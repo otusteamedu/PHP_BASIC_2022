@@ -1,6 +1,6 @@
 body {
     color: #8f8f8f;
-    font: 17px Tahoma, sans-serif;
+    font: 17px Arial, sans-serif;
     background-color: #f8f8f8;
     border-top: 5px solid #7E7E7E;
     margin: 0;
@@ -37,6 +37,23 @@ body {
 .style-4 {
     padding: 0 40px;
 }
+.style-5 {
+    padding: 0 130px;
+}
+.style-footer {
+    max-width: 75%;
+    margin: auto;
+    padding: 10px 0;
+    height: 90px;
+}
+
+button {
+    color: #fff;
+    background-color: #29c5e6;
+    border: none;
+    height: 32px;
+    font-family: 'Oswald', sans-serif;
+}
 
 a            { text-decoration: none; color: #646368; }
 a:visited    { text-decoration: none; color: #646368; }
@@ -50,4 +67,10 @@ h1 {
     background: url(../img/1x1-C0C0C0.png);
     margin: 0;
     padding: 0 10px;
+}
+
+footer {
+    background: #7E7E7E;
+    color: #FFFFFF;
+    font-size: 11px;
 }
