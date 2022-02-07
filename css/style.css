@@ -1,0 +1,14 @@
+h1 {
+    color: cornflowerblue ;
+}
+
+.orange-text {
+    color: darkorange;
+}
+
+.card {
+    border: 1px solid #000; /* Рамка черного цвета */
+    border-radius: 10px; /* Радиус скругления */
+    padding: 0 5px; /* Отступы */
+    width: 200px; /* Размеры */
+}
