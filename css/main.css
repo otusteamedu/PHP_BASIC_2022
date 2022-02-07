@@ -1,0 +1,31 @@
+.h1-main{
+    text-align: center;
+}
+
+h2 {
+    color: red;
+}
+
+h3 {
+    color: yellow;
+}
+
+p{
+    text-align: justify;
+}
+
+.image{
+    width: 800px;
+    display: block;
+    float: left;
+    padding: 10px 20px 0px 0px;
+}
+
+.div-padding{
+    padding: 0px 20px 20px 20px;
+}
+
+.button-right{
+    float: right;
+}
+
