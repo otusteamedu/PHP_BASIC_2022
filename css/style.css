@@ -16,38 +16,45 @@ a:active   {
     color: #222222;
 }
 
+.gravity{
+    padding: 60px 0;
+}
 
-.my-label {
+.my-placeholder-left {
+    margin: 140px 0 0 0;
+}
+
+@media (max-width: 991px) {
+    .my-placeholder-left {
+        margin: 50px 0 0 0;
+    }
+}
+
+.my-placeholder-left span {
     letter-spacing: 4px;
     font-weight: 500;
     font-size: 14px;
     text-transform: uppercase;
 }
 
-.my-hero {
+.my-placeholder-left h2 {
     font-size: 60px;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-.my-paragraph {
+.my-placeholder-left p {
     width: 440px;
     font-size: 18px;
     font-weight: 400;
 }
 
-.gravity{
-    padding: 60px 125px 0 125px;
-}
-
-.my-button{
-    background-color: #4737FF;
-    text-transform: uppercase;
-    color: #ffffff;
-}
-
-.my-placeholder-left {
-    margin: 140px 0 0 0;
+@media (max-width: 991px) {
+    .my-placeholder-left p {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 400;
+    }
 }
 
 .my-placeholder-right {
@@ -57,5 +64,20 @@ a:active   {
 .my-social-icons {
     letter-spacing: 20px;
     margin: 60px 0 0 0;
-    box-sizing: border-box;
+    vertical-align: bottom;
+}
+
+.my-social-icons button {
+    letter-spacing: 4px;
+    cursor: pointer;
+    padding: 20px 20px;
+    background-color: #4737FF;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 400;
+    border: 1px solid transparent;
+}
+
+.my-social-icons img {
+    vertical-align: middle;
 }
