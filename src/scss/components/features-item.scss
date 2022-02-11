@@ -10,26 +10,22 @@
     flex-direction: column;
     justify-content: space-between;
 	svg {
-		width: 32x;
+		width: 32px;
 		height: 32px;
 	}
 	&__title {
-		font-family: $font-family-Manrope;
-		font-style: normal;
 		font-weight: 600;
 		font-size: 24px;
 		line-height: 32px;
 		margin-right: 12px;
 	}
 	&__description {
-		font-family: $font-family-Manrope;
-		font-style: normal;
 		font-weight: normal;
 		font-size: 16px;
 		line-height: 26px;
 	}
 	&__link {
-		position: relative;
+		display:flex;
 	}
 
 	&__link::after {
@@ -38,8 +34,6 @@
 		height: 11px;
 		color: #8C30F5;
 		display: block;
-		position:absolute;
-		left: 60px;
-  		top: 2px;
+		margin-left: 10px;
 	}
 }

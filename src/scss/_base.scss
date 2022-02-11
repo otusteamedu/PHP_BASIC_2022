@@ -30,6 +30,7 @@ body {
 	text-rendering: optimizeLegibility;
 	text-size-adjust: 100%;
 	-webkit-tap-highlight-color: transparent;
+	font-family: $font-family-Manrope;
 }
 
 main {
@@ -137,7 +138,7 @@ iframe {
 	position: relative;
 	z-index: 1;
 	margin: 0 auto;
-	max-width: 1200;
+	max-width: 1100px;
 	text-align: center;
 }
 

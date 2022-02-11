@@ -495,7 +495,8 @@ body {
      -moz-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
           text-size-adjust: 100%;
-  -webkit-tap-highlight-color: transparent; }
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Manrope", sans-serif; }
 
 main {
   -webkit-box-flex: 1;
@@ -611,7 +612,7 @@ iframe {
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  max-width: 1200;
+  max-width: 1100px;
   text-align: center; }
 
 .site {
@@ -848,12 +849,10 @@ iframe {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  max-width: 1100px;
   margin: 50px auto;
   -ms-flex-pack: distribute;
       justify-content: space-around; }
   .features__title {
-    font-family: "Manrope", sans-serif;
     font-style: normal;
     font-weight: 800;
     font-size: 48px;
@@ -881,57 +880,47 @@ iframe {
       -ms-flex-pack: justify;
           justify-content: space-between; }
   .features-item svg {
-    width: 32x;
+    width: 32px;
     height: 32px; }
   .features-item__title {
-    font-family: "Manrope", sans-serif;
-    font-style: normal;
     font-weight: 600;
     font-size: 24px;
     line-height: 32px;
     margin-right: 12px; }
   .features-item__description {
-    font-family: "Manrope", sans-serif;
-    font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 26px; }
   .features-item__link {
-    position: relative; }
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
   .features-item__link::after {
     content: "\2192";
     width: 15px;
     height: 11px;
     color: #8C30F5;
     display: block;
-    position: absolute;
-    left: 60px;
-    top: 2px; }
+    margin-left: 10px; }
 
 .button {
-  width: 180px;
-  height: 62px;
   border: 1px solid #FFFFFF;
   border-radius: 8px;
   color: #FFFFFF;
   background-color: transparent;
-  font-family: "Manrope", sans-serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 20px;
   line-height: 30px;
-  position: relative;
-  padding-right: 22px; }
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding: 16px 20px; }
 
 .button::after {
   content: "\2192";
-  width: 22px;
-  height: 14px;
   color: #8C30F5;
   display: block;
-  position: absolute;
   font-size: 32px;
-  left: 145px;
-  top: 15px; }
+  margin-left: 17px; }
 
 /*# sourceMappingURL=main.css.map */
