@@ -1,0 +1,23 @@
+h2 {color: red;}
+
+.blue-text {
+    color: blue;
+    background-color: blanchedalmond;
+}
+.card{
+    display: flex;
+}
+.card-block {
+    background-color: lightgray;
+    border: 1px solid #000;
+    width: 420px;
+    height: 580px;
+}
+
+.grey-text {
+    color: darkslategrey;
+}
+
+.red-text {
+    color: red;
+}
