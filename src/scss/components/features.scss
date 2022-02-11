@@ -1,0 +1,17 @@
+.features {
+	display: flex;
+	flex-wrap: wrap;
+	margin:50px auto;
+	justify-content: space-around;
+
+	&__title {
+		font-style: normal;
+		font-weight: 800;
+		font-size: 48px;
+		line-height: 64px;
+		color: #FFFFFF;
+		margin: 0;
+		text-align: center;
+	}
+
+}
