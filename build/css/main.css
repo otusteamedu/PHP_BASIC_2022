@@ -894,7 +894,10 @@ iframe {
   .features-item__link {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+            align-items: baseline; }
   .features-item__link::after {
     content: "\2192";
     width: 15px;
