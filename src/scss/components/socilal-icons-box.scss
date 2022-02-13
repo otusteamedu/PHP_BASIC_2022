@@ -1,0 +1,10 @@
+.socilal-icons-box {
+	display: flex;
+	justify-content:space-around;
+	align-items: center;
+	height: 50px;
+	svg {
+		height: 16px;
+		width: 16px;
+	}
+}

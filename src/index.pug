@@ -1,0 +1,18 @@
+extends pug/base
+
+prepend vars
+	//-
+	- title = "hw 5"
+append vars
+	//-
+
+block content
+	//- include pug/data
+		//- .site
+	include pug/components/header
+
+	include pug/pages/home
+
+	//- 	include pug/components/footer
+
+	//- include pug/components/analytics
