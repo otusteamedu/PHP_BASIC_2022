@@ -16,6 +16,7 @@ body {
 
 .main-image{
     padding-top: 61px;
+    max-width: 100%;
 }
 
 .main-mini-caption{
@@ -36,6 +37,7 @@ body {
     color: #222222;
     letter-spacing: -1px;
     padding-left: 0;
+    padding-bottom: 30px;
 }
 .main-text{
     font-size: 18px;
@@ -68,11 +70,17 @@ a:visited{
     padding: 17px 10px;
     border: 1px solid transparent;
     background-color: #4737FF;
+    color:white;
+    margin-right: 30px;
 }
 
 .order-button{
-    letter-spacing: 20px;
     margin: 60px 0 0 0;
-    vertical-align: bottom;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.my-social-icon{
+    margin: 17px 28px 17px 0;
 }
 
