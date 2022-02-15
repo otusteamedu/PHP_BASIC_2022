@@ -1,0 +1,78 @@
+body {
+    font-family: "Fira Sans", sans-serif;
+    background: #D9D3D3;
+    margin: 0;
+}
+.logo{
+    padding-top: 60px;
+}
+.main-menu{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 60px;
+    line-height: 28px;
+}
+
+.main-image{
+    padding-top: 61px;
+}
+
+.main-mini-caption{
+    margin-top: 140px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.8px;
+    color: #222222;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding-left: 0;
+}
+
+.main-caption{
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 70px;
+    color: #222222;
+    letter-spacing: -1px;
+    padding-left: 0;
+}
+.main-text{
+    font-size: 18px;
+    line-height: 28px;
+    margin-left: 0;
+}
+
+a{
+    text-decoration: none;
+    color: #222222;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+a:hover{
+   opacity: 0.3;
+   text-decoration: none;
+}
+
+a:visited{
+    text-decoration: none;
+}
+
+.buttons{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 17px 10px;
+    border: 1px solid transparent;
+    background-color: #4737FF;
+}
+
+.order-button{
+    letter-spacing: 20px;
+    margin: 60px 0 0 0;
+    vertical-align: bottom;
+}
+
