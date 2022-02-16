@@ -1,0 +1,40 @@
+body {
+    font-family: 'Manrope', sans-serif;
+    background: #0B0D17;
+}
+h3 {
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+}
+h1, h2, h3. p {
+    margin: 0 ;
+}
+.container {
+    width: 1110px;
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 60px;
+}
+
+.item {
+    box-sizing: border-box;
+    width: 350px;
+    height: 346px;
+    background-color: white;
+    margin-bottom: 30px;
+    padding: 40px 32px;
+}
