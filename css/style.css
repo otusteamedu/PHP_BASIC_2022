@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Fira Sans", sans-serif;
+    background: #D9D3D3;
+}
+
+
+.services {
+    padding: 60px 125px 0px 125px;
+}
+
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+    color: #222222;
+    font-style: normal;
+}
+
+
+.menu-contacts {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    opacity: 0.3;
+}
+
+.paragraph {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    padding-bottom: 70px;
+}
+
+.text-label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 70px;
+    letter-spacing: -1px;
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.my-text-block {
+    padding-top: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    
+}
+
+
+.my-img {
+    padding-top: 60px;
+}
+
+.my-container-logo {
+    display: flex;
+    justify-content: space-between;
+    align-self: baseline;
+    box-sizing: border-box;
+}
+
+
+img {
+    display: inline-block;
+    height: auto;
+    max-width: 100%;
+}
