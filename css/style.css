@@ -1,0 +1,18 @@
+h3{
+    font-size: 30px;
+    text-align: right;
+}
+div.aqua-color{
+    background-color: aquamarine;
+}
+.child-center{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+li{
+    font-family: "Candara Light";
+}
+.green-text{
+    color: green;
+}
