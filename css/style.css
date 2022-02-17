@@ -1,12 +1,18 @@
-h2 {
-    color: blueviolet;
-  }
-.green-text {
-  color: green;
+h3{
+    font-size: 30px;
+    text-align: right;
 }
-
-.card {background-color: lemonchiffon;
-border: 1px solid black;
-width: 300px;
-height: 300px;
+div.aqua-color{
+    background-color: aquamarine;
+}
+.child-center{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+li{
+    font-family: "Candara Light";
+}
+.green-text{
+    color: green;
 }
