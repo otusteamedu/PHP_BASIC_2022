@@ -1,0 +1,28 @@
+body {
+    background: #D9D3D3;
+}
+
+.container {
+    width: 1110px;
+    height: 900px;
+    padding-top: 60px;
+}
+.logo {
+    color: #222222;
+    margin-bottom: 140px;
+}
+.description {
+    font-family: 'Fira Sans', sans-serif;
+    color: #222222;
+    margin-bottom: 60px;
+    box-sizing: border-box;
+}
+.d-flex {
+
+    margin-bottom: 60px;
+}
+
+h2 {
+    font-size: 60px;
+}
+
