@@ -17,12 +17,15 @@ body {
     margin-bottom: 60px;
     box-sizing: border-box;
 }
-.d-flex {
-
-    margin-bottom: 60px;
-}
 
 h2 {
     font-size: 60px;
 }
-
+.d-flex {
+    margin-bottom: 60px;
+    font-family: 'Fira Sans', sans-serif;
+    box-sizing: border-box;
+}
+.contacts {
+    font-weight: normal;
+}
