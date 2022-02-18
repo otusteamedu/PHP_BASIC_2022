@@ -5,11 +5,9 @@ body {
     background: #D9D3D3;
 }
 
-
 .services {
-    padding: 60px 125px 0px 125px;
+    padding: 60px 0;
 }
-
 
 h1,
 h2,
@@ -27,6 +25,7 @@ p {
     line-height: 28px;
     opacity: 0.3;
 }
+
 
 .paragraph {
     font-weight: normal;
@@ -52,13 +51,7 @@ h2 {
     padding-bottom: 30px;
 }
 
-.my-text-block {
-    padding-top: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    
-}
+
 
 
 .my-img {
@@ -67,9 +60,10 @@ h2 {
 
 .my-container-logo {
     display: flex;
-    justify-content: space-between;
-    align-self: baseline;
+    align-items: center;
     box-sizing: border-box;
+    width: 387px;
+    justify-content: space-between;
 }
 
 
