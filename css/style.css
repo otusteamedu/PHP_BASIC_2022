@@ -1,31 +1,85 @@
 body {
+    margin: 0;
+    padding: 0;
+    font-family: "Fira Sans", sans-serif;
     background: #D9D3D3;
 }
 
-.container {
-    width: 1110px;
-    height: 900px;
-    padding-top: 60px;
+.services {
+    padding: 60px 0;
 }
-.logo {
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
     color: #222222;
-    margin-bottom: 140px;
+    font-style: normal;
 }
-.description {
-    font-family: 'Fira Sans', sans-serif;
-    color: #222222;
-    margin-bottom: 60px;
-    box-sizing: border-box;
+
+
+.menu-contacts {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    opacity: 0.3;
+}
+
+
+.paragraph {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    padding-bottom: 70px;
+}
+
+.link-menu {
+    text-decoration:none;
+}
+
+
+.text-label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 h2 {
+    font-weight: 600;
     font-size: 60px;
+    line-height: 70px;
+    letter-spacing: -1px;
+    padding-top: 15px;
+    padding-bottom: 30px;
 }
-.d-flex {
-    margin-bottom: 60px;
-    font-family: 'Fira Sans', sans-serif;
+
+
+.my-container-logo {
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
+    width: 387px;
+    justify-content: space-between;
 }
-.contacts {
-    font-weight: normal;
+
+img {
+    display: inline-block;
+    height: auto;
+    max-width: 100%;
+}
+
+.button {
+    background: #4737FF;
+    width: 160px;
+    height: 50px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #FFFFFF;
 }
