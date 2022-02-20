@@ -18,12 +18,26 @@ p {
     font-style: normal;
 }
 
+.menu-home {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: #222222;
+}
 
 .menu-contacts {
     font-weight: normal;
     font-size: 18px;
     line-height: 28px;
     opacity: 0.3;
+    color: #222222;
+}
+
+.menu-home {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: #222222;
 }
 
 
@@ -32,9 +46,10 @@ p {
     font-size: 18px;
     line-height: 28px;
     padding-bottom: 70px;
+    color: #222222;
 }
 
-.link-menu {
+a {
     text-decoration:none;
 }
 
@@ -45,6 +60,7 @@ p {
     line-height: 17px;
     letter-spacing: 4px;
     text-transform: uppercase;
+    padding-top: 70px;
 }
 
 h2 {
@@ -55,16 +71,16 @@ h2 {
     padding-top: 15px;
     padding-bottom: 30px;
 }
-
+  
 .my-img {
-    padding-top: 60px;
+    padding-top: 70px;
 }
 
 .my-container-logo {
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    width: 387px;
+    width: 339px;
     justify-content: space-between;
 }
 
@@ -77,8 +93,8 @@ img {
 
 .button {
     background: #4737FF;
-    width: 160px;
-    height: 50px;
+    border: 0;
+    padding: 17px 12px;
     font-weight: 500;
     font-size: 14px;
     line-height: 17px;
@@ -87,10 +103,13 @@ img {
     text-transform: uppercase;
     color: #FFFFFF;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
     .link-menu {display: none;}
+    .menu-contacts {display: none;}
+    .menu-home {display: none;}
 }
 
 @media screen and (max-width: 576px) {
