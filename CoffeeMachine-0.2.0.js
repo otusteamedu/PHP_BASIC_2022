@@ -27,6 +27,7 @@ class CoffeeMachine {
     this._status = 'free';
     this._cookingTime = 2000;
     this._callCounter = 0;
+    this._cookingPause = 2000;
   }
 
   setAmount(type, value) {
@@ -86,7 +87,7 @@ class CoffeeMachine {
         this._status = 'free';
       })
     }
-    
+
     if (this._systemCheck) {
       async function processQueue(recipe) {      
         if (this._status == 'free') {
@@ -95,9 +96,10 @@ class CoffeeMachine {
         }
         else {
           this._callCounter++
+          let callTimer = this._cookingTime * this._callCounter + this._cookingPause * this._callCounter;
           setTimeout(async () =>{
             await cookingManager(recipe);      
-          },  this._cookingTime * this._callCounter * 2)
+          },  this._cookingTime * this._callCounter + this._cookingPause * this._callCounter)
         }
     }
       processQueue.call(this,recipe)
