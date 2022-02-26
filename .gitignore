@@ -1,1 +1,13 @@
+# Editors
 .idea/
+*.sublime-project
+*.sublime-workspace
+
+# Windows system files
+Thumbs.db
+
+# MySQL Workbench
+*.mwb
+
+# Diagram software
+*.drawio
