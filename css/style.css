@@ -11,6 +11,10 @@ body {
     box-sizing: border-box;
 }
 
+.logo {
+    cursor: pointer;
+}
+
 .menu {
     font-weight: 400;
     font-size: 18px;
@@ -29,9 +33,21 @@ body {
     cursor: pointer;
 }
 
+
 .woman-foto {
     width: 475px;
 }
+
+@media (min-width: 992px) {
+    .woman-block {
+        margin-right: 10px;
+        text-align: right;
+    }
+}
+
+/*div {*/
+/*    border: 1px solid;*/
+/*}*/
 
 .label {
     font-weight: 500;
