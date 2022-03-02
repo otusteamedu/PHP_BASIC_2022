@@ -1,0 +1,726 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.1 (Debian 14.1-1.pgdg110+1)
+-- Dumped by pg_dump version 14.1
+
+-- Started on 2022-03-02 14:58:40 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 209 (class 1259 OID 16553)
+-- Name: author; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.author (
+    author_name character varying(50) NOT NULL,
+    author_id integer NOT NULL
+);
+
+
+ALTER TABLE public.author OWNER TO root;
+
+--
+-- TOC entry 223 (class 1259 OID 16674)
+-- Name: author_author_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.author_author_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.author_author_id_seq OWNER TO root;
+
+--
+-- TOC entry 3408 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: author_author_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.author_author_id_seq OWNED BY public.author.author_id;
+
+
+--
+-- TOC entry 211 (class 1259 OID 16558)
+-- Name: book; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.book (
+    book_id integer NOT NULL,
+    "ISBN" character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.book OWNER TO root;
+
+--
+-- TOC entry 210 (class 1259 OID 16557)
+-- Name: book_book_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.book_book_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.book_book_id_seq OWNER TO root;
+
+--
+-- TOC entry 3409 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: book_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.book_book_id_seq OWNED BY public.book.book_id;
+
+
+--
+-- TOC entry 212 (class 1259 OID 16567)
+-- Name: book_name; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.book_name (
+    "ISBN" character varying(17) NOT NULL,
+    name_book character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.book_name OWNER TO root;
+
+--
+-- TOC entry 224 (class 1259 OID 16695)
+-- Name: book_page; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.book_page (
+    "ISBN" character varying(20) NOT NULL,
+    count_page integer NOT NULL
+);
+
+
+ALTER TABLE public.book_page OWNER TO root;
+
+--
+-- TOC entry 219 (class 1259 OID 16611)
+-- Name: book_position; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.book_position (
+    book_position_id integer NOT NULL,
+    book_position_name character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.book_position OWNER TO root;
+
+--
+-- TOC entry 218 (class 1259 OID 16610)
+-- Name: book_position_book_position_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.book_position_book_position_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.book_position_book_position_id_seq OWNER TO root;
+
+--
+-- TOC entry 3410 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: book_position_book_position_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.book_position_book_position_id_seq OWNED BY public.book_position.book_position_id;
+
+
+--
+-- TOC entry 221 (class 1259 OID 16620)
+-- Name: story_rating; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.story_rating (
+    rating_id integer NOT NULL,
+    rating integer NOT NULL
+);
+
+
+ALTER TABLE public.story_rating OWNER TO root;
+
+--
+-- TOC entry 220 (class 1259 OID 16619)
+-- Name: books_rating_rating_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.books_rating_rating_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.books_rating_rating_id_seq OWNER TO root;
+
+--
+-- TOC entry 3411 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: books_rating_rating_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.books_rating_rating_id_seq OWNED BY public.story_rating.rating_id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 16578)
+-- Name: story; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.story (
+    story_id integer NOT NULL,
+    name_story character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.story OWNER TO root;
+
+--
+-- TOC entry 216 (class 1259 OID 16597)
+-- Name: story_author; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.story_author (
+    story_id integer NOT NULL,
+    autor_id integer NOT NULL
+);
+
+
+ALTER TABLE public.story_author OWNER TO root;
+
+--
+-- TOC entry 215 (class 1259 OID 16584)
+-- Name: story_in_book; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.story_in_book (
+    story_id integer NOT NULL,
+    book_id integer NOT NULL
+);
+
+
+ALTER TABLE public.story_in_book OWNER TO root;
+
+--
+-- TOC entry 222 (class 1259 OID 16629)
+-- Name: story_resault; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.story_resault (
+    story_id integer NOT NULL,
+    story_status_id integer DEFAULT 1,
+    book_position_id integer DEFAULT 1 NOT NULL,
+    rating_id integer
+);
+
+
+ALTER TABLE public.story_resault OWNER TO root;
+
+--
+-- TOC entry 217 (class 1259 OID 16605)
+-- Name: story_status; Type: TABLE; Schema: public; Owner: root
+--
+
+CREATE TABLE public.story_status (
+    story_status_id integer NOT NULL,
+    story_status_name character varying(10) NOT NULL
+);
+
+
+ALTER TABLE public.story_status OWNER TO root;
+
+--
+-- TOC entry 213 (class 1259 OID 16577)
+-- Name: story_story_id_seq; Type: SEQUENCE; Schema: public; Owner: root
+--
+
+CREATE SEQUENCE public.story_story_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.story_story_id_seq OWNER TO root;
+
+--
+-- TOC entry 3412 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: story_story_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: root
+--
+
+ALTER SEQUENCE public.story_story_id_seq OWNED BY public.story.story_id;
+
+
+--
+-- TOC entry 3211 (class 2604 OID 16675)
+-- Name: author author_id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.author ALTER COLUMN author_id SET DEFAULT nextval('public.author_author_id_seq'::regclass);
+
+
+--
+-- TOC entry 3212 (class 2604 OID 16561)
+-- Name: book book_id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book ALTER COLUMN book_id SET DEFAULT nextval('public.book_book_id_seq'::regclass);
+
+
+--
+-- TOC entry 3214 (class 2604 OID 16614)
+-- Name: book_position book_position_id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book_position ALTER COLUMN book_position_id SET DEFAULT nextval('public.book_position_book_position_id_seq'::regclass);
+
+
+--
+-- TOC entry 3213 (class 2604 OID 16581)
+-- Name: story story_id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story ALTER COLUMN story_id SET DEFAULT nextval('public.story_story_id_seq'::regclass);
+
+
+--
+-- TOC entry 3215 (class 2604 OID 16623)
+-- Name: story_rating rating_id; Type: DEFAULT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_rating ALTER COLUMN rating_id SET DEFAULT nextval('public.books_rating_rating_id_seq'::regclass);
+
+
+--
+-- TOC entry 3387 (class 0 OID 16553)
+-- Dependencies: 209
+-- Data for Name: author; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.author (author_name, author_id) FROM stdin;
+Агата Кристи	1
+Эдриан Ньюи	2
+Артур Хейли	3
+Дарья Донцова	4
+Рой Викерс	5
+Генри Уэйд	6
+Сирил Хейр	7
+Дэшил Хэммет	8
+\.
+
+
+--
+-- TOC entry 3389 (class 0 OID 16558)
+-- Dependencies: 211
+-- Data for Name: book; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.book (book_id, "ISBN") FROM stdin;
+1	978-5-04-118536-7
+3	5-227-01814-6
+4	978-5-04-102023-1
+5	978-5-94643-100-2
+6	978-5-17-121183-7
+7	978-5-17-084694-8
+8	5-253-00317-7
+2	5-253-00317-7
+10	5-253-00884-5
+11	978-5-04-118536-7
+\.
+
+
+--
+-- TOC entry 3390 (class 0 OID 16567)
+-- Dependencies: 212
+-- Data for Name: book_name; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.book_name ("ISBN", name_book) FROM stdin;
+978-5-04-118536-7	Убийство в восточном экспрессе
+5-227-01814-6	Десят негритят
+978-5-04-102023-1	Как построить машину
+978-5-94643-100-2	Отель
+978-5-17-121183-7	Отель
+978-5-17-084694-8	Только не дворецкий
+5-253-00884-5	Мастера детектива. Выпуск 14 (сборник)
+5-253-00317-7	Мастера детектива. Выпуск 5 (сборник)
+\.
+
+
+--
+-- TOC entry 3402 (class 0 OID 16695)
+-- Dependencies: 224
+-- Data for Name: book_page; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.book_page ("ISBN", count_page) FROM stdin;
+5-227-01814-6	592
+5-253-00317-7	752
+5-253-00884-5	480
+978-5-04-102023-1	352
+978-5-04-118536-7	320
+978-5-17-084694-8	728
+978-5-17-121183-7	512
+978-5-94643-100-2	880
+\.
+
+
+--
+-- TOC entry 3397 (class 0 OID 16611)
+-- Dependencies: 219
+-- Data for Name: book_position; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.book_position (book_position_id, book_position_name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3392 (class 0 OID 16578)
+-- Dependencies: 214
+-- Data for Name: story; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.story (story_id, name_story) FROM stdin;
+1	Убийство в восточном экспрессе
+2	Десят негритят
+3	Как построить машину
+4	Знамение
+5	Отель
+6	Пропавший студент
+7	Образцовая подделка
+8	Отель "Бертрам"
+9	Отель "Бертрам"
+11	Стеклянный ключ
+12	106 тысяч за голову
+\.
+
+
+--
+-- TOC entry 3394 (class 0 OID 16597)
+-- Dependencies: 216
+-- Data for Name: story_author; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.story_author (story_id, autor_id) FROM stdin;
+1	1
+2	1
+3	2
+6	6
+5	3
+7	5
+\.
+
+
+--
+-- TOC entry 3393 (class 0 OID 16584)
+-- Dependencies: 215
+-- Data for Name: story_in_book; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.story_in_book (story_id, book_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3399 (class 0 OID 16620)
+-- Dependencies: 221
+-- Data for Name: story_rating; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.story_rating (rating_id, rating) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3400 (class 0 OID 16629)
+-- Dependencies: 222
+-- Data for Name: story_resault; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.story_resault (story_id, story_status_id, book_position_id, rating_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3395 (class 0 OID 16605)
+-- Dependencies: 217
+-- Data for Name: story_status; Type: TABLE DATA; Schema: public; Owner: root
+--
+
+COPY public.story_status (story_status_id, story_status_name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3413 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: author_author_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.author_author_id_seq', 8, true);
+
+
+--
+-- TOC entry 3414 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: book_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.book_book_id_seq', 11, true);
+
+
+--
+-- TOC entry 3415 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: book_position_book_position_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.book_position_book_position_id_seq', 1, false);
+
+
+--
+-- TOC entry 3416 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: books_rating_rating_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.books_rating_rating_id_seq', 1, false);
+
+
+--
+-- TOC entry 3417 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: story_story_id_seq; Type: SEQUENCE SET; Schema: public; Owner: root
+--
+
+SELECT pg_catalog.setval('public.story_story_id_seq', 12, true);
+
+
+--
+-- TOC entry 3219 (class 2606 OID 16680)
+-- Name: author author_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.author
+    ADD CONSTRAINT author_pkey PRIMARY KEY (author_id);
+
+
+--
+-- TOC entry 3223 (class 2606 OID 16571)
+-- Name: book_name book_name_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book_name
+    ADD CONSTRAINT book_name_pkey PRIMARY KEY ("ISBN");
+
+
+--
+-- TOC entry 3237 (class 2606 OID 16711)
+-- Name: book_page book_page_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book_page
+    ADD CONSTRAINT book_page_pkey PRIMARY KEY ("ISBN");
+
+
+--
+-- TOC entry 3221 (class 2606 OID 16563)
+-- Name: book book_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book
+    ADD CONSTRAINT book_pkey PRIMARY KEY (book_id);
+
+
+--
+-- TOC entry 3231 (class 2606 OID 16657)
+-- Name: book_position book_position_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book_position
+    ADD CONSTRAINT book_position_pkey PRIMARY KEY (book_position_id);
+
+
+--
+-- TOC entry 3227 (class 2606 OID 16684)
+-- Name: story_author story_author_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_author
+    ADD CONSTRAINT story_author_pkey PRIMARY KEY (story_id);
+
+
+--
+-- TOC entry 3225 (class 2606 OID 16583)
+-- Name: story story_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story
+    ADD CONSTRAINT story_pkey PRIMARY KEY (story_id);
+
+
+--
+-- TOC entry 3233 (class 2606 OID 16664)
+-- Name: story_rating story_rating_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_rating
+    ADD CONSTRAINT story_rating_pkey PRIMARY KEY (rating_id);
+
+
+--
+-- TOC entry 3235 (class 2606 OID 16635)
+-- Name: story_resault story_resault_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_resault
+    ADD CONSTRAINT story_resault_pkey PRIMARY KEY (story_id);
+
+
+--
+-- TOC entry 3229 (class 2606 OID 16618)
+-- Name: story_status story_status_pkey; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_status
+    ADD CONSTRAINT story_status_pkey PRIMARY KEY (story_status_id);
+
+
+--
+-- TOC entry 3247 (class 2606 OID 16712)
+-- Name: book_page ISBN_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book_page
+    ADD CONSTRAINT "ISBN_fk" FOREIGN KEY ("ISBN") REFERENCES public.book_name("ISBN") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
+
+
+--
+-- TOC entry 3242 (class 2606 OID 16685)
+-- Name: story_author author_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_author
+    ADD CONSTRAINT author_id_fk FOREIGN KEY (autor_id) REFERENCES public.author(author_id) NOT VALID;
+
+
+--
+-- TOC entry 3240 (class 2606 OID 16592)
+-- Name: story_in_book book_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_in_book
+    ADD CONSTRAINT book_id_fk FOREIGN KEY (book_id) REFERENCES public.book(book_id);
+
+
+--
+-- TOC entry 3245 (class 2606 OID 16658)
+-- Name: story_resault book_position_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_resault
+    ADD CONSTRAINT book_position_id_fk FOREIGN KEY (book_position_id) REFERENCES public.book_position(book_position_id) NOT VALID;
+
+
+--
+-- TOC entry 3238 (class 2606 OID 16690)
+-- Name: book isbn_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.book
+    ADD CONSTRAINT isbn_fk FOREIGN KEY ("ISBN") REFERENCES public.book_name("ISBN") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
+
+
+--
+-- TOC entry 3246 (class 2606 OID 16665)
+-- Name: story_resault rating_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_resault
+    ADD CONSTRAINT rating_id_fk FOREIGN KEY (rating_id) REFERENCES public.story_rating(rating_id) NOT VALID;
+
+
+--
+-- TOC entry 3239 (class 2606 OID 16587)
+-- Name: story_in_book story_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_in_book
+    ADD CONSTRAINT story_id_fk FOREIGN KEY (story_id) REFERENCES public.story(story_id);
+
+
+--
+-- TOC entry 3241 (class 2606 OID 16600)
+-- Name: story_author story_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_author
+    ADD CONSTRAINT story_id_fk FOREIGN KEY (story_id) REFERENCES public.story(story_id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3244 (class 2606 OID 16646)
+-- Name: story_resault story_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_resault
+    ADD CONSTRAINT story_id_fk FOREIGN KEY (story_id) REFERENCES public.story(story_id) NOT VALID;
+
+
+--
+-- TOC entry 3243 (class 2606 OID 16651)
+-- Name: story_resault story_status_id_fk; Type: FK CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.story_resault
+    ADD CONSTRAINT story_status_id_fk FOREIGN KEY (story_status_id) REFERENCES public.story_status(story_status_id) NOT VALID;
+
+
+-- Completed on 2022-03-02 14:58:40 UTC
+
+--
+-- PostgreSQL database dump complete
+--
+
