@@ -28,53 +28,38 @@ $a = rand(0, 15);
 
 switch($a)
 {
-    case 15:
-        echo "15";
-        break;
-    case 14:
-        echo "14";
-        break;
-    case 13:
-        echo "13";
-        break;
-    case 12:
-        echo "12";
-        break;
-    case 11:
-        echo "11";
-        break;
-    case 10:
-        echo "10";
-        break;
-    case 9:
-        echo "9";
-        break;
-    case 8:
-        echo "8";
-        break;
-    case 7:
-        echo "7";
-        break;
-    case 6:
-        echo "6";
-        break;
-    case 5:
-        echo "5";
-        break;
-    case 4:
-        echo "4";
-        break;
-    case 3:
-        echo "3";
-        break;
-    case 2:
-        echo "2";
-        break;
-    case 1:
-        echo "1";
-        break;
     case 0:
-        echo "0";
+        echo "0\n";
+    case 1:
+        echo "1\n";
+    case 2:
+        echo "2\n";
+    case 3:
+        echo "3\n";
+    case 4:
+        echo "4\n";
+    case 5:
+        echo "5\n";
+    case 6:
+        echo "6\n";
+    case 7:
+        echo "7\n";
+    case 8:
+        echo "8\n";
+    case 9:
+        echo "9\n";
+    case 10:
+        echo "10\n";
+    case 11:
+        echo "11\n";
+    case 12:
+        echo "12\n";
+    case 13:
+        echo "13\n";
+    case 14:
+        echo "14\n";
+    case 15:
+        echo "15\n";
         break;
     default:
         echo "что-то пошло не так";
@@ -89,22 +74,22 @@ $a = rand(0, 15);
 
 $result = match ($a)
 {
-    15 => '15',
-    14 => '14',
-    13 => '13',
-    12 => '12',
-    11 => '11',
-    10 => '10',
-     9 => '9',
-     8 => '8',
-     7 => '7',
-     6 => '6',
-     5 => '5',
-     4 => '4',
-     3 => '3',
-     2 => '2',
-     1 => '1',
      0 => '0',
+     1 => '1',
+     2 => '2',
+     3 => '3',
+     4 => '4',
+     5 => '5',
+     6 => '6',
+     7 => '7',
+     8 => '8',
+     9 => '9',
+    10 => '10',
+    11 => '11',
+    12 => '12',
+    13 => '13',
+    14 => '14',
+    15 => '15',
 };
 
 var_dump($result);
