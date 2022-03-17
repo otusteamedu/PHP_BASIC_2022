@@ -72,6 +72,12 @@ switch($a)
 
 $a = rand(0, 15);
 
+function print_result ($result)
+{
+    for ($i = 0; $i <= $result; $i++)
+        echo "".$i."\n";
+}
+
 $result = match ($a)
 {
      0 => '0',
@@ -92,7 +98,7 @@ $result = match ($a)
     15 => '15',
 };
 
-var_dump($result);
+print_result ($a);
 
 
 ?>
