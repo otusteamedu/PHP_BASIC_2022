@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Manrope", sans-serif;
+    background: #0B0D17;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+.container {
+    width: 1110px;
+    margin: 0 auto;
+}
+h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 48px;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.item {
+    width: 350px;
+    height: 346px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    padding: 40px 32px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.card-caption{
+    margin: 48px 0px 12px 0px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.card-description{
+    margin-bottom: 40px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.block-main-caption{
+    width: 730px;
+    margin: 0 auto;
+}
+
+.main-caption{
+    font-size: 48px;
+    line-height: 64px;
+    color: white;
+    text-align: center;
+    padding: 80px 0 48px 0;
+}
+
+.link{
+    font-weight: 700;
+    line-height: 16px;
+    display: inline-flex;
+    align-items: center;
+    size: 12px;
+}
+
+.image-align{
+    margin-left: 8px;
+}
+
+.main-button{
+    background: black;
+    border-radius: 8px;
+}
+
+.button-text{
+    padding:16px 21px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.block-button{
+    margin: 0 auto;
+    align-content: center;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 96px;
+}
