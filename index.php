@@ -75,7 +75,7 @@ function power(float $val, int $pow) {
         return 1;
     elseif ($val == 0 && $pow >= 1)
         return 0;
-    elseif ($val <= 1)
+    elseif ($val == 1)
         return 1;
     elseif ($val > 1 && $pow == 0)
         return 1;
