@@ -64,9 +64,33 @@ echo "© ".$nowYear." OTUS PHP Developer. BASIC";
 
 /**
  * ЗАДАНИЕ 4
- * Написать функцию, которая вычисляет текущее время и возвращает его в формате с правильными склонениями, например: 22 часа 15 минут 21 час 43 минуты
+ * С помощью рекурсии организовать функцию возведения числа в степень. Формат: function power($val, $pow), где $val – заданное число, $pow – степень.
+ * 
+ * Пример использования: var_dump(power(0, 5));
  */
 echo "<h2>Задание 4:</h2>";
+
+function power(float $val, int $pow) {
+    if ($val == 0 && $pow == 0)
+        return 1;
+    elseif ($val == 0 && $pow >= 1)
+        return 0;
+    elseif ($val <= 1)
+        return 1;
+    elseif ($val > 1 && $pow == 0)
+        return 1;
+    elseif ($pow == 1)
+        return $val;
+    else
+     return $val * power($val, $pow - 1);
+}
+
+
+/**
+ * ЗАДАНИЕ 5
+ * Написать функцию, которая вычисляет текущее время и возвращает его в формате с правильными склонениями, например: 22 часа 15 минут 21 час 43 минуты
+ */
+echo "<h2>Задание 5:</h2>";
 
 function declination($nowHours, $nowMinutes) {
     if ($nowHours==1 || $nowHours==21) 
@@ -76,11 +100,14 @@ function declination($nowHours, $nowMinutes) {
     else
         $declinationHours = " часов";
 
-.......
 
     echo $nowHours . $declinationHours . " " . $nowMinutes . $declinationMinutes;
 }
 
-declination(date("H"), date("i"));
+$now = new DateTime();
+$nowHours = $now->format('H');
+$nowMinutes = $now->format('i');
+
+declination($nowHours, $nowMinutes);
 
 ?>
