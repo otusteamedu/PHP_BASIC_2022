@@ -29,7 +29,29 @@ function division(float $value1, float $value2) {
  * Реализовать функцию с тремя параметрами: function mathOperation($arg1, $arg2, $operation), 
  * где $arg1, $arg2 – значения аргументов, $operation – строка с названием операции. В зависимости от переданного значения операции выполнить 
  * одну из арифметических операций (использовать функции из пункта 3) и вернуть полученное значение (использовать switch).
+ * 
+ * Пример использования: echo mathOperation(4, 5, '+');
+ * В качестве оператора передаём одно из значений: +, -, * или /
+ * Проверку деления на ноль тоже проходит.
  */
+
+function mathOperation(float $arg1, float $arg2, string $operation)
+{
+    switch ($operation) {
+        case '+' :
+            return addition($arg1, $arg2);
+            break;
+        case '-' :
+            return subtraction($arg1, $arg2);
+            break;
+        case '*' :
+            return multiplication($arg1, $arg2);
+            break;
+        case '/' :
+            return division($arg1, $arg2);
+            break;
+    }
+}
 
 /**
  * ЗАДАНИЕ 3
