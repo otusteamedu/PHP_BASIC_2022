@@ -89,25 +89,49 @@ function power(float $val, int $pow) {
 /**
  * ЗАДАНИЕ 5
  * Написать функцию, которая вычисляет текущее время и возвращает его в формате с правильными склонениями, например: 22 часа 15 минут 21 час 43 минуты
+ * 
+ * Реализовать такой вывод можно с помощью функции склонения существительных после числительных:
+ * $number - число на основе которого нужно сформировать окончание;
+ * $endingArray - массив окончаний.
  */
 echo "<h2>Задание 5:</h2>";
 
-function declination($nowHours, $nowMinutes) {
-    if ($nowHours==1 || $nowHours==21) 
-        $declinationHours = " час";
-    elseif (($nowHours>=2 && $nowHours<=4) || ($nowHours>=22 && $nowHours<=24)) 
-        $declinationHours = " часа";
-    else
-        $declinationHours = " часов";
-
-
-    echo $nowHours . $declinationHours . " " . $nowMinutes . $declinationMinutes;
+function declination(int $number, $endingArray) {
+    $number = $number % 100;
+    if ($number>=11 && $number<=19)
+        $ending=$endingArray[2];
+    else {
+        $i = $number % 10;
+        switch ($i)
+        {
+            case (1): 
+                $ending = $endingArray[0]; 
+                break;
+            case (2):
+            case (3):
+            case (4): 
+                $ending = $endingArray[1]; 
+                break;
+            default: 
+                $ending=$endingArray[2];
+        }
+    }
+    return $ending;
 }
 
 $now = new DateTime();
 $nowHours = $now->format('H');
 $nowMinutes = $now->format('i');
+$recorder = 3;
+$camera = 3;
+$cigarette_case = 3;
+$jacket = 3;
 
-declination($nowHours, $nowMinutes);
+echo 'Из показаний Антона Семёновича Шпака, пострадавшего от квартирного вора:<br>';
+echo 'Свидетель Шпак А.С., обеспеченный стоматолог, показал, что в '.$nowHours.' ' .declination($nowHours, array('часа', 'часа', 'часов')).' '.$nowMinutes . ' ' .declination($nowMinutes, array('минуту', 'минуты', 'минут')).' вернулся в квартиру, где обнаружил пропажу '.$recorder.' '.declination($recorder, array('магнитофона', 'магнитофонов', 'магнитофонов')).', '.$camera.' '.declination($camera, array('кинoкамеры заграничной', 'кинoкамеры заграничных', 'кинoкамер заграничных')).', '.$cigarette_case.' '.declination($cigarette_case, array('пoртсигар отечественный', 'пoртсигара отечественных', 'пoртсигар отечественных')).', куртка замшевая - '.$jacket.' '.declination($jacket, array('штука', 'штуки', 'штук')).'. ';
+
+ 
+
+
 
 ?>
