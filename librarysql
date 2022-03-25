@@ -1,0 +1,24 @@
+SELECT title FROM Books WHERE title LIKE '% % %'
+
+https://prnt.sc/n-DyUvAlarzF
+
+---------------------------------------------------------------------------
+
+SELECT Books.title FROM Books WHERE isbn IN
+(SELECT book_id FROM Books_Authors
+INNER JOIN Authors ON Authors.author_id = Books_Authors.author_id 
+WHERE Authors.FIO = 'Крохов Иван')
+
+https://prnt.sc/_PbF12lFsZgj
+
+---------------------------------------------------------------------------
+
+SELECT title FROM Books WHERE pages > 500
+
+https://prnt.sc/xQu7mfluSkbs
+
+---------------------------------------------------------------------------
+
+SELECT SUM(pages) as pages_sum FROM Books
+
+https://prnt.sc/8afjVUofLAey
