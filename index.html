@@ -1,16 +1,71 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My first html page</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+Для моей БД имеет смысл сделать простой индекс по атрибуту title в таблице books, 
+потому по этому полю будет много запросов. Кол-во данных будет расти и скорость обработки 
+будет критична.
 
-    
 
-</body>
-</html>
+
+SELECT title FROM Books WHERE title LIKE '% % %'
+
+"Seq Scan on books  (cost=0.00..11.38 rows=110 width=118)"
+"  Filter: ((title)::text ~~ '% % %'::text)"
+
+С индексом из-за размера
+
+"Index Only Scan using title_i on books  (cost=0.13..12.18 rows=3 width=118)"
+"  Filter: ((title)::text ~~ '% % %'::text)"
+
+
+---------------------------------------------------------------------------
+Насколько понимаю здесь можно сделать покрывающий индекс по атрибуту
+Books.isbn с хранением поля Books.title
+
+
+SELECT Books.title FROM Books WHERE isbn IN
+(SELECT book_id FROM Books_Authors
+INNER JOIN Authors ON Authors.author_id = Books_Authors.author_id 
+WHERE Authors.FIO = 'Крохов Иван')
+
+"Hash Semi Join  (cost=34.96..36.00 rows=1 width=118)"
+"  Hash Cond: ((books.isbn)::text = (books_authors.book_id)::text)"
+"  ->  Seq Scan on books  (cost=0.00..1.03 rows=3 width=162)"
+"  ->  Hash  (cost=34.83..34.83 rows=11 width=44)"
+"        ->  Hash Join  (cost=11.26..34.83 rows=11 width=44)"
+"              Hash Cond: (books_authors.author_id = authors.author_id)"
+"              ->  Seq Scan on books_authors  (cost=0.00..20.70 rows=1070 width=48)"
+"              ->  Hash  (cost=11.25..11.25 rows=1 width=4)"
+"                    ->  Seq Scan on authors  (cost=0.00..11.25 rows=1 width=4)"
+"                          Filter: ((fio)::text = 'Крохов Иван'::text)"
+
+С Индексом
+
+"Nested Loop  (cost=10000000037.63..10000000039.40 rows=1 width=118)"
+"  ->  HashAggregate  (cost=10000000037.50..10000000037.61 rows=11 width=44)"
+"        Group Key: (books_authors.book_id)::text"
+"        ->  Hash Join  (cost=10000000013.91..10000000037.47 rows=11 width=44)"
+"              Hash Cond: (books_authors.author_id = authors.author_id)"
+"              ->  Seq Scan on books_authors  (cost=10000000000.00..10000000020.70 rows=1070 width=48)"
+"              ->  Hash  (cost=13.89..13.89 rows=1 width=4)"
+"                    ->  Index Scan using authors_pkey on authors  (cost=0.14..13.89 rows=1 width=4)"
+"                          Filter: ((fio)::text = 'Крохов Иван'::text)"
+"  ->  Index Only Scan using isdn_i on books  (cost=0.13..0.16 rows=1 width=162)"
+"        Index Cond: (isbn = (books_authors.book_id)::text)"
+
+
+---------------------------------------------------------------------------
+
+SELECT title FROM Books WHERE pages > 500
+
+"Seq Scan on books  (cost=0.00..1.04 rows=1 width=118)"
+"  Filter: (pages > 100)"
+
+С индексом
+
+"Index Scan using pages_i on books  (cost=0.13..2.15 rows=1 width=118)"
+"  Index Cond: (pages > 100)"
+
+---------------------------------------------------------------------------
+
+SELECT SUM(pages) as pages_sum FROM Books
+
+Тут нет смысла в индексе. Идет полная переборка.
+
