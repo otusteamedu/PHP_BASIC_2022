@@ -149,7 +149,24 @@ echo (space_replace ('Авторские онлайн‑курсы для про
  * Задание 6
  * В имеющемся шаблоне сайта заменить статичное меню (ul - li) на генерируемое через PHP. Необходимо представить пункты меню как элементы
  * массива и вывести их циклом. Подумать, как можно реализовать меню с вложенными подменю? Попробовать его реализовать.
+ *
+ * Для выполнения этого задания использовал ранее созданный массив регионов и городов.
  */
+
+function list_location_as_menu (array $location_region) {
+    echo '<ul>';
+    foreach ($location_region as $region => $location_city) {
+        echo '<li><a href="#">' .$region .':</li>';
+        echo '<ul>';
+        foreach ($location_city as $city) {
+            echo '<li><a href="#">' .$city .':</li>';
+        }
+        echo '</ul>';
+    }
+    echo '</ul>';
+}
+
+list_location_as_menu ($location_region);
 
 /**
  * Задание 7
