@@ -67,7 +67,6 @@ list_location ($location_region);
  */
 
 function string_translit (string $string) {
-
     $letters = [
         'А' => 'A',     'а' => 'a',
         'Б' => 'B',     'б' => 'b',
@@ -103,7 +102,6 @@ function string_translit (string $string) {
         'Ю' => 'YU',    'ю' => 'yu',
         'Я' => 'YA',    'я' => 'ya',
     ];
-
     return str_replace (array_keys($letters), array_values($letters), $string);
 }
 
@@ -113,6 +111,12 @@ echo (string_translit ('Онлайн-образование') . PHP_EOL);
  * Залдание 5
  * Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку.
  */
+
+function space_replace (string $string) {
+    return str_replace(' ', '_', $string);
+}
+
+echo(space_replace ('Авторские онлайн‑курсы для профессионалов'). PHP_EOL);
 
 /**
  * Залдание 6
