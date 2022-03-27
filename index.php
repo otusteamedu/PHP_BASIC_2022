@@ -143,7 +143,7 @@ function space_replace (string $string) {
     return str_replace(' ', '_', $string);
 }
 
-echo(space_replace ('Авторские онлайн‑курсы для профессионалов'). PHP_EOL);
+echo (space_replace ('Авторские онлайн‑курсы для профессионалов'). PHP_EOL);
 
 /**
  * Залдание 6
@@ -168,5 +168,11 @@ for ($i = 0; $i <= 9; print $i++ . PHP_EOL) {};
  * Объединить две ранее написанные функции в одну, которая получает строку на русском языке, производит транслитерацию и замену пробелов на подчеркивания (аналогичная задача решается
  * при конструировании url-адресов на основе названия статьи в блогах).
  */
+
+function construct_url (string $string) {
+    return space_replace (string_translit ($string));
+}
+
+echo (construct_url ('Авторские онлайн‑курсы для профессионалов'). PHP_EOL);
 
 ?>
