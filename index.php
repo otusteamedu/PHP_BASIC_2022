@@ -83,6 +83,11 @@
                     <img class="arrow" src="img/Vector_large.svg" alt="Стрелка">
                 </button>
             </div>
+            <div>
+                <div class="item-bottom">
+                    <p>©2008-<? echo date('Y'); ?> РОМАШКА и Ко. Права защищены</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>

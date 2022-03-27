@@ -62,6 +62,14 @@ p {
     box-sizing: border-box;
 }
 
+.item-bottom {
+    width: auto;
+    height: auto;
+    background: #FFFFFF;
+    padding: 20px 32px;
+    border-radius: 8px;
+}
+
 .item-text-height {
     height: 120px;
 }
