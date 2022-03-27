@@ -159,7 +159,7 @@ function list_location_as_menu (array $location_region) {
         echo '<li><a href="#">' .$region .':</li>';
         echo '<ul>';
         foreach ($location_city as $city) {
-            echo '<li><a href="#">' .$city .':</li>';
+            echo '<li><a href="#">' .$city .'</li>';
         }
         echo '</ul>';
     }
