@@ -109,7 +109,7 @@ $letters = [
 
 $text = 'привет мир';
 
-function translit (array $lettersIn, string $textIn){
+function translit (array $lettersIn, string $textIn):string {
 
     echo("Введен текст: ".$textIn."\r");
 
@@ -117,7 +117,7 @@ function translit (array $lettersIn, string $textIn){
         $textIn = str_replace($key, $letter, $textIn);
     }
 
-    return $textIn;
+    return $textIn."\r";
 }
 echo("Результат выполнения функции: ".translit($letters, $text)."\r");
 
@@ -184,24 +184,24 @@ $menu = [
     'Контакты'
 ];
 
-function outputMenu($menu){
-    echo("<ul>\r");
+function outputMenu(array $menu):string{
+    $result  = "<ul>\r";
     foreach ($menu as $items){
         if (is_array($items)){
-            echo("<li><a href=''>array_keys($items)</a>\r");
-            echo("<ul>\r");
+            $result .= "<ul>\r";
             foreach ($items as $item){
-                echo("<li><a href=''>$item</a></li>\r");
+                $result .= "<li><a href=''>$item</a></li>\r";
             }
-            echo("</ul>\r");
+            $result .= "</ul>\r";
         } else {
-            echo("<li><a href=''>$items</a></li>\r");
+            $result .= "<li><a href=''>$items</a></li>\r";
         }
     }
-    echo("</ul>\r");
+    $result .= "</ul>\r";
+    return $result;
 }
 
-outputMenu($menu);
+echo(outputMenu($menu));
 
 //=========================================================================================
 
@@ -241,12 +241,12 @@ $text = 'просмотр функции php';
 
 function translitFull (array $lettersIn, string $textIn){
 
-    echo("Введен текст: ".$textIn."\r");
+    $result = "Введен текст: ".$textIn."\r";
 
     foreach ($lettersIn as $key => $letter){
-        $textIn = str_replace($key, $letter, $textIn);
+        $result .= str_replace($key, $letter, $textIn);
     }
 
-    return $textIn;
+    return $result;
 }
 echo("Результат выполнения функции: ".translitFull($letters, $text)."\r");
