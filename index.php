@@ -1,3 +1,4 @@
+<?php declare(strict_types = 1); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +12,6 @@
 </head>
 <body>
 <?php
-    declare(strict_types = 1);
     //1.Реализовать основные 4 арифметические операции в виде функций с двумя параметрами. 
     function minus(float $a, float $b):float
     {
@@ -32,7 +32,7 @@
     {
         return $a / $b;        
     }
-
+    echo '1. Задание'.'<br>';
     echo("Минус:".minus(7, 4)."<br>");
     echo("Плюс:".plus(7, 4)."<br>");
     echo("Умножение:".multi(7, 4)."<br>");
@@ -57,7 +57,7 @@
                 return 0;
         }
     }
-
+    echo '2. Задание'.'<br>';
     echo mathOperation(4, 10, 'div'), "<br>";
     echo mathOperation(4, 10, 'plus'), "<br>";
     echo mathOperation(4, 10, 'minus'), "<br>";
@@ -81,8 +81,8 @@
         }
         return $val * power($val, $pow - 1);
     }
-
-    echo power(3, 6);
+    echo '4. Задание'.'<br>';
+    echo power(3, 6).'<br>';
 
     // 5.*Написать функцию, которая вычисляет текущее время и возвращает его в формате с
     // правильными склонениями, например: 22 часа 15 минут 21 час 43 минуты
@@ -165,6 +165,7 @@
     }
     date_default_timezone_set('Europe/Moscow');
     $timeArray = explode("-", date("G-i-s"));
+    echo '5. Задание'.'<br>';
     echo getUserFormatHours((int) $timeArray[0]).' '.getUserFormatMin((int) $timeArray[1]).' '.getUserFormatSec((int) $timeArray[2]);
 
     ?>
