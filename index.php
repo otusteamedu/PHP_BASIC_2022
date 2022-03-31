@@ -43,7 +43,7 @@ $array_of_photos = scandir($imageDir);
             <div class="row">
                 <div class="col-md-12">
                     <form method="post" action="" enctype="multipart/form-data">
-                        <input type="file" name="upload"/>
+                        <input type="file" name="upload" accept=".jpg, .jpeg, .png, .gif, .bmp" multiple/>
                         <input type="submit" value="Загрузить фото котика"/>
                     </form>
                 </div>
@@ -56,14 +56,22 @@ $array_of_photos = scandir($imageDir);
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <? for ($i = 2; $i < count($array_of_photos); $i++) { 
-                    $photo[$i] = "/otus/img/album" . "/" . $array_of_photos[$i];?>
+                <? for ($i = 2; $i < count($array_of_photos); $i++) {
+                    $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
+                    $exif = exif_read_data($photo[$i], 0, true); ?>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $photo[$i] ?>" class="img-fluid" alt="photo"></a>
+                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $photo[$i] ?>" class="img-fluid" alt="<?$exif['FILE']['FileName']?>"></a>
                             <div class="card-body">
                                 <p class="card-text">
-                                    <?php echo $array_of_photos[$i] ?>
+                                    <?php
+                                    echo $exif['FILE']['FileName']."<br><br>";
+                                    echo "Размер: ".$exif['FILE']['FileSize']." bytes<br>";
+                                    echo "Дата съемки: ".date ("F d Y H:i:s.",$exif['FILE']['FileDateTime'])."<br>";
+                                    echo "MIME-тип: ".$exif['FILE']['MimeType']."<br>";
+                                    echo "Ширина: ".$exif['COMPUTED']['Width']."<br>";
+                                    echo "Высота: ".$exif['COMPUTED']['Height']."<br>";
+                                    ?>
                                 </p>
                             </div>
                         </div>
