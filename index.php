@@ -37,6 +37,21 @@ $array_of_photos = scandir($imageDir);
     </div>
 </header>
 
+<section>
+    <div class="album pt-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        <input type="file" name="upload"/>
+                        <input type="submit" value="Загрузить фото котика"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <main role="main">
     <div class="album py-5 bg-light">
         <div class="container">
@@ -57,7 +72,6 @@ $array_of_photos = scandir($imageDir);
             </div>
         </div>
     </div>
-
 </main>
 
 <footer class="text-muted">
@@ -69,8 +83,6 @@ $array_of_photos = scandir($imageDir);
         <p>PHP Developer. Basic</p>
     </div>
 </footer>
-
-
 
 </body>
 </html>
