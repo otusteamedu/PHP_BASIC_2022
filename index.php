@@ -65,9 +65,8 @@ $array_of_photos = scandir($imageDir);
                             <div class="card-body">
                                 <p class="card-text">
                                     <?php
-                                    echo $exif['FILE']['FileName']."<br><br>";
                                     echo "Размер: ".$exif['FILE']['FileSize']." bytes<br>";
-                                    echo "Дата съемки: ".date ("F d Y H:i:s.",$exif['FILE']['FileDateTime'])."<br>";
+                                    echo "Дата загрузки: ".date ("d F Y",$exif['FILE']['FileDateTime'])."<br>";
                                     echo "MIME-тип: ".$exif['FILE']['MimeType']."<br>";
                                     echo "Ширина: ".$exif['COMPUTED']['Width']."<br>";
                                     echo "Высота: ".$exif['COMPUTED']['Height']."<br>";
