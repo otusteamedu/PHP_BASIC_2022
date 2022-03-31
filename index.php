@@ -31,7 +31,7 @@ $array_of_photos = scandir($imageDir);
     <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container justify-content-between">
             <a href="#" class="navbar-brand align-items-center">
-                <strong>Галерея фотографий</strong>
+                <strong>Галерея котиков</strong>
             </a>
         </div>
     </div>
