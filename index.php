@@ -82,30 +82,6 @@ $location_region = [
     ],
 ];
 
-$location_region_width_highway = [
-    'Московская область',
-    'Ленинградская область' => [
-        'Бокситогорск',
-        'Волосово' => [
-            '41А-002 (Гатчина — Ополье)',
-            '41К-013 (Жабино — Вересть)',
-            '41К-014 (Волосово — Гомонтово)',
-            ],
-        'Волхов',
-        'Всеволожск',
-        'Выборг',
-        'Шлиссельбург',
-    ],
-    'Рязанская область' => [
-        'Касимов',
-        'Кораблино',
-        'Михайлов',
-        'Новомичуринск',
-        'Рыбное',
-        'Шацк',
-    ],
-];
-
 list_location ($location_region);
 
 /**
@@ -177,17 +153,20 @@ echo (space_replace ('Авторские онлайн‑курсы для про
  * Для выполнения этого задания использовал ранее созданный массив регионов и городов.
  */
 
-function list_highway_as_menu ($data, $level = 0){
+function list_location_as_menu (array $location_region) {
     echo '<ul>';
-    foreach($data as $key => $value){
-        echo '<li><a href="#">' .(is_array($value) ? $key : $value).'</li>';
-        if(is_array($value))
-            list_highway_as_menu ($value, $level + 1);
+    foreach ($location_region as $region => $location_city) {
+        echo '<li><a href="#">' .$region .':</li>';
+        echo '<ul>';
+        foreach ($location_city as $city) {
+            echo '<li><a href="#">' .$city .'</li>';
+        }
+        echo '</ul>';
     }
     echo '</ul>';
 }
 
-list_highway_as_menu ($location_region_width_highway);
+list_location_as_menu ($location_region);
 
 /**
  * Задание 7
