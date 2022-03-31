@@ -45,7 +45,7 @@ $array_of_photos = scandir($imageDir);
                     $photo[$i] = "/otus/img/album" . "/" . $array_of_photos[$i];?>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <img src="<?= $photo[$i] ?>" class="img-fluid" alt="photo">
+                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $photo[$i] ?>" class="img-fluid" alt="photo"></a>
                             <div class="card-body">
                                 <p class="card-text">
                                     <?php echo $array_of_photos[$i] ?>
