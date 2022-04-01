@@ -61,13 +61,16 @@ $cities = [
     ],
 ];
 
-function viewCities(array $cities){
+function viewCities(array $cities):string
+{
+    $result = '';
     foreach ($cities as $key => $city){
-        echo($key.': '.implode(', ', $city)."\r");
+        $result .= $key.': '.implode(', ', $city)."\r";
     }
+    return $result;
 }
 
-viewCities($cities);
+echo (viewCities($cities));
 
 //=========================================================================================
 
@@ -109,17 +112,19 @@ $letters = [
 
 $text = 'привет мир';
 
-function translit (array $lettersIn, string $textIn):string {
+function translit (array $lettersIn, string $textIn):string
+{
 
-    echo("Введен текст: ".$textIn."\r");
+    $result = "Введен текст: ".$textIn."\r";
 
     foreach ($lettersIn as $key => $letter){
         $textIn = str_replace($key, $letter, $textIn);
     }
+    $result.="Результат выполнения функции: ".$textIn."\r";
 
-    return $textIn."\r";
+    return $result;
 }
-echo("Результат выполнения функции: ".translit($letters, $text)."\r");
+echo(translit($letters, $text)."\r");
 
 //=========================================================================================
 
@@ -127,15 +132,18 @@ echo("Результат выполнения функции: ".translit($letter
 
 $text = "Привет дядя Ваня, как Ваши дела?";
 
-function replaceSpace(string $textIn){
-    echo("Введен текст: ".$textIn."\r");
+function replaceSpace(string $textIn):string
+{
+    $result = "Введен текст: ".$textIn."\r";
 
     $textIn = str_replace(' ', '_', $textIn);
 
-    return $textIn;
+    $result .= "Результат выполнения функции: ".$textIn;
+
+    return $result;
 }
 
-echo("Результат выполнения функции: ".replaceSpace($text)."\r");
+echo(replaceSpace($text)."\r");
 
 //=========================================================================================
 
@@ -184,7 +192,8 @@ $menu = [
     'Контакты'
 ];
 
-function outputMenu(array $menu):string{
+function outputMenu(array $menu):string
+{
     $result  = "<ul>\r";
     foreach ($menu as $items){
         if (is_array($items)){
@@ -208,8 +217,9 @@ echo(outputMenu($menu));
 /**Вывести с помощью цикла for числа от 0 до 9, НЕ используя тело цикла.
  * То есть выглядеть должно так: for (…){ // здесь пусто}
  */
-function viewI(){
-    for($i=0; $i<=9; print $i."\r", $i++){
+function viewI():void{
+    for($i=0; $i<=9; print $i."\r", $i++)
+    {
         //
     }
 }
@@ -219,16 +229,17 @@ viewI();
 
 /*8.Повторить третье задание, но вывести на экран только города, начинающиеся с буквы «К».*/
 
-function viewCitiesStartK(array $cities){
+function viewCitiesStartK(array $cities):string{
+    $result = '';
     foreach ($cities as $key => $city){
         if (preg_match_all("/(?:^|\,\s*)(К[А-я\s]+)/u", implode(', ', $city),$match)){
-            echo($key.': '.implode(', ', $match[1])."\r");
+            $result .= $key.': '.implode(', ', $match[1])."\r";
         }
-
     }
+        return $result;
 }
 
-viewCitiesStartK($cities);
+echo(viewCitiesStartK($cities));
 
 //=========================================================================================
 
@@ -239,7 +250,7 @@ viewCitiesStartK($cities);
 
 $text = 'просмотр функции php';
 
-function translitFull (array $lettersIn, string $textIn){
+function translitFull (array $lettersIn, string $textIn):string{
 
     $result = "Введен текст: ".$textIn."\r";
 
