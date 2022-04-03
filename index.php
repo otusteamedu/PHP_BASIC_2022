@@ -56,12 +56,12 @@ $array_of_photos = scandir($imageDir);
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <? for ($i = 2; $i < count($array_of_photos); $i++) {
+                <?php for ($i = 2; $i < count($array_of_photos); $i++) {
                     $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
                     $exif = exif_read_data($photo[$i], 0, true); ?>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $photo[$i] ?>" class="img-fluid" alt="<?$exif['FILE']['FileName']?>"></a>
+                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $photo[$i] ?>" class="img-fluid" alt="<?= $exif['FILE']['FileName'] ?>"></a>
                             <div class="card-body">
                                 <p class="card-text">
                                     <?php
@@ -75,7 +75,7 @@ $array_of_photos = scandir($imageDir);
                             </div>
                         </div>
                     </div>
-                <? } ?>
+                <?php } ?>
             </div>
         </div>
     </div>
