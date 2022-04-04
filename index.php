@@ -1,14 +1,43 @@
 <?php
 
-/**
- * Задание 1
- * Создать галерею фотографий. Она должна состоять всего из одной странички, на которой пользователь видит все картинки в уменьшенном виде и
- * форму для загрузки нового изображения. При клике на фотографию она должна открыться в браузере в новой вкладке. Размер картинок можно ограничивать
- * с помощью свойства width. Галерея должна собираться средствами PHP (scandir)
- */
+// директория с изображениями
+$imageDir    =  dirname(__FILE__) . '\img\album/';
+if (!is_dir($imageDir))
+    mkdir($imageDir);
 
-$imageDir    =  dirname(__FILE__) . '\img\album';
-$array_of_photos = scandir($imageDir);
+// директория с уменьшенными копиями
+$imageDirSmall    =  dirname(__FILE__) . '\img\albumsmall/';
+if (!is_dir($imageDirSmall))
+    mkdir($imageDirSmall);
+
+// Массив допустимых значений типа файла
+$array_types_of_photo = array(
+    'image/gif', 
+    'image/png',
+    'image/jpg', 
+    'image/bmp', 
+    'image/jpeg'
+);
+
+// Максимальный размер файла, в байтах
+$max_size_of_photo = 1048576;
+
+// загрузка фотографии
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(!empty($_POST['form_token']) && $_POST['form_token'] !== 'afg37rv32')
+        die('Подделка запроса!');
+
+    // проверяем тип файла
+    if (!in_array($_FILES['upload']['type'], $array_types_of_photo))
+        die('Запрещённый тип файла!');
+
+    // проверяем размер файла
+    if ($_FILES['upload']['size'] > $max_size_of_photo)
+        die('Слишком большой размер файла!');
+
+    if (!@copy($_FILES['upload']['tmp_name'], $imageDir . $_FILES['upload']['name']))
+        die('Что-то пошло не так');
+}
 
 ?>
 
@@ -44,6 +73,7 @@ $array_of_photos = scandir($imageDir);
                 <div class="col-md-12">
                     <form method="post" action="" enctype="multipart/form-data">
                         <input type="file" name="upload" accept=".jpg, .jpeg, .png, .gif, .bmp" multiple/>
+                        <input type="hidden" name="form_token" value="afg37rv32"/>
                         <input type="submit" value="Загрузить фото котика"/>
                     </form>
                 </div>
@@ -56,7 +86,9 @@ $array_of_photos = scandir($imageDir);
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <?php for ($i = 2; $i < count($array_of_photos); $i++) {
+                <?php 
+                    $array_of_photos = scandir($imageDir);
+                    for ($i = 2; $i < count($array_of_photos); $i++) {
                     $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
                     $exif = exif_read_data($photo[$i], 0, true); ?>
                     <div class="col-md-4">
