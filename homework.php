@@ -1,7 +1,7 @@
 <?php
 
+echo "<h2>Дополнительное задание 1:</h2>";
 /**
- * Дополнительное задание 1:
  * function iWantToBeLogged() {
  * $result = 'I was called at ' . date('Y-m-d H:i:s')
  * echo $result;
@@ -11,6 +11,16 @@
  * Каждая запись на новой строке. Между вызовами скрипта файл также не должен очищаться
  */
 
+function iWantToBeLogged() {
+    $filename = __DIR__ . '/data/result.log';
+    $result = 'I was called at ' . date('Y-m-d H:i:s') . PHP_EOL;
+    file_put_contents($filename, $result, FILE_APPEND);
+    echo $result;
+}
+
+iWantToBeLogged();
+
+echo "<h2>Дополнительное задание 2:</h2>";
 /**
  * Дополнительное задание 2:
  * Подсчитать количество слов в файле. Содержимое файла взять любое. Предусмотреть то, что файл может быть большим и не помещаться в оперативную память.
@@ -54,9 +64,7 @@ echo '</pre>';
  * удалить в массиве
  */
 
-function remove_from_array (){
 
-}
 
 /**
  * добавим клиента, вариант 1:
