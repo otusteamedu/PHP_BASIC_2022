@@ -10,15 +10,14 @@ echo "<h2>Дополнительное задание 1:</h2>";
  * $result должен записываться в лог-файл. Последующие вызовы функции должны дописывать значения в конец файла, не удаляя содержимого.
  * Каждая запись на новой строке. Между вызовами скрипта файл также не должен очищаться
  */
-
-function iWantToBeLogged() {
-    $filename = __DIR__ . '/data/result.log';
+$filename = __DIR__ . '/data/result.log';
+function iWantToBeLogged($filename) {
     $result = 'I was called at ' . date('Y-m-d H:i:s') . PHP_EOL;
     file_put_contents($filename, $result, FILE_APPEND);
     echo $result;
 }
 
-iWantToBeLogged();
+iWantToBeLogged($filename);
 
 echo "<h2>Дополнительное задание 2:</h2>";
 /**
@@ -31,7 +30,7 @@ echo "<h2>Дополнительное задание 2:</h2>";
 $filename = __DIR__ . '/data/2.txt';
 echo "Количество слов в файле - ";
 echo str_word_count(file_get_contents($filename));
-echo "<br>";
+echo "<br><br>";
 /**
  * решение вариант 2:
  */
@@ -41,19 +40,27 @@ $word_count = str_word_count($contents);
 fclose($handle);
 echo "Количество слов в файле - ";
 echo $word_count;
-echo "<br>";
+echo "<br><br>";
 /**
  * решение вариант 3:
- * читаем файл побайтно
+ * читаем файл построчно
  */
-$handle = fopen($filename, "r");
-while($contents = fread($handle, 1)) {
 
+$row_count = 0;
+$word_count_total = 0;
+
+if (($handle = fopen($filename, "r")) !== FALSE) {
+    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        $num = count($data);
+        for ($c=0; $c < $num; $c++) {
+            $word_count_total = $word_count_total + str_word_count($data[$c]);
+        }
+        $row_count++;
+    }
+    fclose($handle);
 }
-fclose($handle);
-echo "Количество слов в файле - ";
-echo $word_count;
-echo "<hr>";
+echo "Количество слов в файле - $word_count_total Строчек - $row_count ";
+
 /**
  * Дополнительное задание 3:
  * Есть csv файл с таким содержимым:
@@ -62,6 +69,7 @@ echo "<hr>";
  * Анна;Кошкина;;;18.09.2021
  * Удалить клиента Иван, добавить любого другого клиента, сохранить результат в csv, используя функции для работы с csv.
  */
+echo "<h2>Дополнительное задание 3:</h2>";
 $filename = __DIR__ . '/data/3.csv';
 $handle = fopen($filename, "r");
 while (($csv_data = fgetcsv($handle, 0, ";")) !== FALSE) {
