@@ -12,9 +12,14 @@
  */
 
 // директория с изображениями
-$imageDir    =  dirname(__FILE__) . '\img\album/';
+$imageDir    =  './img/album/';
 if (!is_dir($imageDir))
     mkdir($imageDir);
+
+// директория с изображениями
+$preview_imageDir    =  './img/album/preview/';
+    if (!is_dir($preview_imageDir))
+        mkdir($preview_imageDir);
 
 // Массив допустимых значений типа файла
 $array_types_of_photo = array(
@@ -58,19 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             case IMAGETYPE_PNG:
                 $imageResourceId = imagecreatefrompng($_FILES['upload']['tmp_name']);
                 $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
-                imagepng($targetLayer,$imageDir. "preview-". $fileNewName. ".". $ext);
+                imagepng($targetLayer,$preview_imageDir. "preview-". $fileNewName. ".". $ext);
                 break;
 
             case IMAGETYPE_GIF:
                 $imageResourceId = imagecreatefromgif($_FILES['upload']['tmp_name']);
                 $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
-                imagegif($targetLayer,$imageDir. "preview-". $fileNewName. ".". $ext);
+                imagegif($targetLayer,$preview_imageDir. "preview-". $fileNewName. ".". $ext);
                 break;
 
             case IMAGETYPE_JPEG:
                 $imageResourceId = imagecreatefromjpeg($_FILES['upload']['tmp_name']);
                 $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
-                imagejpeg($targetLayer,$imageDir. "preview-". $fileNewName. ".". $ext);
+                imagejpeg($targetLayer,$preview_imageDir. "preview-". $fileNewName. ".". $ext);
                 break;
 
             default:
@@ -131,10 +136,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="container">
             <div class="row">
                 <?php
-                $array_of_photos = glob($imageDir . '/preview-*.{jpg,jpeg,gif,png}', GLOB_BRACE);
+                $array_of_photos = glob($imageDir . '/*.{jpg,jpeg,gif,png}', GLOB_BRACE);
                 foreach ($array_of_photos as $filename) {
-                    $photo_preview = './img/album/' . basename($filename);
-                    $photo = str_replace('preview-', '', $photo_preview);
+                    $photo_preview = $preview_imageDir . 'preview-' . basename($filename);
+                    $photo = $imageDir . basename($filename);
                     $exif = exif_read_data($photo, 0, true); ?>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
