@@ -53,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $ext = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
         $imageType = $sourceProperties[2];
 
-
         switch ($imageType) {
 
             case IMAGETYPE_PNG:
@@ -131,15 +130,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <?php 
-                    $array_of_photos = scandir($imageDir);
-                    for ($i = 2; $i < count($array_of_photos); $i++) {
-                        $preview_photo[$i] = "./img/album/preview-" . $array_of_photos[$i];
-                        $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
-                        $exif = exif_read_data($photo[$i], 0, true); ?>
+                <?php
+                $array_of_photos = glob($imageDir . '/preview-*.{jpg,jpeg,gif,png}', GLOB_BRACE);
+                foreach ($array_of_photos as $filename) {
+                    $photo_preview = './img/album/' . basename($filename);
+                    $photo = str_replace('preview-', '', $photo_preview);
+                    $exif = exif_read_data($photo, 0, true); ?>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $preview_photo[$i] ?>" class="img-fluid" alt="<?= $exif['FILE']['FileName'] ?>"></a>
+                            <a href="<?= $photo ?>" target="_blank"><img src="<?= $photo_preview ?>" class="img-fluid" alt="<?= $exif['FILE']['FileName'] ?>"></a>
                             <div class="card-body">
                                 <p class="card-text">
                                     <?php
@@ -153,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php }?>
             </div>
         </div>
     </div>
