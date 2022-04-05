@@ -29,13 +29,14 @@ $array_types_of_photo = array(
 );
 
 // ограничение размера уменьшенной копии изображения по ширине
-$max_preview_size = 500;
+$max_preview_size = 700;
+$min_preview_size = 400;
 
 // максимальный размер файла, в байтах
 $max_size_of_photo = 1048576;
 
 function imageResize($imageResourceId,$width,$height) {
-    global $max_preview_size, $quality;
+    global $max_preview_size;
     $ratio = $width/$max_preview_size;
     $targetWidth = round($width/$ratio);
     $targetHeight = round($height/$ratio);
@@ -62,6 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $fileNewName = time();
         $ext = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
         $imageType = $sourceProperties[2];
+
+        // проверяем размер файла
+        if ($sourceProperties[0] < $min_preview_size)
+            die('Слишком маленькое разрешение файла!');
 
         switch ($imageType) {
 
