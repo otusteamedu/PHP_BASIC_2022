@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /**
  * $_FILES это массив загруженных файлов
@@ -17,38 +17,77 @@ $imageDir    =  dirname(__FILE__) . '\img\album/';
 if (!is_dir($imageDir))
     mkdir($imageDir);
 
-// директория с уменьшенными копиями
-$imageDirSmall    =  dirname(__FILE__) . '\img\albumsmall/';
-if (!is_dir($imageDirSmall))
-    mkdir($imageDirSmall);
-
 // Массив допустимых значений типа файла
 $array_types_of_photo = array(
     'image/gif', 
     'image/png',
-    'image/jpg', 
-    'image/bmp', 
     'image/jpeg'
 );
+
+function imageResize($imageResourceId,$width,$height) {
+    $targetWidth =200;
+    $targetHeight =200;
+    $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
+    imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$targetWidth,$targetHeight, $width,$height);
+    return $targetLayer;
+}
 
 // Максимальный размер файла, в байтах
 $max_size_of_photo = 1048576;
 
 // загрузка фотографии
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if(!empty($_POST['form_token']) && $_POST['form_token'] !== 'afg37rv32')
-        die('Подделка запроса!');
+    if(is_array($_FILES)) {
+        if(!empty($_POST['form_token']) && $_POST['form_token'] !== 'afg37rv32')
+            die('Подделка запроса!');
 
-    // проверяем тип файла
-    if (!in_array($_FILES['upload']['type'], $array_types_of_photo))
-        die('Запрещённый тип файла!');
+        // проверяем тип файла
+        if (!in_array($_FILES['upload']['type'], $array_types_of_photo))
+            die('Запрещённый тип файла!');
 
-    // проверяем размер файла
-    if ($_FILES['upload']['size'] > $max_size_of_photo)
-        die('Слишком большой размер файла!');
+        // проверяем размер файла
+        if ($_FILES['upload']['size'] > $max_size_of_photo)
+            die('Слишком большой размер файла!');
 
-    if (!@copy($_FILES['upload']['tmp_name'], $imageDir . $_FILES['upload']['name']))
-        die('Что-то пошло не так');
+
+        $sourceProperties = getimagesize($_FILES['upload']['tmp_name']);
+        $fileNewName = time();
+        $ext = pathinfo($_FILES['upload']['name'], PATHINFO_EXTENSION);
+        $imageType = $sourceProperties[2];
+
+
+        switch ($imageType) {
+
+            case IMAGETYPE_PNG:
+                $imageResourceId = imagecreatefrompng($_FILES['upload']['tmp_name']);
+                $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                imagepng($targetLayer,$imageDir. "preview-". $fileNewName. ".". $ext);
+                break;
+
+            case IMAGETYPE_GIF:
+                $imageResourceId = imagecreatefromgif($_FILES['upload']['tmp_name']);
+                $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                imagegif($targetLayer,$imageDir. "preview-". $fileNewName. ".". $ext);
+                break;
+
+            case IMAGETYPE_JPEG:
+                $imageResourceId = imagecreatefromjpeg($_FILES['upload']['tmp_name']);
+                $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                imagejpeg($targetLayer,$imageDir. "preview-". $fileNewName. ".". $ext);
+                break;
+
+            default:
+                echo "Проблема с обработкой фотографии на сервере";
+                break;
+        }
+
+
+        if (!move_uploaded_file($_FILES['upload']['tmp_name'], $imageDir. $fileNewName. ".". $ext))
+            die('Что-то пошло не так');
+
+
+
+    }
 }
 
 ?>
@@ -84,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row">
                 <div class="col-md-12">
                     <form method="post" action="" enctype="multipart/form-data">
-                        <input type="file" name="upload" accept=".jpg, .jpeg, .png, .gif, .bmp" multiple/>
+                        <input type="file" name="upload" accept=".jpeg, .png, .gif" multiple/>
                         <input type="hidden" name="form_token" value="afg37rv32"/>
                         <input type="submit" value="Загрузить фото котика"/>
                     </form>
@@ -101,11 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php 
                     $array_of_photos = scandir($imageDir);
                     for ($i = 2; $i < count($array_of_photos); $i++) {
-                    $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
-                    $exif = exif_read_data($photo[$i], 0, true); ?>
+                        $preview_photo[$i] = "./img/album" . "/preview-" . $array_of_photos[$i];
+                        $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
+                        $exif = exif_read_data($photo[$i], 0, true); ?>
                     <div class="col-md-4">
                         <div class="card mb-4 shadow-sm">
-                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $photo[$i] ?>" class="img-fluid" alt="<?= $exif['FILE']['FileName'] ?>"></a>
+                            <a href="<?= $photo[$i] ?>" target="_blank"><img src="<?= $preview_photo[$i] ?>" class="img-fluid" alt="<?= $exif['FILE']['FileName'] ?>"></a>
                             <div class="card-body">
                                 <p class="card-text">
                                     <?php
