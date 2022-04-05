@@ -16,28 +16,33 @@ $imageDir    =  './img/album/';
 if (!is_dir($imageDir))
     mkdir($imageDir);
 
-// директория с изображениями
+// директория с изображениями уменьшенных копий
 $preview_imageDir    =  './img/album/preview/';
     if (!is_dir($preview_imageDir))
         mkdir($preview_imageDir);
 
-// Массив допустимых значений типа файла
+// массив допустимых значений типа файла
 $array_types_of_photo = array(
     'image/gif', 
     'image/png',
     'image/jpeg'
 );
 
+// ограничение размера уменьшенной копии изображения по ширине
+$max_preview_size = 500;
+
+// максимальный размер файла, в байтах
+$max_size_of_photo = 1048576;
+
 function imageResize($imageResourceId,$width,$height) {
-    $targetWidth =400;
-    $targetHeight =225;
+    global $max_preview_size, $quality;
+    $ratio = $width/$max_preview_size;
+    $targetWidth = round($width/$ratio);
+    $targetHeight = round($height/$ratio);
     $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
     imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$targetWidth,$targetHeight, $width,$height);
     return $targetLayer;
 }
-
-// Максимальный размер файла, в байтах
-$max_size_of_photo = 1048576;
 
 // загрузка фотографии
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
