@@ -9,7 +9,6 @@
  *      Вначале он загружается во временную директорию сервера, а затем обрабатывается  * с помощью PHP интерпритатора.
  *      По окончанию сессии временный файл автоматически удаляется.
  *      Именно этот параметр и используется для перемещения файлов после загрузки.
- * $_FILES[' picture ']['error'] – код ошибки.
  */
 
 // директория с изображениями
@@ -25,8 +24,8 @@ $array_types_of_photo = array(
 );
 
 function imageResize($imageResourceId,$width,$height) {
-    $targetWidth =200;
-    $targetHeight =200;
+    $targetWidth =400;
+    $targetHeight =225;
     $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
     imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$targetWidth,$targetHeight, $width,$height);
     return $targetLayer;
@@ -48,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // проверяем размер файла
         if ($_FILES['upload']['size'] > $max_size_of_photo)
             die('Слишком большой размер файла!');
-
 
         $sourceProperties = getimagesize($_FILES['upload']['tmp_name']);
         $fileNewName = time();
@@ -81,12 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 break;
         }
 
-
         if (!move_uploaded_file($_FILES['upload']['tmp_name'], $imageDir. $fileNewName. ".". $ext))
             die('Что-то пошло не так');
-
-
-
     }
 }
 
@@ -123,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row">
                 <div class="col-md-12">
                     <form method="post" action="" enctype="multipart/form-data">
-                        <input type="file" name="upload" accept=".jpeg, .png, .gif" multiple/>
+                        <input type="file" name="upload" accept=".jpeg, .jpg, .png, .gif" multiple/>
                         <input type="hidden" name="form_token" value="afg37rv32"/>
                         <input type="submit" value="Загрузить фото котика"/>
                     </form>
@@ -140,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php 
                     $array_of_photos = scandir($imageDir);
                     for ($i = 2; $i < count($array_of_photos); $i++) {
-                        $preview_photo[$i] = "./img/album" . "/preview-" . $array_of_photos[$i];
+                        $preview_photo[$i] = "./img/album/preview-" . $array_of_photos[$i];
                         $photo[$i] = "./img/album" . "/" . $array_of_photos[$i];
                         $exif = exif_read_data($photo[$i], 0, true); ?>
                     <div class="col-md-4">
