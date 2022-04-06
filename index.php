@@ -1,10 +1,18 @@
 <?php
 
 require_once("db.php");
-$books = db_get_all_books();
-echo "<pre>";
-print_r($_GET);
-echo "</pre>";
+if (empty($_GET)) {
+    $books = db_get_all_books();
+}
+if (!empty($_GET)) {
+    if (isset($_GET['name']) && !isset($_GET['author'])) {
+        $books = db_get_all_books($_GET['name']);
+    } elseif (isset($_GET['name']) && isset($_GET['author'])) {
+        $books = db_get_all_books($_GET['name'], $_GET['author']);
+    } elseif (!isset($_GET['name']) && isset($_GET['author'])) {
+        $books = db_get_all_books(null, $_GET['author']);
+    }
+};
 
 ?>
 
@@ -23,28 +31,10 @@ echo "</pre>";
 
 <div class="container">
     <h2>Фильтр</h2>
-    <form action="/" method="GET">
-        <div class="form-group">
-            <label for="id">id</label>
-            <input type="text" class="form-control" id="id">
-        </div>
-        <div class="form-group">
-            <label for="name">Название</label>
-            <input type="text" class="form-control" id="name">
-        </div>
-        <div class="form-group">
-            <label for="authors">Автор</label>
-            <input type="text" class="form-control" id="authors">
-        </div>
-        <div class="form-group">
-            <label for="pages">Количество страниц</label>
-            <input type="number" class="form-control" id="pages">
-        </div>
-        <div class="form-group">
-            <label for="year">Год</label>
-            <input type="number" class="form-control" id="year">
-        </div>
-        <input type="submit" value ="Отправить">
+    <form action="/" method="get" class="form-group" enctype="multipart/form-data">
+        Name: <input type="text" class="mb-3" name="name" /><br />
+        Author: <input type="text" class="mb-3" name="author" /><br />
+        <input type="submit" class="mb-3" value="Найти" />
     </form>
     <h2>Список книг</h2>
     <table class="table table-striped">
@@ -58,15 +48,15 @@ echo "</pre>";
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($books as $book):?>
+        <?php foreach ($books as $book): ?>
             <tr>
-                <td><?=$book['id'];?></td>
-                <td><?=$book['name'];?></td>
-                <td><?=$book['authors'];?></td>
-                <td><?=$book['pages'];?></td>
-                <td><?=$book['year'];?></td>
+                <td><?= $book['id']; ?></td>
+                <td><?= $book['name']; ?></td>
+                <td><?= $book['authors']; ?></td>
+                <td><?= $book['pages']; ?></td>
+                <td><?= $book['year']; ?></td>
             </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>

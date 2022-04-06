@@ -8,17 +8,27 @@ function db_connect()
     ]);
 }
 
-function db_get_all_books($filter = null)
+function db_get_all_books($filterName = null, $filterAuthor = null)
 {
     $pdo = db_connect();
-    if ($filter === null) {
+    if ($filterName === null && $filterAuthor === null) {
         $result = $pdo->query('select * from books', PDO::FETCH_ASSOC);
         $result->execute();
-    } else {
-        $result = $pdo->prepare('select * from books where username like ?', [
+    } elseif ($filterName !== null && $filterAuthor === null) {
+        $result = $pdo->prepare('select * from books where name like ?', [
             PDO::FETCH_ASSOC
         ]);
-        $result->execute(["%{$filter}%"]);
+        $result->execute(["%{$filterName}%"]);
+    } elseif ($filterName == null && $filterAuthor !== null) {
+        $result = $pdo->prepare('select * from books where authors like ?', [
+            PDO::FETCH_ASSOC
+        ]);
+        $result->execute(["%{$filterAuthor}%"]);
+    } else {
+        $result = $pdo->prepare('select * from books where name like ? and authors like ?', [
+            PDO::FETCH_ASSOC
+        ]);
+        $result->execute(["%{$filterName}%","%{$filterAuthor}%"]);
     }
     return $result->fetchAll();
 }
