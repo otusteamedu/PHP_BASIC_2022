@@ -1,6 +1,8 @@
 <?php
 
 $op = $_GET['op'];
+$action = $_GET['action'];
+$query = $_POST['query'];
 
 // include("./config/db.inc.php");
 
@@ -13,7 +15,9 @@ function getTemplate($template) {
 }
 
 function main() {
-    global $fyb, $db;
+    global $fyb, $db, $action, $query;
+
+    $query = preg_replace('/(?<!\\\)([%_])/', '\\\$1',$query);
     // подгружаем шаблон шапки сайта
     include_once("./templates/main.head.html");
 
@@ -24,26 +28,32 @@ function main() {
     include_once("./templates/main.container.sidebar.html");
 
     // подгружаем шаблон основного содержимого
-    $sql = $db->query("SELECT * FROM * WHERE *");
-    while ($row = $sql->fetch_assoc()) {
-        $SUMMARY = $row["SUMMARY"];
-        $TEXT = $row["TEXT"];
-        $main_section_tpl_variables = str_replace(
-            array(
-                "%SUMMARY%",
-                "%TEXT%"
-            ),
-            array(
-                $SUMMARY,
-                $TEXT
-            ),
-            getTemplate("main.container.menu")
-        );
+    if (!$action || $action == '') {
+        $sql = $db->query("SELECT * FROM * WHERE *");
+        while ($row = $sql->fetch_assoc()) {
+            $SUMMARY = $row["SUMMARY"];
+            $TEXT = $row["TEXT"];
+            $search_tpl_variables = str_replace(
+                array(
+                    "%SUMMARY%",
+                    "%TEXT%"
+                ),
+                array(
+                    $SUMMARY,
+                    $TEXT
+                ),
+                getTemplate("main.container.search")
+            );
+            echo $search_tpl_variables;
+        }
+    }
+    if ($query && $action == "search") {
+        getTemplate("main.container.menu");
         echo $main_section_tpl_variables;
     }
 
-        // подгржаем шаблон подвала сайта
-    include("./templates/main.footer.html");
+    // подгржаем шаблон подвала сайта
+    include_once ("./templates/main.footer.html");
 }
 
 switch($op) {
