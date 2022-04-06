@@ -12,8 +12,7 @@ function getTemplate($template) {
     return $variables; // Возвращение текста из файла
 }
 
-function main()
-{
+function main() {
     global $fyb, $db;
     // подгружаем шаблон шапки сайта
     include_once("./templates/main.head.html");
@@ -25,9 +24,25 @@ function main()
     include_once("./templates/main.container.sidebar.html");
 
     // подгружаем шаблон основного содержимого
-    include_once("./templates/main.container.menu.html");
+    $sql = $db->query("SELECT * FROM * WHERE *");
+    while ($row = $sql->fetch_assoc()) {
+        $SUMMARY = $row["SUMMARY"];
+        $TEXT = $row["TEXT"];
+        $main_section_tpl_variables = str_replace(
+            array(
+                "%SUMMARY%",
+                "%TEXT%"
+            ),
+            array(
+                $SUMMARY,
+                $TEXT
+            ),
+            getTemplate("main.container.menu")
+        );
+        echo $main_section_tpl_variables;
+    }
 
-    // подгржаем шаблон подвала сайта
+        // подгржаем шаблон подвала сайта
     include("./templates/main.footer.html");
 }
 
