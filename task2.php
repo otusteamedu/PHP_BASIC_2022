@@ -1,11 +1,24 @@
 <?php
 
-$handle = fopen("textfortask2.txt", "r");
-$words = 0;
+$file = "textfortask2.txt";
 
-while(!feof($handle)) {
-    $str = fgets($handle);
-    $words += substr_count($str, " ") + 1;
+function wordsInFileCounter(string $file) {
+    $words = [];
+    $word = "";
+    $handle = fopen($file, "r");
+    $separatorsInASCII = [32, 10, 13];
+    while(!feof($handle)) {
+        $symbol = fgetc($handle);
+        $symbolInASCII = ord($symbol);
+        if (!in_array($symbolInASCII, $separatorsInASCII)) {
+            $word .= $symbol;
+        } else {
+            $words[] = $word;
+            $word = "";
+        }
+
+    }
+    return count(array_diff($words, array(''))) + 1;
 }
 
-echo "Всего слов: " . $words;
+echo ($words = wordsInFileCounter($file));

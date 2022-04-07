@@ -1,5 +1,7 @@
 <?php
-$images = array_diff(scandir("img"), array('..', '.'));
+require_once ('lib.php');
+
+$images = getImages();
 
 ?>
 
