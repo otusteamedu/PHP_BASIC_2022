@@ -3,22 +3,20 @@
 $file = "textfortask2.txt";
 
 function wordsInFileCounter(string $file) {
-    $words = [];
-    $word = "";
     $handle = fopen($file, "r");
-    $separatorsInASCII = [32, 10, 13];
+    $separatorsInASCII = [0, 32, 10, 13];
+    $wordIsStarted = false;
+    $wordCnt = 0;
     while(!feof($handle)) {
-        $symbol = fgetc($handle);
-        $symbolInASCII = ord($symbol);
-        if (!in_array($symbolInASCII, $separatorsInASCII)) {
-            $word .= $symbol;
-        } else {
-            $words[] = $word;
-            $word = "";
-        }
-
+        $currentSymbol = ord(fgetc($handle));
+        $currentSymbolIsDelimiter = in_array($currentSymbol, $separatorsInASCII);
+        if ($currentSymbolIsDelimiter) {
+            if ($wordIsStarted) $wordCnt++;
+            $wordIsStarted = false;
+        } else $wordIsStarted = true;
     }
-    return count(array_diff($words, array(''))) + 1;
+    if ($wordIsStarted) $wordCnt++;
+    return $wordCnt;
 }
 
 echo ($words = wordsInFileCounter($file));
