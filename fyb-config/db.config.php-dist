@@ -1,0 +1,14 @@
+<?php
+
+return array (
+    'fyb' =>
+        array (
+            'dbhost' => 'localhost',
+            'dbuname' => 'root',
+            'dbpass' => '',
+            'dbname' => '',
+            'type' => 'mysqli',
+            'sql_mode' => 'TRADITIONAL',
+        ),
+);
+//EOF
