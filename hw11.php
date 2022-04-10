@@ -30,11 +30,12 @@ echo '<br>';
 //Подсчитать количество слов в файле. Содержимое файла взять любое.
 // Предусмотреть то, что файл может быть большим и не помещаться в оперативную память
 
-function getWordsCountFromFile(\resource $fd): int
+function getWordsCountFromFile($fd): int
 {
     $wordsCount = 0;
     while($line = fgets($fd)){
-        $wordsCount += count(explode($line,' '));
+        $wordsArray = ($line === "\r\n") ? [] : explode(" ", $line);
+        $wordsCount += count($wordsArray);
     }
     return $wordsCount;
 }
@@ -43,10 +44,40 @@ $fd = fopen('test.txt','r');
 echo getWordsCountFromFile($fd);
 fclose($fd);
 
+// не смог определить тип передаваемого аргумента в функцию, как resource.
+//
+//
+
+
+
 //3.
 //Есть csv файл с таким содержимым:
 //Name;Surname;Phone;Email;CreatedAt
 //Иван;Семенов;+79031231212;ivan@mail.ru;12.01.2017
 //Анна;Кошкина;;;18.09.2021
 //Удалить клиента Иван, добавить любого другого клиента, сохранить результат в csv, используя функции для работы с csv
+function deleteByName(string $name, string $fileName): void
+{
+    $fd = fopen($fileName, 'r');
+    $fieldsName = fgetcsv($fd, 0, ';');
+    $fileData[] = $fieldsName;
+    while($row = fgetcsv($fd, 0, ';')){
+        $assoc_row = array_combine($fieldsName, $row);
+        if($assoc_row["Name"] === "$name") continue;
+        $fileData[] = $row;
+    }
+    fclose($fd);
+    $fd = fopen($fileName, 'w');
+    foreach($fileData as $row){
+        fputcsv($fd,$row, ';');
+    }
+    fclose($fd);
+}
 
+function addRecord(array $record, $fd): bool
+{
+
+}
+
+
+deleteByName('Иван', "ex3.txt");
