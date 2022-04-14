@@ -11,42 +11,63 @@
 </head>
 <body>
     <?php
-    //Создать галерею фотографий. Она должна состоять всего из одной странички, на которой
-    // пользователь видит все картинки в уменьшенном виде и форму для загрузки нового изображения.
-    // При клике на фотографию она должна открыться в браузере в новой вкладке.
-    // Размер картинок можно ограничивать с помощью свойства width.
-    // Галерея должна собираться средствами PHP (scandir)
+    const MAX_HEIGHT = 300;
 
-    //Критерии оценки:
-    //
-    //    На странице не выводятся несуществующие файлы
-    //    Миниатюры имеют выравнивание по высоте
-    //    Фотография полного размера должна выводиться на отдельной странице
-
-    $imgDir = './img/';
-    if(!empty($_FILES)){
-        $uploadFile = $imgDir . basename($_FILES['user_image']['name']);
-        echo '<pre>';
-        if (move_uploaded_file($_FILES['user_image']['tmp_name'], $uploadFile)) {
-            echo "Файл корректен и был успешно загружен.\n";
-        } else {
-            echo "Возможная атака с помощью файловой загрузки!\n";
+    function resizeAndSaveImage(string $filename):GdImage
+    {
+        list($width, $height, $type) = getimagesize($filename);
+        $newWidth = $width;
+        $newHeight = $height;
+        if($height > MAX_HEIGHT){
+            $newWidth = (int)($width * (MAX_HEIGHT / $height));
+            $newHeight = MAX_HEIGHT;
         }
-        echo "</pre>";
+        $GDImage = imagecreatetruecolor($newWidth, $newHeight);
+        $source = match($type){
+            IMAGETYPE_JPEG => imagecreatefromjpeg($filename),
+            IMAGETYPE_GIF => imagecreatefromgif($filename),
+            IMAGETYPE_PNG => imagecreatefrompng($filename),
+            IMAGETYPE_BMP => imagecreatefrombmp($filename)
+        };
+        imagecopyresized($GDImage, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        return $GDImage;
     }
 
+    $imgDir = './img/';
+    $imgDirMin = './img/min/';
+    $tmpFilePath = $_FILES['user_image']['tmp_name'];
+    $fileName = $_FILES['user_image']['name'];
+    $allowedTypes = ['image/gif', 'image/bmp', 'image/png', 'image/jpeg', 'image/jpg'];
 
-    $filesArray = scandir($imgDir);
+    if(isset($_FILES['user_image'])){
+        $mimeType = mime_content_type($tmpFilePath);
+        if (in_array($mimeType, $allowedTypes)){
+            $uploadFile = $imgDir . basename($fileName);
+            if (move_uploaded_file($tmpFilePath, $uploadFile)) {
+                echo "<pre>Файл корректен и был успешно загружен.</pre>";
+            } else {
+                echo "<pre>Что-то пошло не так!</pre>";
+            }
+            $GDImage = resizeAndSaveImage($uploadFile);
+            imagejpeg($GDImage, "{$imgDirMin}{$fileName}");
+        }else{
+            echo "<pre>Попытка загрузить не изображение. Просьба повторить попытку.</pre>";
+        }
+    }
+
+    $filesArray = scandir($imgDirMin);
     foreach ($filesArray as $fileName){
-        $filePath = $imgDir . $fileName;
-        if(str_contains($fileName, '.jpg')){
-            echo "<a target='_blank' href='". $filePath ."'><img src=". $filePath ." ></a>";
+        $ext = pathinfo($fileName)['extension'];
+        if(in_array("image/".$ext, $allowedTypes)){
+            $filePathMin = $imgDirMin . $fileName;
+            $filePath = $imgDir . $fileName;
+            echo "<a target='_blank' href='". $filePath ."'><img src=". $filePathMin ." ></a>";
         }
     }
 
     ?>
     <p>
-        Добавить изображение в галерею
+        Добавить изображение в галерею (поддерживает типы файлов: jpg, jpeg, bmp, gif, png)
     </p>
     <form enctype="multipart/form-data" method="post">
         <p>
