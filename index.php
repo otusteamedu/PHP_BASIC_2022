@@ -21,29 +21,27 @@
             if(in_array($ext, $allowedExtensions))
             {
                 $uniq_name = uniqid().$_FILES['picture']['name'];
-                
-                $min_uniq_name = 'min-'.uniqid().$_FILES['picture']['name'];
+                $min_uniq_name = 'min-'.$uniq_name;
+                if (!getimagesize($_FILES['picture']['tmp_name'])) {
+                    die('<BR>А где картинка?? А я Вам доверял....<BR>');
+                    }
                
-                
-                if(!move_uploaded_file($_FILES['picture']['tmp_name'],'images/'.$uniq_name))
+                if(move_uploaded_file($_FILES['picture']['tmp_name'],'images/'.$uniq_name))
                 {
+                    $percent = 0.5;
+                    header('Content-Type: image/jpeg');
+                    list($width, $height) = getimagesize('images/'.$uniq_name);
+                    $new_width = round($width * $percent);
+                    $new_height = round($height * $percent);
+                    $image_p = imagecreatetruecolor($new_width, $new_height);
+                    $min_uniq_name_image = imagecreatefromjpeg('images/'.$uniq_name);
+                    imagecopyresampled($image_p, $min_uniq_name_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                    imagejpeg($image_p, 'images/'.$min_uniq_name);
+                   // imagejpeg($image_p, NULL, 75);
+                    imagedestroy($image_p);
+                } else {
                     unset($uniq_name);
                 }
-
-                $percent = 0.5;
-                header('Content-Type: image/jpeg');
-                list($width, $height) = getimagesize('images/'.$uniq_name);
-                $new_width = round($width * $percent);
-                $new_height = round($height * $percent);
-                $image_p = imagecreatetruecolor($new_width, $new_height);
-                $min_uniq_name_image = imagecreatefromjpeg('images/'.$uniq_name);
-                imagecopyresampled($image_p, $min_uniq_name_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-                imagejpeg($image_p, 'images/'.$min_uniq_name);
-               // imagejpeg($image_p, NULL, 75);
-                imagedestroy($image_p);
-
-
-
             }
         }
         $data = [];
@@ -64,7 +62,7 @@
     }
 
 ?>
-<form action="/index.php?action=test" method="post" enctype="multipart/form-data">
+<form action="/index.php" method="post" enctype="multipart/form-data">
     <label for="user">Имя пользователя:</label>
     <input type="text" name="user" /><br>
     <label for="message">Сообщение:</label>
