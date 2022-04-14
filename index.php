@@ -30,16 +30,19 @@
             IMAGETYPE_BMP => imagecreatefrombmp($filename)
         };
         imagecopyresized($GDImage, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        $im = imagecreatetruecolor(300, 100);
+        $red = imagecolorallocate($im, 0xFF, 0x00, 0x00);
+        imagefttext($GDImage, 13, 0, 10, 20, $red, './verdana.ttf', 'SV-AUTO');
         return $GDImage;
     }
 
     $imgDir = './img/';
     $imgDirMin = './img/min/';
-    $tmpFilePath = $_FILES['user_image']['tmp_name'];
-    $fileName = $_FILES['user_image']['name'];
     $allowedTypes = ['image/gif', 'image/bmp', 'image/png', 'image/jpeg', 'image/jpg'];
 
     if(isset($_FILES['user_image'])){
+        $tmpFilePath = $_FILES['user_image']['tmp_name'];
+        $fileName = $_FILES['user_image']['name'];
         $mimeType = mime_content_type($tmpFilePath);
         if (in_array($mimeType, $allowedTypes)){
             $uploadFile = $imgDir . basename($fileName);
