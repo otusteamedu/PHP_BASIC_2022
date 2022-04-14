@@ -19,10 +19,10 @@ function iWantToBeLogged()
     fclose($fd);
     echo $result;
 }
-//for($i=0; $i < 2; $i++){
-//    iWantToBeLogged();
-//    sleep(rand(1,2));
-//}
+for($i=0; $i < 2; $i++){
+    iWantToBeLogged();
+    sleep(rand(1,2));
+}
 
 
 echo '<br>';
