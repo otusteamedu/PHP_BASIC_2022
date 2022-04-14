@@ -26,5 +26,4 @@ function register($username, $password) {
     $password = md5($password);
     $result = $pdo->prepare('insert into users (name, password) values (?, ?)');
     $result->execute([$username,$password]);
-    Header("Location: /");
 }

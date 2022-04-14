@@ -3,6 +3,8 @@ session_start();
 
 require_once("libs/functions.php");
 
+$images = getImages();
+router($_GET, $_POST, $_FILES);
 ?>
 
 <!DOCTYPE html>

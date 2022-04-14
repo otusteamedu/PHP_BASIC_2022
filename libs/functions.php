@@ -61,8 +61,7 @@ function getImages():array {
     return array_diff(scandir("img/min"), array('..', '.'));
 }
 
-if(isset($_FILES['picture']) && $_FILES['picture']['size'] > 0)
-{
+function resizeImage() {
     $allowedExtensions = ['jpg','jpeg','png'];
     $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
     if(in_array($ext, $allowedExtensions))
@@ -79,36 +78,31 @@ if(isset($_FILES['picture']) && $_FILES['picture']['size'] > 0)
     }
 }
 
-if(!empty($_GET['action']) && $_GET['action'] === 'login')
-{
-    $result = authenticate($_POST['username'], $_POST['password']);
+function setUserInSession($userData) {
+    $_SESSION['is_auth'] = true;
+    $_SESSION['user_id'] = $userData['id'];
+    $_SESSION['username'] = $userData['name'];
+}
+
+function login($username, $password) {
+    $result = authenticate($username, $password);
     if($result !== false)
     {
-        $_SESSION['is_auth'] = true;
-        $_SESSION['user_id'] = $result['id'];
-        $_SESSION['username'] = $result['name'];
+        setUserInSession($result) ;
     }
     header('Location: /');
 }
 
-if(!empty($_GET['action']) && $_GET['action'] === 'registry')
-{
-    register($_POST['username'], $_POST['password']);
-    $result = authenticate($_POST['username'], $_POST['password']);
-    if($result !== false)
-    {
-        $_SESSION['is_auth'] = true;
-        $_SESSION['user_id'] = $result['id'];
-        $_SESSION['username'] = $result['name'];
+function router($getParams = null, $postParams = null, $fileParams = null) {
+    if(isset($fileParams['picture']) && $fileParams['picture']['size'] > 0) resizeImage();
+    if(!empty($getParams['action']) && $getParams['action'] === 'login') login($postParams['username'], $postParams['password']);
+    if(!empty($getParams['action']) && $getParams['action'] === 'registry') {
+        register($postParams['username'], $postParams['password']);
+        login($postParams['username'], $postParams['password']);
     }
-    header('Location: /');
+    if(!empty($getParams['action']) && $getParams['action'] === 'logout')
+    {
+        session_destroy();
+        header('Location: /');
+    }
 }
-
-
-if(!empty($_GET['action']) && $_GET['action'] === 'logout')
-{
-    session_destroy();
-    header('Location: /');
-}
-
-$images = getImages();
