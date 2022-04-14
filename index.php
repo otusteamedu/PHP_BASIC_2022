@@ -54,7 +54,7 @@ router($_GET, $_POST, $_FILES);
         <?php endforeach; ?>
     </div>
     <?php if (isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
-        <form action="/index.php?action=get" enctype="multipart/form-data" class="form-inline" method="post">
+        <form action="/index.php" enctype="multipart/form-data" class="form-inline" method="post">
             <p>Загрузите ваши фотографии на сервер &nbsp;&nbsp;&nbsp;</p>
             <p><input type="file" name="picture" multiple accept="image/*,image/jpeg">
                 <input type="submit" value="Отправить"></p>
