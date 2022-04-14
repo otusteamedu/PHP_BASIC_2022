@@ -55,18 +55,35 @@ fclose($fd);
 //Name;Surname;Phone;Email;CreatedAt
 //Иван;Семенов;+79031231212;ivan@mail.ru;12.01.2017
 //Анна;Кошкина;;;18.09.2021
+//Василий;;+79258526548;vasya@mail.ru;13.01.2020
 //Удалить клиента Иван, добавить любого другого клиента, сохранить результат в csv, используя функции для работы с csv
-function deleteByName(string $name, string $fileName): void
+function deleteByName(string $name, array $fileData): array
 {
+    for($i = 1; $i < count($fileData); $i++){
+        if($fileData[$i][0] === $name) unset($fileData[$i]);
+    }
+    return $fileData;
+}
+
+function addRecord(array $record, array $fileData): array
+{
+    $fileData[] = $record;
+    return $fileData;
+}
+
+function getArrayFromFile(string $fileName): array
+{
+    $fileData = [];
     $fd = fopen($fileName, 'r');
-    $fieldsName = fgetcsv($fd, 0, ';');
-    $fileData[] = $fieldsName;
     while($row = fgetcsv($fd, 0, ';')){
-        $assoc_row = array_combine($fieldsName, $row);
-        if($assoc_row["Name"] === "$name") continue;
         $fileData[] = $row;
     }
     fclose($fd);
+    return $fileData;
+}
+
+function saveArrayToFile(string $fileName, array $fileData): void
+{
     $fd = fopen($fileName, 'w');
     foreach($fileData as $row){
         fputcsv($fd,$row, ';');
@@ -74,10 +91,9 @@ function deleteByName(string $name, string $fileName): void
     fclose($fd);
 }
 
-function addRecord(array $record, $fd): bool
-{
+$newRecord = ['Михаил', 'Петров', '+324751214775', 'man@gmail.com', '13.05.1995'];
+$fileData = getArrayFromFile("ex3.txt");
+$fileData = deleteByName('Иван', $fileData);
+$fileData = addRecord($newRecord, $fileData);
+saveArrayToFile("ex3.txt", $fileData);
 
-}
-
-
-deleteByName('Иван', "ex3.txt");

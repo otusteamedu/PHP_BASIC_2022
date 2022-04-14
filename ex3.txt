@@ -1,2 +1,6 @@
-Name;Surname;Phone;Email;CreatedAt
+﻿Name;Surname;Phone;Email;CreatedAt
 Анна;Кошкина;;;18.09.2021
+Василий;;+79258526548;vasya@mail.ru;13.01.2020
+Михаил;Петров;+324751214775;man@gmail.com;13.05.1995
+Иван;Семенов;+79031231212;ivan@mail.ru;12.01.2017
+Михаил;Петров;+324751214775;man@gmail.com;13.05.1995
