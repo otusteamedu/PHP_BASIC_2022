@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 14 2022 г., 12:47
+-- Время создания: Апр 15 2022 г., 17:22
 -- Версия сервера: 10.4.21-MariaDB
 -- Версия PHP: 8.0.11
 
@@ -24,40 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `authors`
---
-
-CREATE TABLE `authors` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `bookauthors`
---
-
-CREATE TABLE `bookauthors` (
-  `id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
-  `author_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `books`
 --
 
 CREATE TABLE `books` (
   `id` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `author` varchar(255) DEFAULT NULL,
   `pages` int(11) NOT NULL,
   `photo` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `slug` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `books`
+--
+
+INSERT INTO `books` (`id`, `name`, `author`, `pages`, `photo`, `description`, `slug`) VALUES
+(23, '411', 'пывавыыв32', 1231, 36, ' авыаываывфвыфавы', '411');
 
 -- --------------------------------------------------------
 
@@ -72,22 +57,15 @@ CREATE TABLE `gallery` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Дамп данных таблицы `gallery`
+--
+
+INSERT INTO `gallery` (`id`, `path`, `book_id`) VALUES
+(36, '6259845e3198fgarry-poter-1.jpg', 23);
+
+--
 -- Индексы сохранённых таблиц
 --
-
---
--- Индексы таблицы `authors`
---
-ALTER TABLE `authors`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `bookauthors`
---
-ALTER TABLE `bookauthors`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_id` (`book_id`),
-  ADD KEY `author_id` (`author_id`);
 
 --
 -- Индексы таблицы `books`
@@ -108,39 +86,20 @@ ALTER TABLE `gallery`
 --
 
 --
--- AUTO_INCREMENT для таблицы `authors`
---
-ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT для таблицы `bookauthors`
---
-ALTER TABLE `bookauthors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
-
---
--- Ограничения внешнего ключа таблицы `bookauthors`
---
-ALTER TABLE `bookauthors`
-  ADD CONSTRAINT `bookauthors_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `bookauthors_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `books`

@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="/index.php" enctype="multipart/form-data" method="post">
+<form action="/api/createBook.php" enctype="multipart/form-data" method="post">
     <label for="name" class="px-2">Название книги</label>
     <input type="text" name="bookname" class="px-2"/><br>
     <label for="pages" class="px-2">Количество страниц</label>
