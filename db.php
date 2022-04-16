@@ -13,10 +13,9 @@ function db_get_all_book($filter = null) {
         $result = $pdo->query('select * from otus_book', PDO::FETCH_ASSOC);
         $result->execute();
     } else {
-        $result = $pdo->prepare('select * from otus_book where book_name like ?', [
-            PDO::FETCH_ASSOC
-        ]);
-        $result->execute(["%{$filter}%"]);
+        $sql = 'select * from otus_book where book_name like :params or book_author like :params2';
+        $result = $pdo->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $result->execute(array('params' => "%{$filter}%", 'params2' => "%{$filter}%"));
     }
     return $result->fetchAll();
 }
