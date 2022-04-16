@@ -67,7 +67,7 @@
     <input type="text" name="user" /><br>
     <label for="message">Сообщение:</label>
     <textarea name="message"></textarea><br>
-    <input type="file" name="picture" />
+    <input type="file" name="picture" accept=".jpg,.jpeg,.png" />
     <input type="hidden" name="form_token" value="afg37rv32"/>
     <input type="submit" value="Отправить!">
 </form>
