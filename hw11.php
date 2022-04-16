@@ -11,7 +11,7 @@ declare(strict_types=1);
 //$result должен записываться в лог-файл. Последующие вызовы функции должны дописывать значения в конец файла,
 // не удаляя содержимого. Каждая запись на новой строке. Между вызовами скрипта файл также не должен очищаться
 
-function iWantToBeLogged()
+function iWantToBeLogged():void
 {
     $result = 'I was called at ' . date('Y-m-d H:i:s'.PHP_EOL);
     $fd = fopen('log_time.txt','a');
@@ -21,7 +21,7 @@ function iWantToBeLogged()
 }
 for($i=0; $i < 2; $i++){
     iWantToBeLogged();
-    sleep(rand(1,2));
+//    sleep(rand(1,2));
 }
 
 
@@ -33,9 +33,15 @@ echo '<br>';
 function getWordsCountFromFile($fd): int
 {
     $wordsCount = 0;
-    while($line = fgets($fd)){
-        $wordsArray = ($line === "\r\n") ? [] : explode(" ", $line);
+    while($line = fgets($fd, 300)){
+        //Вариант№1
+        $line = preg_replace('/\s+/', ' ', $line);
+        $line = trim($line, ' ');
+        $wordsArray = ($line === '') ? [] : explode(" ", $line);
         $wordsCount += count($wordsArray);
+
+        //Вариант №2 , но не работает с многобайтовыми кодировками
+        //$wordsCount += str_word_count($line);
     }
     return $wordsCount;
 }
