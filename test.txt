@@ -2,8 +2,14 @@ TOPIC
 	Pester
 
 SYNOPSIS
-	Pester is a BDD based test runner for PowerShell.
-VSidorenko/hw12
+	Pester is a BDD    based test runner    for    PowerShell.
+
+
+
+
+Текст на русском
+
+
 DESCRIPTION
 	Pester provides a framework for running Unit Tests to execute and validate 
 	PowerShell commands. Pester follows a file naming convention for naming 
