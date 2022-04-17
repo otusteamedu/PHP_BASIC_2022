@@ -33,15 +33,13 @@ echo '<br>';
 function getWordsCountFromFile($fd): int
 {
     $wordsCount = 0;
-    while($line = fgets($fd, 300)){
-        //Вариант№1
-        $line = preg_replace('/\s+/', ' ', $line);
-        $line = trim($line, ' ');
-        $wordsArray = ($line === '') ? [] : explode(" ", $line);
-        $wordsCount += count($wordsArray);
-
-        //Вариант №2 , но не работает с многобайтовыми кодировками
-        //$wordsCount += str_word_count($line);
+    $delimArray = [" ", ",", ".", "\r", "\n", "\t"];
+    $prevChar = null;
+    while($char = fgetc($fd)){
+        if((in_array($char, $delimArray)) && (!in_array($prevChar, $delimArray))){
+            $wordsCount++;
+        }
+        $prevChar = $char;
     }
     return $wordsCount;
 }
