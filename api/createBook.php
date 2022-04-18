@@ -1,7 +1,7 @@
 <?php
 
-require_once ("../libs/db.php");
-require_once ("../libs/functions.php");
+require_once ($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/libs/db.php");
+require_once ($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/libs/functions.php");
 
 function addBook() {
     $bookId = addBookToDB();
