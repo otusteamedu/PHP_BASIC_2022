@@ -23,4 +23,4 @@ Thumbs.db
 *.drawio
 
 #
-db.config.php
+db.inc.php
