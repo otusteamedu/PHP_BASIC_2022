@@ -70,7 +70,7 @@ function resizeImage($path, $tmpPath):string {
         {
             unset($uniq_name);
         }
-        SetImgSize($fullPathImg, 280, 160, 1, $fullPathMinImg);
+        SetImgSize($fullPathImg, 250, 250, 1, $fullPathMinImg);
     }
     return $uniq_name;
 }

@@ -1,16 +1,7 @@
 <?php
 
-require_once ("api/getBooks.php");
+define("APP_PATH", __DIR__);
 
-echo "<pre>";
-print_r(getBooks());
-echo "</pre>";
+require_once APP_PATH . DIRECTORY_SEPARATOR . 'libs/router.php';
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-echo "<pre>";
-print_r($_FILES);
-echo "</pre>";
-
-echo "<a href='/add.php'>добавить книгу </a>";
+router($_GET);

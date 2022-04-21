@@ -10,10 +10,8 @@ function dbConnect($driver, $host, $port, $dbName, $user, $password): PDO {
     ]);
 }
 
-$config = getConfig()['database'];
-$persistentConnection = dbConnect($config['driver'], $config['host'], $config['port'], $config['db'], $config['user'], $config['password']);
-
-function getConnection(): PDO {
-    global $persistentConnection;
-    return $persistentConnection;
+function getConnection():PDO {
+    $config = getConfig()['database'];
+    return dbConnect($config['driver'], $config['host'], $config['port'], $config['db'], $config['user'], $config['password']);n;
 }
+

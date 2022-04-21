@@ -1,6 +1,6 @@
 <?php
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "libs/db.php");
+require_once (APP_PATH . DIRECTORY_SEPARATOR  . "libs/db.php");
 
 function getBook(string $slug) {
     $pdo = getConnection();
@@ -8,21 +8,33 @@ function getBook(string $slug) {
         PDO::FETCH_ASSOC
     ]);
     $result->execute([$slug]);
-    $books = $result->fetch(PDO::FETCH_ASSOC);
+    $book = $result->fetch(PDO::FETCH_ASSOC);
     $images = $pdo->prepare("SELECT * FROM gallery WHERE book_id = ?", [
         PDO::FETCH_ASSOC
     ]);
-    echo $books['book_id'];
-    $images->execute([$books['book_id']]);
-    $books['images'] = $images->fetchAll(PDO::FETCH_ASSOC);
-    return $books;
+    $images->execute([$book['book_id']]);
+    $book['images'] = $images->fetchAll(PDO::FETCH_ASSOC);
+    return $book;
 }
 
-function getBooks() {
-    $pdo = getConnection();
-    $result = $pdo->prepare("SELECT * FROM books b LEFT JOIN gallery g ON b.photo = g.id", [
-        PDO::FETCH_ASSOC
-    ]);
-    $result->execute();
-    return $result->fetch(PDO::FETCH_ASSOC);
+function getBooks($search = []) {
+    $db = getConnection();
+    if(!empty($search))
+    {
+        $searchParams = [];
+        foreach($search as $k => $s)
+        {
+            if(!empty($s))
+            {
+                $searchParams[] = "{$k} like \"%{$s}%\"";
+            }
+        }
+        $searchString = implode(' and ', $searchParams);
+        $query = $db->query("SELECT * FROM books b LEFT JOIN gallery g ON b.photo = g.id WHERE {$searchString}");
+        $query->execute();
+        return $query->fetchAll();
+    }
+    $query = $db->query("SELECT * FROM books b LEFT JOIN gallery g ON b.photo = g.id");
+    $query->execute();
+    return $query->fetchAll();
 }
