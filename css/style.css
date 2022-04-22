@@ -5,102 +5,12 @@ body {
     padding: 0;
 }
 
-.gravity {
-    max-width: 1110px;
-    margin: 60px auto;
-    box-sizing: border-box;
+
+.search-block {
+    margin: 30px 0px;
 }
 
-.logo {
-    cursor: pointer;
-}
-
-.menu {
-    font-weight: 400;
-    font-size: 18px;
-    color: #222222;
-    text-decoration: none;
-}
-
-.checked-menu {
-    opacity: 0.3;
-}
-
-.hamb-menu {
-    margin-right: 10px;
-    text-align: right;
-    margin-top: 3px;
-    cursor: pointer;
-}
-
-
-.woman-foto {
-    width: 475px;
-}
-
-@media (min-width: 992px) {
-    .woman-block {
-        margin-right: 10px;
-        text-align: right;
-    }
-}
-
-/*div {*/
-/*    border: 1px solid;*/
-/*}*/
-
-.label {
-    font-weight: 500;
-    font-size: 14px;
-    color: #222222;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-}
-
-.hero {
-    font-weight: 600;
-    font-size: 60px;
-    color: #222222;
-    margin-top: 30px;
-}
-
-.text {
-    font-weight: 400;
-    font-size: 18px;
-    color: #222222;
-    opacity: 0.7;
-    max-width: 444px;
-    line-height: 28px;
-}
-
-.main-block {
-    margin: 60px 0px;
-}
-
-.main-block-left {
-    margin: 80px 0px;
-}
-
-.social {
-    margin: 70px 0px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.start-button {
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    background: #4737FF;
-    padding: 17px;
-    margin: 0px;
-    cursor: pointer;
-    color: #FFFFFF;
-    border: 0px;
-}
-
-.icons {
-    margin-left: 34px;
-    cursor: pointer;
+label, input {
+    display: block;
+    margin-top: 5px;
 }
