@@ -1,5 +1,14 @@
 <?php
     declare(strict_types=1);
+
+    function IsEmptyInputFormData(array $inputData): bool
+    {
+        foreach ($inputData as $item){
+            if(!empty($item)) return false;
+        }
+        return true;
+    }
+
     $books = null;
     try {
         $pdo = new PDO('mysql:host=otus;dbname=library', 'root', '',
@@ -7,7 +16,7 @@
     } catch (PDOException $e) {
         print "Error!: " . $e->getMessage() . "<br/>";
         die();
-}
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -26,7 +35,7 @@
 </head>
 <body>
     <?php
-    if(!empty($_GET)){
+    if(!IsEmptyInputFormData($_GET)){
         $filter = [];
         $filterQuery = '';
         $availableParams = ['isbn', 'pages', 'issue_year'];
@@ -102,17 +111,17 @@
                 <div class="search-block">
                     <div class="col">
                         <p>Поиск книг по параметрам:</p>
-                        <form action="" method="get" name="searh_books">
+                        <form action="" method="get" name="searсh_books">
                             <label for="isbn">isbn</label>
-                            <input type="search" name="isbn" id="isbn">
+                            <input type="search" name="isbn" id="isbn" value="<?= isset($_GET['isbn']) ? $_GET['isbn'] : '' ?>">
                             <label for="title">название</label>
-                            <input type="search" name="title" id="title">
+                            <input type="search" name="title" id="title" value="<?= isset($_GET['title']) ? $_GET['title'] : '' ?>">
                             <label for="authors">авторы</label>
-                            <input type="search" name="authors" id="authors">
+                            <input type="search" name="authors" id="authors" value="<?= isset($_GET['authors']) ? $_GET['authors'] : '' ?>">
                             <label for="pages">кол-во страниц</label>
-                            <input type="search" name="pages" id="pages">
+                            <input type="search" name="pages" id="pages" value="<?= isset($_GET['pages']) ? $_GET['pages'] : '' ?>">
                             <label for="issue_year">год выпуска</label>
-                            <input type="search" name="issue_year" id="issue_year">
+                            <input type="search" name="issue_year" id="issue_year" value="<?= isset($_GET['issue_year']) ? $_GET['issue_year'] : '' ?>">
                             <input type="submit" value="Поиск">
                         </form>
                     </div>
