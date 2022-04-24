@@ -1,17 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My first html page</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <?php
+<?php
+    require_once 'auth.php';
+    include_once 'db.php';
     const MAX_HEIGHT = 300;
+    session_start();
+
+    $pdo = InitDBConnection('mysql:host=otus;dbname=gallery', 'root');
+
+    if(isset($_POST['user_name']))
+        Authenticate($pdo, $_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
+
+    if(isset($_COOKIE['token']))
+        AuthenticateByToken($pdo, $_COOKIE['token']);
 
     function resizeAndSaveImage(string $filename):GdImage
     {
@@ -32,7 +31,21 @@
         imagecopyresized($GDImage, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         return $GDImage;
     }
+?>
 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My first html page</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <?php
     $imgDir = './img/';
     $imgDirMin = './img/min/';
     $allowedTypes = ['image/gif', 'image/bmp', 'image/png', 'image/jpeg', 'image/jpg'];
@@ -60,8 +73,9 @@
         $filePath = $imgDir . $fileName;
         echo "<a target='_blank' href='". $filePath ."'><img src=". $filePathMin ." ></a>";
     }
-
     ?>
+
+    <?php if (IsAuthorized($pdo)): ?>
     <p>
         Добавить изображение в галерею (поддерживает типы файлов: jpg, jpeg, bmp, gif, png)
     </p>
@@ -71,6 +85,21 @@
             <input type="submit" value="Отправить">
         </p>
     </form>
-
+    <?php else: ?>
+    <p>
+        Авторизуйтесь
+    </p>
+    <form method="post" name="auth" id="auth">
+        <p>
+            <label for="user_name">Логин</label>
+            <input type="text" name="user_name">
+            <label for="pwd">Пароль</label>
+            <input type="password" name="pwd"><br>
+            <label for="remember">Запомнить меня</label>
+            <input type="checkbox" name="remember"><br>
+            <input type="submit" value="Отправить">
+        </p>
+    </form>
+    <?php endif; ?>
 </body>
 </html>
