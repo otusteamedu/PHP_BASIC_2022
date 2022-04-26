@@ -25,7 +25,7 @@ function addBookToDB(): string {
 }
 
 function addMainPictureToGallery($bookId): string {
-    if (isset($_FILES['main-picture'])) {
+    if (isset($_FILES['main-picture']) && $_FILES['main-picture']['size'] > 0) {
         $path = resizeImage($_FILES['main-picture']['name'], $_FILES['main-picture']['tmp_name']);
     }
     return addImagesToDB($path, $bookId);

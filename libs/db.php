@@ -12,6 +12,6 @@ function dbConnect($driver, $host, $port, $dbName, $user, $password): PDO {
 
 function getConnection():PDO {
     $config = getConfig()['database'];
-    return dbConnect($config['driver'], $config['host'], $config['port'], $config['db'], $config['user'], $config['password']);n;
+    return dbConnect($config['driver'], $config['host'], $config['port'], $config['db'], $config['user'], $config['password']);
 }
 

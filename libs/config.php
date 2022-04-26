@@ -7,7 +7,3 @@ function getConfig(): array
         die("config.ini not found!");
     return parse_ini_file( $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "config.ini", true);
 }
-//echo "<pre>";
-//var_dump(getConfig());
-//echo "</pre>";
-//die();
