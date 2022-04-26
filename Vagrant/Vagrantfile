@@ -1,0 +1,41 @@
+$install = <<~INSTALL
+  apt-get -y install wget vim
+  apt-get -y install apache2
+  apt-get -y install mysql-server mysql-client
+  apt-get -y install php libapache2-mod-php php-mysql
+  apt-get -y install php-curl php-memcached php-mysql php-pgsql php-gd php-imagick php-intl php-xml php-zip php-mbstring
+INSTALL
+
+$update = <<~UPDATE
+  apt-get update
+  apt-get -y upgrade
+UPDATE
+
+Vagrant.configure("2") do |config|
+  # образ системы Ubuntu 18/04 LTS (Bionic Beaver)
+  config.vm.box = "bento/ubuntu-18.04"
+  # не проверять репозиторий на наличие обновлений
+  config.vm.box_check_update = false
+  
+  # настройка сети (сетевой мост на втором интерфейсе)
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "private_network", ip: "192.168.31.99"
+  # config.vm.network "private_network", type: "dhcp"
+  # имя пользователя
+  config.ssh.username = 'vagrant'
+  # пароль пользователя
+  config.ssh.password = 'vagrant'
+  # можно подключаться по паролю
+  config.ssh.keys_only = false
+  # отменить создание ssh-ключа
+  config.ssh.insert_key = false
+
+  # hostname виртуальной машины
+  config.vm.hostname = "otus-php-developer"
+  # синхронизация директорий
+  config.vm.synced_folder "www/", "/var/www/html"
+  
+  # установка пакетов
+  config.vm.provision "update", type: "shell", inline: $update
+  config.vm.provision "install", type: "shell", inline: $install
+end
