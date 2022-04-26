@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?=$book['name'];?></title>
+    <title><?= $book['name']; ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet"><title>Lesson 5 Home work 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Lesson 5 Home work 4</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap-grid.css">
     <link rel="stylesheet" href="css/style.css">
@@ -41,33 +42,53 @@
 <section class="gravity">
     <div class="container">
         <div class="row">
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3">
                 <a href="/">
                     На главную
                 </a>
             </div>
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="/?action=bookAdd">
-                    Добавить книгу
-                </a>
-            </div>
-            <div class="col-lg-2 d-none d-lg-block">
-                <a href="/?action=logout" style="opacity: 0.3;">
-                    Выйти
-                </a>
-            </div>
+            <?php if (!isset($_SESSION['is_auth'])): ?>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a href="/?action=login">
+                        Войти
+                    </a>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a href="/?action=registry">
+                        Регистрация
+                    </a>
+                </div>
+            <?php else: ?>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a href="/?action=bookAdd">
+                        Добавить книгу
+                    </a>
+                </div>
+                <div class="col-lg-2 d-none d-lg-block">
+                    <a href="/?action=logout" style="opacity: 0.3;">
+                        Выйти
+                    </a>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a href="/?action=delete&book=<?= $book['book_id']; ?>">
+                        Удалить
+                    </a>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-7">
                 <div class="placeholder-left">
                     <span>
-                        <?=$book['author'];?>
+                        <?= $book['author']; ?>
                     </span>
                     <h1>
-                        <?=$book['name'];?>
+                        <?= $book['name']; ?>
                     </h1>
                     <p>
-                        <?=$book['description'];?>
+                        <?= $book['description']; ?>
                     </p>
                 </div>
             </div>

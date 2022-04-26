@@ -1,16 +1,18 @@
 <?php
-
+session_start();
 require_once ($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/libs/db.php");
 require_once ($_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . "/libs/functions.php");
 
 function addBook() {
-    $bookId = addBookToDB();
-    $mainPictureId = addMainPictureToGallery($bookId);
-    $images = addImagesToGallery();
-    foreach ($images as $image) {
-        addImagesToDB($image, $bookId);
+    if ($_SESSION['is_auth']) {
+        $bookId = addBookToDB();
+        $mainPictureId = addMainPictureToGallery($bookId);
+        $images = addImagesToGallery();
+        foreach ($images as $image) {
+            addImagesToDB($image, $bookId);
+        }
+        updateBookPhoto($bookId, $mainPictureId);
     }
-    updateBookPhoto($bookId, $mainPictureId);
     Header("Location: /");
 }
 
