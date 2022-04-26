@@ -1,7 +1,17 @@
-# Editors
+# редакторы
 .idea/
 *.sublime-project
-*.sublime-workspace
+*.sublime-worspace
+
+# каталоги для выходных данных сборки
+./bin
+./out
+./target
+
+#файлы, сгенерированные во время выполнения
+.log
+.lock
+.tmp
 
 # Windows system files
 Thumbs.db
@@ -11,3 +21,13 @@ Thumbs.db
 
 # Diagram software
 *.drawio
+
+#
+db.inc.php
+
+
+
+/config/*
+/data/*
+/logs/*
+/www/**
