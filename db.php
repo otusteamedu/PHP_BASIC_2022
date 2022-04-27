@@ -9,14 +9,14 @@ function IsEmptyInputFormData(array $inputData): bool
     return true;
 }
 
-function InitDBConnection(): PDO
+function InitDBConnection(): PDO|false
 {
     try {
         return new PDO('mysql:host=otus;dbname=library', 'root', '',
             array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC));
     } catch (PDOException $e) {
-        print "Error!: " . $e->getMessage() . "<br/>";
-        die();
+        print "Database connection error!";
+        return false;
     }
 }
 
@@ -32,11 +32,12 @@ function GetFilteredBooks(PDO $pdo, array $filter): PDOStatement
     $filterQuery = '';
     $availableParams = ['isbn', 'pages', 'issue_year'];
     if(!empty($_GET['authors'])){
-        $filterQuery .= 'isbn IN
-                            (SELECT book_id FROM books_authors
-                            INNER JOIN authors ON authors.author_id = books_authors.author_id 
-                            WHERE authors.fio LIKE ?) and ';
+        $filterQuery .= 'JOIN books_authors ON books.isbn = books_authors.book_id
+                         JOIN authors ON books_authors.author_id = authors.author_id
+                         WHERE authors.fio LIKE ? and ';
         $filter[] = "%{$_GET['authors']}%";
+    }else{
+        $filterQuery .= ' WHERE ';
     }
     if(!empty($_GET['title'])){
         $filterQuery .= 'title LIKE ? and ';
@@ -50,7 +51,7 @@ function GetFilteredBooks(PDO $pdo, array $filter): PDOStatement
     }
     if(!empty($filter)){
         $filterQuery = substr($filterQuery, 0, mb_strlen($filterQuery) - 5);
-        $books = $pdo->prepare('SELECT books.isbn, books.title, books.issue_year, books.pages, books.description FROM books WHERE ' . $filterQuery);
+        $books = $pdo->prepare('SELECT books.isbn, books.title, books.issue_year, books.pages, books.description FROM books ' . $filterQuery);
         $books->execute($filter);
     }
     return $books;
@@ -59,9 +60,10 @@ function GetFilteredBooks(PDO $pdo, array $filter): PDOStatement
 function GetAuthorsByBook(PDO $pdo, array $book): string
 {
     $authorsList = '';
-    $authors = $pdo->query("SELECT authors.fio FROM authors
+    $authors = $pdo->prepare("SELECT authors.fio FROM authors
                                             INNER JOIN books_authors ON books_authors.author_id = authors.author_id
-                                            WHERE books_authors.book_id = {$book['isbn']}");
+                                            WHERE books_authors.book_id = ?");
+    $authors->execute([$book['isbn']]);
     foreach ($authors as $author){
         $authorsList .= $author['fio'] . '<BR>';
     }

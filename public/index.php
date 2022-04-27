@@ -1,6 +1,15 @@
 <?php
-    require_once 'db.php';
+    require_once '../db.php';
     $pdo = InitDBConnection();
+    if(!$pdo){
+        header("HTTP/1.1 503 Database is unavailable");
+        exit;
+    }
+    if(!IsEmptyInputFormData($_GET)){
+        $books = GetFilteredBooks($pdo, $_GET);
+    }else{
+        $books = GetAllBooks($pdo);
+    }
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,21 +19,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My first html page</title>
-    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <?php
-    if(!IsEmptyInputFormData($_GET)){
-        $books = GetFilteredBooks($pdo, $_GET);
-    }else{
-        $books = GetAllBooks($pdo);
-    }
-    ?>
     <div class="library">
         <div class="container">
             <?php
