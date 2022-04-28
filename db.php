@@ -1,13 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function IsEmptyInputFormData(array $inputData): bool
-{
-    foreach ($inputData as $item){
-        if(!empty($item)) return false;
-    }
-    return true;
-}
+$pdo = InitDBConnection();
 
 function InitDBConnection(): PDO|false
 {

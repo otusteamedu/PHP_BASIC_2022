@@ -1,15 +1,5 @@
 <?php
-    require_once '../db.php';
-    $pdo = InitDBConnection();
-    if(!$pdo){
-        header("HTTP/1.1 503 Database is unavailable");
-        exit;
-    }
-    if(!IsEmptyInputFormData($_GET)){
-        $books = GetFilteredBooks($pdo, $_GET);
-    }else{
-        $books = GetAllBooks($pdo);
-    }
+    require_once '../lib.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,46 +9,46 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>My first html page</title>
-    <link rel="stylesheet" href="../css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="library">
         <div class="container">
             <?php
-            if(empty($books) or $books->rowCount() === 0){
-                echo "
-                    <div class='row'>
-                        <div class='col'>
-                            <div class='book'>
-                                Нет книг с заданными параметрами
-                            </div>
-                        </div>
+                if(empty($books) or $books->rowCount() === 0){
+            ?>
+            <div class='row'>
+                <div class='col'>
+                    <div class='book'>
+                        Нет книг с заданными параметрами
                     </div>
-                ";
-            }else{
+                </div>
+            </div>
+            <?php
+                }else{
                 foreach ($books as $book){
                     $authorsList = GetAuthorsByBook($pdo, $book);
-                    echo "
-                        <div class='row'>
-                            <div class='col'>
-                                <div class='book'>
-                                    <h3>{$book['isbn']} --- {$book['title']} --- {$book['pages']} страниц --- {$book['issue_year']} год выпуска</h3>
-                                    <p>
-                                        Авторы: {$authorsList}
-                                    </p>
-                                    <p>
-                                        Описание книги:<br>
-                                        {$book['description']}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    ";
+            ?>
+            <div class='row'>
+                <div class='col'>
+                    <div class='book'>
+                        <h3><?php echo "{$book['isbn']} --- {$book['title']} --- {$book['pages']} страниц --- {$book['issue_year']} год выпуска"; ?></h3>
+                        <p>
+                            Авторы: <?= $authorsList?>
+                        </p>
+                        <p>
+                            Описание книги:<br>
+                            <?= $book['description']?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <?php
                 }
             }
             ?>
