@@ -9,9 +9,9 @@
 ./target
 
 # файлы, сгенерированные во время выполнения
-.log
-.lock
-.tmp
+*.log
+*.lock
+*.tmp
 
 # Windows system files
 Thumbs.db
@@ -24,4 +24,5 @@ Thumbs.db
 
 
 /data/mysql/**
+
 
