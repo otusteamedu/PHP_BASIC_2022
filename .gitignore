@@ -1,14 +1,14 @@
-# редакторы
+# Среда разработки
 .idea/
 *.sublime-project
 *.sublime-worspace
 
-# каталоги для выходных данных сборки
+# Каталоги для выходных данных сборки
 ./bin
 ./out
 ./target
 
-# файлы, сгенерированные во время выполнения
+# Файлы, сгенерированные во время выполнения
 *.log
 *.lock
 *.tmp
@@ -22,7 +22,8 @@ Thumbs.db
 # Diagram software
 *.drawio
 
-
+# Папка с дампами MySQL
 /data/mysql/**
+!/data/mysql/.gitkeep
 
 
