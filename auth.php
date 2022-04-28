@@ -1,30 +1,26 @@
 <?php
 
-function IsAuthorized(PDO $pdo):bool
+function isAuthorized(PDO $pdo):bool
 {
-    if(isset($_SESSION['is_auth']) and $_SESSION['is_auth'] === 1)
-        return true;
-    else
-        return false;
+    return (isset($_SESSION['is_auth']) and $_SESSION['is_auth'] === 1);
 }
 
-function Authenticate(PDO $pdo, string $login, string $pwd, bool $remember): void
+function authenticate(PDO $pdo, string $login, string $pwd, bool $remember): void
 {
-    $pwdHash = md5($pwd);
-    $userId = GetUserIdByNameAndPwd($pdo, $login, $pwdHash);
-    if($userId > 0) {
+    $user = getUserByName($pdo, $login);
+    if(!empty($user) and (password_verify($pwd, $user['pwd']))) {
         $_SESSION['is_auth'] = 1;
         if ($remember) {
             $token = uniqid();
-            SetToken($pdo, $userId, $token);
-            setcookie('token', $token, time() + 3600);
+            setToken($pdo, $user['id'], $token);
+            setcookie('token', $token, time()+3600);
         }
     }
 }
 
-function AuthenticateByToken(PDO $pdo, string $token): void
+function authenticateByToken(PDO $pdo, string $token): void
 {
-    $userId = GetUserIdByToken($pdo, $token);
+    $userId = getUserIdByToken($pdo, $token);
     if($userId > 0) {
         $_SESSION['is_auth'] = 1;
     }

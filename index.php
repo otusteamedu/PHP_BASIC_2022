@@ -4,13 +4,13 @@
     const MAX_HEIGHT = 300;
     session_start();
 
-    $pdo = InitDBConnection('mysql:host=otus;dbname=gallery', 'root');
+    $pdo = initDBConnection('mysql:host=otus;dbname=gallery', 'root');
 
     if(isset($_POST['user_name']))
-        Authenticate($pdo, $_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
+        authenticate($pdo, $_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
 
     if(isset($_COOKIE['token']))
-        AuthenticateByToken($pdo, $_COOKIE['token']);
+        authenticateByToken($pdo, $_COOKIE['token']);
 
     function resizeAndSaveImage(string $filename):GdImage
     {
@@ -50,7 +50,7 @@
     $imgDirMin = './img/min/';
     $allowedTypes = ['image/gif', 'image/bmp', 'image/png', 'image/jpeg', 'image/jpg'];
 
-    if(isset($_FILES['user_image']) && empty($_FILES['user_image']['error'])){
+    if(isAuthorized($pdo) && isset($_FILES['user_image']) && empty($_FILES['user_image']['error'])){
         $tmpFilePath = $_FILES['user_image']['tmp_name'];
         $fileName = $_FILES['user_image']['name'];
         $mimeType = mime_content_type($tmpFilePath);
@@ -75,7 +75,7 @@
     }
     ?>
 
-    <?php if (IsAuthorized($pdo)): ?>
+    <?php if (isAuthorized($pdo)): ?>
     <p>
         Добавить изображение в галерею (поддерживает типы файлов: jpg, jpeg, bmp, gif, png)
     </p>

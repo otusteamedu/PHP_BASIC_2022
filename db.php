@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-function InitDBConnection(string $dsn, string $login, string $pwd = ''): PDO
+function initDBConnection(string $dsn, string $login, string $pwd = ''): PDO
 {
     try {
         return new PDO($dsn, $login, $pwd,
@@ -13,17 +13,17 @@ function InitDBConnection(string $dsn, string $login, string $pwd = ''): PDO
     }
 }
 
-function GetUserIdByNameAndPwd(PDO $pdo, string $login, string $pwd): int
+function getUserByName(PDO $pdo, string $login): array
 {
-    $user = $pdo->prepare('SELECT id FROM users WHERE user_name = ? AND pwd = ?');
-    $user->execute([$login, $pwd]);
+    $user = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
+    $user->execute([$login]);
     if($user->rowCount() > 0)
-        return (int)$user->fetch()['id'];
+        return $user->fetch();
     else
-        return 0;
+        return [];
 }
 
-function GetUserIdByToken(PDO$pdo, string $token): int
+function getUserIdByToken(PDO $pdo, string $token): int
 {
     $user = $pdo->prepare('SELECT id FROM users WHERE token = ?');
     $user->execute([$token]);
@@ -33,7 +33,7 @@ function GetUserIdByToken(PDO$pdo, string $token): int
         return 0;
 }
 
-function SetToken(PDO $pdo, int $userId, string $token): void
+function setToken(PDO $pdo, int $userId, string $token): void
 {
     $user = $pdo->prepare('UPDATE users SET token = ? WHERE id = ?');
     $user->execute([$token, $userId]);
