@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Fira Sans", sans-serif;
+  background: #D9D3D3;
+}
+
+.services {
+  padding: 60px 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  color: #222222;
+  font-style: normal;
+}
+
+
+.my-container {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
