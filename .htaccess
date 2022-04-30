@@ -1,0 +1,12 @@
+RewriteEngine on
+Options -Indexes
+
+# так как файла в корне сайта нет, нужно открыть файл из папки page не меняя url
+# проверка, что обратились к файлу в корне сайта
+ RewriteCond %{REQUEST_URI} ^\/([^\/]+)$
+# проверка, что такой файл есть в папке page
+ RewriteCond %{DOCUMENT_ROOT}images%{REQUEST_URI} -f
+# открываем файл из папки page (дописывая параметр stopredirect в запрос для отмены зацикливания)
+ RewriteRule .* /images%{REQUEST_URI}?stopredirect=STOPREDIRECT&%{QUERY_STRING} [L]
+
+
