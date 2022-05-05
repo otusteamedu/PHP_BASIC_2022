@@ -1,34 +1,14 @@
 <?php 
-    
+    include_once "lib.php";
+
     $pictureDir = 'gallery/';
     $pictureDirMin = 'gallery/min/';
+
     $pictures = scandir($pictureDirMin);
 
-    function iWantToBeLogged($picture)
-    {
-        $logFile = 'logLoadPictures.txt';
-        $result = 'Добавили в галлерею фото '.$picture.', дата и время загрузки: '. date('Y-m-d H:i:s').PHP_EOL;
-        file_put_contents($logFile, $result, FILE_APPEND);
-    }
-
-
     if(isset($_FILES['picture']) && $_FILES['picture']['size'] > 0){
-       
-       $allowedExtensions = ['jpg','jpeg','png','gif'];
-            $ext = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
-            if(in_array($ext, $allowedExtensions))
-            {
-                $uniq_name = uniqid().$_FILES['picture']['name'];
-                if(move_uploaded_file($_FILES['picture']['tmp_name'],'gallery/'.$uniq_name))
-                {
-                    iWantToBeLogged($uniq_name);
-                    copy('gallery/'.$uniq_name, 'gallery/min/'.$uniq_name);
-                    unset($uniq_name);
-                }
-                
-            }
-        $pictures = scandir($pictureDirMin);
-        
+
+        $pictures = addedImages($_FILES, $pictureDir, $pictureDirMin);
     } 
 ?>
 <!DOCTYPE html>
