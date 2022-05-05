@@ -1,5 +1,5 @@
 <?php
-function db_connect() {
+function dbConnect() {
     return new PDO('mysql:host=127.0.0.1;port=3306;dbname=gallery','root','',[
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::FETCH_ASSOC => true
@@ -7,11 +7,11 @@ function db_connect() {
 }
 
 function userAuth(string $username, string $password, $remember){
-    $pdo = db_connect();
+    $pdo = dbConnect();
     $result = $pdo->prepare('SELECT uid, username, password FROM users WHERE username = ?', [PDO::FETCH_ASSOC]);
     $result->execute([$username]);
     $count = $result->rowCount();
-    if($count > 0)
+    if($count > 0 && !empty($remember))
     {
         $user_data = $result->fetch();
         if (password_verify($password, $user_data['password'])){
@@ -21,12 +21,14 @@ function userAuth(string $username, string $password, $remember){
             $user_data['token'] = $token;
             return $user_data;
         }
+    } else {
+        return $result->fetch();
     }
     return false;
 }
 
-function authenticate_by_token($token) {
-    $pdo = db_connect();
+function authenticateByToken($token) {
+    $pdo = dbConnect();
     $result = $pdo->prepare('select * from users where remember_token = ?');
     $result->execute([$token]);
     $count = $result->rowCount();

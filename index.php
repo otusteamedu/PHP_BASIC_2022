@@ -3,9 +3,9 @@ session_start();
 include_once 'db.php';
 include_once 'imgResizer.php';
 
-if(isset($_COOKIE['remember_token']))
+if(isset($_COOKIE['remember_token']) && session_status() !== PHP_SESSION_ACTIVE)
 {
-    $result = authenticate_by_token($_COOKIE['remember_token']);
+    $result = authenticateByToken($_COOKIE['remember_token']);
     if($result !== false)
     {
         $_SESSION['id'] = $result['uid'];
