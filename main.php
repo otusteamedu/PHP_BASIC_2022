@@ -52,14 +52,14 @@ if (empty($_GET)){
     }
 
     if ($_GET['action'] === 'add_book' && !empty($_POST) && isset($_FILES['cover_img']) && $_FILES['cover_img']['size'] > 0){
-        $author_name = htmlspecialchars($_POST['author_name']);
-        $book_name = htmlspecialchars($_POST['book_name']);
-        $book_about = htmlspecialchars($_POST['book_about']);
-        $pages_count = intval($_POST['pages_count']);
-        $years_issue = intval($_POST['years_issue']);
-        $price = intval($_POST['price']);
+        foreach ($_POST as $key => $value){
+            $_POST[$key] = htmlspecialchars($value);
+        }
+        extract($_POST);
 
-        $allowedExtensions = ['jpg','jpeg','png','gif'];
+        $formatRow = getConfig()['image'];
+        $allowedExtensions = explode(',', $formatRow['formats']);
+
         $ext = pathinfo($_FILES['cover_img']['name'], PATHINFO_EXTENSION);
         if(in_array($ext, $allowedExtensions))
         {
@@ -96,7 +96,7 @@ if (empty($_GET)){
 
     }
 
-    if ($_GET['action'] === 'book_delete'){
+    if ($_GET['action'] === 'book_delete' && $_SESSION['is_admin'] == 1){
         deleteBook($_GET['uid']);
         header('Location: /');
     }
