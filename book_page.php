@@ -17,9 +17,7 @@
 <body>
 <?php
    $data = db_get_the_bookinfo($_GET['book_id']);
-   foreach ($data as $otus_albom) {
-        echo "<h2>Информация о книге: {$otus_albom['book_name']}</h2> <h3>(автор: {$otus_albom['book_author']})</h3><br>"; 
-    }
+        echo "<h2>Информация о книге: {$data[0]['book_name']}</h2> <h3>(автор: {$data[0]['book_author']})</h3><br>"; 
 ?>
 <h3>Обложки изданий</h3>
 <body>
