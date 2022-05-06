@@ -4,7 +4,6 @@
     require_once 'lib/users.php';
     require_once 'lib/db.php';
     require_once 'lib/book_post.php';
-    
 ?>
 
 <head>
