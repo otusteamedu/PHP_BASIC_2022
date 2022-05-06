@@ -55,17 +55,17 @@
     <script src="js/lightbox-plus-jquery.js"></script>
     </body>
     <?php
-    $data = db_get_all_bookinfo();
-    foreach ($data as $otus_albom) {
-        echo "<tr><th><a href=book.php?book_id={$otus_albom['book_id']}><img width=150px src=\"/images/{$otus_albom['picture']}\" /></a></th>  
-        <th>{$otus_albom['book_name']}</th>  
-        <th>{$otus_albom['book_author']}</th> 
-        <th><a href=book_page.php?book_id={$otus_albom['book_id']}>Подробнее</a></th> ";
-        if(!empty($_SESSION['is_admin']) && $_SESSION['is_admin'])
-        {
-            echo "<th><a href=\"/index.php?action=delete&book_id={$otus_albom['book_id']}\">Удалить</a> </th></tr>";
+        $data = db_get_all_bookinfo();
+        foreach ($data as $otus_albom) {
+            echo "<tr><th><a href=book.php?book_id={$otus_albom['book_id']}><img width=150px src=\"/images/{$otus_albom['picture']}\" /></a></th>  
+            <th>{$otus_albom['book_name']}</th>  
+            <th>{$otus_albom['book_author']}</th> 
+            <th><a href=book_page.php?book_id={$otus_albom['book_id']}>Подробнее</a></th> ";
+            if(!empty($_SESSION['is_admin']) && $_SESSION['is_admin'])
+            {
+                echo "<th><a href=\"/index.php?action=delete&book_id={$otus_albom['book_id']}\">Удалить</a> </th></tr>";
+            }
         }
-    }
     ?>
 
 <?php else: ?>
