@@ -27,8 +27,12 @@
 </body>
 <?php
    $data = db_get_all_imgbook($_GET['book_id']);
-   foreach ($data as $otus_imgbook) {
-       echo "<tr><th><a href=\"/images/{$otus_imgbook['picture_full']}\" data-lightbox='oblozka' data-title='Обложки' >
-       <img width=150px src=\"/images/{$otus_imgbook['picture']}\" /></a></th>   ";
+   if(!empty($data)) {
+    foreach ($data as $otus_imgbook) {
+        echo "<tr><th><a href=\"/images/{$otus_imgbook['picture_full']}\" data-lightbox='oblozka' data-title='Обложки' >
+        <img width=150px src=\"/images/{$otus_imgbook['picture']}\" /></a></th>   ";
+        }
+    } else {
+        echo '<p class="error">Нет такой книги, Александр =)!</p>';
     }
 ?>
