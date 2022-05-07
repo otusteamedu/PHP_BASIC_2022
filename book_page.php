@@ -14,23 +14,22 @@
 
 <a href=index.php>На главную</a>
 
-<body>
-<?php
-   $data = db_get_the_bookinfo($_GET['book_id']);
-        echo "<h2>Информация о книге: {$data[0]['book_name']}</h2> <h3>(автор: {$data[0]['book_author']})</h3><br>"; 
-?>
 <h3>Обложки изданий</h3>
 <body>
   <script src="js/lightbox-plus-jquery.js"></script>
 </body>
+
 <?php
-   $data = db_get_all_imgbook($_GET['book_id']);
-   if(!empty($data)) {
-    foreach ($data as $otus_imgbook) {
-        echo "<tr><th><a href=\"/images/{$otus_imgbook['picture_full']}\" data-lightbox='oblozka' data-title='Обложки' >
-        <img width=150px src=\"/images/{$otus_imgbook['picture']}\" /></a></th>   ";
+ if(!empty($_GET['book_id']) && (db_book_id_check($_GET['book_id']) !== false))
+    {
+        $data = db_get_the_bookinfo($_GET['book_id']);
+            echo "<h2>Информация о книге: {$data[0]['book_name']}</h2> <h3>(автор: {$data[0]['book_author']})</h3><br>"; 
+        $data_img = db_get_all_imgbook($_GET['book_id']);
+        foreach ($data_img as $otus_imgbook) {
+            echo "<tr><th><a href=\"/images/{$otus_imgbook['picture_full']}\" data-lightbox='oblozka' data-title='Обложки' >
+            <img width=150px src=\"/images/{$otus_imgbook['picture']}\" /></a></th>   ";
         }
     } else {
-        echo '<p class="error">Нет такой книги, Александр =)!</p>';
+        echo '<h1 class="error">Не верный ID книги!</h1>';
     }
 ?>

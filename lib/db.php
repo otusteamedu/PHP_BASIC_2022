@@ -40,6 +40,23 @@ function db_get_all_imgbook() {
     return $result->fetchAll();
 }
 
+function db_book_id_check($book_id) {
+    $pdo = db_connect();
+    $book_id = $_GET['book_id'];
+    $result = $pdo->prepare('select * from otus_book where book_id = :book_id', [
+                                            PDO::FETCH_ASSOC
+                                        ]);
+    $result->bindParam('book_id', $book_id, PDO::PARAM_INT);
+    $result->execute();
+    $count = $result->rowCount();
+    if($count > 0)
+    {
+        return $result->fetch();
+    }
+    return false;
+}
+
+
 function db_add_book($book_name, $book_author, $book_page, $book_created_dt) {
     $pdo = db_connect();
     $result = $pdo->prepare('insert into otus_book(book_name, book_author, book_page, book_created_dt) values(?,?,?,?)');
