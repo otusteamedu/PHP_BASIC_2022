@@ -79,7 +79,7 @@
     <p>
         Добавить изображение в галерею (поддерживает типы файлов: jpg, jpeg, bmp, gif, png)
     </p>
-    <form enctype="multipart/form-data" method="post">
+    <form enctype="multipart/form-data" method="post" action="index.php?new_file">
         <p>
             <input type="file" name="user_image" accept="image/jpeg">
             <input type="submit" value="Отправить">
@@ -89,7 +89,7 @@
     <p>
         Авторизуйтесь
     </p>
-    <form method="post" name="auth" id="auth">
+    <form method="post" name="auth" id="auth" action="index.php?auth">
         <p>
             <label for="user_name">Логин</label>
             <input type="text" name="user_name">
