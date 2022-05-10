@@ -1,6 +1,7 @@
 <?php
+declare(strict_types=1);
 
-function isAuthorized(PDO $pdo):bool
+function isAuthorized():bool
 {
     return (isset($_SESSION['is_auth']) and $_SESSION['is_auth'] === 1);
 }
@@ -24,4 +25,9 @@ function authenticateByToken(PDO $pdo, string $token): void
     if($userId > 0) {
         $_SESSION['is_auth'] = 1;
     }
+}
+
+function logout(): void
+{
+    session_destroy();
 }
