@@ -1,5 +1,7 @@
- <?php
+<?php
+    declare(strict_types=1);
     include_once 'lib/db.php';
+    
 ?>
 
 <head>
@@ -20,16 +22,22 @@
 </body>
 
 <?php
- if(!empty($_GET['book_id']) && (db_book_id_check($_GET['book_id']) !== false))
-    {
-        $data = db_get_the_bookinfo($_GET['book_id']);
-            echo "<h2>Информация о книге: {$data[0]['book_name']}</h2> <h3>(автор: {$data[0]['book_author']})</h3><br>"; 
-        $data_img = db_get_all_imgbook($_GET['book_id']);
-        foreach ($data_img as $otus_imgbook) {
-            echo "<tr><th><a href=\"/images/{$otus_imgbook['picture_full']}\" data-lightbox='oblozka' data-title='Обложки' >
-            <img width=150px src=\"/images/{$otus_imgbook['picture']}\" /></a></th>   ";
+ if(!empty($_GET['book_id'])) { 
+        $book_id_check = $_GET['book_id'];
+      if(!preg_match('/^[0-9]\d{2}/',$book_id_check)) {
+            echo '<p class="error">Идентификатор не верный!</p>';
+        } else {
+                if(db_book_id_check($_GET['book_id']) !== false){
+                $data = db_get_the_bookinfo($_GET['book_id']);
+                    echo "<h2>Информация о книге: {$data[0]['book_name']}</h2> <h3>(автор: {$data[0]['book_author']})</h3><br>"; 
+                $data_img = db_get_all_imgbook($_GET['book_id']);
+                    foreach ($data_img as $otus_imgbook) {
+                        echo "<tr><th><a href=\"/images/{$otus_imgbook['picture_full']}\" data-lightbox='oblozka' data-title='Обложки' >
+                        <img width=150px src=\"/images/{$otus_imgbook['picture']}\" /></a></th>   ";
+                    }
+                } else {
+                    echo '<p class="error">Нет такой книги!</p>'; 
+                }
+            }
         }
-    } else {
-        echo '<h1 class="error">Не верный ID книги!</h1>';
-    }
 ?>
