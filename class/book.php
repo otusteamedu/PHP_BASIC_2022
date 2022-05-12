@@ -22,7 +22,7 @@ class Book extends Product {
     public $yearOfPublishing;
     public $editionNumber;
 
-    public function __construct(int $id, string $name, int $price, float $salesAmount, string $bookType, string $author,
+    public function __construct(int $id, string $name, float $price, float $salesAmount, string $bookType, string $author,
                                 int $numberOfPage, string $publishingHouse, int $yearOfPublishing,
                                 int $editionNumber, int $productInStock, int $vendorCode)
     {
@@ -35,13 +35,25 @@ class Book extends Product {
         $this->editionNumber = $editionNumber;
     }
 
-    public function getPrice()
+    public function getPrice($count)
     {
+        if (empty($count))
+            return false;
+
         if ($this->bookType == 'Электронная'){
-            return parent::getPrice()*0.5;
+            return parent::getPrice($count)*0.5;
         } else {
-            return parent::getPrice();
+            return parent::getPrice($count);
         }
+    }
+
+    public function allSalesAmount(int $id, float $productCount)
+    {
+        if (empty($id) || empty($productCount))
+            return false;
+
+        $this->salesAmount += self::getPrice($productCount);
+       return $this->salesAmount;
     }
 }
 ?>

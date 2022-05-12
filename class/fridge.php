@@ -24,7 +24,7 @@ class Fridge extends Product {
     public $length;
 
     public function __construct(int $id, string $name, string $producingCountry, string $manufacturer,
-                                int $weight, int $width, int $height, int $length, int $price, float $salesAmount,
+                                int $weight, int $width, int $height, int $length, float $price, float $salesAmount,
                                 string $defrostType, string $color, int $shelvesCount, int $productInStock, int $vendorCode)
     {
         parent::__construct($id, $name, $price, $salesAmount, $productInStock, $vendorCode);
@@ -37,6 +37,22 @@ class Fridge extends Product {
         $this->shelvesCount = $shelvesCount;
         $this->producingCountry = $producingCountry;
         $this->manufacturer = $manufacturer;
+    }
+
+    public function getVolume($productCount){
+        if ($productCount < 1)
+            return false;
+        $volume = ($productCount * ($this->width * $this->height * $this->length)/1000000);
+        return $volume;
+    }
+
+    public function allSalesAmount(int $id, float $productCount)
+    {
+        if (empty($id) || empty($productCount))
+            return false;
+
+        $this->salesAmount += $this->getPrice($productCount);
+        return $this->salesAmount;
     }
 }
 ?>

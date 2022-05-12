@@ -22,11 +22,11 @@ abstract class Product {
     private $id;
     public $name;
     private $price;
-    private $salesAmount;
+    public $salesAmount;
     public $productInStock;
     public $vendorCode;
 
-    public function __construct(int $id, string $name, int $price, float $salesAmount, int $productInStock, int $vendorCode)
+    public function __construct(int $id, string $name, float $price, float $salesAmount, float $productInStock, int $vendorCode)
     {
         $this->id = $id;
         $this->name = $name;
@@ -36,18 +36,13 @@ abstract class Product {
         $this->vendorCode = $vendorCode;
     }
 
-    public function getVolume($productCount){
-        if ($productCount < 1)
+    public function getPrice(float $count){
+        if (empty($count))
             return false;
-        $volume = ($productCount * ($this->width * $this->height * $this->length)/1000000);
-        return $volume;
+        return ($this->price * $count)*1.2;
     }
 
-    public function getPrice(){
-        return $this->price * 1.20;
-    }
-
-    public function productSale($id, $count){
+    public function productSale(int $id, float $count){
         if ($id < 1)
             return false;
         if ($count > $this->productInStock)
@@ -56,7 +51,7 @@ abstract class Product {
         $this->productInStock -= $count;
     }
 
-    public function productReceipt($id, $count){
+    public function productReceipt(int $id, float $count){
         if ($id < 1)
             return false;
         if ($count < 1)
@@ -64,5 +59,7 @@ abstract class Product {
 
         $this->productInStock += $count;
     }
+
+    abstract public function allSalesAmount(int $id, float $productCount);
 }
 ?>
