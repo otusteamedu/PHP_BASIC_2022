@@ -24,7 +24,7 @@
 <?php
  if(!empty($_GET['book_id'])) { 
         $book_id_check = $_GET['book_id'];
-      if(!preg_match('/^[0-9]\d{2}/',$book_id_check)) {
+      if(!preg_match('/^[0-9]{1,2}\b/',$book_id_check)) {
             echo '<p class="error">Идентификатор не верный!</p>';
         } else {
                 if(db_book_id_check($_GET['book_id']) !== false){
