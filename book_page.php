@@ -22,11 +22,13 @@
 </body>
 
 <?php
- if(!empty($_GET['book_id'])) { 
-        $book_id_check = $_GET['book_id'];
-      if(!preg_match('/^[0-9]{1,2}\b/',$book_id_check)) {
+ if(!empty($_GET['book_id']))
+    {
+        $book_id_check = (int)$_GET['book_id'];
+        if($book_id_check === 0) {
             echo '<p class="error">Идентификатор не верный!</p>';
         } else {
+            
                 if(db_book_id_check($_GET['book_id']) !== false){
                 $data = db_get_the_bookinfo($_GET['book_id']);
                     echo "<h2>Информация о книге: {$data[0]['book_name']}</h2> <h3>(автор: {$data[0]['book_author']})</h3><br>"; 
@@ -37,7 +39,9 @@
                     }
                 } else {
                     echo '<p class="error">Нет такой книги!</p>'; 
-                }
             }
         }
+    }
+        
+
 ?>
