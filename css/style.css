@@ -5,9 +5,11 @@ p,
 body {
     margin: 0;
     }
+body {
+    font-family: 'Manrope', sans-serif;
+}
 
 h3 {
-    font-family: 'Manrope';
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -18,7 +20,6 @@ h3 {
 }
 
 p {
-    font-family: 'Manrope';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -46,7 +47,6 @@ p {
 
 .services-title {
     color: white;
-    font-family: 'Manrope';
     font-style: normal;
     font-weight: 800;
     font-size: 48px;
@@ -66,7 +66,6 @@ p {
 }
 
 a {
-    font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -80,7 +79,6 @@ img {
 }
 
 .button-href {
-    font-family: 'Manrope';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
