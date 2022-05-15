@@ -4,7 +4,8 @@ h3,
 p,
 body {
     margin: 0;
-    }
+}
+
 body {
     font-family: 'Manrope', sans-serif;
 }
@@ -93,4 +94,80 @@ button {
     border-radius: 8px;
     box-sizing: border-box;
     cursor: pointer;
- }
+}
+
+@media screen and (max-width: 1920px) {
+    .services-title {
+        background-color: green;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .services-title {
+        background-color: blue;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        margin: 0 auto;
+        width: 800px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        margin: 0 auto;
+        width: 720px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .container {
+        margin: 0 auto;
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .container {
+        margin: 0 auto;
+        width: 350px;
+    }
+
+    .card {
+        width: 340px;
+    }
+
+    .services-title {
+        color: white;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 28px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .container {
+        margin: 0 auto;
+        width: 300px;
+    }
+
+    .card {
+        width: 300px;
+    height: 300px;
+    }
+
+    .services-title {
+        color: white;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 12px;
+        line-height: 16px;
+        margin-bottom: 14px;
+        text-align: center;
+    }
+}
