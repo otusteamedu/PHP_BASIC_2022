@@ -1,107 +1,117 @@
 <?php
-abstract class product {
+abstract class Product 
+{
    protected string $name; // название продукта
    protected string $category; // категория товара
-   public static $price = '1000'; // цена продукта
    protected string $count; // количество
+   protected static string $price_modifier;
+   public static $price = '1000'; // цена продукта
 
    abstract public function priceСalculation(); //метод расчета цены
  
 }
 
-trait incomeFromSale {
-   public function salesProd () {
+trait IncomeFromSale {
+   public function profitSales () 
+   {
       $sale=parent::$price*$this->count;
       return $this->name.' '.$sale;
    }
 }
 
-class physicalProduct extends product {
+class PhysicalProduct extends product 
+{
    public string $material;
-   private static string $priceModifier = '1';
-   
 
-   public function __construct($name,$category,$material,$count) {
+
+   public function __construct($name, $category, $material, $count) 
+   {
       $this->name = $name;
       $this->category = $category;
       $this->material = $material;
       $this->count = $count;
+      parent::$price_modifier = '1';
    }
    
-   public function priceСalculation() {
-      $price=parent::$price*self::$priceModifier;
+   public function priceСalculation() 
+   {
+      $price=parent::$price*self::$price_modifier;
       return $this->name.' '.$price;
    }
 
-   use incomeFromSale;
+   use IncomeFromSale;
 
 }
 
-class digitalProduct extends product {
-   public string $rarityItem;
-   private static string $priceModifier = '0.5';
+class DigitalProduct extends product 
+{
+   public string $rarity_item;
 
-   public function __construct($name,$category,$rarityItem,$count) {
+   public function __construct($name, $category, $rarity_item, $count) 
+   {
       $this->name = $name;
       $this->category = $category;
-      $this->rarityItem = $rarityItem;
+      $this->rarity_item = $rarity_item;
       $this->count = $count;
+      parent::$price_modifier = '0.5';
    }
    
    public function priceСalculation() {
-      $price=parent::$price*self::$priceModifier;
+      $price=parent::$price*self::$price_modifier;
       return $this->name.' '.$price;
    }
    
-   use incomeFromSale;
+   use IncomeFromSale;
 
 }
 
-class weightProduct extends product {
+class WeightProduct extends product 
+{
    public string $measure; 
-   private static string $priceModifier = '0.75';
 
-
-   public function __construct($name,$category,$measure,$count) {
+   public function __construct($name, $category, $measure, $count) 
+   {
       $this->name = $name;
       $this->category = $category;
       $this->measure = $measure;
       $this->count = $count;
+      parent::$price_modifier = '0.75';
    }
    
-   public function priceСalculation() {
+   public function priceСalculation() 
+   {
       if ($this->measure < 10) {
          $price=parent::$price;
       } else {
-         $price=parent::$price*self::$priceModifier;
+         $price=parent::$price*self::$price_modifier;
       }
       return $this->name.' '.$price;
    }
 
-   use incomeFromSale;
+   use IncomeFromSale;
 
 }
 
-
-
-$products1 = new physicalProduct ('Фростморн','Предметы из игр','сталь','12'); 
-$products2 = new digitalProduct ('Посох','Промокод на предмет в игре','Легендарный','1'); 
-$products3 = new weightProduct ('кубик','Lego детали','кг','10'); 
+$products1 = new PhysicalProduct ('Фростморн','Предметы из игр','сталь','12'); 
+$products2 = new DigitalProduct ('Посох','Промокод на предмет в игре','Легендарный','1'); 
+$products3 = new WeightProduct ('кубик','Lego детали','кг','10'); 
 
 var_dump($products1);
 var_dump($products2);
 var_dump($products3);
+
 var_dump($products1->priceСalculation());
 var_dump($products2->priceСalculation());
 var_dump($products3->priceСalculation());
 
-var_dump($products1->salesProd());
+var_dump($products1->profitSales());
+var_dump($products2->profitSales());
+var_dump($products3->profitSales());
 
 
+//Результат выполнения
 
-//Результат выполнения кода
-
-object(physicalProduct)#1 (4) {
+object(PhysicalProduct)#1 (4) {
    ["name":protected]=>
    string(18) "Фростморн"
    ["category":protected]=>
@@ -111,7 +121,7 @@ object(physicalProduct)#1 (4) {
    ["material"]=>
    string(10) "сталь"
  }
- object(digitalProduct)#2 (4) {
+ object(DigitalProduct)#2 (4) {
    ["name":protected]=>
    string(10) "Посох"
    ["category":protected]=>
@@ -121,7 +131,7 @@ object(physicalProduct)#1 (4) {
    ["rarityItem"]=>
    string(22) "Легендарный"
  }
- object(weightProduct)#3 (4) {
+ object(WeightProduct)#3 (4) {
    ["name":protected]=>
    string(10) "кубик"
    ["category":protected]=>
@@ -131,11 +141,7 @@ object(physicalProduct)#1 (4) {
    ["measure"]=>
    string(4) "кг"
  }
- string(23) "Фростморн 1000"
- string(14) "Посох 500"
+ string(22) "Фростморн 750"
+ string(14) "Посох 750"
  string(14) "кубик 750"
  string(24) "Фростморн 12000"
-
-
-
-
