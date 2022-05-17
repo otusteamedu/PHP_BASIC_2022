@@ -4,39 +4,46 @@ abstract class Product
    protected string $name; // название продукта
    protected string $category; // категория товара
    protected string $count; // количество
-   protected static string $price_modifier;
-   public static $price = '1000'; // цена продукта
+   protected static string $price_modifier ='1'; //модификатор цены
+   protected static string $price = '1000'; // цена продукта
 
-   abstract public function priceСalculation(); //метод расчета цены
- 
+   public function priceСalculation() 
+   {
+      $price=self::$price*static::$price_modifier;
+      return $this->name.' '.$price;
+   }
+   
+   abstract public function returnProduct(); //операция возврата товара
 }
 
 trait IncomeFromSale {
    public function profitSales () 
    {
-      $sale=parent::$price*$this->count;
-      return $this->name.' '.$sale;
+      $sale=self::$price*static::$price_modifier*$this->count;
+      return "Если продать все ".''.$this->name.''.", а всего их шт. - ".' '.$this->count.''.", то получим: ".' '.$sale;
    }
 }
 
 class PhysicalProduct extends product 
 {
    public string $material;
-
-
+   
    public function __construct($name, $category, $material, $count) 
    {
       $this->name = $name;
       $this->category = $category;
       $this->material = $material;
       $this->count = $count;
-      parent::$price_modifier = '1';
    }
    
-   public function priceСalculation() 
+   public function returnProduct()
    {
-      $price=parent::$price*self::$price_modifier;
-      return $this->name.' '.$price;
+      if ($this->count < 1) {
+         $shipping_cost='5000';
+      } else {
+         $shipping_cost='15000';
+      }
+      return "Вам необходимо оплатить пересылку. Стоимость:".' '.$shipping_cost;
    }
 
    use IncomeFromSale;
@@ -45,6 +52,7 @@ class PhysicalProduct extends product
 
 class DigitalProduct extends product 
 {
+   protected static string $price_modifier ='0.5';
    public string $rarity_item;
 
    public function __construct($name, $category, $rarity_item, $count) 
@@ -53,34 +61,38 @@ class DigitalProduct extends product
       $this->category = $category;
       $this->rarity_item = $rarity_item;
       $this->count = $count;
-      parent::$price_modifier = '0.5';
-   }
-   
-   public function priceСalculation() {
-      $price=parent::$price*self::$price_modifier;
-      return $this->name.' '.$price;
    }
    
    use IncomeFromSale;
 
+   public function returnProduct()
+   {
+      if ($this->rarity_item = 1) {
+         return "Можно вернуть. Напишите нам на auction@bay.com";
+      } else {
+         return "Не редкие товары можете выставить на аукцион, вернуть не получится, он уже попользованный...";
+      }
+   }
+
 }
+
 
 class WeightProduct extends product 
 {
+   protected static string $price_modifier ='0.75';
    public string $measure; 
-
+   
    public function __construct($name, $category, $measure, $count) 
    {
       $this->name = $name;
       $this->category = $category;
       $this->measure = $measure;
       $this->count = $count;
-      parent::$price_modifier = '0.75';
    }
    
    public function priceСalculation() 
    {
-      if ($this->measure < 10) {
+      if ($this->count < 10) {
          $price=parent::$price;
       } else {
          $price=parent::$price*self::$price_modifier;
@@ -89,6 +101,11 @@ class WeightProduct extends product
    }
 
    use IncomeFromSale;
+
+   public function returnProduct()
+   {
+      return "Вернуть Lego? Серьезно? Играйте и будьте счастливы!";
+   }
 
 }
 
@@ -108,9 +125,13 @@ var_dump($products1->profitSales());
 var_dump($products2->profitSales());
 var_dump($products3->profitSales());
 
+var_dump($products1->returnProduct());
+var_dump($products2->returnProduct());
+var_dump($products3->returnProduct());
+
+
 
 //Результат выполнения
-
 object(PhysicalProduct)#1 (4) {
    ["name":protected]=>
    string(18) "Фростморн"
@@ -128,7 +149,7 @@ object(PhysicalProduct)#1 (4) {
    string(48) "Промокод на предмет в игре"
    ["count":protected]=>
    string(1) "1"
-   ["rarityItem"]=>
+   ["rarity_item"]=>
    string(22) "Легендарный"
  }
  object(WeightProduct)#3 (4) {
@@ -141,7 +162,12 @@ object(PhysicalProduct)#1 (4) {
    ["measure"]=>
    string(4) "кг"
  }
- string(22) "Фростморн 750"
- string(14) "Посох 750"
+ string(23) "Фростморн 1000"
+ string(14) "Посох 500"
  string(14) "кубик 750"
- string(24) "Фростморн 12000"
+ string(110) "Если продать все Фростморн, а всего их шт. -  12, то получим:  12000"
+ string(99) "Если продать все Посох, а всего их шт. -  1, то получим:  500"
+ string(101) "Если продать все кубик, а всего их шт. -  10, то получим:  7500"
+ string(90) "Вам необходимо оплатить пересылку. Стоимость: 15000"
+ string(71) "Можно вернуть. Напишите нам на auction@bay.com"
+ string(89) "Вернуть Lego? Серьезно? Играйте и будьте счастливы!"
