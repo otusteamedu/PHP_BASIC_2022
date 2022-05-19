@@ -18,6 +18,7 @@
 				<form action="index.php?action=add_book" method="post" enctype="multipart/form-data">
 					<div class="login-form">
 						<h4 style = "text-align: center" class="login-title">Добавление новой книги</h4>
+                        <p style="color: red">*Все поля обязательны для заполнения</p>
 						<div class="row">
 							<div class="col-md-12 col-12 mb--15">
 								<label for="author_name">Автор книги</label>

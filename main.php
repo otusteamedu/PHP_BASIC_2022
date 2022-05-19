@@ -3,22 +3,18 @@ require_once 'requirements.php';
 
 session_start();
 
+$page = 'view.php';
 $booksCount = getBookCount();
 
 if (empty($_GET)){
-    $page = 'view.php';
     $books = getBooks();
 } elseif(!empty($_GET['action'])){
 
-    switch ($_GET['action']) {
-        case 'add' : $page = $_GET['action'].'.php';
-            break;
-        case 'login-register' : $page = $_GET['action'].'.php';
-            break;
-    }
+    if (in_array($_GET['action'], ['add', 'login-register']))
+        $page = $_GET['action'].'.php';
 
     if ($_GET['action'] === 'view' && isset($_GET['pageOrder'])){
-        $page = 'view.php';
+
         $books = getBooks($_GET['pageOrder']);
     }
 
@@ -87,7 +83,6 @@ if (empty($_GET)){
     }
 
     if ($_GET['action'] === 'search'){
-        $page = 'view.php';
         if (!empty($_POST['book_search'])){
             $books = getBooks(0, htmlspecialchars($_POST['book_search']));
         } else {
