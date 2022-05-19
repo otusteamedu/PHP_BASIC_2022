@@ -1,5 +1,5 @@
 <?php 
-    include_once "lib.php";
+    include_once "lib/lib.php";
 
     $pictureDir = 'gallery/';
     $pictureDirMin = 'gallery/min/';
@@ -61,8 +61,7 @@
         </div>
     </div>
     <div>
-        <p style="text-align: center;">All rights reserved &copy; 2001 - <?php echo(date('Y'));?>
-        </p>
+        <p style="text-align: center;">All rights reserved &copy; 2001 - <?php echo(date('Y'));?></p>
     </div>
 </body>
 </html>
