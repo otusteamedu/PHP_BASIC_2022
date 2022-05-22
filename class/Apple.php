@@ -19,12 +19,5 @@ class Apple extends Product
         $this->producingCountry = $producingCountry;
     }
 
-    public function allSalesAmount(int $id,float $productCount)
-    {
-        if (empty($id) || empty($productCount))
-            return false;
 
-        $this->salesAmount += $this->getPrice($productCount);
-        return $this->salesAmount;
-    }
 }

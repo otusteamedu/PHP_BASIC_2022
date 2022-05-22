@@ -10,9 +10,9 @@
  *
  */
 
-require_once 'product.php';
+require_once 'SingleProduct.php';
 
-class Fridge extends Product {
+class Fridge extends SingleProduct {
 
     public $producingCountry;
     public $manufacturer;
@@ -44,15 +44,6 @@ class Fridge extends Product {
             return false;
         $volume = ($productCount * ($this->width * $this->height * $this->length)/1000000);
         return $volume;
-    }
-
-    public function allSalesAmount(int $id, float $productCount)
-    {
-        if (empty($id) || empty($productCount))
-            return false;
-
-        $this->salesAmount += $this->getPrice($productCount);
-        return $this->salesAmount;
     }
 }
 ?>

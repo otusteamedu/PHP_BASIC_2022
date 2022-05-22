@@ -11,9 +11,9 @@
  *
  */
 
-require_once 'product.php';
+require_once 'DigitalProduct.php';
 
-class Book extends Product {
+class Book extends DigitalProduct {
 
     public $bookType;
     public $author;
@@ -33,27 +33,6 @@ class Book extends Product {
         $this->publishingHouse = $publishingHouse;
         $this->yearOfPublishing = $yearOfPublishing;
         $this->editionNumber = $editionNumber;
-    }
-
-    public function getPrice($count)
-    {
-        if (empty($count))
-            return false;
-
-        if ($this->bookType == 'Электронная'){
-            return parent::getPrice($count)*0.5;
-        } else {
-            return parent::getPrice($count);
-        }
-    }
-
-    public function allSalesAmount(int $id, float $productCount)
-    {
-        if (empty($id) || empty($productCount))
-            return false;
-
-        $this->salesAmount += self::getPrice($productCount);
-       return $this->salesAmount;
     }
 }
 ?>

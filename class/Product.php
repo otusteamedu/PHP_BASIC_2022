@@ -59,7 +59,5 @@ abstract class Product {
 
         $this->productInStock += $count;
     }
-
-    abstract public function allSalesAmount(int $id, float $productCount);
 }
 ?>
