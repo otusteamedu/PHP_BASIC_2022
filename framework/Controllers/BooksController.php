@@ -2,19 +2,18 @@
 
 namespace Otus\Mvc\Controllers;
 use Otus\Mvc\Core\View;
+use Otus\Mvc\Models\OtusORM\Books;
+
 class BooksController
 {
+
     public function search() {
-        View::render('view_books',[
-            'title' => 'OTUS - книжный магазин',
-            'value' => 'Показываем реузльтат поиска'
-        ]);
+        $books = new Books;
+        View::render('view_books', $books->getBookSearch());
     }
 
     public function view() {
-        View::render('view_books',[
-            'title' => 'OTUS - книжный магазин',
-            'value' => 'Показываем полный список книг'
-        ]);
+        $books = new Books;
+        View::render('view_books', $books->getBookView());
     }
 }

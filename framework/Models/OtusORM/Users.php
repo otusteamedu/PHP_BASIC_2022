@@ -4,6 +4,16 @@ namespace Otus\Mvc\Models\OtusORM;
 
 class Users extends Model
 {
-    protected static $table = 'users';
+    public function userLogin(){
+        return [
+            'title' => 'OTUS - книжный магазин',
+        ];
+    }
+
+    public function userLogout(){
+        return [
+            'title' => 'OTUS - книжный магазин',
+        ];
+    }
 
 }
