@@ -1,5 +1,5 @@
 <?php
-include_once "lib/lib.php";
+include_once "../lib/lib.php";
 
 $fileName = 'LongTextFile.txt';
 
