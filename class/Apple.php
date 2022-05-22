@@ -6,7 +6,10 @@
  * @var string $producingCountry Страна изготовитель
  *
  */
-class Apple extends Product
+
+require_once 'WeightProduct.php';
+
+class Apple extends WeightProduct
 {
     public $variety;
     public $producingCountry;
