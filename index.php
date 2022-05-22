@@ -2,9 +2,10 @@
 /* 1. С помощью цикла while вывести все числа в промежутке от 0 до 100, которые делятся на 3 без остатка.
 */
 $a = 0;
-while($a++ < 100){
-    if($a % 3 == 0)
-    echo $a.' ';
+while ($a++ < 100) {
+    if ($a % 3 == 0) {
+        echo $a . ' ';
+    }
 }
 
 /* 2. С помощью цикла do…while написать функцию
@@ -15,21 +16,21 @@ while($a++ < 100){
 3 – нечетное число.
 … 10 – четное число.
 */
-$n = 10;
-$i = 0;
+$number = 0;
+do {
+    if ($number == 0) {
+        echo $number . ' – это ноль.' . "\n";
+        $number++;
+    } elseif ($number % 2 != 0) {
+        echo $number . ' – нечетное число.' . "\n";
+        $number++;
+    } else {
+        echo $number . ' – четное число.' . "\n";
+        $number++;
+    }
+} while ($number < 11);
 
-function exer2($i) {
-    if ($i == 0)
-        echo "$i" . " - это ноль \n";
-    elseif ($i % 2 != 0)
-        echo "$i" . " - нечетное число \n";
-    elseif ($i % 2 == 0)
-        echo "$i" . " - четное число \n";
-
-} do {
-    exer2($i);
-    $i++;
-} while ($i <= $n);
+echo '';
 
 /*3. Объявить массив, в котором в качестве ключей будут использоваться названия областей,
 а в качестве значений – массивы с названиями городов из соответствующей области.
@@ -45,10 +46,10 @@ $region = [
 
 $str = '';
 
-foreach ($region as $key => $value){
+foreach ($region as $key => $value) {
     $str .= $key;
 
-    foreach ($value as $city => $value2){
+    foreach ($value as $city => $value2) {
         $str .= $value2 . ' ';
     };
 
@@ -111,16 +112,17 @@ function transition($str)
     }
     return $new;
 }
- echo transition('если мне придется выбирать я предпочту не выбирать вовсе');
+
+echo transition('если мне придется выбирать я предпочту не выбирать вовсе');
 /* 5. Написать функцию, которая заменяет в строке пробелы
  на подчеркивания и возвращает видоизмененную строчку.
 */
 
-function replace($string) {
-	echo str_replace (' ', '_', $string);
-};
-
-replace ('Написать функцию, которая заменяет в строке пробелы на подчеркивания');
+function replace($string)
+{
+    return str_replace(' ', '_', $string);
+}
+echo replace('Написать функцию, которая заменяет в строке пробелы на подчеркивания');
 
 /* 6. В имеющемся шаблоне сайта заменить статичное меню (ul - li) на генерируемое через PHP.
 Необходимо представить пункты меню как элементы массива и вывести их циклом.
@@ -136,7 +138,7 @@ $menu = [
     ]
 ];
 
-function recursion ($menuarr)
+function recursion($menuarr)
 {
     $perem[] = '<ul>';
     foreach ($menuarr as $key => $value) {
@@ -150,15 +152,15 @@ function recursion ($menuarr)
     return implode($perem);
 }
 
-echo recursion ($menu);
+echo recursion($menu);
 
 /* 7. Вывести с помощью цикла for числа от 0 до 9, НЕ используя тело цикла.
 То есть выглядеть должно так: for (…){ // здесь пусто} */
-for ($i = 0; $i < 9; print $i++.' ') {
+for ($i = 0; $i < 9; print $i++ . ' ') {
 };
 
 echo $i;
- /* 8. *Повторить третье задание, но вывести на экран только города, начинающиеся с буквы «К». */
+/* 8. *Повторить третье задание, но вывести на экран только города, начинающиеся с буквы «К». */
 $region = [
     'Московская область: ' => ['Москва', 'Зеленоград', 'Клин'],
     'Ленинградская область: ' => ['Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'],
@@ -167,12 +169,12 @@ $region = [
 
 $str = '';
 
-foreach ($region as $key => $value){
+foreach ($region as $key => $value) {
     $str .= $key;
 
-    foreach ($value as $city => $value2){
+    foreach ($value as $city => $value2) {
         $splitted = mb_str_split($value2);
-        if ($splitted[0] == 'К'){
+        if ($splitted[0] == 'К') {
             $str .= $value2 . '. ';
         }
     }
@@ -232,7 +234,7 @@ function transition2($str)
         }
         $new .= $letters[$letter];
     }
-    return str_replace (' ', '_', $new);
+    return str_replace(' ', '_', $new);
 }
 
 echo transition2('если мне придется выбирать я предпочту не выбирать вовсе ');
