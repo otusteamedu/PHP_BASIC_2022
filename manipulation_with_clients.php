@@ -12,28 +12,54 @@ function read(string $filename)
     }
     fclose($handle); //Закрываем файл
 
-    unset($array_line_full[1]);
     return $array_line_full;
 }
 
-function add(string $filename, array $fields)
+function add(string $filename, array $fields = [], string $mode = 'a+')
 {
-    $handle = fopen($filename, 'a+');
+    $handle = fopen($filename, $mode);
 
-    $puts = fputcsv($handle, $fields, ';');
+    foreach ($fields as $field) {
+        fputcsv($handle, $field, ';');
+    }
 
     fclose($handle);
 
-    return $puts;
+    return true;
 }
 
-//$array = read($filename);
+function delete(array $rows, string $name)
+{
+    $nameKey = null;
+    $afterDeleteRows = [];
 
-$add = add($filename, [
-    'Михаил', 'Петраков', '', 'test@test.ru', ''
-]);
-$read = read($filename);
+    foreach ($rows as $row) {
+        foreach ($row as $key => $field) {
+            if (is_null($nameKey) && $field == 'Name') {
+                $nameKey = $key;
+                break;
+            }
+        }
+
+        if (!is_null($nameKey) && $row[$nameKey] == $name) {
+            continue;
+        }
+
+        $afterDeleteRows[] = $row;
+    }
+
+    return $afterDeleteRows;
+}
+
+$rows = read($filename);
+$rows = delete($rows, 'Иван');
+add($filename, $rows, 'w+');
+add($filename, [
+    [
+        'Михаил11', 'Петраков11', '1121', 'test1@test.ru', '2122'
+    ]
+], 'w+');
+$rows = read($filename);
 
 echo '<pre>';
-var_dump($add);
-print_r($read);
+print_r($rows);

@@ -1,15 +1,13 @@
 <?php
 include_once "log.php";
 
-$gallary = 'gallery/';
-$gallaryMin = 'galleryMin/';
-
-$pictures = scandir($gallaryMin);
+$gallery = 'gallery/';
 
 if (isset($_FILES['picture']) && $_FILES['picture']['size'] > 0) {
-
-    $pictures = addedImages($_FILES, $gallary, $gallaryMin);
+    addedImages($_FILES, $gallery,);
 }
+
+$pictures = array_diff(scandir($gallery), ['.', '..']);
 ?>
 
 <!DOCTYPE html>
@@ -34,21 +32,22 @@ if (isset($_FILES['picture']) && $_FILES['picture']['size'] > 0) {
 
         <div class="flex-container">
             <?php
-            if (isset($pictures)) {
+            if (!empty($pictures)) {
                 foreach ($pictures as $picture) {
-                    if ($picture !== '.' && $picture !== '..') {
-                        ?>
-                        <div class="item">
-                            <a href="<?php echo($gallary . $picture); ?>" target="_blank">
-                                <img class="image-gallery" src="<?php echo($gallaryMin . $picture); ?>"
-                                     alt="<?php echo($picture); ?>"/>
-                            </a>
-                        </div>
-                        <?php
-                    }
+                    ?>
+                    <div class="item">
+                        <a href="<?php echo($gallery . $picture); ?>" target="_blank">
+                            <img class="image-gallery" src="<?php echo($gallery . $picture); ?>"
+                                  alt="<?php echo($picture); ?>" />
+                        </a>
+                    </div>
+                    <?php
                 }
+            } else {
+            ?>
+                <h3>Галерея пока пуста</h3>
+            <?php
             }
-
             ?>
             <div class="block-button">
                 <form action="index.php" method="post" enctype="multipart/form-data">
