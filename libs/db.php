@@ -5,8 +5,7 @@ require_once 'config.php';
 function initDBConnection(string $dsn, string $login, string $pwd = ''): PDO|false
 {
     try {
-        return new PDO('mysql:host=otus;dbname=library', 'root', '',
-            array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC));
+        return new PDO($dsn, $login, $pwd, array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC));
     } catch (PDOException $e) {
         print "Database connection error!";
         return false;
@@ -94,6 +93,9 @@ function GetFilteredBooks(array $filterData): PDOStatement
         $books = $pdo->prepare('SELECT books.isbn, books.title, books.issue_year, books.pages, books.description FROM books ' . $filterQuery);
         $books->execute($filter);
     }
+    if($books == null){
+        return GetAllBooks();
+    }
     return $books;
 }
 
@@ -111,3 +113,18 @@ function GetAuthorsByBook(array $book): string
     return $authorsList;
 }
 
+function bindImageToBook(string $bookId, string $fileName):bool
+{
+    $pdo = getDBConnection();
+    $images = $pdo->prepare("INSERT INTO images(image_name,book_isbn) VALUES(?, ?)");
+    return $images->execute([$fileName, $bookId]);
+
+}
+
+function getImagesByBook(string $bookId): array
+{
+    $pdo = getDBConnection();
+    $images = $pdo->prepare("SELECT * FROM images WHERE book_isbn = ?");
+    $images->execute([$bookId]);
+    return $images->fetchAll();
+}

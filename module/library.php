@@ -1,5 +1,6 @@
 <?php
 require_once '../libs/library.php';
+require_once '../libs/auth.php';
 
 if(isset($_GET['book_id'])){
     $books = GetFilteredBooks(array('isbn' => $_GET['book_id']));

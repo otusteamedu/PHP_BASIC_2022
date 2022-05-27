@@ -1,4 +1,5 @@
 <?php require_once '../libs/db.php';  ?>
+<?php require_once '../libs/auth.php';  ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,9 +14,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/lightbox.css">
 </head>
 <body>
     <?php require_once '../module/auth.php'; ?>
-    <?php require_once '../module/library.php'; ?>
+    <?php 
+        if(isAuthorized()){
+            require_once '../module/library.php'; 
+        }
+    ?>
 </body>
 </html>
