@@ -17,6 +17,16 @@
  * @function productReceipt Увеличивает количество товара на остатке при поступлении
  * @function getPrice возвращает цену товара
  */
+trait Sales {
+    public function allSalesAmount(int $id, float $productCount)
+    {
+        if (empty($id) || empty($productCount))
+        return false;
+
+        $this->salesAmount += $this->getPrice($productCount);
+        return $this->salesAmount;
+    }
+}
 abstract class Product {
 
     private $id;
@@ -59,5 +69,7 @@ abstract class Product {
 
         $this->productInStock += $count;
     }
+
+    abstract public function allSalesAmount(int $id,float $productCount);
 }
 ?>
