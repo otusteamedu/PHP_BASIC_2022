@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80024
 File Encoding         : 65001
 
-Date: 2022-05-23 13:39:51
+Date: 2022-05-29 19:16:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -103,16 +103,34 @@ INSERT INTO `genre` VALUES ('5', 'Комедия', '1654-08-10');
 DROP TABLE IF EXISTS `images`;
 CREATE TABLE `images` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `image_name` varchar(100) NOT NULL,
+  `image_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `book_isbn` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `isbn_fk` (`book_isbn`),
   CONSTRAINT `isbn_fk` FOREIGN KEY (`book_isbn`) REFERENCES `books` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of images
 -- ----------------------------
+INSERT INTO `images` VALUES ('1', '1898-1000x830.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('2', '235661_1921.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('3', 'e28941758b3f65164b58c67a35b317c4.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('4', 'iconic-story-bridge-in-brisbane-queensland-australia-0031099456-preview.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('5', 'krasnoe-selo.orig.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('6', 'm6220cfaa.gif', '9782266111560');
+INSERT INTO `images` VALUES ('7', 'maxresdefault.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('8', 'shutterstock_71090377.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('9', 'solnce-volna-ballonchik.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('10', 'znamenij-most-goroda-san-francisko.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('11', 'zolotoj-bereg-okean-avstraliya-oteli-more-gorod.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('12', 'vajoming-ssha-grand-teton-nacionalnyj-park-snejk-river-grand-titon-nacionalnyj-park-zakat-oblaka-vecher-gory-pole-cvety-zelen-les-derevya-sosny.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('13', 'Б-ОБ33660.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('14', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('15', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('16', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('17', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '9782266111560');
+INSERT INTO `images` VALUES ('18', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '6549875645646');
 
 -- ----------------------------
 -- Table structure for `location`

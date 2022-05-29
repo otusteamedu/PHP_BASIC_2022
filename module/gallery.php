@@ -13,8 +13,6 @@
         //     echo "<a target='_blank' href='". $filePath ."'><img class='min-img' src=". $filePathMin ." ></a>";
         // }
 
-        require_once '../views/lightbox.php';        
-
         if(isAuthorized()){
             if(isset($_GET['action']) and ($_GET['action'] === 'add_img') and isset($_FILES['user_image']) and empty($_FILES['user_image']['error'])){
                 if(addImage($_GET['book_id'], $_FILES['user_image'])){
@@ -22,7 +20,9 @@
                 } 
                 echo "<pre>Ошибка загрузки изображения.</pre>";      
             }
+            require_once '../views/lightbox.php';
             ?>
+
             <p>Добавить изображение в галерею (поддерживает типы файлов: jpg, jpeg, bmp, gif, png)</p>
             <form enctype="multipart/form-data" method="post" action="index.php?action=add_img&book_id=<?=$_GET['book_id'] ?>">
                 <p>
