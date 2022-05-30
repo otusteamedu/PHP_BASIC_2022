@@ -1,1 +1,17 @@
-https://otus.ru/lessons/php-basic/?utm_source=github&utm_medium=free&utm_campaign=otus
+Это пример простого PHP MVC микрофреймворка
+
+Перед тем, как запускать docker-compose установите зависимости!
+```
+cd framework
+
+docker run --rm --interactive --tty \
+  --volume $PWD:/app \
+  composer install
+```
+
+Также, укажите в hosts запись
+```
+127.0.0.1   otus.mvc
+```
+
+За основу был взят движок и сверху добавлено домашнее задание по подключению к базе через ORM и оформление кода по MVC (логику перенес из контролеров в модели) + принципы SOLID.
