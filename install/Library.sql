@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80024
 File Encoding         : 65001
 
-Date: 2022-05-29 19:16:38
+Date: 2022-06-03 13:13:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,8 +43,8 @@ CREATE TABLE `books` (
   `title` varchar(50) NOT NULL,
   `issue_year` int NOT NULL DEFAULT '0',
   `description` varchar(500) DEFAULT NULL,
-  `genre` int NOT NULL,
-  `location` int NOT NULL,
+  `genre` int NOT NULL DEFAULT '6',
+  `location` int NOT NULL DEFAULT '2',
   `pages` int NOT NULL DEFAULT '100',
   PRIMARY KEY (`isbn`),
   KEY `FK_genre` (`genre`),
@@ -56,6 +56,7 @@ CREATE TABLE `books` (
 -- ----------------------------
 -- Records of books
 -- ----------------------------
+INSERT INTO `books` VALUES ('2342342342342', '234234', '234', null, '3', '2', '234');
 INSERT INTO `books` VALUES ('6549875645646', 'Война и мир', '1825', 'Замысел эпопеи формировался задолго до начала работы над тем текстом, который известен под названием «Война и мир». В наброске предисловия к «Войне и миру» Толстой писал, что в 1856 году начал писать повесть, «герой которой должен был быть декабрист, возвращающийся с семейством в Россию. Невольно от настоящего я перешёл к 1825 году…', '3', '2', '10000');
 INSERT INTO `books` VALUES ('9782266111560', 'Отцы и дети', '1860', 'Действия в романе происходят весной 1859 года, то есть накануне крестьянской реформы 1861 года. ', '4', '1', '351');
 
@@ -78,6 +79,7 @@ CREATE TABLE `books_authors` (
 INSERT INTO `books_authors` VALUES ('6549875645646', '1');
 INSERT INTO `books_authors` VALUES ('9782266111560', '3');
 INSERT INTO `books_authors` VALUES ('9782266111560', '2');
+INSERT INTO `books_authors` VALUES ('2342342342342', '1');
 
 -- ----------------------------
 -- Table structure for `genre`
@@ -88,7 +90,7 @@ CREATE TABLE `genre` (
   `description` varchar(50) NOT NULL,
   `found_date` date DEFAULT NULL,
   PRIMARY KEY (`genre_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of genre
@@ -96,6 +98,7 @@ CREATE TABLE `genre` (
 INSERT INTO `genre` VALUES ('3', 'Повесть', '1822-03-17');
 INSERT INTO `genre` VALUES ('4', 'Трагедия', '1540-01-24');
 INSERT INTO `genre` VALUES ('5', 'Комедия', '1654-08-10');
+INSERT INTO `genre` VALUES ('6', 'Не определено', '2022-04-07');
 
 -- ----------------------------
 -- Table structure for `images`
@@ -108,7 +111,7 @@ CREATE TABLE `images` (
   PRIMARY KEY (`id`),
   KEY `isbn_fk` (`book_isbn`),
   CONSTRAINT `isbn_fk` FOREIGN KEY (`book_isbn`) REFERENCES `books` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of images
@@ -131,6 +134,10 @@ INSERT INTO `images` VALUES ('15', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg'
 INSERT INTO `images` VALUES ('16', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '9782266111560');
 INSERT INTO `images` VALUES ('17', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '9782266111560');
 INSERT INTO `images` VALUES ('18', 'skazochno-krasivyj-zamok-na-beregu-reki.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('19', '576ac372db58c90d0749fda81b69f573.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('20', 'pejzazh-gory-ozero-voda-gory-water-priroda-zimnie-sneg-derevya-kanada-ozera.jpg', '6549875645646');
+INSERT INTO `images` VALUES ('21', 'a683bb6d465e19c3330da96d53dbedce.jpg', '2342342342342');
+INSERT INTO `images` VALUES ('22', 'GP00068.jpg', '2342342342342');
 
 -- ----------------------------
 -- Table structure for `location`
@@ -150,6 +157,22 @@ INSERT INTO `location` VALUES ('1', 'Шкаф 3 Полка 2', null);
 INSERT INTO `location` VALUES ('2', 'Шкаф 5 Полка 4', null);
 
 -- ----------------------------
+-- Table structure for `role`
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `id` tinyint NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES ('1', 'admin');
+INSERT INTO `role` VALUES ('2', 'guest');
+
+-- ----------------------------
 -- Table structure for `users`
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -158,11 +181,14 @@ CREATE TABLE `users` (
   `user_name` varchar(50) NOT NULL,
   `pwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `token` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `role` tinyint NOT NULL DEFAULT '2',
+  PRIMARY KEY (`id`),
+  KEY `id_role` (`role`),
+  CONSTRAINT `id_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'admin', '$2y$10$sbSGqtAeUTQLBz15d0IjSeVWtXb5MjwV.ZQ.j44ipOAtcLv78m6D2', '626aee0a3aa5b');
-INSERT INTO `users` VALUES ('2', 'user', '$2y$10$l/OOxylod88DKfSWfl.ZdOO3rwSm7fJNtrA5h8XhZINezs8ug1ZEi', '626514df1bb76');
+INSERT INTO `users` VALUES ('1', 'admin', '$2y$10$sbSGqtAeUTQLBz15d0IjSeVWtXb5MjwV.ZQ.j44ipOAtcLv78m6D2', '626aee0a3aa5b', '1');
+INSERT INTO `users` VALUES ('2', 'user', '$2y$10$l/OOxylod88DKfSWfl.ZdOO3rwSm7fJNtrA5h8XhZINezs8ug1ZEi', '626514df1bb76', '2');
