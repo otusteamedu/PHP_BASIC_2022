@@ -30,8 +30,9 @@ function getDBConnection():PDO
     return $connection;
 }
 
-function getUserByName(PDO $pdo, string $login): array
+function getUserByName(string $login): array
 {
+    $pdo = getDBConnection();
     $user = $pdo->prepare('SELECT * FROM users WHERE user_name = ?');
     $user->execute([$login]);
     if($user->rowCount() > 0)
@@ -40,8 +41,9 @@ function getUserByName(PDO $pdo, string $login): array
         return [];
 }
 
-function getUserIdByToken(PDO $pdo, string $token): int
+function getUserIdByToken(string $token): int
 {
+    $pdo = getDBConnection();
     $user = $pdo->prepare('SELECT id FROM users WHERE token = ?');
     $user->execute([$token]);
     if($user->rowCount() > 0)
@@ -50,20 +52,21 @@ function getUserIdByToken(PDO $pdo, string $token): int
         return 0;
 }
 
-function setToken(PDO $pdo, int $userId, string $token): void
+function setToken(int $userId, string $token): void
 {
+    $pdo = getDBConnection();
     $user = $pdo->prepare('UPDATE users SET token = ? WHERE id = ?');
     $user->execute([$token, $userId]);
 }
 
 
-function GetAllBooks(): PDOStatement
+function getAllBooksFromDB(): array
 {
     $pdo = getDBConnection();
-    return $pdo->query('SELECT isbn, title, issue_year, pages, description FROM books');
+    return $pdo->query('SELECT isbn, title, issue_year, pages, description FROM books')->fetchAll();
 }
 
-function GetFilteredBooks(array $filterData): PDOStatement
+function getFilteredBooksFromDB(array $filterData): array
 {
     $filter = [];
     $books = null;
@@ -94,12 +97,12 @@ function GetFilteredBooks(array $filterData): PDOStatement
         $books->execute($filter);
     }
     if($books == null){
-        return GetAllBooks();
+        return getAllBooksFromDB();
     }
-    return $books;
+    return $books->fetchAll();
 }
 
-function GetAuthorsByBook(array $book): string
+function getAuthorsByBook(array $book): string
 {
     $authorsList = '';
     $pdo = getDBConnection();
@@ -127,4 +130,51 @@ function getImagesByBook(string $bookId): array
     $images = $pdo->prepare("SELECT * FROM images WHERE book_isbn = ?");
     $images->execute([$bookId]);
     return $images->fetchAll();
+}
+
+
+function addBookToDB(array $bookInfo):void
+{
+    $pdo = getDBConnection();
+    try{
+        $pdo->beginTransaction();
+        $book = $pdo->prepare("INSERT INTO books(isbn, title, genre, pages, issue_year) VALUES(?, ?, ?, ?, ?)");
+        $book->execute([$bookInfo['isbn'], $bookInfo['title'], $bookInfo['genre'], $bookInfo['pages'], $bookInfo['issue_year']]);
+        $book = $pdo->prepare("INSERT INTO books_authors VALUES(?, ?)");
+        $book->execute([$bookInfo['isbn'], $bookInfo['authors']]);
+        $pdo->commit();
+    }catch (Exception $ex){
+        $pdo->rollBack();
+    }
+}
+
+function getAuthorsFromDB(): array
+{
+    $pdo = getDBConnection();
+    $images = $pdo->prepare("SELECT * FROM authors");
+    $images->execute();
+    return $images->fetchAll();
+}
+
+function getGenresFromDB(): array
+{
+    $pdo = getDBConnection();
+    $images = $pdo->prepare("SELECT * FROM genre");
+    $images->execute();
+    return $images->fetchAll();
+}
+
+function deleteBookFromDB(string $bookId):void
+{
+    $pdo = getDBConnection();
+    try{
+        $pdo->beginTransaction();
+        $book = $pdo->prepare("DELETE FROM books WHERE isbn = ?");
+        $book->execute([$bookId]);
+        $book = $pdo->prepare("DELETE FROM books_authors WHERE book_id = ?");
+        $book->execute([$bookId]);
+        $pdo->commit();
+    }catch (Exception $ex){
+        $pdo->rollBack();
+    }
 }

@@ -6,17 +6,11 @@
     if(isset($_GET['book_id'])){
         echo "<p><a href='index.php'>Назад</a></p>";
         $images = getBookImagesList($_GET['book_id']);
-        // foreach ($images as $image){
-        //     $fileName =  $image['image_name'];
-        //     $filePath = $imgDir . $fileName;
-        //     $filePathMin = $imgDirMin . $fileName;
-        //     echo "<a target='_blank' href='". $filePath ."'><img class='min-img' src=". $filePathMin ." ></a>";
-        // }
 
         if(isAuthorized()){
             if(isset($_GET['action']) and ($_GET['action'] === 'add_img') and isset($_FILES['user_image']) and empty($_FILES['user_image']['error'])){
                 if(addImage($_GET['book_id'], $_FILES['user_image'])){
-                    header("Location: index.php?book_id={$_GET['book_id']}");
+                    header("Location: index.php?action=show&book_id={$_GET['book_id']}");
                 } 
                 echo "<pre>Ошибка загрузки изображения.</pre>";      
             }

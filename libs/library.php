@@ -2,12 +2,33 @@
 declare(strict_types=1);
 require_once '../libs/db.php';
 
-function initLibrary(): PDOStatement
+function getAllBooks():array
 {
-    if(isset($_GET['action']) and $_GET['action'] === 'filter_books'){
-        return GetFilteredBooks($_POST);
-    }else{
-        return GetAllBooks();
-    }
+    return getAllBooksFromDB();
+}
+
+function getFilteredBooks(array $filter):array
+{
+    return getFilteredBooksFromDB($filter);
+}
+
+function addBook(array $bookInfo): void
+{
+    addBookToDB($bookInfo);
+}
+
+function getAuthors(): array
+{
+    return getAuthorsFromDB();
+}
+
+function getGenres(): array
+{
+    return getGenresFromDB();
+}
+
+function deleteBook(string $bookId): void
+{
+    deleteBookFromDB($bookId);
 }
 

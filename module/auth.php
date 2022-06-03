@@ -4,13 +4,13 @@ require_once '../libs/auth.php';
 
 session_start();
 
-$pdo = getDBConnection();
 if(isset($_GET['action']) and $_GET['action'] === 'auth'){
     if(isset($_POST['user_name']))
-        authenticate($pdo, $_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
+        authenticate($_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
 
     if(isset($_COOKIE['token']))
-        authenticateByToken($pdo, $_COOKIE['token']);
+        authenticateByToken($_COOKIE['token']);
+    header('Location: /');
 }
 if(isset($_GET['action']) and $_GET['action'] === 'logout'){
     logout();
@@ -33,7 +33,7 @@ if(isset($_GET['action']) and $_GET['action'] === 'logout'){
         </p>
     </form>
 <?php else: ?>
-    <p>Вы авторизованы!!!</p>
+    <p>Вы авторизованы, <?=$_SESSION['name'] ?>!!!</p>
     <a href="./index.php?action=logout">Выход</a>
 <?php endif; ?>
 </div>

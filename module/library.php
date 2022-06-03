@@ -2,17 +2,37 @@
 require_once '../libs/library.php';
 require_once '../libs/auth.php';
 
-if(isset($_GET['book_id'])){
-    $books = GetFilteredBooks(array('isbn' => $_GET['book_id']));
-}
-else {
-    $books = initLibrary();
+if(!isset($_GET['action'])){
+    $books = getAllBooks();
+}else{
+    switch ($_GET['action']){
+        case 'show':
+            if(isset($_GET['book_id'])){
+                $books = GetFilteredBooks(array('isbn' => $_GET['book_id']));
+            }
+            break;
+        case 'add_book':
+            if(isAdmin()){
+                addBook($_POST);
+                header("Location: index.php");
+            }
+            break;
+        case 'delete':
+            if(isset($_GET['book_id']) and isAdmin()){
+                deleteBook($_GET['book_id']);
+                header("Location: index.php");
+            }
+            break;
+        case 'filter_books':
+            $books = getFilteredBooks($_POST);
+            break;
+    }
 }
 ?>
 <div class="library">
     <div class="container">
         <?php
-        if(empty($books) or $books->rowCount() === 0){
+        if(empty($books)){
             ?>
             <div class='row'>
                 <div class='col'>
@@ -24,7 +44,7 @@ else {
             <?php
         }else{
             foreach ($books as $book){
-                $authorsList = GetAuthorsByBook($book);
+                $authorsList = getAuthorsByBook($book);
                 ?>
                 <div class='row'>
                     <div class='col'>
@@ -39,7 +59,10 @@ else {
                             </p>
                             <p>
                                 <?php if(!isset($_GET['book_id'])){
-                                    echo "<a href='index.php?book_id={$book['isbn']}'>Подробнее...</a>";
+                                    echo "<a href='index.php?action=show&book_id={$book['isbn']}'>Подробнее...</a>";
+                                    if(isAdmin()){
+                                        echo "  &nbsp; &nbsp;<a href='index.php?action=delete&book_id={$book['isbn']}'> Удалить</a>";
+                                    }
                                 }else{
                                     require_once '../module/gallery.php';
                                 }
@@ -54,8 +77,8 @@ else {
         ?>
         <?php if(!isset($_GET['book_id'])){ ?>
         <hr>
-        <div class="row">
-            <div class="search-block">
+        <div class="container">
+            <div class="row">
                 <div class="col">
                     <p>Поиск книг по параметрам:</p>
                     <form action="./index.php?action=filter_books" method="post" name="searсh_books">
@@ -72,6 +95,40 @@ else {
                         <input type="submit" value="Поиск">
                     </form>
                 </div>
+                <?php if(isAdmin()){ ?>
+                <div class="col">
+                    <p>Добавить книгу:</p>
+                    <form action="./index.php?action=add_book" method="post">
+                        <label for="isbn">isbn</label>
+                        <input type="text" name="isbn" id="isbn" maxlength="13">
+                        <label for="title">название</label>
+                        <input type="text" name="title" id="title">
+                        <label for="authors">авторы</label>
+                        <select name="authors">
+                        <?php
+                        $authors = getAuthors();
+                        foreach ($authors as $author){
+                            echo "<option value='{$author['author_id']}'>{$author['fio']}</option>";
+                        }
+                        ?>
+                        </select>
+                        <label for="genre">авторы</label>
+                        <select name="genre">
+                            <?php
+                            $genres = getGenres();
+                            foreach ($genres as $genre){
+                                echo "<option value='{$genre['genre_id']}'>{$genre['description']}</option>";
+                            }
+                            ?>
+                        </select>
+                        <label for="pages">кол-во страниц</label>
+                        <input type="text" name="pages" id="pages">
+                        <label for="issue_year">год выпуска</label>
+                        <input type="text" name="issue_year" id="issue_year">
+                        <input type="submit" value="Добавить">
+                    </form>
+                </div>
+                <?php } ?>
             </div>
         </div>
         <?php } ?>
