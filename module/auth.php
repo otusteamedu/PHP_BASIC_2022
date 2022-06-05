@@ -4,18 +4,21 @@ require_once '../libs/auth.php';
 
 session_start();
 
-if(isset($_GET['action']) and $_GET['action'] === 'auth'){
-    if(isset($_POST['user_name']))
-        authenticate($_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
-
-    if(isset($_COOKIE['token']))
-        authenticateByToken($_COOKIE['token']);
-    header('Location: /');
-}
 if(isset($_GET['action']) and $_GET['action'] === 'logout'){
     logout();
     header('Location: /');
+}else{
+    if(isset($_GET['action']) and $_GET['action'] === 'auth'){
+        if(isset($_POST['user_name']))
+            authenticate($_POST['user_name'], $_POST['pwd'], isset($_POST['remember']) ? true : false);
+        header('Location: /');
+    }
+
+    if(isset($_COOKIE['token']))
+        authenticateByToken($_COOKIE['token']);
 }
+
+
 ?>
 
 <div class="auth">

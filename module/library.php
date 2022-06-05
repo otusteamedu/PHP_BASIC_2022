@@ -1,6 +1,7 @@
 <?php
 require_once '../libs/library.php';
 require_once '../libs/auth.php';
+require_once '../libs/img.php';
 
 if(!isset($_GET['action'])){
     $books = getAllBooks();
@@ -26,11 +27,25 @@ if(!isset($_GET['action'])){
         case 'filter_books':
             $books = getFilteredBooks($_POST);
             break;
+        case 'add_img':
+            if(isset($_FILES['user_image']) and empty($_FILES['user_image']['error'])){
+                if(addImage($_GET['book_id'], $_FILES['user_image'])){
+                    header("Location: index.php?action=show&book_id={$_GET['book_id']}");
+                }
+            }
+            header("Location: index.php?action=show&book_id={$_GET['book_id']}");
+            break;
     }
 }
 ?>
 <div class="library">
     <div class="container">
+        <?php
+        if(isset($_GET['book_id'])){
+            echo "<p><a href='index.php'>Назад</a></p>";
+        }
+        ?>
+
         <?php
         if(empty($books)){
             ?>
@@ -75,6 +90,7 @@ if(!isset($_GET['action'])){
             }
         }
         ?>
+
         <?php if(!isset($_GET['book_id'])){ ?>
         <hr>
         <div class="container">

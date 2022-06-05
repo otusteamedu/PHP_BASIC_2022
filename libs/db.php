@@ -41,15 +41,15 @@ function getUserByName(string $login): array
         return [];
 }
 
-function getUserIdByToken(string $token): int
+function getUserByToken(string $token): array
 {
     $pdo = getDBConnection();
-    $user = $pdo->prepare('SELECT id FROM users WHERE token = ?');
+    $user = $pdo->prepare('SELECT * FROM users WHERE token = ?');
     $user->execute([$token]);
     if($user->rowCount() > 0)
-        return (int)$user->fetch()['id'];
+        return $user->fetch();
     else
-        return 0;
+        return [];
 }
 
 function setToken(int $userId, string $token): void
