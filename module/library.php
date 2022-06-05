@@ -3,40 +3,7 @@ require_once '../libs/library.php';
 require_once '../libs/auth.php';
 require_once '../libs/img.php';
 
-if(!isset($_GET['action'])){
-    $books = getAllBooks();
-}else{
-    switch ($_GET['action']){
-        case 'show':
-            if(isset($_GET['book_id'])){
-                $books = GetFilteredBooks(array('isbn' => $_GET['book_id']));
-            }
-            break;
-        case 'add_book':
-            if(isAdmin()){
-                addBook($_POST);
-                header("Location: index.php");
-            }
-            break;
-        case 'delete':
-            if(isset($_GET['book_id']) and isAdmin()){
-                deleteBook($_GET['book_id']);
-                header("Location: index.php");
-            }
-            break;
-        case 'filter_books':
-            $books = getFilteredBooks($_POST);
-            break;
-        case 'add_img':
-            if(isset($_FILES['user_image']) and empty($_FILES['user_image']['error'])){
-                if(addImage($_GET['book_id'], $_FILES['user_image'])){
-                    header("Location: index.php?action=show&book_id={$_GET['book_id']}");
-                }
-            }
-            header("Location: index.php?action=show&book_id={$_GET['book_id']}");
-            break;
-    }
-}
+require_once '../views/libraryactions.php';
 ?>
 <div class="library">
     <div class="container">
@@ -59,6 +26,7 @@ if(!isset($_GET['action'])){
             <?php
         }else{
             foreach ($books as $book){
+                if(!isAdmin() and $book['status'] == 0) continue;
                 $authorsList = getAuthorsByBook($book);
                 ?>
                 <div class='row'>
@@ -76,7 +44,11 @@ if(!isset($_GET['action'])){
                                 <?php if(!isset($_GET['book_id'])){
                                     echo "<a href='index.php?action=show&book_id={$book['isbn']}'>Подробнее...</a>";
                                     if(isAdmin()){
-                                        echo "  &nbsp; &nbsp;<a href='index.php?action=delete&book_id={$book['isbn']}'> Удалить</a>";
+                                        echo " &nbsp; &nbsp;<a href='index.php?action=delete&book_id={$book['isbn']}'>Удалить</a>";
+                                        if(getBookStatus($book['isbn']) === 1)
+                                            echo " &nbsp; &nbsp;<a href='index.php?action=hide&book_id={$book['isbn']}'>Спрятать</a>";
+                                        else
+                                            echo " &nbsp; &nbsp;<a href='index.php?action=show_book&book_id={$book['isbn']}'>Показать</a>";
                                     }
                                 }else{
                                     require_once '../module/gallery.php';

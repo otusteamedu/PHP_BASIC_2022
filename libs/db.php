@@ -63,7 +63,7 @@ function setToken(int $userId, string $token): void
 function getAllBooksFromDB(): array
 {
     $pdo = getDBConnection();
-    return $pdo->query('SELECT isbn, title, issue_year, pages, description FROM books')->fetchAll();
+    return $pdo->query('SELECT * FROM books')->fetchAll();
 }
 
 function getFilteredBooksFromDB(array $filterData): array
@@ -93,7 +93,7 @@ function getFilteredBooksFromDB(array $filterData): array
     }
     if (!empty($filter)) {
         $filterQuery = substr($filterQuery, 0, mb_strlen($filterQuery) - 5);
-        $books = $pdo->prepare('SELECT books.isbn, books.title, books.issue_year, books.pages, books.description FROM books ' . $filterQuery);
+        $books = $pdo->prepare('SELECT books.isbn, books.title, books.issue_year, books.pages, books.description, books.status FROM books ' . $filterQuery);
         $books->execute($filter);
     }
     if($books == null){
@@ -177,4 +177,19 @@ function deleteBookFromDB(string $bookId):void
     }catch (Exception $ex){
         $pdo->rollBack();
     }
+}
+
+function getBookStatusFromDB(string $bookId):int
+{
+    $pdo = getDBConnection();
+    $book = $pdo->prepare("SELECT status FROM books WHERE isbn = ?");
+    $book->execute([$bookId]);
+    return (int)$book->fetch()['status'];
+}
+
+function setBookStatusInDB(string $bookId, int $status):void
+{
+    $pdo = getDBConnection();
+    $book = $pdo->prepare("UPDATE books SET status = ? WHERE isbn = ?");
+    $book->execute([$status, $bookId]);
 }

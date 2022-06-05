@@ -32,3 +32,18 @@ function deleteBook(string $bookId): void
     deleteBookFromDB($bookId);
 }
 
+function getBookStatus(string $bookId):int
+{
+    return getBookStatusFromDB($bookId);
+}
+
+function hideBook(string $bookId): void
+{
+    setBookStatusInDB($bookId, 0);
+}
+
+function showBook(string $bookId): void
+{
+    setBookStatusInDB($bookId, 1);
+}
+
