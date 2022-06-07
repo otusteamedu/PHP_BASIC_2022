@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80024
 File Encoding         : 65001
 
-Date: 2022-06-03 13:13:18
+Date: 2022-06-07 07:40:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,6 +46,7 @@ CREATE TABLE `books` (
   `genre` int NOT NULL DEFAULT '6',
   `location` int NOT NULL DEFAULT '2',
   `pages` int NOT NULL DEFAULT '100',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`isbn`),
   KEY `FK_genre` (`genre`),
   KEY `FK_location` (`location`),
@@ -56,9 +57,9 @@ CREATE TABLE `books` (
 -- ----------------------------
 -- Records of books
 -- ----------------------------
-INSERT INTO `books` VALUES ('2342342342342', '234234', '234', null, '3', '2', '234');
-INSERT INTO `books` VALUES ('6549875645646', 'Война и мир', '1825', 'Замысел эпопеи формировался задолго до начала работы над тем текстом, который известен под названием «Война и мир». В наброске предисловия к «Войне и миру» Толстой писал, что в 1856 году начал писать повесть, «герой которой должен был быть декабрист, возвращающийся с семейством в Россию. Невольно от настоящего я перешёл к 1825 году…', '3', '2', '10000');
-INSERT INTO `books` VALUES ('9782266111560', 'Отцы и дети', '1860', 'Действия в романе происходят весной 1859 года, то есть накануне крестьянской реформы 1861 года. ', '4', '1', '351');
+INSERT INTO `books` VALUES ('2342342342342', '234234', '234', null, '3', '2', '234', '1');
+INSERT INTO `books` VALUES ('6549875645646', 'Война и мир', '1825', 'Замысел эпопеи формировался задолго до начала работы над тем текстом, который известен под названием «Война и мир». В наброске предисловия к «Войне и миру» Толстой писал, что в 1856 году начал писать повесть, «герой которой должен был быть декабрист, возвращающийся с семейством в Россию. Невольно от настоящего я перешёл к 1825 году…', '3', '2', '10000', '1');
+INSERT INTO `books` VALUES ('9782266111560', 'Отцы и дети', '1860', 'Действия в романе происходят весной 1859 года, то есть накануне крестьянской реформы 1861 года. ', '4', '1', '351', '1');
 
 -- ----------------------------
 -- Table structure for `books_authors`
@@ -111,7 +112,7 @@ CREATE TABLE `images` (
   PRIMARY KEY (`id`),
   KEY `isbn_fk` (`book_isbn`),
   CONSTRAINT `isbn_fk` FOREIGN KEY (`book_isbn`) REFERENCES `books` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of images
@@ -138,6 +139,7 @@ INSERT INTO `images` VALUES ('19', '576ac372db58c90d0749fda81b69f573.jpg', '6549
 INSERT INTO `images` VALUES ('20', 'pejzazh-gory-ozero-voda-gory-water-priroda-zimnie-sneg-derevya-kanada-ozera.jpg', '6549875645646');
 INSERT INTO `images` VALUES ('21', 'a683bb6d465e19c3330da96d53dbedce.jpg', '2342342342342');
 INSERT INTO `images` VALUES ('22', 'GP00068.jpg', '2342342342342');
+INSERT INTO `images` VALUES ('24', 'solnce-volna-ballonchik.jpg', '2342342342342');
 
 -- ----------------------------
 -- Table structure for `location`
@@ -190,5 +192,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'admin', '$2y$10$sbSGqtAeUTQLBz15d0IjSeVWtXb5MjwV.ZQ.j44ipOAtcLv78m6D2', '626aee0a3aa5b', '1');
-INSERT INTO `users` VALUES ('2', 'user', '$2y$10$l/OOxylod88DKfSWfl.ZdOO3rwSm7fJNtrA5h8XhZINezs8ug1ZEi', '626514df1bb76', '2');
+INSERT INTO `users` VALUES ('1', 'admin', '$2y$10$sbSGqtAeUTQLBz15d0IjSeVWtXb5MjwV.ZQ.j44ipOAtcLv78m6D2', '629c65ac200e3', '1');
+INSERT INTO `users` VALUES ('2', 'user', '$2y$10$l/OOxylod88DKfSWfl.ZdOO3rwSm7fJNtrA5h8XhZINezs8ug1ZEi', '629c65824a78a', '2');
