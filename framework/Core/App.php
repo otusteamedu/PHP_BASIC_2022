@@ -1,6 +1,7 @@
 <?php
 
 namespace Otus\Mvc\Core;
+use Dotenv\Dotenv;
 
 class App
 {
@@ -49,5 +50,8 @@ class App
 
         $controller = new $controller_name();
         $controller->$action_name();
+
+
+
     }
 }

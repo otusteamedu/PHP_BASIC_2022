@@ -14,8 +14,8 @@
 </head>
 <body>
 
-<h1>Привет, <?php echo $name; ?></h1>
-<h2><?php echo $resault; ?></h2>
+
+<h1><?php echo $resault; ?></h1>
 
 <?php if(isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
 <a href='/taskviewer/allTasks'>Можешь посмотреть задачи, ты же авторизован!</a>

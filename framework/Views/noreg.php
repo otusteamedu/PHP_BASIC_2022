@@ -19,7 +19,7 @@
 <h2>Зарегистрируйся</h2>
 
 
-<form action=/userreg/regnewuser method="post">
+<form action=/userreg/userReg method="post">
         <label for="user">Имя пользователя:</label>
         <input type="text" name="username" /><br>
         <label for="password">Пароль:</label>

@@ -3,6 +3,8 @@
 namespace Otus\Mvc\Models\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
+use Doctrine\DBAL\Exception;
+use Otus\Mvc\Core\View;
 
 class TaskRepo extends Model
 {
@@ -15,7 +17,14 @@ class TaskRepo extends Model
             $task->task_description = $_POST['task_description'];
             $task->task_responsibly_user_id = $_POST['task_responsibly_user_id'];
             $task->task_project_id = $_POST['task_project_id'];
-            $task->save();
+            try {
+                if(!$task->save()) {
+                    throw new Exception("Задача не сохранилась в базе"); 
+                }
+            } catch(\Exception $ex) {
+                MyLogger::log_db_error();
+                View::render('503',[]);  
+            }
             return true; 
         } else {
             return false;
