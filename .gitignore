@@ -1,3 +1,4 @@
 /framework/vendor
 /.idea/
 .env
+/framework/log/*
