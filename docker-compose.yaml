@@ -23,4 +23,4 @@ services:
       - "3386:3306"
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 
