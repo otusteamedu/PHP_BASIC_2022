@@ -1,4 +1,6 @@
 /framework/vendor
 /.idea/
 .env
-/framework/log/*
+/framework/log/*.log
+.vscode
+
