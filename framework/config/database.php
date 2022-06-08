@@ -1,11 +1,11 @@
 <?php
     return [
-        'driver' => 'mysql',
-        'host' => 'db',
-        'port' => 3306,
-        'db' => 'mvc',
+        'driver' => '',
+        'host' => '',
+        'port' => ,
+        'db' => '',
         # for doctrine
-        'dbname' => 'mvc',
-        'user' => 'root',
-        'password' => 'root'
+        'dbname' => '',
+        'user' => '',
+        'password' => ''
     ];
