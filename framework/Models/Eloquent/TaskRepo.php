@@ -26,7 +26,7 @@ class TaskRepo extends Model
                 $ex->getMessage();
                 $ex->id;
                 MyExcLog::myLog($ex);
-                View::render('503',[]);  
+                View::render('400',[]);  
             }
             $task = new Task();
             $task->task_name = $secure_task_name;

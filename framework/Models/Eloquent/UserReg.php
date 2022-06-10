@@ -24,15 +24,16 @@ class UserReg extends Model
                     try{
                         if(!$user->save()) {
                             throw new Exception("Пользователь не сохранился в базе"); 
+                        } else {
+                            $_SESSION['is_auth'] = true;
+                            $_SESSION['username'] = $user->name;
+                            $_SESSION['user_id'] = $user->id;
+                    return true;
                         }
                     }catch(\Exception $ex) {
                         MyLogger::log_db_error();
                         View::render('503',[]);  
                     }
-                    $_SESSION['is_auth'] = true;
-                    $_SESSION['username'] = $user->name;
-                    $_SESSION['user_id'] = $user->id;
-                    return true;
                 } 
             }
         } else {

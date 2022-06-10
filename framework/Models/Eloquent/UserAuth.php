@@ -19,8 +19,7 @@ class UserAuth extends Model
                     }
                 } catch (\Exception $e) {
                     MyLogger::log_db_error(); 
-                    View::render('503',[
-                    ]); 
+                    View::render('503',[]); 
                 }
 
             if((User::where('name', '=', $_POST['username'])->first()) !== null) {
