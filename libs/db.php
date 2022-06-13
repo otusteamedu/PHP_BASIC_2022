@@ -60,10 +60,22 @@ function setToken(int $userId, string $token): void
 }
 
 
-function getAllBooksFromDB(): array
+function getAllBooksFromDB(int $limit = 3, int $offset = 1): array
 {
     $pdo = getDBConnection();
-    return $pdo->query('SELECT * FROM books')->fetchAll();
+    $books = $pdo->prepare('SELECT * FROM books LIMIT :start, :rows');
+    $books->bindParam(':start', $offset, PDO::PARAM_INT);
+    $books->bindParam(':rows',$limit, PDO::PARAM_INT);
+    $books->execute();
+    return $books->fetchAll();
+}
+
+function getBooksCountFromDB():int
+{
+    $pdo = getDBConnection();
+    $user = $pdo->prepare('SELECT count(*) as rowcount FROM books');
+    $user->execute();
+    return (int)$user->fetch()['rowcount'];
 }
 
 function getFilteredBooksFromDB(array $filterData): array
@@ -97,7 +109,7 @@ function getFilteredBooksFromDB(array $filterData): array
         $books->execute($filter);
     }
     if($books == null){
-        return getAllBooksFromDB();
+        header("Location: index.php");
     }
     return $books->fetchAll();
 }
@@ -192,4 +204,11 @@ function setBookStatusInDB(string $bookId, int $status):void
     $pdo = getDBConnection();
     $book = $pdo->prepare("UPDATE books SET status = ? WHERE isbn = ?");
     $book->execute([$status, $bookId]);
+}
+
+function addNewUserInDB(array $userData):void
+{
+    $pdo = getDBConnection();
+    $book = $pdo->prepare("INSERT INTO users(user_name, pwd) VALUES(?, ?)");
+    $book->execute([$userData['login'], $userData['pwd']]);
 }

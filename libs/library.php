@@ -2,9 +2,18 @@
 declare(strict_types=1);
 require_once '../libs/db.php';
 
+const MAX_RECORDS_ON_PAGE = 3;
+$page = isset($_GET['page'])? (int)$_GET['page'] : 1;
+
 function getAllBooks():array
 {
-    return getAllBooksFromDB();
+    global $page;
+    return getAllBooksFromDB(MAX_RECORDS_ON_PAGE, MAX_RECORDS_ON_PAGE * ($page - 1));
+}
+
+function getBooksCount():int
+{
+    return getBooksCountFromDB();
 }
 
 function getFilteredBooks(array $filter):array

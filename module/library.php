@@ -2,8 +2,8 @@
 require_once '../libs/library.php';
 require_once '../libs/auth.php';
 require_once '../libs/img.php';
+require_once '../libs/library-actions.php';
 
-require_once '../views/libraryactions.php';
 ?>
 <div class="library">
     <div class="container">
@@ -62,7 +62,10 @@ require_once '../views/libraryactions.php';
             }
         }
         ?>
-
+        <?php
+        if(!isset($_GET['action']))
+            include_once "../views/paginator.php"
+        ?>
         <?php if(!isset($_GET['book_id'])){ ?>
         <hr>
         <div class="container">

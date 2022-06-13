@@ -44,3 +44,29 @@ function logout(): void
     setcookie('token', '', time()+3600);
     session_destroy();
 }
+
+function checkRegForm(array $formData): array
+{
+    $login = isset($formData['login']) ? $formData['login'] : '';
+    if (!preg_match("/^(?:[a-z0-9]+(?:[-_.]?[a-z0-9]+)?@[a-z0-9_.-]+(?:\.?[a-z0-9]+)?\.[a-z]{2,5})$/i", $login)){
+        return array('login' => 'Неверный формат почты');
+    }
+
+    if(!empty(getUserByName($formData['login']))){
+        return array('login' => 'Такой пользователь уже существует.');
+    }
+
+    $pwd = isset($formData['pwd']) ? $formData['pwd'] : '';
+    if (!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$/", $pwd)){
+        return array('pwd' => 'Слишком простой пароль. Длина 8-15 символов в верхнем и нижнем регистре, цифр и спецсимволов. ');
+    }
+
+    return array();
+}
+
+function addNewUser(array $formData): void
+{
+    $formData['login'] = trim($formData['login']);
+    $formData['pwd'] = password_hash(trim($formData['pwd']), PASSWORD_BCRYPT );
+    addNewUserInDB($formData);
+}

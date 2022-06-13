@@ -35,6 +35,7 @@ if(isset($_GET['action']) and $_GET['action'] === 'logout'){
             <input type="submit" value="Отправить">
         </p>
     </form>
+    <a href="/registration.php">Регистрация</a>
 <?php else: ?>
     <p>Вы авторизованы, <?=$_SESSION['name'] ?>!!!</p>
     <a href="./index.php?action=logout">Выход</a>
