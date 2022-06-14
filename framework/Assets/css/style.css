@@ -1,0 +1,13 @@
+.big-banner {
+    background-image: url(../img/big-banner.jpg);
+}
+
+.services {
+    padding: 60px 0;
+    background: rgb(236, 235, 235);
+    position: fixed; top: 50%; left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
