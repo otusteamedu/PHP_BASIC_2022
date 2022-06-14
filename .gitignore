@@ -1,0 +1,5 @@
+/framework/vendor
+/.idea/
+.env
+/framework/log/*.log
+.vscode
