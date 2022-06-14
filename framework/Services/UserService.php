@@ -18,7 +18,7 @@ class UserService
         } else {
             View::render('noreg',[
                 'title' => 'Страница аутентификации',
-                'resault' => 'Не верные учетные данные, зарегистрируйтесь!'
+                'resault' => 'Не верные учетные данные!'
             ]);
         }
     }
@@ -28,7 +28,7 @@ class UserService
             header('location: /index/index' );
         } else {
             View::render('404',[
-                'title' => 'Не удачный выход',
+                'title' => 'Неудачный выход',
                 'resault' => 'Все сломалось и Вы не сможете выйти'
             ]);
         }
