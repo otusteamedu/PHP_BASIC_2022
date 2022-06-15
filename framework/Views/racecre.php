@@ -38,18 +38,32 @@
 
 
 <?php if(isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
-<h1>Создать новую гонку:</h1>
-<form action=/racerepo/createdRace method="post">
-        <label for="race_name">Название гонки:</label>
-        <input type="text" name="race_name" /><br>
-        <label for="race_description">Описание гонки:</label>
-        <input type="text" name="race_description" /><br>
-        <label for="race_responsibly_user_id">ID спортсмена:</label>
-        <input type="text" name="race_responsibly_user_id" /><br>
-        <label for="race_racetype_id">ID категории гонки:</label>
-        <input type="text" name="race_racetype_id" /><br>
-        <input type="submit" name="created" value="Создать">
-</form>
+
+    <div class="services">
+        <div class="container">
+            <h2>Создать новую гонку:</h2>
+            <form action=/RaceRepo/createdRace method="post">
+                <div class="mb-3">
+                    <label for="race_name" class="form-label">Название гонки:</label>
+                    <input type="text" name="race_name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="race_description" class="form-label">Описание гонки:</label>
+                    <input type="text" name="race_description" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="race_participant_user_id" class="form-label">ID спортсмена:</label>
+                    <input type="text" name="race_participant_user_id" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="race_type_id" class="form-label">ID категории гонки:</label>
+                    <input type="text" name="race_type_id" class="form-control">
+                </div>
+                <button type="submit" name="created" class="btn btn-primary">Создать</button>
+            </form>
+        </div>
+    </div>
+
 <?php else: ?>
 <h3>Не авторизованный доступ</h3>
 <?php endif; ?>

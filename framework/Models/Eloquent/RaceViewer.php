@@ -74,9 +74,7 @@ class RaceViewer extends Model
                 ]); 
             }
             return $massif_races; 
-        } else {
-            var_dump($_SESSION['user_id']);
-        }
+        } 
     }
 
     public static function infoRace() {
