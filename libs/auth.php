@@ -24,7 +24,7 @@ function authenticate(string $login, string $pwd, bool $remember): void
         if ($remember) {
             $token = uniqid();
             setToken((int)$user['id'], $token);
-            setcookie('token', $token, time()+3600);
+            setcookie('token', $token, time()+36000);
         }
     }
 }
@@ -41,7 +41,7 @@ function authenticateByToken(string $token): void
 
 function logout(): void
 {
-    setcookie('token', '', time()+3600);
+    setcookie('token');
     session_destroy();
 }
 

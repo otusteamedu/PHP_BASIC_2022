@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80024
 File Encoding         : 65001
 
-Date: 2022-06-07 07:40:59
+Date: 2022-06-16 08:03:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,8 +58,12 @@ CREATE TABLE `books` (
 -- Records of books
 -- ----------------------------
 INSERT INTO `books` VALUES ('2342342342342', '234234', '234', null, '3', '2', '234', '1');
+INSERT INTO `books` VALUES ('2342342342343', 'книга2', '23423', null, '5', '2', '1234', '1');
+INSERT INTO `books` VALUES ('23423423423ув', 'книга3', '4444', null, '5', '2', '3', '1');
 INSERT INTO `books` VALUES ('6549875645646', 'Война и мир', '1825', 'Замысел эпопеи формировался задолго до начала работы над тем текстом, который известен под названием «Война и мир». В наброске предисловия к «Войне и миру» Толстой писал, что в 1856 году начал писать повесть, «герой которой должен был быть декабрист, возвращающийся с семейством в Россию. Невольно от настоящего я перешёл к 1825 году…', '3', '2', '10000', '1');
 INSERT INTO `books` VALUES ('9782266111560', 'Отцы и дети', '1860', 'Действия в романе происходят весной 1859 года, то есть накануне крестьянской реформы 1861 года. ', '4', '1', '351', '1');
+INSERT INTO `books` VALUES ('sdfer34dfgdgd', 'ffddffddав', '2343', null, '3', '2', '234234', '1');
+INSERT INTO `books` VALUES ('ываыаывацукцу', 'аааввв', '234234', null, '4', '2', '333', '1');
 
 -- ----------------------------
 -- Table structure for `books_authors`
@@ -81,6 +85,10 @@ INSERT INTO `books_authors` VALUES ('6549875645646', '1');
 INSERT INTO `books_authors` VALUES ('9782266111560', '3');
 INSERT INTO `books_authors` VALUES ('9782266111560', '2');
 INSERT INTO `books_authors` VALUES ('2342342342342', '1');
+INSERT INTO `books_authors` VALUES ('2342342342343', '2');
+INSERT INTO `books_authors` VALUES ('23423423423ув', '3');
+INSERT INTO `books_authors` VALUES ('ываыаывацукцу', '1');
+INSERT INTO `books_authors` VALUES ('sdfer34dfgdgd', '1');
 
 -- ----------------------------
 -- Table structure for `genre`
@@ -187,10 +195,14 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `id_role` (`role`),
   CONSTRAINT `id_role` FOREIGN KEY (`role`) REFERENCES `role` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'admin', '$2y$10$sbSGqtAeUTQLBz15d0IjSeVWtXb5MjwV.ZQ.j44ipOAtcLv78m6D2', '629c65ac200e3', '1');
+INSERT INTO `users` VALUES ('1', 'admin', '$2y$10$sbSGqtAeUTQLBz15d0IjSeVWtXb5MjwV.ZQ.j44ipOAtcLv78m6D2', '', '1');
 INSERT INTO `users` VALUES ('2', 'user', '$2y$10$l/OOxylod88DKfSWfl.ZdOO3rwSm7fJNtrA5h8XhZINezs8ug1ZEi', '629c65824a78a', '2');
+INSERT INTO `users` VALUES ('3', 'sdkjh@werfwer.ru', '$2y$10$McRmxvpjPkpDnubAHuZbQu.jqiGkIkvxfYu90suMRo8b663PTjuCS', null, '2');
+INSERT INTO `users` VALUES ('5', 'test@test.ru', '$2y$10$00P3PUCr5Vd2PyywvocKzuz5EqbeYeRk9xefhSIsCtEnm1Gbnzz1C', null, '2');
+INSERT INTO `users` VALUES ('6', 'test1@test.ru', '$2y$10$RGLKAgvYkxuiNb1eu6HKb.D1zVpukPw9OKs6ep9hjTj2vhLuHy4sS', '62a773ae6d2f2', '2');
+INSERT INTO `users` VALUES ('7', 'test2@test.ru', '$2y$10$JhxCtJFfEEzYzlIV62UVy.7OMp5M55kUz92U8SLXCvv3fNU96n4bq', null, '2');

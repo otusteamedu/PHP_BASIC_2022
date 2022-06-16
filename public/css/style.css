@@ -20,3 +20,7 @@ label, input {
     height: 300px;
     margin: 30px;
 }
+
+.hidden {
+    display: none;
+}
