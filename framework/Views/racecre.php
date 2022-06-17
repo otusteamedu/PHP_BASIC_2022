@@ -41,25 +41,45 @@
 
     <div class="services">
         <div class="container">
-            <h2>Создать новую гонку:</h2>
+            <h3>Создать новую гонку:</h3>
             <form action=/RaceRepo/createdRace method="post">
                 <div class="mb-3">
                     <label for="race_name" class="form-label">Название гонки:</label>
                     <input type="text" name="race_name" class="form-control">
                 </div>
-                <div class="mb-3">
-                    <label for="race_description" class="form-label">Описание гонки:</label>
-                    <input type="text" name="race_description" class="form-control">
+
+                <div class="input-group mb-3">
+                    <label for="race_logo" class="input-group-text">Баннер</label>
+                    <input type="file" name="race_logo" class="form-control">
                 </div>
-                <div class="mb-3">
-                    <label for="race_participant_user_id" class="form-label">ID спортсмена:</label>
-                    <input type="text" name="race_participant_user_id" class="form-control">
+
+                <div class="input-group">
+                    <span class="input-group-text" for="race_description">Описание гонки:</span>
+                    <textarea class="form-control" name="race_description" aria-label="With textarea"></textarea>
                 </div>
+
                 <div class="mb-3">
-                    <label for="race_type_id" class="form-label">ID категории гонки:</label>
-                    <input type="text" name="race_type_id" class="form-control">
+                    <label for="date" class="form-label">Дата старта:</label>
+                    <input type="date" name="date_start" class="form-control" placeholder="Дата" required>
                 </div>
-                <button type="submit" name="created" class="btn btn-primary">Создать</button>
+                
+                <div class="mb-3">
+                    <label for="race_venue" class="form-label">Место проведения:</label>
+                    <input type="text" name="race_venue" class="form-control">
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="race_type_id">ID категории гонки:</label>
+                    <select name="race_type_id" class="form-select" >
+                        <option selected>Выберите...</option>
+                        <option value="1">1 XCO</option>
+                        <option value="2">2 Станок</option>
+                        <option value="3">3 Шоссе</option>
+                        <option value="3">4 Бег</option>
+                    </select>
+                </div>
+                <button type="submit" name="created" value="created" class="btn btn-primary">Создать</button>
             </form>
         </div>
     </div>

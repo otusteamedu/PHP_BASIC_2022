@@ -46,7 +46,10 @@ class RaceService
                 'title' => 'Информация по гонке',
                 'race_id' => $massif_race_info['race_id'],
                 'race_name' => $massif_race_info['race_name'],
-                'race_description' => $massif_race_info['race_description']
+                'race_description' => $massif_race_info['race_description'],
+                'date_start' => $massif_race_info['date_start'],
+                'date_finish' => $massif_race_info['date_finish'],
+                'race_venue' => $massif_race_info['race_venue']
             ]);
         }     
     }
@@ -63,6 +66,24 @@ class RaceService
             View::render('404',[
                 'title' => 'Неудача',
                 'resault' => 'Извините, мы не смогли создать гонку... попробуйте еще раз заполнить поля'
+            ]);
+        }
+    }
+
+    public static function delRaceServ() {
+
+        if(EloquentRaceRepo::del() == true) {
+            $massif_races = EloquentRaceViewer::allRaces();
+            if($massif_races !== null) {
+                View::render('race',[
+                    'title' => 'Все гонки',
+                    'massif_races' => $massif_races
+                ]);
+            }    
+        } else {
+            View::render('404',[
+                'title' => 'Неудача',
+                'resault' => 'Извините, мы не смогли удалить гонку... попробуйте еще раз'
             ]);
         }
     }

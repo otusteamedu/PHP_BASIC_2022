@@ -42,13 +42,13 @@
             <tr>
                 <th scope="col">Номер</th>
                 <th scope="col">Название</th>
-                <th scope="col">Подробнее</th>
             </tr>
         </thead>
         <tbody>
             <tr scope='row'>
-            <th><?php echo $race_id; ?></th>
-            <th><?php echo $race_name; ?></th>
+                <th><?php echo $race_id; ?></th>
+                <th><?php echo $race_name; ?></th>
+            </tr>    
         </tbody>
     </table>   
 

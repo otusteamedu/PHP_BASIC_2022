@@ -38,19 +38,24 @@
 
     <h1>Информация по гонке: <?php echo $race_name; ?> </h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Номер</th>
+                <th scope="col">ID</th>
                 <th scope="col">Название</th>
-                <th scope="col">Подробнее</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Дата cобытия</th>
+                <th scope="col">Место проведения</th>
             </tr>
         </thead>
         <tbody>
             <tr scope='row'>
-            <th><?php echo $race_id; ?></th>
-            <th><?php echo $race_name; ?></th>
-            <th><?php echo $race_description; ?></th>
+                <th><?php echo $race_id; ?></th>
+                <th><?php echo $race_name; ?></th>
+                <th><?php echo $race_description; ?></th>
+                <th><?php echo $date_start .' - '. $date_finish; ?></th>
+                <th><?php echo $race_venue; ?></th>
+            </tr>
         </tbody>
     </table>    
 

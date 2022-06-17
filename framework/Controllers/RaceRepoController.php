@@ -10,6 +10,10 @@ class RaceRepoController
         RaceService::createdRaceServ();   
     }
 
+    public function delRace() {
+        RaceService::delRaceServ();   
+    }
+
 
 }
 

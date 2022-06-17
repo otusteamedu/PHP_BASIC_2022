@@ -38,7 +38,7 @@
 
     <h1>Список гонок</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Номер</th>

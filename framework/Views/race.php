@@ -40,12 +40,13 @@
 
     <h1>Информация по всем гонкам</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>   
             <tr>
                 <th scope="col">Номер</th>
                 <th scope="col">Название</th>
                 <th scope="col">Подробнее</th>
+                <th scope="col">Удалить</th>
             </tr>
         </thead>
         <tbody>
@@ -59,7 +60,12 @@
                             <a href=/raceviewer/infoRace?race_id={$races['race_id']}>
                                 Ссылка
                             </a>
-                        </th>   
+                        </th>
+                        <th>
+                        <a href=/racerepo/delRace?race_id={$races['race_id']}>
+                            Удалить
+                        </a>
+                    </th>     
                     </tr> ";
     }
     ?>
