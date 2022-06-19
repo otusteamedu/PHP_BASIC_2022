@@ -1,3 +1,8 @@
+<?php
+$config = getConfig()['gallery'];
+$imgDirMin = $config['imgdirmin'];
+$imgDir = $config['imgdir'];
+?>
 <div class="container-light-box">
     <!-- Images used to open the lightbox -->
     <div class="row">

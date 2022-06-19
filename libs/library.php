@@ -56,3 +56,15 @@ function showBook(string $bookId): void
     setBookStatusInDB($bookId, 1);
 }
 
+function getBookGallery(string $bookID): string
+{
+    $images = getBookImagesList($bookID);
+    if(isAuthorized()){
+        ob_start();
+        require_once '../views/lightbox.php';
+        require_once '../forms/add-image-form.php';
+    }
+    $buffer = ob_get_clean();
+    return $buffer === false ? '' : $buffer;
+}
+

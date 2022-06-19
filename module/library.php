@@ -1,7 +1,7 @@
 <?php
+require_once '../libs/img.php';
 require_once '../libs/library.php';
 require_once '../libs/auth.php';
-require_once '../libs/img.php';
 require_once '../libs/library-actions.php';
 
 ?>
@@ -51,7 +51,7 @@ require_once '../libs/library-actions.php';
                                             echo " &nbsp; &nbsp;<a href='index.php?action=show_book&book_id={$book['isbn']}'>Показать</a>";
                                     }
                                 }else{
-                                    require_once '../module/gallery.php';
+                                    echo isset($_GET['book_id']) ? getBookGallery($_GET['book_id']) : '';
                                 }
                                 ?>
                             </p>

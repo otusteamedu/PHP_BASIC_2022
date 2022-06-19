@@ -3,8 +3,10 @@ declare(strict_types=1);
 require_once '../libs/db.php';
 
 const MAX_HEIGHT = 300;
-$imgDir = './img/';
-$imgDirMin = './img/min/';
+
+$config = getConfig()['gallery'];
+$imgDirMin = $config['imgdirmin'];
+$imgDir = $config['imgdir'];
 $allowedTypes = ['image/gif', 'image/bmp', 'image/png', 'image/jpeg', 'image/jpg'];
 
 function resizeAndSaveImage(string $filename):GdImage
