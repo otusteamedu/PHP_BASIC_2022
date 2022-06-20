@@ -9,7 +9,8 @@ class RaceType extends Model
 {
     public $timestamps = false;
 
-    public static function allRaceTypes() {
+    public static function allRaceTypes() 
+    {
         $massif_racetypes=[];
         $k=0;
         try {

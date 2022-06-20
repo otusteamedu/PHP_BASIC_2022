@@ -8,44 +8,47 @@ use Otus\Mvc\Models\Eloquent\UserReg as EloquentUserReg;
 
 class UserService
 {
-    public static function userLoginServ() {
-        if(EloquentUserAuth::login() == true) {
+    public static function userLoginServ()
+    {
+        if(EloquentUserAuth::login()) {
             View::render('reg',[
                 'title' => 'Страница аутентификации',
                 'name' => $_POST['username'],
-                'resault' => 'Успешная авторизация'
+                'result' => 'Успешная авторизация'
             ]);
         } else {
             View::render('noreg',[
                 'title' => 'Страница аутентификации',
-                'resault' => 'Не верные учетные данные!'
+                'result' => 'Не верные учетные данные!'
             ]);
         }
     }
 
-    public static function userLogoutServ() {
-        if(EloquentUserAuth::logout() == true){
+    public static function userLogoutServ()
+    {
+        if(EloquentUserAuth::logout()) {
             header('location: /index/index' );
         } else {
             View::render('404',[
                 'title' => 'Неудачный выход',
-                'resault' => 'Все сломалось и Вы не сможете выйти'
+                'result' => 'Все сломалось и Вы не сможете выйти'
             ]);
         }
     }
 
-    public static function userRegServ() {
-        if(EloquentUserReg::register() == true) {
+    public static function userRegServ()
+    {
+        if(EloquentUserReg::register()) {
             View::render('reg',[
                 'title' => 'Страница регистрации',
                 'name' => $_SESSION['username'],
-                'resault' => 'Успешная регистрация'
+                'result' => 'Успешная регистрация'
             ]);
         } else {
             View::render('reg',[
                 'title' => 'Страница регистрации',
                 'name' => $_POST['username'],
-                'resault' => 'Регистрация не прошла, логин занят'
+                'result' => 'Регистрация не прошла, логин занят'
             ]);
         }
     }

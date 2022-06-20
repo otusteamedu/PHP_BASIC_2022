@@ -6,7 +6,8 @@ use Otus\Mvc\Services\RaceTypeService;
 
 class RaceTypeViewerController
 {
-    public function viewAllRaceTypes() {
+    public function viewAllRaceTypes()
+    {
         RaceTypeService::viewAllRaceTypeServ();   
     }
 

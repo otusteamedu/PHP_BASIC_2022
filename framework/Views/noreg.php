@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title><?php echo $title; ?></title>
     <meta charset="UTF-8">
@@ -24,7 +24,7 @@
 
     <div class="services">
         <div class="container">
-        <h1><?php echo $resault; ?></h1>
+        <h1><?php echo $result; ?></h1>
         <h2>Заполните поля ниже для регистрации</h2>
         <form action=/userreg/userReg  method="post">
             <div class="mb-3">

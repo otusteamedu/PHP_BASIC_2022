@@ -11,7 +11,8 @@ class UserAuth extends Model
 {
     public $timestamps = false;
 
-    public static function login() {
+    public static function login() 
+    {
         if(!empty($_POST['username']) && !empty($_POST['password'])){
             try {
                     if((User::all()->first()) == null) {
@@ -55,7 +56,8 @@ class UserAuth extends Model
         }
     }
 
-    public static function logout() {
+    public static function logout() 
+    {
         if (isset($_POST['logout'])) {
             try {
                 if(!session_destroy()) {

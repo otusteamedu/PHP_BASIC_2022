@@ -7,23 +7,28 @@ use Otus\Mvc\Core\View;
 
 class RaceViewerController
 {
-    public function allRaces() {
+    public function allRaces()
+    {
         RaceService::allRacesServ();   
     }
 
-    public function allRacesType() {
+    public function allRacesType()
+    {
         RaceService::allRacesTypeServ();   
     }
     
-    public function personalRaces() {
+    public function personalRaces()
+    {
         RaceService::personalRacesServ();   
     }
 
-    public function infoRace() {
+    public function infoRace()
+    {
         RaceService::infoRaceServ();   
     }
 
-    public function createRace(): View {
+    public function createRace(): View
+    {
 
         View::render('raceCre',[
             'title' => 'Главная страница',

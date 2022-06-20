@@ -6,7 +6,8 @@ use Otus\Mvc\Core\View;
 
 class IndexController
 {
-    public function index(): View {
+    public function index(): View
+    {
 
         View::render('info',[
             'title' => 'Главная страница',

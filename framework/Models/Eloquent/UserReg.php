@@ -10,12 +10,12 @@ class UserReg extends Model
 {
     public $timestamps = false;
 
-    public static function register() {
-        
+    public static function register() 
+    {
         if(!empty($_POST['username']) || !empty($_POST['password'])) {
             $secure_username = htmlspecialchars($_POST['username']);
             $secure_password = htmlspecialchars($_POST['password']);
-            if(!$user_reg = User::where('name', '=', $secure_username)->first()){
+            if(!$user_reg = User::where('name', '=', $secure_username)->first()) {
                 if($user_reg == null) {
                     $user = new User();
                     $hash_paswd = password_hash($secure_password, PASSWORD_BCRYPT);

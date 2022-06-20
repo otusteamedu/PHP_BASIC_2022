@@ -9,7 +9,8 @@ use Otus\Mvc\Models\Eloquent\RaceRepo as EloquentRaceRepo;
 
 class RaceService
 {
-    public static function allRacesServ() {
+    public static function allRacesServ()
+    {
         $massif_races = EloquentRaceViewer::allRaces();
         if($massif_races !== null) {
             View::render('race',[
@@ -19,7 +20,8 @@ class RaceService
         }        
     }
 
-    public static function allRacesTypeServ() {
+    public static function allRacesTypeServ()
+    {
         $massif_races = EloquentRaceViewer::allRacesType();
         if($massif_races !== null) {
             View::render('race',[
@@ -29,7 +31,8 @@ class RaceService
         }  
     }
 
-    public static function personalRacesServ() {
+    public static function personalRacesServ()
+    {
         $massif_races = EloquentRaceViewer::personalRaces();
         if($massif_races !== null) {
             View::render('racepers',[
@@ -39,7 +42,8 @@ class RaceService
         }   
     }
 
-    public static function infoRaceServ() {
+    public static function infoRaceServ()
+    {
         $massif_race_info = EloquentRaceViewer::infoRace();
         if($massif_race_info !== null) {
             View::render('raceinfo',[
@@ -54,9 +58,10 @@ class RaceService
         }     
     }
 
-    public static function createdRaceServ() {
+    public static function createdRaceServ()
+    {
 
-        if(EloquentRaceRepo::create() == true) {
+        if(EloquentRaceRepo::create()) {
             View::render('racenew',[
                         'title' => 'Новая гонка создана',
                         'race_id' => 'Присваивается',
@@ -65,14 +70,15 @@ class RaceService
         } else {
             View::render('404',[
                 'title' => 'Неудача',
-                'resault' => 'Извините, мы не смогли создать гонку... попробуйте еще раз заполнить поля'
+                'result' => 'Извините, мы не смогли создать гонку... попробуйте еще раз заполнить поля'
             ]);
         }
     }
 
-    public static function delRaceServ() {
+    public static function delRaceServ()
+    {
 
-        if(EloquentRaceRepo::del() == true) {
+        if(EloquentRaceRepo::del()) {
             $massif_races = EloquentRaceViewer::allRaces();
             if($massif_races !== null) {
                 View::render('race',[
@@ -83,7 +89,7 @@ class RaceService
         } else {
             View::render('404',[
                 'title' => 'Неудача',
-                'resault' => 'Извините, мы не смогли удалить гонку... попробуйте еще раз'
+                'result' => 'Извините, мы не смогли удалить гонку... попробуйте еще раз'
             ]);
         }
     }

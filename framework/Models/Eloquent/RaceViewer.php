@@ -10,7 +10,8 @@ class RaceViewer extends Model
 {
     public $timestamps = false;
 
-    public static function allRaces() {
+    public static function allRaces() 
+    {
         $massif_races=[];
         $k=0;
         try {
@@ -32,7 +33,8 @@ class RaceViewer extends Model
         return $massif_races; 
     } 
 
-    public static function allRacesType() {
+    public static function allRacesType() 
+    {
         if(!empty($_GET['racetype_id'])) {
             $racetype_id = $_GET['racetype_id'];
             $massif_races=[];
@@ -55,7 +57,8 @@ class RaceViewer extends Model
             
     }
        
-    public static function personalRaces() {
+    public static function personalRaces() 
+    {
         if(!empty($_SESSION['user_id'])) {
             $user = $_SESSION['user_id'];
             $massif_races=[];
@@ -77,7 +80,8 @@ class RaceViewer extends Model
         } 
     }
 
-    public static function infoRace() {
+    public static function infoRace() 
+    {
         if(!empty($_GET['race_id'])) {
             $race_id = $_GET['race_id'];
             try {

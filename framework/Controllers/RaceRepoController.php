@@ -6,11 +6,13 @@ use Otus\Mvc\Services\RaceService;
 
 class RaceRepoController
 {
-    public function createdRace() {
+    public function createdRace()
+    {
         RaceService::createdRaceServ();   
     }
 
-    public function delRace() {
+    public function delRace()
+    {
         RaceService::delRaceServ();   
     }
 

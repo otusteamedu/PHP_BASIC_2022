@@ -10,24 +10,56 @@ class RaceRepo extends Model
 {
     public $timestamps = false;
 
-    public static function create() {
-        if(!empty($_POST['race_name']) && 
+    public static function create() 
+    {
+        if (!empty($_POST['race_name']) &&
             //!empty($_POST['date_start']) &&
             !empty($_POST['race_venue']) &&
             !empty($_POST['race_description']) && 
-            !empty($_POST['race_type_id'])) {
+            !empty($_POST['race_type_id']) &&
+            (isset($_FILES['race_logo']) && $_FILES['race_logo']['size'] > 0)) {
                 $secure_race_name = htmlspecialchars($_POST['race_name']);
                 $secure_race_venue = htmlspecialchars($_POST['race_venue']);
                 $secure_race_description = htmlspecialchars($_POST['race_description']);
                 $secure_race_type_id = htmlspecialchars($_POST['race_type_id']);
+
+                $allowedExtensions = ['jpg','jpeg','png'];
+                $ext = pathinfo($_FILES['race_logo']['name'], PATHINFO_EXTENSION);
+                if (in_array($ext, $allowedExtensions)) {
+                    $uniq_name = uniqid().$_FILES['race_logo']['name'];
+                    $min_uniq_name = 'min-'.$uniq_name;
+                    if (!getimagesize($_FILES['race_logo']['tmp_name'])) {
+                        echo '<p class="error">Некорректный файл!</p>';
+                    }
+                
+                    if (move_uploaded_file($_FILES['race_logo']['tmp_name'],'/Assets/img/logo_race/'.$uniq_name)) {
+                        $percent = 0.5;
+                        header('Content-Type: image/jpeg');
+                        list($width, $height) = getimagesize('/Assets/img/logo_race/'.$uniq_name);
+                        $new_width = round($width * $percent);
+                        $new_height = round($height * $percent);
+                        $image_p = imagecreatetruecolor($new_width, $new_height);
+                        $min_uniq_name_image = imagecreatefromjpeg('/Assets/img/logo_race/'.$uniq_name);
+                        imagecopyresampled($image_p, $min_uniq_name_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                        imagejpeg($image_p, '/Assets/img/logo_race/'.$min_uniq_name);
+                        imagedestroy($image_p);
+                    } else {
+                        unset($uniq_name);
+                    }
+                }
+
                 $race = new Race();
                 $race->race_name = $secure_race_name;
-                $race->race_name = $secure_race_name;
+                $race->race_venue = $secure_race_venue;
                 //$race->date_start = $_POST['date_start'];
                 $race->race_description = $secure_race_description;
                 $race->race_type_id = $secure_race_type_id;
+                if (isset($min_uniq_name)) {
+                    $race->race_logo = $min_uniq_name;
+                    $race->race_logo_full = $uniq_name;
+                }
                 try {
-                    if(!$race->save()) {
+                    if (!$race->save()) {
                         throw new Exception("Гонка не сохранилась в базе"); 
                     }
                 } catch(\Exception $ex) {
@@ -35,17 +67,18 @@ class RaceRepo extends Model
                     View::render('503',[]);  
                 }
                 return true; 
-            } else {
-                return false;
-            }
+        } else {
+            return false;
+        }
     }
 
-    public static function del() {
+    public static function del() 
+    {
         $massif_races=[];
         $k=0;
-        if(!empty($_GET['race_id'])) {
+        if (!empty($_GET['race_id'])) {
             $race_id = $_GET['race_id'];
-            if(($race_del = Race::where('race_id', '=', $race_id)->delete()) == true) {
+            if (($race_del = Race::where('race_id', '=', $race_id)->delete()) == true) {
                 foreach (Race::all() as $races) {
                     $massif_races[$k]=[
                         "race_id" => $races['race_id'],
@@ -56,8 +89,8 @@ class RaceRepo extends Model
                 return $massif_races; 
             } else {
                 return false;
+            }
         }
-    }
 
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <title><?php echo $title; ?></title>
     <meta charset="UTF-8">
@@ -24,7 +24,7 @@
 
     <div class="services">
         <div class="container">
-            <h3><?php echo $resault; ?></h3>
+            <h3><?php echo $result; ?></h3>
             <?php if(isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
                 <h3><a href='/raceviewer/allRaces'>Можешь посмотреть гонки!</a></h3>
             <?php else: ?>

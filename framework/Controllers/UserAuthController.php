@@ -7,11 +7,13 @@ use Otus\Mvc\Services\UserService;
 
 class UserAuthController
 {
-    public function loginUser() {
+    public function loginUser()
+    {
         UserService::userLoginServ();
     }
 
-    public function logoutUser() {
+    public function logoutUser()
+    {
         UserService::userLogoutServ();
     }
     
