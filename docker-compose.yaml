@@ -16,6 +16,10 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./framework:/var/www/app
+      - ./xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
+      PHP_IDE_CONFIG: "serverName=Docker"
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
