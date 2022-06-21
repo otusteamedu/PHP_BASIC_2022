@@ -1,0 +1,86 @@
+Создание БД:
+CREATE DATABASE `lybrary`
+
+Создание таблиц:
+CREATE TABLE `author` (
+  `author_id` int NOT NULL AUTO_INCREMENT,
+  `last_name` text,
+  `first_name` text,
+  `middle_name` text,
+  `original_lang_id` int DEFAULT NULL,
+  `full_name_original` text,
+  `short_name_rus` text,
+  `short_name_original` text,
+  PRIMARY KEY (`author_id`)
+)
+
+CREATE TABLE `book` (
+  `Book_name_rus` text NOT NULL,
+  `book_id` int NOT NULL AUTO_INCREMENT,
+  `original_book_name` text,
+  `author_id` int DEFAULT NULL,
+  `publisher` text,
+  `translate` text,
+  `genre_id` int DEFAULT NULL,
+  `year` smallint DEFAULT NULL,
+  `binding_type` text,
+  `shelf_number` int DEFAULT NULL,
+  `page_count` smallint DEFAULT NULL,
+  PRIMARY KEY (`book_id`)
+  )
+
+  CREATE TABLE `language` (
+  `language_id` int NOT NULL AUTO_INCREMENT,
+  `language name` text NOT NULL,
+  PRIMARY KEY (`language_id`)
+  )
+
+  CREATE TABLE `genre` (
+  `genre_id` int NOT NULL AUTO_INCREMENT,
+  `genre name` text NOT NULL,
+  PRIMARY KEY (`genre_id`)
+)
+
+CREATE TABLE `shelf` (
+  `shilf number` int NOT NULL AUTO_INCREMENT,
+  `shelving` smallint NOT NULL,
+  `shelf` smallint NOT NULL,
+  PRIMARY KEY (`shilf number`),
+  UNIQUE KEY `shilf number` (`shilf number`)
+)
+
+После создания таблиц создаем связи (создавал через dbeaver связи, не знаю как связывать через консоль) :
+ALTER TABLE `author` 
+CONSTRAINT `author_FK` FOREIGN KEY (`original_lang_id`) REFERENCES `language` (`language_id`)
+
+ALTER TABLE `book`
+  CONSTRAINT `book_FK` FOREIGN KEY (`author_id`) REFERENCES `author` (`author_id`),
+  CONSTRAINT `book_FK_1` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`genre_id`),
+  CONSTRAINT `book_FK_2` FOREIGN KEY (`shelf_number`) REFERENCES `shelf` (`shilf number`)
+
+
+
+Строим запросы к моей БД:
+
+Выберите все книги с автором N (укажите любого автора):(
+    1.
+    SELECT * FROM book 
+    WHERE author_id = N (любой автор которого пожелаем вижеть)
+    2.
+    SELECT Book_name_rus, author_id, short_name_rus
+    FROM book, author
+    WHERE book.author_id=author.author_id AND author_id= N (или short_name_rus LIKE `%Пушкин%`)
+)
+Найдите все книги, в которых кол-во страниц больше 500: (
+    SELECT * FROM book
+    WHERE page_count>500
+)
+Вычислите суммарное кол-во страниц во всех книгах(
+    SELECT SUM (page_count) AS all_page_count FROM book
+)
+Найдите все книги, в названии которых 3 слова и более Стоит ли поменять структуру БД для того, чтобы реализовать запросы? (
+    SELECT * FROM book
+    WHERE Book_name_rus LIKE `% % %` (не уверен что такой вариант сработает, но я ничего не нашел в документации)
+
+    Чтобы реализовать запросы структуру БД менять не пришлось. Через SELECT и JOIN могу достать и собрать любую необходимую информацию
+)
