@@ -1,0 +1,1 @@
+{"virtualbox":{"/www":{"guestpath":"/www","hostpath":"C:/vagrant/www","disabled":false,"__vagrantfile":true},"/etc/nginx/conf.d":{"guestpath":"/etc/nginx/conf.d","hostpath":"C:/vagrant/nginx_conf","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"C:/vagrant","disabled":false,"__vagrantfile":true}}}
