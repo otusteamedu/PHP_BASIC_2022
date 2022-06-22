@@ -39,7 +39,9 @@ class RaceService
                 'title' => 'Ваши гонки',
                 'massif_races' => $massif_races
             ]);
-        }   
+        }  else {
+            View::render('503',[]);
+        }
     }
 
     public static function infoRaceServ()
