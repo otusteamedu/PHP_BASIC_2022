@@ -53,8 +53,8 @@
                 <th><?php echo $race_id; ?></th>
                 <th><?php echo $race_name; ?></th>
                 <th><?php echo $race_description; ?></th>
-                <th><?php echo $date_start .' - '. $date_finish; ?></th>
-                <th><?php echo $race_venue; ?></th>
+                <th><?php echo $race_date_start .' - '. $race_date_finish; ?></th>
+                <th><?php echo $race_place; ?></th>
             </tr>
         </tbody>
     </table>    

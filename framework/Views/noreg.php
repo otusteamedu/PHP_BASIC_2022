@@ -26,9 +26,9 @@
         <div class="container">
         <h1><?php echo $result; ?></h1>
         <h2>Заполните поля ниже для регистрации</h2>
-        <form action=/userreg/userReg  method="post">
+        <form action=/userReg/userRegistration  method="post">
             <div class="mb-3">
-                <label for="user" class="form-label">Логин</label>
+                <label for="username" class="form-label">Логин</label>
                 <input type="text" name="username" class="form-control">
             </div>
             <div class="mb-3">

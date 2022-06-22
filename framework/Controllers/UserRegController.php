@@ -7,7 +7,7 @@ use Otus\Mvc\Core\View;
 
 class UserRegController
 {
-    public function userReg()
+    public function userRegistration()
     {
         UserService::userRegServ();
     }
@@ -17,7 +17,7 @@ class UserRegController
     {
         View::render('noreg',[
             'title' => 'Страница регистрации',
-            'resault' => 'Зарегистрируйтесь'
+            'result' => 'Зарегистрируйтесь'
         ]);
     }
   

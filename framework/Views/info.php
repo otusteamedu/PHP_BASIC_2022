@@ -26,9 +26,9 @@
     <div class="services">
         <div class="container">
             <h2>ВОЙТИ</h2>
-            <form action=/userauth/loginUser method="post">
+            <form action=/userAuth/loginUser method="post">
                 <div class="mb-3">
-                    <label for="user" class="form-label">Логин</label>
+                    <label for="username" class="form-label">Логин</label>
                     <input type="text" name="username" class="form-control">
                 </div>
                 <div class="mb-3">
@@ -41,7 +41,7 @@
                 </div>
                 <button type="submit" name="login" class="btn btn-primary">Войти</button>
             </form>
-            <p>Нет учетной записи? <a href='/userreg/newUser'>Создать</a></p>
+            <p>Нет учетной записи? <a href='/userReg/newUser'>Создать</a></p>
         </div>
     </div>
 

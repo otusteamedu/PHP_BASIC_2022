@@ -42,7 +42,7 @@
     <div class="services">
         <div class="container">
             <h3>Создать новую гонку:</h3>
-            <form action=/RaceRepo/createdRace method="post">
+            <form action=/RaceRepo/createdRace method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="race_name" class="form-label">Название гонки:</label>
                     <input type="text" name="race_name" class="form-control">
@@ -67,7 +67,6 @@
                     <label for="race_venue" class="form-label">Место проведения:</label>
                     <input type="text" name="race_venue" class="form-control">
                 </div>
-
 
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="race_type_id">ID категории гонки:</label>

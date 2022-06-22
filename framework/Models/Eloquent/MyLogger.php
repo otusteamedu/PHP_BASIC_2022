@@ -16,7 +16,7 @@ class MyLogger
     {
         $log = new Logger('users_log');
         $log->pushHandler(new StreamHandler('../log/user_event.log', LogLevel::ERROR));
-        $log->error('Ошибка входа в систему пользователем '.''.$_POST['username']);
+        $log->error('Ошибка входа в систему пользователем ' .$_POST['username']);
     }
 
     public static function log_user_reg()
@@ -30,8 +30,8 @@ class MyLogger
     public static function log_task_created()
     {
         $log = new Logger('task_log');
-        $log->pushHandler(new StreamHandler('../log/task_event.log', LogLevel::ERROR));
-        $log->error('Ошибка при создании задачи! Пользователь ошибся!');
+        $log->pushHandler(new StreamHandler('../log/race_event.log', LogLevel::ERROR));
+        $log->error('Ошибка при создании гонки! Пользователь ошибся!');
     }
 
     public static function log_db_error()
@@ -39,7 +39,7 @@ class MyLogger
         $ex=0; 
         $log = new Logger('db_log');
         $log->pushHandler(new StreamHandler('../log/db_error.log', LogLevel::ERROR));
-        $log->error('Необходимо проверить базу данных. Код ошибки: '.''.$ex);
+        $log->error('Необходимо проверить базу данных. Код ошибки: ' .$ex);
         //$log->error($ex);
     }
 /*

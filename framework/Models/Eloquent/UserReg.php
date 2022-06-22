@@ -21,21 +21,21 @@ class UserReg extends Model
                     $hash_paswd = password_hash($secure_password, PASSWORD_BCRYPT);
                     $user->name = $secure_username;
                     $user->password = $hash_paswd;
-                    try{
-                        if(!$user->save()) {
+                    try {
+                        if (!$user->save()) {
                             throw new Exception("Пользователь не сохранился в базе"); 
                         } else {
                             $_SESSION['is_auth'] = true;
                             $_SESSION['username'] = $user->name;
                             $_SESSION['user_id'] = $user->id;
-                    return true;
+                            return true;
                         }
-                    }catch(\Exception $ex) {
+                    } catch (\Exception $ex) {
                         $ex="Пользователь не сохранился в базе. Ошибка на сервере, проверь базу";
                         MyLogger::log_db_error();
                         View::render('503',[]);  
                     }
-                } 
+                }
             }
         } else {
             return false;

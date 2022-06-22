@@ -19,8 +19,8 @@ class MyExcLog extends \Exception
 
     public static function myLog($ex)
     {
-        $log = new Logger('task_log');
-        $log->pushHandler(new StreamHandler('../log/task_log.log', LogLevel::ERROR));
+        $log = new Logger('race_log');
+        $log->pushHandler(new StreamHandler('../log/race_log.log', LogLevel::ERROR));
         $log->error($ex);
     }
 
