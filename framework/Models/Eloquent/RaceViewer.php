@@ -19,9 +19,12 @@ class RaceViewer extends Model
                 throw new Exception("Таблица с гонками не доступна");
             }
         } catch (\Exception $e) {
-            MyLogger::log_db_error(); 
-            View::render('503',[
-            ]); 
+            MyLogger::log_db_error();
+            View::render('error',[
+                'title' => '503 - Service Unavailable',
+                'error_code' => '503 - Service Unavailable',
+                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+            ]);
         }
         foreach (Race::all() as $races) {
             $massif_races[$k]=[
@@ -49,9 +52,12 @@ class RaceViewer extends Model
                     } 
                 return $massif_races; 
             } catch (\Exception $e) {
-                MyLogger::log_db_error(); 
-                View::render('503',[
-                ]); 
+                MyLogger::log_db_error();
+                View::render('error',[
+                    'title' => '503 - Service Unavailable',
+                    'error_code' => '503 - Service Unavailable',
+                    'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                ]);
             }
         } 
             
@@ -72,9 +78,12 @@ class RaceViewer extends Model
                     $k++;
                 }
             } catch (\Exception $e) {
-                MyLogger::log_db_error(); 
-                View::render('503',[
-                ]); 
+                MyLogger::log_db_error();
+                View::render('error',[
+                    'title' => '503 - Service Unavailable',
+                    'error_code' => '503 - Service Unavailable',
+                    'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                ]);
             }
             return $massif_races; 
         } 
@@ -89,9 +98,12 @@ class RaceViewer extends Model
                     throw new Exception("Таблица с гонками не доступна");
                 }
             } catch (\Exception $e) {
-                MyLogger::log_db_error(); 
-                View::render('503',[
-                ]); 
+                MyLogger::log_db_error();
+                View::render('error',[
+                    'title' => '503 - Service Unavailable',
+                    'error_code' => '503 - Service Unavailable',
+                    'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                ]);
             }
             return $massif_race_info;
         } else {

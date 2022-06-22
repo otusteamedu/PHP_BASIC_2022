@@ -1,7 +1,7 @@
-<!DOCTYPE html>503.php
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <title>503 - Service Unavailable</title>
+    <title><?php echo $title; ?></title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,9 +37,10 @@
         </div>
     </nav>
 
+
     <div class="position-absolute top-50 start-50 translate-middle">
-        <h3>503 - Service Unavailable</h3>
-        <p>Cервер временно не имеет возможности обрабатывать запросы по техническим причинам </p>
+        <h3><?php echo $error_code; ?></h3>
+        <p><?php echo $result; ?></p>
     </div>
 
 </body>

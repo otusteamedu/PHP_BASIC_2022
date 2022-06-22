@@ -40,7 +40,11 @@ class RaceService
                 'massif_races' => $massif_races
             ]);
         }  else {
-            View::render('503',[]);
+            View::render('error',[
+                'title' => '503 - Service Unavailable',
+                'error_code' => '503 - Service Unavailable',
+                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+            ]);
         }
     }
 
@@ -71,8 +75,9 @@ class RaceService
                         'race_name' => $_POST['race_name']
             ]);
         } else {
-            View::render('400',[
-                'title' => 'Неудача',
+            View::render('error',[
+                'title' => '400 - Bad request',
+                'error_code' => '400 - Bad request',
                 'result' => 'Извините, мы не смогли создать гонку... попробуйте еще раз заполнить поля'
             ]);
         }
@@ -90,7 +95,7 @@ class RaceService
                 ]);
             }    
         } else {
-            View::render('404',[
+            View::render('error',[
                 'title' => 'Неудача',
                 'result' => 'Извините, мы не смогли удалить гонку... попробуйте еще раз'
             ]);

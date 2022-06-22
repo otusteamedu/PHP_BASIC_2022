@@ -17,7 +17,13 @@ class RaceTypeService
                 'title' => 'Все категории',
                 'massif' => $massif_racetypes
             ]);
-        }      
+        }  else {
+            View::render('error',[
+                'title' => '503 - Service Unavailable',
+                'error_code' => '503 - Service Unavailable',
+                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+            ]);
+        }
     }
     
 }

@@ -80,7 +80,11 @@ class RaceRepo extends Model
                     }
                 } catch(\Exception $ex) {
                     MyLogger::log_db_error();
-                    View::render('503',[]);  
+                    View::render('error',[
+                        'title' => '503 - Service Unavailable',
+                        'error_code' => '503 - Service Unavailable',
+                        'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                    ]);
                 }
                 return true;
         } else {

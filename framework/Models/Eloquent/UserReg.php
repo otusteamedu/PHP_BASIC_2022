@@ -33,7 +33,11 @@ class UserReg extends Model
                     } catch (\Exception $ex) {
                         $ex="Пользователь не сохранился в базе. Ошибка на сервере, проверь базу";
                         MyLogger::log_db_error();
-                        View::render('503',[]);  
+                        View::render('error',[
+                            'title' => '503 - Service Unavailable',
+                            'error_code' => '503 - Service Unavailable',
+                            'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                        ]);
                     }
                 }
             }

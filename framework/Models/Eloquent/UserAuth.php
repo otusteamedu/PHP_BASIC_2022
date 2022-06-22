@@ -19,8 +19,12 @@ class UserAuth extends Model
                         throw new Exception("Таблица с пользователями не доступна");
                     }
                 } catch (\Exception $e) {
-                    MyLogger::log_db_error(); 
-                    View::render('503',[]); 
+                    MyLogger::log_db_error();
+                    View::render('error',[
+                        'title' => '503 - Service Unavailable',
+                        'error_code' => '503 - Service Unavailable',
+                        'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                    ]);
                 }
 
             if((User::where('name', '=', $_POST['username'])->first()) !== null) {
@@ -38,7 +42,11 @@ class UserAuth extends Model
                             }
                         } catch(\Exception $ex) {
                             MyLogger::log_db_error();
-                            View::render('503',[]);
+                            View::render('error',[
+                                'title' => '503 - Service Unavailable',
+                                'error_code' => '503 - Service Unavailable',
+                                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                            ]);
                         }
                         */
                         $_SESSION['is_auth'] = true;
@@ -65,7 +73,11 @@ class UserAuth extends Model
                 }
             } catch(\Exception $ex) {
                 MyLogger::log_db_error();
-                View::render('503',[]);
+                View::render('error',[
+                    'title' => '503 - Service Unavailable',
+                    'error_code' => '503 - Service Unavailable',
+                    'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                ]);
             }
             return true;
         } else {

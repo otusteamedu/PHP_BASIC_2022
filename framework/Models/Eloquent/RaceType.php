@@ -22,9 +22,12 @@ class RaceType extends Model
                 $k++;
             }
         } catch (\Exception $e) {
-            MyLogger::log_db_error(); 
-            View::render('503',[
-            ]); 
+            MyLogger::log_db_error();
+            View::render('error',[
+                'title' => '503 - Service Unavailable',
+                'error_code' => '503 - Service Unavailable',
+                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+            ]);
         }
         return $massif_racetypes;
     }
