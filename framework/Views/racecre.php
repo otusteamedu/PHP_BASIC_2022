@@ -60,12 +60,12 @@
 
                 <div class="mb-3">
                     <label for="date" class="form-label">Дата старта:</label>
-                    <input type="date" name="date_start" class="form-control" placeholder="Дата" required>
+                    <input type="date" name="race_date_start" class="form-control" placeholder="Дата" required>
                 </div>
                 
                 <div class="mb-3">
                     <label for="race_venue" class="form-label">Место проведения:</label>
-                    <input type="text" name="race_venue" class="form-control">
+                    <input type="text" name="race_place" class="form-control">
                 </div>
 
                 <div class="input-group mb-3">

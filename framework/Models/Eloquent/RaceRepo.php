@@ -13,7 +13,7 @@ class RaceRepo extends Model
     public static function create()
     {
         if (!empty($_POST['race_name']) &&
-            //!empty($_POST['date_start']) &&
+            !empty($_POST['race_date_start']) &&
             !empty($_POST['race_place']) &&
             !empty($_POST['race_description']) && 
             !empty($_POST['race_type_id']) &&
@@ -27,11 +27,15 @@ class RaceRepo extends Model
                 $ext = pathinfo($_FILES['race_logo']['name'], PATHINFO_EXTENSION);
                 if (in_array($ext, $allowedExtensions)) {
                     $uniq_name = uniqid().$_FILES['race_logo']['name'];
-                    $min_uniq_name = 'min-'.$uniq_name;
+                    //$min_uniq_name = 'min-'.$uniq_name;
                     if (!getimagesize($_FILES['race_logo']['tmp_name'])) {
                         echo '<p class="error">Некорректный файл!</p>';
                     }
-                
+                    if (!move_uploaded_file($_FILES['race_logo']['tmp_name'],'../Assets/img/logo_race/'.$uniq_name)) {
+                        unset($uniq_name);
+                    }
+
+                    /* отключено создание уменьшенного изображения, потому что не установлено GD на сервере
                     if (move_uploaded_file($_FILES['race_logo']['tmp_name'],'../Assets/img/logo_race/'.$uniq_name)) {
                         $percent = 0.5;
                         header('Content-Type: image/jpeg');
@@ -51,18 +55,25 @@ class RaceRepo extends Model
                     } else {
                         unset($uniq_name);
                     }
+                    */
+
                 }
 
                 $race = new Race();
                 $race->race_name = $secure_race_name;
                 $race->race_place = $secure_race_place;
-                //$race->date_start = $_POST['date_start'];
+                $race->race_date_start = $_POST['race_date_start'];
                 $race->race_description = $secure_race_description;
                 $race->race_type_id = $secure_race_type_id;
+                $race->race_logo = $uniq_name;
+
+                /* отключено создание уменьшенного изображения, потому что не установлено GD на сервере
                 if (isset($min_uniq_name)) {
                     $race->race_logo = $min_uniq_name;
                     $race->race_logo_full = $uniq_name;
                 }
+                */
+
                 try {
                     if (!$race->save()) {
                         throw new Exception("Гонка не сохранилась в базе"); 
@@ -71,7 +82,7 @@ class RaceRepo extends Model
                     MyLogger::log_db_error();
                     View::render('503',[]);  
                 }
-                return true; 
+                return true;
         } else {
             return false;
         }

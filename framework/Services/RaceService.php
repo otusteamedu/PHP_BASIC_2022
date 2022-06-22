@@ -55,7 +55,8 @@ class RaceService
                 'race_description' => $massif_race_info['race_description'],
                 'race_date_start' => $massif_race_info['race_date_start'],
                 'race_date_finish' => $massif_race_info['race_date_finish'],
-                'race_place' => $massif_race_info['race_place']
+                'race_place' => $massif_race_info['race_place'],
+                'race_logo' => $massif_race_info['race_logo']
             ]);
         }     
     }
@@ -70,7 +71,7 @@ class RaceService
                         'race_name' => $_POST['race_name']
             ]);
         } else {
-            View::render('404',[
+            View::render('400',[
                 'title' => 'Неудача',
                 'result' => 'Извините, мы не смогли создать гонку... попробуйте еще раз заполнить поля'
             ]);

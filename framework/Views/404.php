@@ -42,16 +42,19 @@
     <div class="position-absolute top-50 start-50 translate-middle">
         <h3>404 - Not Found</h3>
         <p>Страница не найдена</p>
+        <!-- Код для отладки, не забыть удалить -->
+        <p><?php echo $result; ?></p>
+        <?php
+        $testGD = get_extension_funcs("gd"); // Grab function list
+        if (!$testGD){ echo "GD not even installed."; exit; }
+        echo"<pre>".print_r($testGD,true)."</pre>"; ?>
     </div>
 
 
-<h2><?php echo $result; ?></h2>
 
 
-<?php
-$testGD = get_extension_funcs("gd"); // Grab function list
-if (!$testGD){ echo "GD not even installed."; exit; }
-echo"<pre>".print_r($testGD,true)."</pre>"; ?>
+
+
 
 
 

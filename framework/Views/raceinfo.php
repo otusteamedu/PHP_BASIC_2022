@@ -57,7 +57,13 @@
                 <th><?php echo $race_place; ?></th>
             </tr>
         </tbody>
-    </table>    
+    </table>
+
+
+
+    <div class="position-absolute top-0 start-50 translate-middle"></div>
+        <img src="../Assets/img/logo_race/<?php echo $race_logo; ?> " class="rounded mx-auto d-block" alt="Баннер для гонки">
+    </div>
 
 </body>
 </html>
