@@ -51,9 +51,9 @@ class RaceService
                 'race_id' => $massif_race_info['race_id'],
                 'race_name' => $massif_race_info['race_name'],
                 'race_description' => $massif_race_info['race_description'],
-                'date_start' => $massif_race_info['date_start'],
-                'date_finish' => $massif_race_info['date_finish'],
-                'race_venue' => $massif_race_info['race_venue']
+                'race_date_start' => $massif_race_info['race_date_start'],
+                'race_date_finish' => $massif_race_info['race_date_finish'],
+                'race_place' => $massif_race_info['race_place']
             ]);
         }     
     }

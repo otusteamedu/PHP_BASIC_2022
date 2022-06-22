@@ -48,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-    <?php
+        <?php
             foreach ($massif as $massif_racetype) {
                 echo "<tr scope='row'>
                     <th>{$massif_racetype['type_id']}</th>
