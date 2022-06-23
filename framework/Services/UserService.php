@@ -41,7 +41,7 @@ class UserService
         if(EloquentUserReg::register()) {
             View::render('reg',[
                 'title' => 'Страница регистрации',
-                'name' => $_SESSION['username'],
+                'name' => $_SESSION['login'],
                 'result' => 'Успешная регистрация'
             ]);
         } else {

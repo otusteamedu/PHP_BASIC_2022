@@ -28,12 +28,16 @@
         <h2>Заполните поля ниже для регистрации</h2>
         <form action=/userReg/userRegistration  method="post">
             <div class="mb-3">
-                <label for="username" class="form-label">Логин</label>
+                <label for="login" class="form-label">Логин</label>
+                <input type="text" name="login" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label">Ваше имя</label>
                 <input type="text" name="username" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Пароль</label>
-                        <input type="password" name="password" class="form-control">
+                <input type="password" name="password" class="form-control">
             </div>
                 <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

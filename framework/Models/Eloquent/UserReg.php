@@ -12,21 +12,23 @@ class UserReg extends Model
 
     public static function register() 
     {
-        if(!empty($_POST['username']) || !empty($_POST['password'])) {
-            $secure_username = htmlspecialchars($_POST['username']);
+        if(!empty($_POST['login']) && !empty($_POST['password']) && !empty($_POST['username'])) {
+            $secure_login = htmlspecialchars($_POST['login']);
             $secure_password = htmlspecialchars($_POST['password']);
-            if(!$user_reg = User::where('name', '=', $secure_username)->first()) {
+            $secure_username = htmlspecialchars($_POST['username']);
+            if(!$user_reg = User::where('login', '=', $secure_login)->first()) {
                 if($user_reg == null) {
                     $user = new User();
                     $hash_paswd = password_hash($secure_password, PASSWORD_BCRYPT);
-                    $user->name = $secure_username;
+                    $user->login = $secure_login;
+                    $user->username = $secure_username;
                     $user->password = $hash_paswd;
                     try {
                         if (!$user->save()) {
                             throw new Exception("Пользователь не сохранился в базе"); 
                         } else {
                             $_SESSION['is_auth'] = true;
-                            $_SESSION['username'] = $user->name;
+                            $_SESSION['login'] = $user->login;
                             $_SESSION['user_id'] = $user->id;
                             return true;
                         }

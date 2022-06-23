@@ -28,8 +28,8 @@
             <h2>ВОЙТИ</h2>
             <form action=/userAuth/loginUser method="post">
                 <div class="mb-3">
-                    <label for="username" class="form-label">Логин</label>
-                    <input type="text" name="username" class="form-control">
+                    <label for="login" class="form-label">Логин</label>
+                    <input type="text" name="login" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Пароль</label>

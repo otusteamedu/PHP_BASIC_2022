@@ -13,7 +13,7 @@ class UserAuth extends Model
 
     public static function login() 
     {
-        if(!empty($_POST['username']) && !empty($_POST['password'])){
+        if(!empty($_POST['login']) && !empty($_POST['password'])){
             try {
                     if((User::all()->first()) == null) {
                         throw new Exception("Таблица с пользователями не доступна");
@@ -27,8 +27,8 @@ class UserAuth extends Model
                     ]);
                 }
 
-            if((User::where('name', '=', $_POST['username'])->first()) !== null) {
-                foreach (User::where('name', '=', $_POST['username'])->get() as $user) {
+            if((User::where('login', '=', $_POST['login'])->first()) !== null) {
+                foreach (User::where('login', '=', $_POST['login'])->get() as $user) {
                     $password = $_POST['password'];
                     if (password_verify($password,$user->password)){
                        //session_id('myIDSession01');
@@ -50,7 +50,7 @@ class UserAuth extends Model
                         }
                         */
                         $_SESSION['is_auth'] = true;
-                        $_SESSION['username'] = $user->name;
+                        $_SESSION['login'] = $user->name;
                         $_SESSION['user_id'] = $user->id;
                         return true;
                     } else {
