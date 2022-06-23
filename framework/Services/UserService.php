@@ -13,7 +13,7 @@ class UserService
         if(EloquentUserAuth::login()) {
             View::render('reg',[
                 'title' => 'Страница аутентификации',
-                'name' => $_POST['username'],
+                'name' => $_POST['login'],
                 'result' => 'Успешная авторизация'
             ]);
         } else {
