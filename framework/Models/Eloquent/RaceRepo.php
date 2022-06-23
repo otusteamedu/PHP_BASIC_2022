@@ -14,6 +14,7 @@ class RaceRepo extends Model
     {
         if (!empty($_POST['race_name']) &&
             !empty($_POST['race_date_start']) &&
+            !empty($_POST['race_date_finish']) &&
             !empty($_POST['race_place']) &&
             !empty($_POST['race_description']) && 
             !empty($_POST['race_type_id']) &&
@@ -63,6 +64,7 @@ class RaceRepo extends Model
                 $race->race_name = $secure_race_name;
                 $race->race_place = $secure_race_place;
                 $race->race_date_start = $_POST['race_date_start'];
+                $race->race_date_finish = $_POST['race_date_finish'];
                 $race->race_description = $secure_race_description;
                 $race->race_type_id = $secure_race_type_id;
                 $race->race_logo = $uniq_name;

@@ -39,7 +39,7 @@
 
 <?php if(isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
 
-    <div class="services">
+    <div class="services_form_race">
         <div class="container">
             <h3>Создать новую гонку:</h3>
             <form action=/RaceRepo/createdRace method="post" enctype="multipart/form-data">
@@ -61,6 +61,10 @@
                 <div class="mb-3">
                     <label for="date" class="form-label">Дата старта:</label>
                     <input type="date" name="race_date_start" class="form-control" placeholder="Дата" required>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Дата финиша:</label>
+                    <input type="date" name="race_date_finish" class="form-control" placeholder="Дата" required>
                 </div>
                 
                 <div class="mb-3">
