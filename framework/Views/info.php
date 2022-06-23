@@ -21,8 +21,6 @@
         </div>
     </nav>
 
-
-
     <div class="services">
         <div class="container">
             <h2>ВОЙТИ</h2>
@@ -36,10 +34,10 @@
                     <input type="password" name="password" class="form-control">
                 </div>
                 <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
+                    <input type="checkbox" class="form-check-input" id="Check1">
+                    <label class="form-check-label" for="Check1">Запомнить меня</label>
                 </div>
-                <button type="submit" name="login" class="btn btn-primary">Войти</button>
+                <button type="submit" name="auth" class="btn btn-primary">Войти</button>
             </form>
             <p>Нет учетной записи? <a href='/userReg/newUser'>Создать</a></p>
         </div>
