@@ -42,7 +42,6 @@
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Название</th>
                 <th scope="col">Описание</th>
                 <th scope="col">Дата cобытия</th>
                 <th scope="col">Место проведения</th>
@@ -51,7 +50,6 @@
         <tbody>
             <tr scope='row'>
                 <th><?php echo $race_id; ?></th>
-                <th><?php echo $race_name; ?></th>
                 <th><?php echo $race_description; ?></th>
                 <th><?php echo $race_date_start .' - '. $race_date_finish; ?></th>
                 <th><?php echo $race_place; ?></th>
@@ -76,13 +74,13 @@
         <tbody>
 
         <?php
-        foreach ($massif_race_results as $race_results) {
-            echo "<tr scope='row'>
-                        <th>{$race_results['user_final_result']}</th>  
-                        <th>{$race_results['user_id']}</th>
-                        <th>{$race_results['user_number']}</th>
-                    </tr> ";
-        }
+            foreach ($massif_race_results as $race_results) {
+                echo "<tr scope='row'>
+                            <th>{$race_results['user_final_result']}</th>  
+                            <th>{$race_results['user_id']}</th>
+                            <th>{$race_results['user_number']}</th>
+                        </tr> ";
+            }
         ?>
 
 
