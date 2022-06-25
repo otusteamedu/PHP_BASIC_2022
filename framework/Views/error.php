@@ -23,7 +23,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link disabled" aria-current="page" href="/raceViewer/allRaces">Главная</a>
+                    <a class="nav-link active" aria-current="page" href="/raceViewer/allRaces">Главная</a>
                     <a class="nav-link active" href='/raceTypeViewer/viewAllRaceTypes'>Категории гонок</a>
                     <a class="nav-link active" href='/raceViewer/personalRaces'>Мои гонки</a>
                     <a class="nav-link active" href='/raceViewer/createRace'>Добавление новой гонки</a>
