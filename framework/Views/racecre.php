@@ -26,8 +26,6 @@
                 <a class="nav-link active" href='/racetypeviewer/viewAllRacetypes'>Категории гонок</a>
                 <a class="nav-link active" href='/Raceviewer/personalRaces'>Мои гонки</a>
                 <a class="nav-link disabled" href='/raceViewer/createRace'>Добавление новой гонки</a>
-                <!--<a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
             </div>
             <form class="d-flex" action="/userauth/logoutUser" method="post" enctype="multipart/form-data">
                 <button type="submit" class="btn btn-outline-success" name="logout"  value="logout">Выход</button>
