@@ -14,7 +14,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/index/index">
+            <a class="navbar-brand" href="/raceviewer/allRaces">
                 <img src="/Assets/img/favicon.ico" alt="HiRusSportsmen-logo" width="30" height="24" class="d-inline-block align-text-top">
                 HiRusSportsmen
             </a>
