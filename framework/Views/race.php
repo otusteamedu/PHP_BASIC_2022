@@ -26,7 +26,10 @@
                 <a class="nav-link disabled" aria-current="page" href="/raceviewer/allRaces">Главная</a>
                 <a class="nav-link active" href='/racetypeviewer/viewAllRacetypes'>Категории гонок</a>
                 <a class="nav-link active" href='/Raceviewer/personalRaces'>Мои гонки</a>
-                <a class="nav-link active" href='/raceViewer/createRace'>Добавление новой гонки</a>
+                <?php if(!empty($_SESSION['is_admin']) && $_SESSION['is_admin'])
+                    {
+                        echo "<a class='nav-link active' href=/'raceViewer/createRace'>Добавление новой гонки</a>";
+                    } ?>
                 <!--<a class="nav-link" href="#">Pricing</a>
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
             </div>
