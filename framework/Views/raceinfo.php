@@ -68,7 +68,6 @@
         <tr>
             <th scope="col">Место</th>
             <th scope="col">Имя гонщика</th>
-            <th scope="col">Номер</th>
         </tr>
         </thead>
         <tbody>
@@ -77,8 +76,7 @@
             foreach ($massif_race_results as $race_results) {
                 echo "<tr scope='row'>
                             <th>{$race_results['user_final_result']}</th>  
-                            <th>{$race_results['user_id']}</th>
-                            <th>{$race_results['user_number']}</th>
+                            <th>{$race_results['username']}</th>
                         </tr> ";
             }
         ?>

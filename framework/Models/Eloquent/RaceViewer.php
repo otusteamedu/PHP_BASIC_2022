@@ -12,7 +12,7 @@ class RaceViewer extends Model
 {
     public $timestamps = false;
 
-    public static function allRaces() 
+    public static function allRaces()
     {
         $massif_races=[];
         $k=0;
@@ -35,10 +35,10 @@ class RaceViewer extends Model
             ];
             $k++;
         }
-        return $massif_races; 
-    } 
+        return $massif_races;
+    }
 
-    public static function allRacesType() 
+    public static function allRacesType()
     {
         if(!empty($_GET['racetype_id'])) {
             $racetype_id = $_GET['racetype_id'];
@@ -46,13 +46,13 @@ class RaceViewer extends Model
             $k=0;
             try {
                 foreach (Race::where('race_type_id', '=', $racetype_id)->get() as $races) {
-                        $massif_races[$k]=[
+                    $massif_races[$k]=[
                         "race_id" => $races['race_id'],
                         "race_name" => $races['race_name']
-                        ];
-                        $k++;
-                    } 
-                return $massif_races; 
+                    ];
+                    $k++;
+                }
+                return $massif_races;
             } catch (\Exception $e) {
                 MyLogger::log_db_error();
                 View::render('error',[
@@ -61,11 +61,11 @@ class RaceViewer extends Model
                     'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
                 ]);
             }
-        } 
-            
+        }
+
     }
-       
-    public static function personalRaces() 
+
+    public static function personalRaces()
     {
         if(!empty($_SESSION['user_id'])) {
             $user = $_SESSION['user_id'];
@@ -73,21 +73,21 @@ class RaceViewer extends Model
             $k=0;
             try {
                 foreach (DB::table('users')
-                        ->join('race_results', 'users.user_id', '=', 'race_results.user_id')
-                        ->join('races', 'race_results.race_id', '=', 'races.race_id')
-                        ->where('users.user_id', '=', $user)
-                        ->select('race_results.user_final_result', 'users.username','races.race_name', 'races.race_id')
-                        ->get() as $race_result) {
-                            $race_result_array = json_decode(json_encode($race_result));
-                            $array = json_decode(json_encode($race_result_array), true);
+                             ->join('race_results', 'users.user_id', '=', 'race_results.user_id')
+                             ->join('races', 'race_results.race_id', '=', 'races.race_id')
+                             ->where('users.user_id', '=', $user)
+                             ->select('race_results.user_final_result', 'users.username','races.race_name', 'races.race_id')
+                             ->get() as $race_result) {
+                    $race_result_array = json_decode(json_encode($race_result));
+                    $array = json_decode(json_encode($race_result_array), true);
 
-                            $massif_race_result[$k]=[
-                                "user_final_result" => $array['user_final_result'],
-                                "race_name" => $array['race_name'],
-                                "race_id" => $array['race_id'],
-                                "username" => $array['username']
-                            ];
-                            $k++;
+                    $massif_race_result[$k]=[
+                        "user_final_result" => $array['user_final_result'],
+                        "race_name" => $array['race_name'],
+                        "race_id" => $array['race_id'],
+                        "username" => $array['username']
+                    ];
+                    $k++;
                 }
                 return $massif_race_result;
             } catch (\Exception $e) {
@@ -101,7 +101,7 @@ class RaceViewer extends Model
         }
     }
 
-    public static function infoRace() 
+    public static function infoRace()
     {
         if(!empty($_GET['race_id'])) {
             $race_id = $_GET['race_id'];
