@@ -3,6 +3,7 @@
 namespace Otus\Mvc\Services;
 
 use Otus\Mvc\Core\View;
+use Otus\Mvc\Models\Eloquent\RaceResult as EloquentRaceResult;;
 use Otus\Mvc\Models\Eloquent\RaceViewer as EloquentRaceViewer;
 use Otus\Mvc\Models\Eloquent\RaceRepo as EloquentRaceRepo;
 
@@ -51,7 +52,8 @@ class RaceService
     public static function infoRaceServ()
     {
         $massif_race_info = EloquentRaceViewer::infoRace();
-        if($massif_race_info !== null) {
+        $massif_race_results = EloquentRaceResult::allRaceResults();
+        if ($massif_race_info !== null && $massif_race_results !== null) {
             View::render('raceinfo',[
                 'title' => 'Информация по гонке',
                 'race_id' => $massif_race_info['race_id'],
@@ -60,7 +62,8 @@ class RaceService
                 'race_date_start' => $massif_race_info['race_date_start'],
                 'race_date_finish' => $massif_race_info['race_date_finish'],
                 'race_place' => $massif_race_info['race_place'],
-                'race_logo' => $massif_race_info['race_logo']
+                'race_logo' => $massif_race_info['race_logo'],
+                'massif_race_results' => $massif_race_results
             ]);
         }     
     }

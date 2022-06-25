@@ -65,5 +65,30 @@
         <img src="../Assets/img/logo_race/<?php echo $race_logo; ?> " width="400" class="rounded mx-auto d-block" alt="Баннер для гонки">
     </div>
 
+
+
+    <h1>Результаты</h1>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Место</th>
+            <th scope="col">Имя гонщика</th>
+            <th scope="col">Номер</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <?php
+        foreach ($massif_race_results as $race_results) {
+            echo "<tr scope='row'>
+                        <th>{$race_results['user_final_result']}</th>  
+                        <th>{$race_results['user_id']}</th>
+                        <th>{$race_results['user_number']}</th>
+                    </tr> ";
+        }
+        ?>
+
+
 </body>
 </html>
