@@ -46,7 +46,6 @@
                 <th scope="col">Номер</th>
                 <th scope="col">Название</th>
                 <th scope="col">Подробнее</th>
-                <th scope="col">Удалить</th>
             </tr>
         </thead>
         <tbody>
@@ -61,12 +60,19 @@
                                 Ссылка
                             </a>
                         </th>
-                        <th>
-                        <a href=/racerepo/delRace?race_id={$races['race_id']}>
-                            Удалить
-                        </a>
-                        </th>     
                     </tr> ";
+                if(!empty($_SESSION['is_admin']) && $_SESSION['is_admin'])
+                {
+                    echo "<tr scope='row'>
+                            <th>
+                                <td colspan='3'>
+                                    <a href=\"/racerepo/delRace?race_id={$races['race_id']}\">
+                                        Удалить
+                                    </a> 
+                                </td>
+                            </th>
+                          </tr>";
+                }
             }
     ?>
 

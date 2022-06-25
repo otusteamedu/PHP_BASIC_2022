@@ -25,7 +25,7 @@ class RaceResult extends Model
                              ->get() as $race_result) {
                     $race_result_array = json_decode(json_encode($race_result));
                     $array = json_decode(json_encode($race_result_array), true);
-    
+
                     $massif_race_results[$k]=[
                         "user_final_result" => $array['user_final_result'],
                         "username" => $array['username']

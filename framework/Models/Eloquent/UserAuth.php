@@ -52,6 +52,7 @@ class UserAuth extends Model
                         $_SESSION['is_auth'] = true;
                         $_SESSION['login'] = $user->username;
                         $_SESSION['user_id'] = $user->user_id;
+                        $_SESSION['is_admin'] = intval($user->is_admin) === 1;
                         return true;
                     } else {
                         return false;
