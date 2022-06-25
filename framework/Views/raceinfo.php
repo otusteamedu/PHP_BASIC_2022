@@ -59,13 +59,9 @@
         </tbody>
     </table>
 
-
-
     <div class="position-absolute top-0 start-50 translate-middle"></div>
         <img src="../Assets/img/logo_race/<?php echo $race_logo; ?> " width="400" class="rounded mx-auto d-block" alt="Баннер для гонки">
     </div>
-
-
 
     <h1>Результаты</h1>
 

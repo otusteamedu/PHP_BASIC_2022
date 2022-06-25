@@ -65,9 +65,9 @@
                         <a href=/racerepo/delRace?race_id={$races['race_id']}>
                             Удалить
                         </a>
-                    </th>     
+                        </th>     
                     </tr> ";
-    }
+            }
     ?>
 
 </body>
