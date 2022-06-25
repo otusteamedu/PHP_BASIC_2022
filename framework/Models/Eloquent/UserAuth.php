@@ -50,8 +50,8 @@ class UserAuth extends Model
                         }
                         */
                         $_SESSION['is_auth'] = true;
-                        $_SESSION['login'] = $user->name;
-                        $_SESSION['user_id'] = $user->id;
+                        $_SESSION['login'] = $user->username;
+                        $_SESSION['user_id'] = $user->user_id;
                         return true;
                     } else {
                         return false;
