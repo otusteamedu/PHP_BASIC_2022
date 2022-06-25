@@ -39,9 +39,9 @@
 
 <?php if(isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
 
-    <div class="services_form_race">
+
         <div class="container">
-            <h3>Создать новую гонку:</h3>
+            <h3>Создать новую гонку</h3>
             <form action=/RaceRepo/createdRace method="post" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="race_name" class="form-label">Название гонки:</label>
@@ -85,7 +85,7 @@
                 <button type="submit" name="created" value="created" class="btn btn-primary">Создать</button>
             </form>
         </div>
-    </div>
+
 
 <?php else: ?>
 <h3>Не авторизованный доступ</h3>
