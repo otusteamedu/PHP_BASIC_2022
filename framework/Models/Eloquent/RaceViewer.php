@@ -5,6 +5,8 @@ namespace Otus\Mvc\Models\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use Doctrine\DBAL\Exception;
 use Otus\Mvc\Core\View;
+//use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class RaceViewer extends Model
 {
@@ -70,15 +72,24 @@ class RaceViewer extends Model
             $massif_race_result=[];
             $k=0;
             try {
-                foreach (RaceResult::where('user_id', '=', $user)->get() as $race_result) {
-                    $massif_race_result[$k]=[
-                        "race_id" => $race_result['race_id'],
-                        "user_id" => $race_result['user_id'],
-                        "user_final_result" => $race_result['user_final_result'],
-                        "user_number" => $race_result['user_number']
-                    ];
-                    $k++;
+                foreach (DB::table('users')
+                        ->join('race_results', 'users.user_id', '=', 'race_results.user_id')
+                        ->join('races', 'race_results.race_id', '=', 'races.race_id')
+                        ->where('users.user_id', '=', $user)
+                        ->select('race_results.user_final_result', 'users.username','races.race_name', 'races.race_id')
+                        ->get() as $race_result) {
+                            $race_result_array = json_decode(json_encode($race_result));
+                            $array = json_decode(json_encode($race_result_array), true);
+
+                            $massif_race_result[$k]=[
+                                "user_final_result" => $array['user_final_result'],
+                                "race_name" => $array['race_name'],
+                                "race_id" => $array['race_id'],
+                                "username" => $array['username']
+                            ];
+                            $k++;
                 }
+                return $massif_race_result;
             } catch (\Exception $e) {
                 MyLogger::log_db_error();
                 View::render('error',[
@@ -87,8 +98,7 @@ class RaceViewer extends Model
                     'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
                 ]);
             }
-            return $massif_race_result;
-        } 
+        }
     }
 
     public static function infoRace() 

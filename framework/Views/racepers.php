@@ -36,13 +36,14 @@
         </div>
     </nav>
 
-    <h1>Ваши результаты на гонках</h1>
+    <h1>Результаты на гонках</h1>
 
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Место</th>
                 <th scope="col">Название гонки</th>
+                <th scope="col">Спортсмен</th>
             </tr>
         </thead>
         <tbody>
@@ -52,9 +53,10 @@
                         <th>{$race_result['user_final_result']}</th>
                         <th>
                             <a href=/raceviewer/infoRace?race_id={$race_result['race_id']}>
-                                ID гонки {$race_result['race_id']}
+                                {$race_result['race_name']}
                             </a>
                         </th>
+                        <th>{$race_result['username']}</th>
                  </tr> ";
         }
     ?>
