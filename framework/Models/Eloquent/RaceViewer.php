@@ -67,13 +67,15 @@ class RaceViewer extends Model
     {
         if(!empty($_SESSION['user_id'])) {
             $user = $_SESSION['user_id'];
-            $massif_races=[];
+            $massif_race_result=[];
             $k=0;
             try {
-                foreach (Race::where('race_participant_user_id', '=', $user)->get() as $races) {
-                    $massif_races[$k]=[
-                        "race_id" => $races['race_id'],
-                        "race_name" => $races['race_name']
+                foreach (RaceResult::where('user_id', '=', $user)->get() as $race_result) {
+                    $massif_race_result[$k]=[
+                        "race_id" => $race_result['race_id'],
+                        "user_id" => $race_result['user_id'],
+                        "user_final_result" => $race_result['user_final_result'],
+                        "user_number" => $race_result['user_number']
                     ];
                     $k++;
                 }
@@ -85,7 +87,7 @@ class RaceViewer extends Model
                     'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
                 ]);
             }
-            return $massif_races; 
+            return $massif_race_result;
         } 
     }
 

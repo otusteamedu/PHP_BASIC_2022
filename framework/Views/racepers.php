@@ -36,29 +36,27 @@
         </div>
     </nav>
 
-    <h1>Список гонок</h1>
+    <h1>Ваши результаты на гонках</h1>
 
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Номер</th>
-                <th scope="col">Название</th>
-                <th scope="col">Подробнее</th>
+                <th scope="col">Место</th>
+                <th scope="col">Название гонки</th>
             </tr>
         </thead>
         <tbody>
     <?php
-            foreach ($massif_races as $races) {
-                echo "<tr scope='row'>
-                    <th>{$races['race_id']}</th>
-                    <th>{$races['race_name']}</th>
-                    <th> 
-                        <a href=/raceviewer/infoRace?race_id={$races['race_id']}>
-                            Ссылка   
-                        </a>
-                    </th>    
-                </tr> ";
-    }
+        foreach ($massif_race_result as $race_result) {
+            echo "<tr scope='row'>
+                        <th>{$race_result['user_final_result']}</th>
+                        <th>
+                            <a href=/raceviewer/infoRace?race_id={$race_result['race_id']}>
+                                ID гонки {$race_result['race_id']}
+                            </a>
+                        </th>
+                 </tr> ";
+        }
     ?>
 </body>
 </html>

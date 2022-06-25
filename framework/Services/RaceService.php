@@ -34,11 +34,11 @@ class RaceService
 
     public static function personalRacesServ()
     {
-        $massif_races = EloquentRaceViewer::personalRaces();
-        if($massif_races !== null) {
+        $massif_race_result = EloquentRaceViewer::personalRaces();
+        if($massif_race_result !== null) {
             View::render('racepers',[
                 'title' => 'Ваши гонки',
-                'massif_races' => $massif_races
+                'massif_race_result' => $massif_race_result
             ]);
         }  else {
             View::render('error',[
