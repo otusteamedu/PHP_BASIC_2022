@@ -16,7 +16,7 @@ class UserReg extends Model
             $secure_login = htmlspecialchars($_POST['login']);
             $secure_password = htmlspecialchars($_POST['password']);
             $secure_username = htmlspecialchars($_POST['username']);
-            if (!$user_reg = User::where('login', '=', $secure_login)->first()) {
+            if (!$user_reg = User::where('login', '=', $secure_login)->firstOrFail()) {
                 if ($user_reg == null) {
                     $user = new User();
                     $hash_paswd = password_hash($secure_password, PASSWORD_BCRYPT);
