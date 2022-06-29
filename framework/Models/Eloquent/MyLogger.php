@@ -40,14 +40,6 @@ class MyLogger
         $log = new Logger('db_log');
         $log->pushHandler(new StreamHandler('../log/db_error.log', LogLevel::ERROR));
         $log->error('Необходимо проверить базу данных. Код ошибки: ' .$ex);
-        //$log->error($ex);
     }
-/*
-    public static function new_log_db() {
-        $log = new Logger('db_log');
-        $log->pushHandler(new StreamHandler('../log/db_error.log', LogLevel::ERROR));
-        //$log->error('ошибка в базе данных');
-        $log->info('Newlog', ['username' => 'Seldaek']);
-    }
-*/
+
 }

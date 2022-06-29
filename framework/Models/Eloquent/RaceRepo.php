@@ -35,31 +35,7 @@ class RaceRepo extends Model
                     if (!move_uploaded_file($_FILES['race_logo']['tmp_name'],'../Assets/img/logo_race/'.$uniq_name)) {
                         unset($uniq_name);
                     }
-
-                    /* отключено создание уменьшенного изображения, потому что не установлено GD на сервере
-                    if (move_uploaded_file($_FILES['race_logo']['tmp_name'],'../Assets/img/logo_race/'.$uniq_name)) {
-                        $percent = 0.5;
-                        header('Content-Type: image/jpeg');
-                        list($width, $height) = getimagesize('../Assets/img/logo_race/'.$uniq_name);
-                        $new_width = round($width * $percent);
-                        $new_height = round($height * $percent);
-                        try {
-                            $image_p = imagecreatetruecolor($new_width, $new_height);
-                        } catch (\Exception $e) {
-                            MyLogger::log_db_error();
-                            View::render('503',[]);
-                        }
-                        $min_uniq_name_image = imagecreatefromjpeg('../Assets/img/logo_race/'.$uniq_name);
-                        imagecopyresampled($image_p, $min_uniq_name_image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-                        imagejpeg($image_p, '../Assets/img/logo_race/'.$min_uniq_name);
-                        imagedestroy($image_p);
-                    } else {
-                        unset($uniq_name);
-                    }
-                    */
-
                 }
-
                 $race = new Race();
                 $race->race_name = $secure_race_name;
                 $race->race_place = $secure_race_place;
@@ -68,14 +44,6 @@ class RaceRepo extends Model
                 $race->race_description = $secure_race_description;
                 $race->race_type_id = $secure_race_type_id;
                 $race->race_logo = $uniq_name;
-
-                /* отключено создание уменьшенного изображения, потому что не установлено GD на сервере
-                if (isset($min_uniq_name)) {
-                    $race->race_logo = $min_uniq_name;
-                    $race->race_logo_full = $uniq_name;
-                }
-                */
-
                 try {
                     if (!$race->save()) {
                         throw new Exception("Гонка не сохранилась в базе"); 
