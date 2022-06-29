@@ -9,6 +9,8 @@ use Illuminate\Database\Capsule\Manager as DB;
 
 class RaceResult extends Model
 {
+    public $timestamps = false;
+
     public static function allRaceResults()
     {
         if (!empty($_GET['race_id'])) {
@@ -31,8 +33,8 @@ class RaceResult extends Model
                         "username" => $array['username']
                     ];
                     $k++;
-                }
-                    return $massif_race_results;
+                    }
+                        return $massif_race_results;
                 } catch (\Exception $e) {
                     MyLogger::log_db_error();
                     View::render('error', [
@@ -44,6 +46,41 @@ class RaceResult extends Model
 
         }
     }
+
+    public static function raceRegistration()
+    {
+
+        if (!empty($_SESSION['user_id']) && !empty($_SESSION['race_id'])) {
+            if ((RaceResult::where([
+                ['user_id', '=', $_SESSION['user_id']],
+                ['race_id', '=', $_SESSION['race_id']],
+                    ])->first()) == null) {
+                $secure_user_id = htmlspecialchars($_SESSION['user_id']);
+                $secure_race_id = htmlspecialchars($_SESSION['race_id']);
+                $raceRegistration = new RaceResult();
+                $raceRegistration->user_id = $secure_user_id;
+                $raceRegistration->race_id = $secure_race_id;
+                $raceRegistration->user_number = $secure_user_id;
+                try {
+                    if (!$raceRegistration->save()) {
+                        throw new Exception("Пользователь не сохранился в базе");
+                    }
+                } catch (\Exception $ex) {
+                    $ex = "Пользователю не получилось зарегистрироваться на гонку";
+                    MyLogger::log_db_error();
+                    View::render('error', [
+                        'title' => '503 - Service Unavailable',
+                        'error_code' => '503 - Service Unavailable',
+                        'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
+                    ]);
+                }
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
 }
 
 

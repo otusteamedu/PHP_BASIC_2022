@@ -62,7 +62,17 @@
         <img src="../Assets/img/logo_race/<?php echo $race_logo; ?> " width="400" class="rounded mx-auto d-block" alt="Баннер для гонки">
     </div>
 
-    <h1>Результаты</h1>
+    <?php if(empty($_SESSION['is_admin']))
+    {
+        echo "    <form action='/racerepo/regOnRace' method='post'>
+        <button type='submit' name='raceregistration' value='raceregistration' class='btn btn-danger'>Зарегистрироваться на гонку</button>
+    </form>";
+    } ?>
+
+
+
+    <h1>Результаты/участники</h1>
+    <p>*итоговые места проставляются организатором при загрузке протокола в течении недели после мероприятия</p>
 
     <table class="table table-hover">
         <thead>

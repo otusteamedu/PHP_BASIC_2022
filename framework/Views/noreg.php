@@ -40,8 +40,8 @@
                 <input type="password" name="password" class="form-control">
             </div>
                 <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Запомнить меня</label>
+                <input type="checkbox" class="form-check-input" id="Check">
+                <label class="form-check-label" for="Check">Запомнить меня</label>
             </div>
                 <button type="submit" name="register" value="register" class="btn btn-primary">Регистрация</button>
             </form>

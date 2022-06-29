@@ -16,6 +16,11 @@ class RaceRepoController
         RaceService::delRaceServ();   
     }
 
+    public function regOnRace()
+    {
+        RaceService::regOnRaceServ();
+    }
+
 
 }
 

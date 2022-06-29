@@ -54,6 +54,7 @@ class RaceService
         $massif_race_info = EloquentRaceViewer::infoRace();
         $massif_race_results = EloquentRaceResult::allRaceResults();
         if ($massif_race_info !== null && $massif_race_results !== null) {
+            $_SESSION['race_id'] = $massif_race_info['race_id'];
             View::render('raceinfo',[
                 'title' => 'Информация по гонке',
                 'race_id' => $massif_race_info['race_id'],
@@ -70,7 +71,6 @@ class RaceService
 
     public static function createdRaceServ()
     {
-
         if(EloquentRaceRepo::create()) {
             View::render('racenew',[
                         'title' => 'Новая гонка создана',
@@ -88,7 +88,6 @@ class RaceService
 
     public static function delRaceServ()
     {
-
         if(EloquentRaceRepo::del()) {
             $massif_races = EloquentRaceViewer::allRaces();
             if($massif_races !== null) {
@@ -104,5 +103,24 @@ class RaceService
             ]);
         }
     }
+
+    public static function regOnRaceServ()
+    {
+        if(EloquentRaceResult::raceRegistration()) {
+                View::render('reg',[
+                    'title' => 'Все гонки',
+                    'result' => 'Успешная регистрация! Увидимся на старте'
+                ]);
+            }
+        else {
+            View::render('reg',[
+                'title' => 'Все гонки',
+                'result' => 'Вы уже ранее зарегистрировались на гонку'
+            ]);
+        }
+    }
+
+
+
     
 }
