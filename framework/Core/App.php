@@ -36,9 +36,8 @@ class App
             }
         }
 
-
         // Check controller exists.
-        if(!class_exists($controller_name,true)) {
+        if(!class_exists($controller_name,true) || !method_exists($controller_name, $action_name))   {
             //redirect to 404
             View::render('error',[
                 'title' => '400 - Bad request',
@@ -46,20 +45,17 @@ class App
                 'result' => 'Нет такой страницы'
             ]);
         }
-
-        if(!method_exists($controller_name, $action_name)) {
-            //redirect to 404
+        try {
+            if (!$controller = new $controller_name()) {
+                throw new Exception("Контроллер определился не корректно");
+            }
+        } catch(\Exception $ex) {
+            MyLogger::log_db_error();
             View::render('error',[
-                'title' => '400 - Bad request',
-                'error_code' => '400 - Bad request',
-                'result' => 'Нет такой страницы'
+                'title' => '503 - Service Unavailable',
+                'error_code' => '503 - Service Unavailable',
+                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
             ]);
-        }
-
-        $controller = new $controller_name();
-        $controller->$action_name();
-
-
-
+        } $controller->$action_name();
     }
 }
