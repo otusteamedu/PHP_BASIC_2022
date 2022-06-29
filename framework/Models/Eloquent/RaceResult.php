@@ -31,8 +31,8 @@ class RaceResult extends Model
                         "username" => $array['username']
                     ];
                     $k++;
-                }
-                    return $massif_race_results;
+                    }
+                        return $massif_race_results;
                 } catch (\Exception $e) {
                     MyLogger::log_db_error();
                     View::render('error', [

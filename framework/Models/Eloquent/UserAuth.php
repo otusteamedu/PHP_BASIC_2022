@@ -31,24 +31,6 @@ class UserAuth extends Model
                 foreach (User::where('login', '=', $_POST['login'])->get() as $user) {
                     $password = $_POST['password'];
                     if (password_verify($password,$user->password)) {
-                       //session_id('myIDSession01');
-                       //session_start();
-                        /*
-                        try {
-                            if (!session_id()) {
-                                session_start();
-                            } else {
-                                throw new Exception("Не удалось создать сессию");
-                            }
-                        } catch(\Exception $ex) {
-                            MyLogger::log_db_error();
-                            View::render('error',[
-                                'title' => '503 - Service Unavailable',
-                                'error_code' => '503 - Service Unavailable',
-                                'result' => 'Cервер временно не имеет возможности обрабатывать запросы по техническим причинам'
-                            ]);
-                        }
-                        */
                         $_SESSION['is_auth'] = true;
                         $_SESSION['login'] = $user->username;
                         $_SESSION['user_id'] = $user->user_id;
