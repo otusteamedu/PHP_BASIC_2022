@@ -6,20 +6,36 @@ $c = "minus";
 var_dump($a);
 var_dump($b);
 var_dump($c);
-function summFunc (int $a, int $b): int {
+function summFunc (int|float $a, int|float $b): int|float {
 	return $a+$b;
 };
-function minusFunc (int $a, int $b): int {
+function minusFunc (int|float $a, int|float $b): int|float {
 	return $a-$b;
 };
-function multiplyFunc (int $a, int $b): int {
-	return $a*$b;
+function multiplyFunc (int|float $a, int|float $b): int|float {
+	if ($a === 0 || $b === 0) {
+		return 0;
+	} else {
+		return $a*$b;
+	};
+	
 };
-function divideFunc (int $a, int $b): int {
-	return $a/$b;
+function divideFunc (int|float $a, int|float $b): mixed {
+	switch ($b) {
+		case 0:
+			return "Error";
+			break;
+		case 1:
+			return $a;
+			break;
+		default:
+			return $a/$b;
+			break;
+	}
+	
 };
 
-function muthOperation (int $a, int $b, string $c): int {
+function muthOperation (int|float $a, int|float $b, string $c): mixed {
 	switch ($c){
 		case "minus":
 			return minusFunc($a,$b);
@@ -107,7 +123,7 @@ function minutes (mixed $min): string {
 		case in_array ($min,[1, 21, 31, 41, 51]):
 			return "минута";
 			break;
-		case in_array ($min,[2,3,4,22,23,24,32,33,34,42,43,44,52,53,54]):
+		case (in_array (substr($min,-1,1),[2,3,4,])) && (in_array ($min, [12, 13, 14])) == false:
 			return "минуты";
 			break;
 		default:
