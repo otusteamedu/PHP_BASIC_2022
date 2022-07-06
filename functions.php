@@ -26,7 +26,8 @@ function addedImages(array $pictureFile, string $gallery)
                 unset($uniq_name);
             }
 
-            return true;
+            header('Location: /');
+            exit();
         }
 
         return false;

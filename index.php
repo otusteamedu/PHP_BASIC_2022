@@ -9,6 +9,7 @@ if (isset($_FILES['picture']) && $_FILES['picture']['size'] > 0) {
 }
 
 $pictures = array_diff(scandir($gallery), ['.', '..']);
+
 ?>
 
 <!DOCTYPE html>
