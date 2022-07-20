@@ -1,4 +1,6 @@
 <?php
+declare (strict_types = 1);
+
 // задание 1 и 2 на простых пользовательских функциях
 $a = random_int(0,15);
 $b = random_int(0,15);
@@ -119,7 +121,16 @@ $date = date("G.i");
 //var_dump (substr($date,-2,2)); получаем последние 2 символа из date, т.е. забираем минуты
 
 function minutes (mixed $min): string {
-	switch ($min){
+	if ($min === 1 || (($min % 10) === 1 && $min > 11)){
+		return 'минута';
+	} elseif (in_array (($min % 10), [2,3,4]) && $min > 14) {
+		return 'минуты';
+	} else {
+		return 'минут';
+	}
+
+/* Прошлое решение
+	switch (true){
 		case in_array ($min,[1, 21, 31, 41, 51]):
 			return "минута";
 			break;
@@ -130,9 +141,20 @@ function minutes (mixed $min): string {
 			return "минут";
 			break;
 	};
+*/
 };
 function hours(mixed $h): string {
-		switch ($h){
+	if ($h === 1 || (($h % 10) === 1 && $h > 11)){
+		return 'час';
+	} elseif (in_array (($h % 10), [2,3,4]) && $h > 14) {
+		return 'часа';
+	} else {
+		return 'часов';
+	}
+
+
+/* Прошлое решение
+		switch (true){
 		case in_array ($h,[1, 21]):
 			return "час";
 			break;
@@ -143,6 +165,7 @@ function hours(mixed $h): string {
 			return "часов";
 			break;
 	};
+*/	
 };
 
 $min= substr($date,-2,2);
