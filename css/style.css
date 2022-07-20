@@ -1,0 +1,23 @@
+body {
+    font-family: 'Nunito', sans-serif;
+};
+container-form {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0, auto;
+    min-width: 400 px;
+    max-width: 1100 px;
+}
+container-photo-gal {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 0, auto;
+    min-width: 400 px;
+    max-width: 1100 px;
+}
+card {
+    box-sizing: border-box;
+    margin: 0, auto;
+    width: 320px;
+
+}
