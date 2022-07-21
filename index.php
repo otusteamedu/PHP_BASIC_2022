@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('connect_db.php');
 ?>
 
 <form method="post" action="index.php">
