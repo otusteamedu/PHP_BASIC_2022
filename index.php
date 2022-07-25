@@ -24,7 +24,7 @@ session_start();
     <div class="row mt-4">
         <?php if (empty($_SESSION['user_id'])): ?>
             <div class="col-md-12">
-                <form action="auth/auth.php" method="post" class="form-inline">
+                <form action="lib/auth/handlers/auth.php" method="post" class="form-inline">
                     <div class="form-group mb-2">
                         <label for="staticEmail2" class="sr-only">Email</label>
                         <input type="text" name="login" class="form-control" id="staticEmail2"
@@ -42,14 +42,17 @@ session_start();
                         <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
                     </div>
                 </form>
+                <div>
+<!--                    здесь будет вывод ошибки авторизации-->
+                </div>
             </div>
         <?php else: ?>
             <div class="col-md-12 d-flex justify-content-between">
-                <form action="functions/uploader.php" method="post" enctype="multipart/form-data">
+                <form action="lib/functions/uploader.php" method="post" enctype="multipart/form-data">
                     <input type="file" id="idPicture" name="picture"/>
                     <input type="submit" value="Отправить!">
                 </form>
-                <form action="auth/exit.php" method="post">
+                <form action="lib/auth/handlers/exit.php" method="post">
                     <button type="submit" class="btn btn-primary mb-2">Exit</button>
                 </form>
             </div>
@@ -57,13 +60,13 @@ session_start();
         <div class="col-md-12 mt-4">
             <h1 class="text-center">Фотогалерея</h1>
         </div>
-        <?php $pictures = array_diff(scandir('img/gallery/'), ['.', '..']); ?>
+        <?php $pictures = array_diff(scandir('lib/img/gallery/'), ['.', '..']); ?>
         <?php if (!empty($pictures)): ?>
             <div class="col-md-12 mt-4 d-flex justify-content-center">
                 <?php foreach ($pictures as $picture): ?>
                     <div class="card" style="width: 18rem;">
-                        <a href="img/gallery/<?= $picture ?>" target="_blank">
-                            <img class="card-img" src="img/galleryMin/<?= $picture ?>" alt="<?= $picture ?>"/>
+                        <a href="lib/img/gallery/<?= $picture ?>" target="_blank">
+                            <img class="card-img" src="lib/img/galleryMin/<?= $picture ?>" alt="<?= $picture ?>"/>
                         </a>
                     </div>
                 <?php endforeach; ?>

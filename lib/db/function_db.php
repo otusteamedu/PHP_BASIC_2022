@@ -10,18 +10,6 @@ function connect()
     ]);
 }
 
-/* Функция авторизации*/
-function authorize(string $user, string $password)
-{
-    $db = connect();
-    $result = $db->prepare('SELECT id from users where username = ? and password = ?');
-    $result->execute([$user, md5($password)]);
-    if ($result->rowCount() == 0) {
-        return false;
-    }
-    return $result->fetch(PDO::FETCH_ASSOC);
-}
-
 
 /* Функция записи токена*/
 function setRememberToken(int $user_id, string $token)

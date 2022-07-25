@@ -1,11 +1,11 @@
 <?php
 
-require_once("image_resizer.php");
+require_once('image_resizer.php');
 
 
 function iWantToBeLogged(string $picture)
 {
-    $logFile = 'txt/LogLoadImages.txt';
+    $logFile = 'log/LogLoadImages.txt';
     $result = 'Добавили в галлерею фото ' . $picture . ', дата и время загрузки: ' . date('Y-m-d H:i:s') . PHP_EOL;
     file_put_contents($logFile, $result, FILE_APPEND);
 }
@@ -20,7 +20,7 @@ function addedImages(array $pictureFile, string $gallery)
             $uniq_name = uniqid() . $pictureFile['picture']['name'];
 
             if ((move_uploaded_file($pictureFile['picture']['tmp_name'], $gallery . $uniq_name))) {
-                SetImgSize('../img/gallery/' . $uniq_name, 350, 240, 1, '../img/galleryMin/' . $uniq_name);
+                SetImgSize('../../lib/img/gallery/' . $uniq_name, 350, 240, 1, '../../lib/img/galleryMin/' . $uniq_name);
                 unset($uniq_name);
             }
 
