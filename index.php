@@ -1,9 +1,3 @@
-<?php
-
-session_start();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +16,7 @@ session_start();
 <body>
 <div class="container-fluid">
     <div class="row mt-4">
-        <?php if (empty($_SESSION['user_id'])): ?>
+        <?php if(empty($_SESSION['user_id'])): ?>
             <div class="col-md-12">
                 <form action="lib/auth/handlers/auth.php" method="post" class="form-inline">
                     <div class="form-group mb-2">
@@ -37,14 +31,16 @@ session_start();
                     </div>
                     <div class="form-check">
                         <input type="hidden" name="action" value="auth">
-                        <input class="form-check-input" type="checkbox" name="remember_me" id="Remember_me" checked>
+                        <input class="form-check-input" type="checkbox" name="remember_me" id="Remember_me">
                         <label class="form-check-label" for="Remember_me">Remember me</label>
                         <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
                     </div>
                 </form>
+                <?php if(!empty($_SESSION['error'])): ?>
                 <div>
-<!--                    здесь будет вывод ошибки авторизации-->
+                    <?=$_SESSION['error']?>
                 </div>
+                <?php endif; ?>
             </div>
         <?php else: ?>
             <div class="col-md-12 d-flex justify-content-between">

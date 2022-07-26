@@ -2,6 +2,15 @@
 
 require_once('../../../lib/db/function_db.php');
 
+function login()
+{
+    $check = checkToken();
+
+    if (!$check) {
+        auth();
+    }
+}
+
 /* Функция авторизации*/
 function authorize(string $user, string $password): array
 {
@@ -20,28 +29,34 @@ function checkToken()
 {
     if (!empty($_COOKIE['remember_token'])) {
         $userData = getUserDataByToken($_COOKIE['remember_token']);
+        if (empty($userData['id'])) {
+            return false;
+        }
         $_SESSION['user_id'] = intval($userData['id']);
         $_SESSION['username'] = $userData['username'];
-        header('Location: /');
+        return true;
     }
+    return false;
 }
 
 function auth()
 {
     if (!empty($_POST['action']) && $_POST['action'] === 'auth') {
         $authResult = authorize($_POST['login'], $_POST['password']);
+
         if (empty($authResult)) {
-            echo 'Неправильное имя пользователя или пароль!';
+            $_SESSION['error'] = 'Неправильное имя пользователя или пароль!';
         } else {
             $_SESSION['user_id'] = intval($authResult['id']);
             $_SESSION['username'] = $_POST['login'];
             if ($_POST['remember_me'] === 'on') {
                 $token = uniqid();
                 setRememberToken($_SESSION['user_id'], $token);
-                setcookie('remember_token', $token, time() + 3600 * 24 * 30 * 6);
+                setcookie('remember_token', $token, time() + 3600*24*30*6, '/');
             }
-            header('Location: /');
         }
+
+        header('Location: /');
     }
 }
 
