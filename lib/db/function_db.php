@@ -17,7 +17,7 @@ function setRememberToken(int $user_id, string $token)
     $db = connect();
     $result = $db->prepare('update users set remember_token = :token where id = :id');
     $result->bindParam(':token', $token,PDO::PARAM_STR);
-    $result->bindParam(':token', $user_id,PDO::PARAM_INT);
+    $result->bindParam(':id', $user_id,PDO::PARAM_INT);
     $result->execute();
 }
 
