@@ -4,9 +4,7 @@ require_once('../../../lib/db/function_db.php');
 
 function login()
 {
-    $check = checkToken();
-
-    if (!$check) {
+    if (!checkToken()) {
         auth();
     }
 }
@@ -59,6 +57,7 @@ function auth()
         header('Location: /');
     }
 }
+
 
 function logout()
 {
