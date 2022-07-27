@@ -4,10 +4,12 @@ require_once('../../../lib/db/function_db.php');
 
 function login()
 {
+
     if (!checkToken()) {
         auth();
     }
 }
+
 
 /* Функция авторизации*/
 function authorize(string $user, string $password): array
