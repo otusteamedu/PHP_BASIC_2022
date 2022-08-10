@@ -48,7 +48,7 @@ function getBookById($id)
 {
     $db = connect();
     $result = $db->prepare('SELECT * FROM `library` WHERE id = :id');
-    $result->bindParam('id', $id);
+    $result->bindParam('id', $id, PDO::PARAM_INT);
     $result->execute();
     return $result->fetch(PDO::FETCH_ASSOC);
 }
@@ -65,10 +65,10 @@ function addBook($book)
         $result = $db->prepare('INSERT INTO `library` 
     (`bookname`, `author`, `page_count`, `year_of_issue`)
     VALUES (:bookname, :author, :page_count, :year_of_issue)');
-        $result->bindParam('bookname', $bookname);
-        $result->bindParam('author', $author);
-        $result->bindParam('page_count', $page_count);
-        $result->bindParam('year_of_issue', $year_of_issue);
+        $result->bindParam('bookname', $bookname, PDO::PARAM_STR);
+        $result->bindParam('author', $author, PDO::PARAM_STR);
+        $result->bindParam('page_count', $page_count, PDO::PARAM_STR);
+        $result->bindParam('year_of_issue', $year_of_issue, PDO::PARAM_STR);
         $result->execute();
         $id = $db->lastInsertId();
     }
@@ -80,7 +80,7 @@ function deleteBook($id)
 {
     $db = connect();
     $result = $db->prepare('DELETE FROM `library` WHERE id = :id');
-    $result->bindParam('id', $id);
+    $result->bindParam('id', $id, PDO::PARAM_INT);
     return $result->execute();
 }
 
@@ -93,17 +93,18 @@ function addPicture($bookId,$name)
     $result = $db->prepare('INSERT INTO `illustrations`
     (`book_id`, `link`)
     VALUES (:book_id, :link)');
-    $result->bindParam('book_id', $number_id);
-    $result->bindParam('link', $namepic);
+    $result->bindParam('book_id', $number_id, PDO::PARAM_INT);
+    $result->bindParam('link', $namepic, PDO::PARAM_STR);
     return $result->execute();
 }
+
 
 /* Функция получения изображения по id книги */
 function getPictureById($id)
 {
     $db = connect();
     $result = $db->prepare('SELECT link FROM `illustrations` WHERE book_id = :book_id');
-    $result->bindParam('book_id', $id);
+    $result->bindParam('book_id', $id, PDO::PARAM_INT);
     $result->execute();
     return $result->fetchAll(PDO::FETCH_ASSOC);
 
