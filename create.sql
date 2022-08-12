@@ -4,15 +4,15 @@ CREATE TABLE book (
     bookname VARCHAR(250) NOT NULL,
     page_count BIGINT NOT NULL,
     year_of_issue YEAR NOT NULL,
-    PRIMARY KEY (id)
+    author_id BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (author_id) REFERENCES authors(id)
 );
-
-CREATE TABLE author (
+/* Создаю таблицу authors */
+CREATE TABLE authors (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    book_id BIGINT NOT NULL,
     author VARCHAR(250) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (book_id) REFERENCES book(id)
 );
 
 
