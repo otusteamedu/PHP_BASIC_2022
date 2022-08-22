@@ -20,13 +20,13 @@ class ShopProduct
         $this->price = $price;
     }
 
-    public function getProducer()
+    public function getProducer(): string
     {
         return $this->producerFirstName . " "
             . $this->producerMainName;
     }
 
-    public function getSummaryLine()
+    public function getSummaryLine(): string
     {
         $base = "{$this->title} ( {$this->producerMainName}, ";
         $base .= "{$this->producerFirstName} )";

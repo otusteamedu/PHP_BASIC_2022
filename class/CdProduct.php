@@ -22,12 +22,12 @@ class CdProduct extends ShopProduct
         $this->playLength = $playLength;
     }
 
-    public function getPlayLength()
+    public function getPlayLength(): int
     {
         return $this->playLength;
     }
 
-    public function getSummaryLine()
+    public function getSummaryLine(): string
     {
         $base = "{$this->title} ( {$this->producerMainName}, ";
         $base .= "{$this->producerFirstName} )";

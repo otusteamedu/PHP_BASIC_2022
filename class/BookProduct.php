@@ -22,12 +22,12 @@ class BookProduct extends ShopProduct
         $this->numPages = $numPages;
     }
 
-    public function getNumberOfPages()
+    public function getNumberOfPages(): int
     {
         return $this->numPages;
     }
 
-    public function getSummaryLine()
+    public function getSummaryLine(): string
     {
         $base = "{$this->title} ( {$this->producerMainName}, ";
         $base .= "{$this->producerFirstName} )";

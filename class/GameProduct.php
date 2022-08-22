@@ -23,12 +23,12 @@ class GameProduct extends ShopProduct
         $this->countOfChapters = $countOfChapters;
     }
 
-    public function getcountOfChapters()
+    public function getcountOfChapters():int
     {
         return $this->countOfChapters;
     }
 
-    public function getSummaryLine()
+    public function getSummaryLine(): string
     {
         $base = "{$this->title} ( {$this->producerMainName}, ";
         $base .= "{$this->producerFirstName} )";
