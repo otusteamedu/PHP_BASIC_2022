@@ -16,7 +16,7 @@ class digitalProduct extends Product
 
     public function getProfite(): float
     {
-        return parent::getProfite() * 0.5;
+        return parent::getProfite() * 0.5; // цена цифрового товара в два раза меньше, чем у штучного
     }
 
 }
