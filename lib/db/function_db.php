@@ -4,10 +4,19 @@ require_once('config.php');
 
 function connect()
 {
-    return new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USERNAME, PASSWORD, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::FETCH_ASSOC => true
-    ]);
+    $connect = null;
+
+    try {
+        $connect = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USERNAME, PASSWORD, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::FETCH_ASSOC => true
+        ]);
+    } catch (\PDOException $e) {
+        $_SESSION['error'] = $e->getMessage();
+        header('Location: /');
+    }
+
+    return $connect;
 }
 
 
