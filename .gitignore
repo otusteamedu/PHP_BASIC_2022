@@ -1,1 +1,3 @@
-.idea/
+/.vagrant
+/.idea
+/www/vendor

@@ -1,0 +1,12 @@
+{
+    "name": "otus/env",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Otus\\Env\\": "src/"
+        }
+    },
+    "require": {
+        "rivsen/hello-world": "^0.1.0"
+    }
+}
