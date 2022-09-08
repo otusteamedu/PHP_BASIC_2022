@@ -1,3 +1,3 @@
 <?php
     require_once 'vendor/autoload.php';
-    \Otus\Mvc\Core\App::run();
+    \Hell\Mvc\Core\App::run();

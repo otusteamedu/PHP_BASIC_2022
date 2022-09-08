@@ -1,6 +1,6 @@
 <?php
 
-namespace Otus\Mvc\Core;
+namespace Hell\Mvc\Core;
 
 class View
 {
