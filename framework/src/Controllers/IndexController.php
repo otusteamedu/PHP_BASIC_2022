@@ -21,4 +21,11 @@ class IndexController
         ]);
     }
 
+    public function home() {
+        View::render('home',[
+            'title'=> 'Midgard',
+            'name' => 'путник, дальше путь лежит во тьме'
+        ]);
+    }
+
 }

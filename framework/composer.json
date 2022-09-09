@@ -6,9 +6,9 @@
 
   "autoload": {
     "psr-4": {
-      "Hell\\Mvc\\Controllers\\": "Controllers/",
-      "Hell\\Mvc\\Core\\": "Core/",
-      "Hell\\Mvc\\Views\\": "Views/"
+      "Hell\\Mvc\\Controllers\\": "src/Controllers/",
+      "Hell\\Mvc\\Core\\": "src/Core/",
+      "Hell\\Mvc\\Views\\": "src/Views/"
     }
   }
 }
