@@ -1,0 +1,7 @@
+/framework/vendor
+/.idea/
+.env
+/framework/log/*.log
+.vscode
+mysql
+/framework/Assets/img/logo_race/

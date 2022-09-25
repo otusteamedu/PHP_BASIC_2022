@@ -1,0 +1,31 @@
+{
+  "name": "otus/mvc",
+  "description": "A simple race journal",
+  "type": "project",
+  "license": "Freeware",
+  "authors": [
+    {
+      "name": "I.Tsyganok",
+      "email": "ciganokigor@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/database": "^8.69",
+    "doctrine/orm": "^2.10",
+    "symfony/yaml": "^5.3",
+    "symfony/cache": "^5.3",
+    "monolog/monolog": "^2.6",
+    "vlucas/phpdotenv": "^5.4",
+    "twbs/bootstrap": "5.2.0-beta1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Otus\\Mvc\\Controllers\\": "Controllers/",
+      "Otus\\Mvc\\Core\\": "Core/",
+      "Otus\\Mvc\\Models\\": "Models/",
+      "Otus\\Mvc\\Views\\": "Views/",
+      "Otus\\Mvc\\Services\\": "Services/",
+      "Otus\\Mvc\\Assets\\": "Assets/"
+    }
+  }
+}
