@@ -1,0 +1,43 @@
+
+services:
+    db:
+        build: ./db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: dimitry
+            MYSQL_PASSWORD: dimitry
+        hostname: c_mysql
+        ports:
+            - 3306:3306
+        volumes:
+            - v_mysql_data:/var/lib/mysql
+            - /shared/tmp:/var/tmp
+        networks:
+            - n_my_net
+    
+    php:
+       build: ./php
+       hostname: c_php
+       ports:
+           - 9000:9000
+       volumes:
+           - /shared/www/htdocs:/var/www
+       networks:
+           - n_my_net
+            
+    web:
+        image: nginx
+        hostname: c_web
+        ports:
+            - 80:80
+        volumes:
+            - /shared/www/htdocs:/var/www
+            - /shared/www/sites-conf:/etc/nginx/conf.d
+        networks:
+            - n_my_net
+            
+volumes:
+   v_mysql_data:
+
+networks:
+    n_my_net:
