@@ -31,6 +31,8 @@ Vagrant.configure("2") do |config|
     echo "Install basic soft by script /shared/config/basic_soft_install.bash"
     echo "Install docker by script /shared/config/docker_install.bash"
     
+    mkdir /var/www && chown vagrant /var/www
+    
     apt-get update
     apt-get -y upgrade
     apt-get -y install vim
