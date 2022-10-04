@@ -1,1 +1,3 @@
-https://otus.ru/lessons/php-basic/?utm_source=github&utm_medium=free&utm_campaign=otus
+Курс: "PHP Basic 2022"
+
+Студент: Д.С. Понятов
