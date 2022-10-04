@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Вспомогательный сценарий установки компонентов docker (например, на случай возможных сбоев в работе provision-скрипта в Vagrantfile)
+
 sudo mkdir -p /etc/apt/keyrings
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg

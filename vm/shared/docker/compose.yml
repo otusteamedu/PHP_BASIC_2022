@@ -19,7 +19,7 @@ services:
        ports:
            - 9000:9000
        volumes:
-           - /shared/www/htdocs:/var/www
+           - /var/www:/var/www
        networks:
            - n_my_net
             
@@ -29,7 +29,7 @@ services:
         ports:
             - 80:80
         volumes:
-            - /shared/www/htdocs:/var/www
+            - /var/www:/var/www
             - /shared/www/sites-conf:/etc/nginx/conf.d
         networks:
             - n_my_net

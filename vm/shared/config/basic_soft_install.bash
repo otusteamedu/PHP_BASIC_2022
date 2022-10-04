@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Вспомогательный сценарий установки базовых пакетов (например, на случай возможных сбоев в работе provision-скрипта в Vagrantfile)
 sudo apt-get update
 sudo apt-get -y upgrade
 
