@@ -84,6 +84,12 @@
         <div class="explore">
             <button type="button">Explore all <img src="images/arrow_r_beige.svg" alt="Стрелка вправо"></button>
         </div>
+        <hr>
+        <?php
+            $dtiNow = new DateTimeImmutable('now');
+            $strNow = $dtiNow->format('d.m, H:i');
+        ?>
+        <p><em>Сформирована: <?=$strNow;?></em></p>
     </footer>
 </body>
 

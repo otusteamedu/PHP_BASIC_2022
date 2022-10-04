@@ -1,7 +1,7 @@
 FROM php:8.1-fpm-bullseye
+COPY php.ini /usr/local/etc/php/php.ini
 COPY composer_install.sh /tmp/
-RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini && \
-    apt-get update && \
+RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y      \
         wget                \
