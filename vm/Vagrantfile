@@ -5,33 +5,18 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", host: 5432, guest: 5432, id: "pgsql"
   config.vm.network "forwarded_port", host: 80, guest: 80, id: "www"
 
-  config.vm.synced_folder "shared/", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=777", "fmode=666"]
-
-  config.vm.provider "virtualbox" do |vb|
-     vb.memory = "4096"
-  end
+  config.vm.synced_folder "shared/", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
 
   config.vm.provision "shell", inline: <<-SHELL
     TZ=Europe/Moscow
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     
-    cd /home/vagrant && \
-    cp -f /shared/config/vagrant_bashrc .bashrc && \
-    cp /shared/config/.bash_aliases .bash_aliases && \
-    cp /shared/config/.selected_editor .selected_editor && \
-    cp /shared/config/.vimrc .vimrc && \
-    chown -R vagrant:vagrant /home/vagrant && \
+    cp -pf /shared/config/vagrant_bashrc ~vagrant/.bashrc
+    cp -pf /shared/config/.bash_aliases ~vagrant/.bash_aliases
+    cp -pf /shared/config/.selected_editor ~vagrant/.selected_editor
+    cp -pf /shared/config/.vimrc ~vagrant/.vimrc
+    cp -pfr /shared/docker ~vagrant/
     echo "User vagrant config ok..."
-
-    cp -f /shared/config/root_bashrc /root/.bashrc && \
-    cp /shared/config/.selected_editor /root/.selected_editor && \
-    cp /shared/config/.vimrc /root/.vimrc && \
-    echo "User root config ok..."
-    echo
-    echo "Install basic soft by script /shared/config/basic_soft_install.bash"
-    echo "Install docker by script /shared/config/docker_install.bash"
-    
-    mkdir /var/www && chown vagrant /var/www
     
     apt-get update
     apt-get -y upgrade

@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/normalize.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
-    <title>Connection services</title>
+    <title>Connection services Z</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
     <main>
         <!-- плитка -->
         <div class="tile">
-            <img class="feature_icon" src="images/icon1.png" alt="значок Mobile Application">
+            <img class="feature_icon" src="/images/icon1.png" alt="значок Mobile Application">
             <h3 class="tile_header">Mobile Application</h3>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

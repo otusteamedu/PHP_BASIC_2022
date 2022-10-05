@@ -14,23 +14,23 @@ services:
         command: "-c timezone='Europe/Moscow' -c log_timezone='Europe/Moscow'"
 
     php:
-       build: ./php
+       build: ./php81
        hostname: c_php
        ports:
            - 9000:9000
        volumes:
-           - /var/www:/var/www
+           - /home/vagrant/docker/web/htdocs:/var/www
        networks:
            - n_my_net
             
     web:
-        image: nginx
+        build: ./web
         hostname: c_web
         ports:
             - 80:80
         volumes:
-            - /var/www:/var/www
-            - /shared/www/sites-conf:/etc/nginx/conf.d
+            - /home/vagrant/docker/web/htdocs:/var/www
+            - /home/vagrant/docker/web/conf:/etc/nginx/conf.d
         networks:
             - n_my_net
             
