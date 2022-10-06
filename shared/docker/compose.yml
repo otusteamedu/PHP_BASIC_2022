@@ -1,20 +1,34 @@
 
 services:
-    php:
-       build: ./php81
-       hostname: c_php
+    # движок php7-fpm
+    php7:
+       build: ./php74
+       hostname: c_php7
        ports:
-           - 9000:9000
+           - 9007:9007
        volumes:
            - /home/vagrant/docker/web/www:/var/www
        networks:
            - n_my_net
-            
+    
+    # движок php8-fpm
+    php8:
+       build: ./php81
+       hostname: c_php8
+       ports:
+           - 9008:9008
+       volumes:
+           - /home/vagrant/docker/web/www:/var/www
+       networks:
+           - n_my_net
+    
+    # веб-сервер nginx
     web:
         build: ./web
         hostname: c_web
         ports:
-            - 80:80
+            - 8074:8074
+            - 8081:8081
         volumes:
             - /home/vagrant/docker/web/www:/var/www
             - /home/vagrant/docker/web/conf:/etc/nginx/conf.d

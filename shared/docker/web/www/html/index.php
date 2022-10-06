@@ -8,7 +8,7 @@
     <link href="/css/normalize.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
 
-    <title>Connection services Z</title>
+    <title>Connection services</title>
 </head>
 
 <body>
@@ -94,7 +94,7 @@
             $dtiNow = new DateTimeImmutable('now');
             $strNow = $dtiNow->format('d.m, H:i');
         ?>
-        <p><em>Сформировано: <?=$strNow;?></em></p>
+        <p><em>Сформировано: <?=$strNow;?>; PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?></em></p>
     </footer>
 </body>
 

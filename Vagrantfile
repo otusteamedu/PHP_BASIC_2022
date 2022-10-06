@@ -2,7 +2,8 @@ Vagrant.configure("2") do |config|
   #config.vm.box = "debian11-4.1.4"
   config.vm.box = "generic/debian11"
   
-  config.vm.network "forwarded_port", host: 8000, guest: 80, id: "www"
+  config.vm.network "forwarded_port", host: 8081, guest: 8081, id: "www_php8"
+  config.vm.network "forwarded_port", host: 8074, guest: 8074, id: "www_php7"
 
   config.vm.synced_folder "shared/", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
 
@@ -37,5 +38,7 @@ Vagrant.configure("2") do |config|
     apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin && usermod -aG docker vagrant
     
     docker run hello-world
+    
+    cd /home/vagrant/docker && docker compose up
   SHELL
 end
