@@ -13,7 +13,6 @@ RUN apt-get update && \
         libzip-dev          \
         libzstd-dev         \
         libicu-dev          \
-        libpq-dev           \
     && docker-php-ext-configure gd --with-freetype --with-jpeg  \
     && docker-php-ext-install -j$(nproc) gd                     \
     && docker-php-ext-configure zip                             \
@@ -24,10 +23,6 @@ RUN apt-get update && \
     && docker-php-ext-install -j$(nproc) calendar               \
     && docker-php-ext-configure intl                            \
     && docker-php-ext-install -j$(nproc) intl                   \
-    && docker-php-ext-configure pdo_pgsql                       \
-    && docker-php-ext-install -j$(nproc) pdo_pgsql              \
-    && pecl install igbinary-3.2.7                              \
-    && pecl install redis-5.3.7                                 \
     && pecl install xdebug-3.1.5                                \
-    && docker-php-ext-enable igbinary redis xdebug              \
+    && docker-php-ext-enable xdebug                             \
     && /bin/sh /tmp/composer_install.sh

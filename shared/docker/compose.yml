@@ -1,18 +1,5 @@
 
 services:
-    db:
-        build: ./pgsql
-        environment:
-            POSTGRES_PASSWORD: qwerty
-        ports:
-            - "5432:5432"
-        volumes:
-            - v_pgsql_data:/var/lib/postgresql/data
-            - /shared/tmp:/tmp
-        networks:
-            - n_my_net
-        command: "-c timezone='Europe/Moscow' -c log_timezone='Europe/Moscow'"
-
     php:
        build: ./php81
        hostname: c_php
@@ -33,9 +20,6 @@ services:
             - /home/vagrant/docker/web/conf:/etc/nginx/conf.d
         networks:
             - n_my_net
-            
-volumes:
-   v_pgsql_data:
 
 networks:
     n_my_net:
