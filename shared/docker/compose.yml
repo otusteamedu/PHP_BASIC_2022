@@ -8,7 +8,7 @@ services:
             - "5432:5432"
         volumes:
             - v_pgsql_data:/var/lib/postgresql/data
-            - /shared/tmp:/var/tmp
+            - /shared/tmp:/tmp
         networks:
             - n_my_net
         command: "-c timezone='Europe/Moscow' -c log_timezone='Europe/Moscow'"

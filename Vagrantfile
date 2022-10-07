@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "generic/debian11"
   
   config.vm.network "forwarded_port", host: 5432, guest: 5432, id: "pgsql"
-  config.vm.network "forwarded_port", host: 80, guest: 80, id: "www"
+  config.vm.network "forwarded_port", host: 8033, guest: 8033, id: "www"
 
   config.vm.synced_folder "shared/", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
 
