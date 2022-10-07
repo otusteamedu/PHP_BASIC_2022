@@ -1,5 +1,6 @@
 FROM php:8.1-fpm-bullseye
 COPY php.ini /usr/local/etc/php/php.ini
+COPY zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY composer_install.sh /tmp/
 RUN apt-get update && \
     apt-get upgrade -y && \
