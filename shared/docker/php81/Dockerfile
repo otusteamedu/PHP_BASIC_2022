@@ -15,6 +15,6 @@ RUN apt-get update &&     \
     && docker-php-ext-enable xdebug          \
     && /bin/sh /tmp/composer_install.sh      \
     && cd /var/www/html                      \
-    && composer global require "squizlabs/php_codesniffer=*"
+    && composer require --dev "squizlabs/php_codesniffer=*"
 
 EXPOSE 9033
