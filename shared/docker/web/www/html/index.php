@@ -92,7 +92,7 @@
         </nav>
         <?php
             $dtiNow = new DateTimeImmutable('now');
-            $strNow = $dtiNow->format('d.m, H:i');
+            $strNow = $dtiNow->format('d.m.Y, H:i');
         ?>
         <p><em>Сформировано: <?=$strNow;?>; PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?></em></p>
     </footer>
