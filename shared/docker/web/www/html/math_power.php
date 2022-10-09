@@ -28,16 +28,22 @@
             $power = random_int(-5, 5);
 
             $itog = power($val, $power);
+
+            if ($val < 0) {
+                $leftBrace = '(';
+                $rightBrace = ')';
+            } else {
+                $leftBrace = '';
+                $rightBrace = '';
+            }
+            
         ?>
-        <p>Число: <?=$val;?></p>
-        <p>Степень: <?=$power;?></p>
-        <p>Итог: <?=$itog ?? 'Не существует';?></p>
+        <p><?=$leftBrace;?><?=$val;?><?=$rightBrace;?><sup><?=$power;?></sup> = <?=($itog ?? 'не существует');?></p>
     </main>
     
     <footer>
         <nav>
             <p class="nav_item"><a class="nav_link" href="/index.php">На главную</a></p>
-            <!-- <p class="nav_item"><a class="nav_link" href="/var_exchange.php">Обмен значениями переменных</a></p> -->
         </nav>
         <?php
             $dtiNow = new DateTimeImmutable('now');
