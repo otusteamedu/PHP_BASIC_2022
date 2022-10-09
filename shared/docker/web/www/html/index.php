@@ -92,8 +92,8 @@
 
     <footer>
         <nav>
-            <p class="nav_item"><a class="nav_link" href="type_conversion.php">Приведение типов</a></p>
-            <p class="nav_item"><a class="nav_link" href="var_exchange.php">Обмен значениями переменных</a></p>
+            <p class="nav_item"><a class="nav_link" href="math_power.php">Возведение в степень</a></p>
+            <!-- <p class="nav_item"><a class="nav_link" href="var_exchange.php">Обмен значениями переменных</a></p> -->
         </nav>
         <?php
             $dtiNow = new DateTimeImmutable('now');
