@@ -1,3 +1,8 @@
+<?php
+    require('src/hours_rus.php');
+    require('src/minutes_rus.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -92,9 +97,12 @@
         </nav>
         <?php
             $dtiNow = new DateTimeImmutable('now');
-            $strNow = $dtiNow->format('d.m.Y, H:i');
+            $dateNow = $dtiNow->format('d.m.Y');
+            $hoursNow = $dtiNow->format('H');
+            $minutesNow = $dtiNow->format('i');
         ?>
-        <p><em>Сформировано: <?=$strNow;?>; PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?></em></p>
+        <p><em> Сформировано: <?=$dateNow;?>, <?=hours_rus($hoursNow);?> <?=minutes_rus($minutesNow);?>. </em></p>
+        <p><em> PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?> </em></p>
     </footer>
 </body>
 
