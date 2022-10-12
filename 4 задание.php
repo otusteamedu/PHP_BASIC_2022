@@ -1,7 +1,8 @@
 <?php
-    $a = A;
-    $b = B;
-    
-    list($a, $b) = array($b, $a);
+$a = 1;
+$b = 2;
+$a = $b + $a;
+$b = $a - $b;
+$a = $a - $b;
 
-?>
+echo $a, $b;
