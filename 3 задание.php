@@ -2,24 +2,23 @@
 
 $a = 4;
 
-$constatnt = match ($a) {
-    0 => 0,
-    1 => 1,
-    2 => 2,
-    3 => 3,
-    4 => 4,
-    5 => 5,
-    6 => 6,
-    7 => 7,
-    8 => 8,
-    9 => 9,
-    10 => 10,
-    11 => 11,
-    12 => 12,
-    13 => 13,
-    14 => 14,
+$result = match ($a) {
+    0 => range(0, 15),
+    1 => range(1, 15),
+    2 => range(2, 15),
+    3 => range(3, 15),
+    4 => range(4, 15),
+    5 => range(5, 15),
+    6 => range(6, 15),
+    7 => range(7, 15),
+    8 => range(8, 15),
+    9 => range(9, 15),
+    10 => range(10, 15),
+    11 => range(11, 15),
+    12 => range(12, 15),
+    13 => range(13, 15),
+    14 => range(14, 15),
     15 => 15,
+    default => 'out of range',
 };
-foreach (range($constatnt, 15, 1) as $number) {
-    echo $number;
-}
+print_r($result);
