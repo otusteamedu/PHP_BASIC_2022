@@ -1,0 +1,124 @@
+@font-face {
+    font-family: 'Nunito';
+    src: local("Nunito"),
+    url("/fonts/Nunito-Regular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+body {
+    margin: 0;
+    font-family: "Nunito", "Arial", "Tahoma", sans-serif;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+img {
+    margin-right: 64px;
+}
+
+a {
+    color: #485466;
+}
+
+.header {
+    padding: 25px 0px;
+    justify-content: space-between;
+}
+
+.btn-log {
+    margin-right: 16px;
+    border: none;
+    background-color: white;
+    color: #4E92F9;
+    font-size: 16px;
+}
+
+.btn-sign {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0px 7px 20px rgba(49, 69, 255, 0.13);
+    background: linear-gradient(112.77deg, #C381DB 0%, #4E92F9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.container-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 461px;
+    margin-top: 138px;
+}
+
+.demo-h1 {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 51px;
+    line-height: 70px;
+    background: linear-gradient(112.77deg, #C381DB 0%, #4E92F9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.demo-h2 {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 55px;
+    color: #485466;
+}
+
+.demo-h3 {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #5A6980;
+}
+
+.btn-demo {
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    position: relative;
+    outline: none;
+    border: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 0.75em 1.75em;
+    border-radius: 8px;
+    display: inline-block;
+    color: #fff;
+    margin-top: 47px;
+    background: linear-gradient(112.77deg, #C381DB 0%, #4E92F9 100%);
+}
+
+.btn-demo:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -10px;
+    left: 5%;
+    height: 110%;
+    width: 90%;
+    opacity: 0.8;
+    border-radius: 7px;
+    background: inherit;
+    -webkit-filter: blur(12px);
+    -moz-filter: blur(12px);
+    -o-filter: blur(12px);
+    -ms-filter: blur(12px);
+    filter: blur(12px);
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
