@@ -11,8 +11,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/normalize.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 
     <title>ДЗ_14: Функции</title>
 </head>
@@ -38,7 +40,8 @@
             }
             
         ?>
-        <p><?=$leftBrace;?><?=$val;?><?=$rightBrace;?><sup><?=$power;?></sup> = <?=($itog ?? 'не существует');?></p>
+        <p class="mb-0"><?=$leftBrace;?><?=$val;?><?=$rightBrace;?><sup><?=$power;?></sup> = <?=($itog ?? 'не существует');?></p>
+        <p class="text-right"><em><small>Перезагрузите страницу для обновления вычисления</small></em></p>
     </main>
     
     <footer>
