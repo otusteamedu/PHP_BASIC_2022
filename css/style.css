@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  font-family: "Tahoma", "Open-Sans", "Verdana", sans-serif;
+  background-color: black;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h3 {
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 48px;
+}
+
+a {
+  text-decoration: none;
+  color: #8c30f5;
+}
+.services {
+  padding: 80px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1110px;
+  margin: 0 auto;
+  background-color: black;
+}
+.services-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.services-flex_item {
+  width: 350px;
+  height: 346px;
+  background-color: aliceblue;
+  border-radius: 8px;
+  padding: 40px 32px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+}
+
+.services-flex_item img {
+  margin-bottom: 56px;
+}
+.services-flex_item h3 {
+  margin-bottom: 12px;
+}
+.services-flex_item p {
+  margin-bottom: 40px;
+}
+
+.button-flex {
+  display: flex;
+  justify-content: center;
+}
+button {
+  background: black;
+  color: #ffffff;
+  box-sizing: border-box;
+  padding: 16px 21px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  flex: none;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 1440px) {
+  .services-flex__item {
+    background-color: white;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .services-flex {
+    justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 1209px) {
+  .services-flex {
+    justify-content: space-evenly;
+  }
+}
+@media screen and (max-width: 845px) {
+  .services-flex_item {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .services-flex_item {
+    width: 286px;
+  }
+}
+@media screen and (max-width: 425px) {
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  .services-flex_item img {
+    margin-bottom: 15px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .services-flex_item p {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .services-flex_item p {
+    margin-bottom: 5px;
+  }
+  .services-flex_item img {
+    margin-bottom: 20px;
+    margin-top: 2px;
+  }
+  .services-flex_item {
+    padding: 10px;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+}
