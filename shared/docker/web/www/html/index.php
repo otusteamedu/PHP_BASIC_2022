@@ -1,20 +1,10 @@
 <?php
     require('src/hours_rus.php');
     require('src/minutes_rus.php');
+
+    $title = 'Connection services';
+    require('head.php');
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/normalize.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet">
-
-    <title>Connection services</title>
-</head>
 
 <body>
     <header>
@@ -93,16 +83,9 @@
     <footer>
         <nav>
             <p class="nav_item"><a class="nav_link" href="math_power.php">Возведение в степень</a></p>
-            <!-- <p class="nav_item"><a class="nav_link" href="var_exchange.php">Обмен значениями переменных</a></p> -->
+            <p class="nav_item"><a class="nav_link" href="math_operations.php">Математические операции</a></p>
         </nav>
-        <?php
-            $dtiNow = new DateTimeImmutable('now');
-            $dateNow = $dtiNow->format('d.m.Y');
-            $hoursNow = $dtiNow->format('H');
-            $minutesNow = $dtiNow->format('i');
-        ?>
-        <p><em> Сформировано: <?=$dateNow;?>, <?=hours_rus($hoursNow);?> <?=minutes_rus($minutesNow);?>. </em></p>
-        <p><em> PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?> </em></p>
+       <?php include('foot.php'); ?>
     </footer>
 </body>
 
