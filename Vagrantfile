@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  #config.vm.box = "debian11-4.1.4"
+  #config.vm.box = "debian11-4.1.16"
   config.vm.box = "generic/debian11"
   
   config.vm.network "forwarded_port", host: 8033, guest: 8033, id: "www"
@@ -37,5 +37,7 @@ Vagrant.configure("2") do |config|
     apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin && usermod -aG docker vagrant
     
     docker run hello-world
+
+    cd /home/vagrant/docker && docker compose up
   SHELL
 end
