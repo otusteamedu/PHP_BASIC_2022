@@ -1,9 +1,9 @@
 <?php
-    require('src/hours_rus.php');
-    require('src/minutes_rus.php');
+    require 'src/hours_rus.php';
+    require 'src/minutes_rus.php';
 
     $title = 'Connection services';
-    require('head.php');
+    require 'head.php';
 ?>
 
 <body>
@@ -85,7 +85,7 @@
             <p class="nav_item"><a class="nav_link" href="math_power.php">Возведение в степень</a></p>
             <p class="nav_item"><a class="nav_link" href="math_operations.php">Математические операции</a></p>
         </nav>
-       <?php include('foot.php'); ?>
+       <?php include 'foot.php'; ?>
     </footer>
 </body>
 

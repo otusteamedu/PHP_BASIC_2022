@@ -6,7 +6,7 @@ services:
        ports:
            - 9033:9033
        volumes:
-           - /home/vagrant/docker/web/www:/var/www
+           - /home/vagrant/docker/site/www:/var/www
        networks:
            - n_my_net
             
@@ -16,13 +16,10 @@ services:
         ports:
             - 8033:8033
         volumes:
-            - /home/vagrant/docker/web/www:/var/www
-            - /home/vagrant/docker/web/conf:/etc/nginx/conf.d
+            - /home/vagrant/docker/site/www:/var/www
+            - /home/vagrant/docker/site/conf:/etc/nginx/conf.d
         networks:
             - n_my_net
-            
-volumes:
-   v_pgsql_data:
 
 networks:
     n_my_net:

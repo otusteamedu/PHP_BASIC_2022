@@ -1,10 +1,10 @@
 <?php
-    require('src/hours_rus.php');
-    require('src/minutes_rus.php');
-    require('src/power.php');
+    require 'src/hours_rus.php';
+    require 'src/minutes_rus.php';
+    require 'src/power.php';
 
     $title = 'ДЗ_14: Функции';
-    require('head.php');
+    require 'head.php';
 ?>
 
 <body>
@@ -36,7 +36,7 @@
         <nav>
             <p class="nav_item"><a class="nav_link" href="/index.php">На главную</a></p>
         </nav>
-       <?php include('foot.php'); ?>
+       <?php include 'foot.php'; ?>
     </footer>
 </body>
 

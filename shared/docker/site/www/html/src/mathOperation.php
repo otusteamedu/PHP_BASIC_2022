@@ -1,12 +1,13 @@
 <?php
-require_once('src/multiply.php');
-require_once('src/divide.php');
-require_once('src/summa.php');
-require_once('src/difference.php');
+
+require_once 'src/multiply.php';
+require_once 'src/divide.php';
+require_once 'src/summa.php';
+require_once 'src/difference.php';
 
 /**
  * Выполнить арифметическую операцию.
- * 
+ *
  * @param int|float $a первый аргумент
  * @param int|float $b второй аргумент
  * @param string $operation название одной из четырёх основных арифметических операций:
