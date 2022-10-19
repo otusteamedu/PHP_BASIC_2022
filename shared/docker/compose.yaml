@@ -1,15 +1,5 @@
 
-services:
-    php:
-       build: ./php81
-       hostname: c_php
-       ports:
-           - 9033:9033
-       volumes:
-           - /home/vagrant/docker/site/www:/var/www
-       networks:
-           - n_my_net
-            
+services:        
     web:
         build: ./web
         hostname: c_web
@@ -20,6 +10,16 @@ services:
             - /home/vagrant/docker/site/conf:/etc/nginx/conf.d
         networks:
             - n_my_net
+
+    php:
+       build: ./php81
+       hostname: c_php
+       ports:
+           - 9033:9033
+       volumes:
+           - /home/vagrant/docker/site/www:/var/www
+       networks:
+           - n_my_net
 
 networks:
     n_my_net:
