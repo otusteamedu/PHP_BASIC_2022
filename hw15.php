@@ -36,6 +36,7 @@ echo Hw15::replaceSpaces($text) . PHP_EOL. PHP_EOL;
 //Задание #7
 for($i = 0; print $i . PHP_EOL, $i++ < 9;);
 echo PHP_EOL;
+
 //Задание #8
 Hw15::printArray($regionsArray, 'К');
 echo PHP_EOL;
