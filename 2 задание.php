@@ -1,20 +1,15 @@
 <?php
 
-function mathOperation($arg1, $arg2, $operation)
-{
-    switch ($operation) {
-        case 'sum':
-            return $arg1 + $arg2;
-
-        case 'sub':
-            return $arg1 - $arg2;
-
-        case 'mlt':
-            return $arg1 * $arg2;
-
-        case 'div':
-            return $arg1 / $arg2;
+$number = 0;
+do {
+    if ($number == 0) {
+        echo $number . ' - это ноль ';
+        $number++;
+    } elseif ($number % 2 != 0) {
+        echo $number . ' - это нечетное число ';
+        $number++;
+    } else {
+        echo $number . ' - это четное число ';
+        $number++;
     }
-}
-$result = mathOperation(3, 2, 'mlt');
-echo $result;
+} while ($number <= 10);
