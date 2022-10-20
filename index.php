@@ -29,7 +29,6 @@ foreach ($files as $value) {
   </div>
 </main>
   <footer>Footer</footer>
-  <script src="js/script.js"></script>
 </body>
 
 </html>
