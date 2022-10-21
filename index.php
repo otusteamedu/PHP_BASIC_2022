@@ -16,16 +16,9 @@
   <header>Header</header>
   <main>
     <div class='images'>
-    <?php
-$dir = './img';
-$files = array_diff(scandir($dir), array('..', '.'));
-
-foreach ($files as $value) {
-
-    $image = "./img/$value";
-    echo '<a href="' . $image . '" target = "_blank"><img src="' . $image . '"></a>';
-}?>
-
+<?php
+require_once 'gallery.php';
+?>
   </div>
 </main>
   <footer>Footer</footer>
