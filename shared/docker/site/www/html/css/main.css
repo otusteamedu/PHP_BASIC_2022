@@ -16,9 +16,18 @@ header {
 	padding: 0.5rem 0 0.5rem 0;
 }
 
+aside {
+	padding-left: 1rem;
+}
+
 footer {
 	border-top: 1px solid lime;
     padding: 1rem 1rem 3rem 1rem;
+}
+
+.menu_razdel {
+    margin-top: 1rem;
+    margin-bottom: 0;
 }
 
 nav {
