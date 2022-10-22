@@ -14,21 +14,19 @@
 
     <div class="d-flex">
         <aside class="w-25">
-            <details>
-                <summary>Меню</summary>
-                <?php
-                    foreach ($menu as $razdel) {
-                        echo sprintf('<p class="menu_razdel"><a href="%s">%s</a></p>', $razdel[1], $razdel[0]);
-                        if ($razdel[2]) {
-                            echo '<ul>';
-                            foreach ($razdel[2] as $subrazdel) {
-                                echo sprintf('<li><a href="%s">%s</a></li>', $subrazdel[1], $subrazdel[0]);
-                            }
-                            echo '</ul>';
+            <!-- <summary>Меню</summary> -->
+            <?php
+                foreach ($menu as $razdel) {
+                    echo sprintf('<p class="menu_razdel"><a href="%s">%s</a></p>', $razdel[1], $razdel[0]);
+                    if ($razdel[2]) {
+                        echo '<details><ul>';
+                        foreach ($razdel[2] as $subrazdel) {
+                            echo sprintf('<li><a href="%s">%s</a></li>', $subrazdel[1], $subrazdel[0]);
                         }
+                        echo '</ul></details>';
                     }
-                ?>
-            </details>
+                }
+            ?>
         </aside>
 
         <main>
