@@ -1,4 +1,6 @@
-<?php ;?>
+<?php
+require_once 'gallery.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +19,7 @@
   <main>
     <div class='images'>
 <?php
-require_once 'gallery.php';
+gallery();
 ?>
   </div>
 </main>
