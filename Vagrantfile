@@ -1,5 +1,4 @@
 Vagrant.configure("2") do |config|
-  #config.vm.box = "debian11-4.1.16"
   config.vm.box = "generic/debian11"
   
   config.vm.network "forwarded_port", host: 8033, guest: 8033, id: "www"
