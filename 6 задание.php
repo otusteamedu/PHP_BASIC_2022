@@ -2,7 +2,7 @@
 
 $menuArr = [
     'Item 1',
-    'Item 2' => ['Subitem 1', 'Subitem 2', 'Subitem 3'],
+    'Item 2' => ['Subitem 1' => ['Subitem8'], 'Subitem 2', 'Subitem 3'],
     'Item 3' => ['Subitem 4', 'Subitem 5', 'Subitem 6']
 ];
 
