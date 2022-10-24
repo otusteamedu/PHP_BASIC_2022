@@ -1,0 +1,112 @@
+body {
+	font-family: "Manrope", "Tahoma", sans-serif;
+	background-color: black;
+	color: beige;
+}
+
+header {
+	text-align: center;
+	padding: 2rem 0 0.5rem 0;
+}
+
+#tiles {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0.5rem 0 0.5rem 0;
+}
+
+aside {
+	padding-left: 1rem;
+}
+
+footer {
+	border-top: 1px solid lime;
+    padding: 1rem 1rem 3rem 1rem;
+}
+
+.menu_razdel {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: start;
+}
+
+.nav_item {
+    margin-right: 1rem;
+}
+
+.nav_link {
+    color: aqua;
+}
+
+/* плитка */
+.tile {
+	width: 350px;
+	background-color: beige;
+	color: black;
+	border-radius: 0.4em;
+	margin: 0.5em 0.5em;
+	padding: 2.1em 2em;
+	box-sizing: border-box;
+}
+
+/* значок плитки */
+.feature_icon {
+	width: 2em;
+	height: 2em;
+	margin-bottom: 2em;
+}
+
+/* текстовое описание */
+.tile p {
+	text-align: justify;
+	margin-bottom: 3em;
+}
+
+/* ссылка на детальное описание плитки */
+a.expand {
+	color: #8C30F5;
+	text-decoration: none;
+}
+
+/* контейнер навигационных кнопок */
+.explore {
+	display: flex;
+	justify-content: center;
+}
+
+/* кнопка "Explore all" */
+.explore button {
+	background-color: black;
+	border-radius: 0.4em;
+	color: beige;
+	padding: 1em 1.2em 1em 1.2em;
+}
+
+/* нижние отступы */
+#tiles, .explore button {
+    margin-bottom: 1em;
+}
+
+/* media */
+@media screen and (max-width: 1920px) {
+	main {
+		padding: 0.5rem 3rem 0.5rem 3rem;
+	}
+}
+
+@media screen and (max-width: 1440px) {
+	main {
+		padding: 0.5rem 1rem 0.5rem 1rem;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	h1 {
+		font-size: 1.3em;
+	}
+}
