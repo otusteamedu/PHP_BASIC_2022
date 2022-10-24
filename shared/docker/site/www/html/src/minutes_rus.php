@@ -1,31 +1,23 @@
 <?php
 
 /**
- * Добавляет к числу слово "час" в соответствующем падеже.
+ * Добавляет к числу слово "минута" в соответствующем падеже.
  *
  * @param int|string $inputMinutes числовое значение минут
  *
- * @return ?string Числовое значение минут с добавлением слова "минута" в падеже или null,
+ * @return string Числовое значение минут с добавлением слова "минута" в падеже или сообщение об ошибке,
  *  если входной аргумент выходит за 60-минутный диапазон.
  */
-function minutes_rus(int|string $inputMinutes): ?string
+function minutes_rus(int|string $inputMinutes): string
 {
-    //"минутА"
-    $caseOneDigits = [1, 21, 31, 41, 51];
-
-    //"минутЫ"
-    $caseTwoDigits = [
-        2, 3, 4,
-        22, 23, 24,
-        32, 33, 34,
-        42, 43, 44,
-        52, 53, 54
-    ];
+    $base = "$inputMinutes минут";
 
     return match (true) {
-        in_array((int)$inputMinutes, $caseOneDigits) => "$inputMinutes минута",
-        in_array((int)$inputMinutes, $caseTwoDigits) => "$inputMinutes минуты",
-        $inputMinutes < 0 || $inputMinutes > 59 => null,
-        default => "$inputMinutes минут"
+        $inputMinutes < 0 || $inputMinutes > 59 => 'число_вне_диапазона',
+        ($inputMinutes - 1) % 10 === 0 && ($inputMinutes - 1) / 10 !== 1 => $base . 'а',
+        ($inputMinutes - 2) % 10 === 0 && ($inputMinutes - 2) / 10 !== 1 => $base . 'ы',
+        ($inputMinutes - 3) % 10 === 0 && ($inputMinutes - 3) / 10 !== 1 => $base . 'ы',
+        ($inputMinutes - 4) % 10 === 0 && ($inputMinutes - 4) / 10 !== 1 => $base . 'ы',
+        default => $base
     };
 }

@@ -2,30 +2,25 @@
 
 /**
  * Добавляет к числу слово "час" в соответствующем падеже.
+ * Падеж определяется на основании формул вида 10k + m = $inputHour, где m находится в диапазоне 1..4 и k не равно 1.
  *
  * @param int|string $inputHour числовое значение часа
  *
- * @return ?string Числовое значение часа с добавлением слова "час" в падеже или null,
+ * @return string Числовое значение часа с добавлением слова "час" в падеже или сообщение об ошибке,
  *  если входной аргумент выходит за 24-часовой диапазон.
  */
-function hours_rus(int|string $inputHour): ?string
+function hours_rus(int|string $inputHour): string
 {
-    if ($inputHour < 0 || $inputHour > 24) {
-        return null;
-    }
+    $base = "$inputHour час";
 
-    switch ($inputHour) {
-        case 1:
-        case 21:
-            return "$inputHour час";
-        case 2:
-        case 3:
-        case 4:
-        case 22:
-        case 23:
-        case 24:
-            return "$inputHour часа";
-        default:
-            return "$inputHour часов";
-    }
+    return match (true) {
+        ($inputHour < 0) || ($inputHour > 24) => 'число_вне_диапазона',
+        ($inputHour - 1) % 10 === 0 && ($inputHour - 1) / 10 !== 1 => $base,
+        ($inputHour - 2) % 10 === 0 && ($inputHour - 2) / 10 !== 1 => $base . 'а',
+        ($inputHour - 3) % 10 === 0 && ($inputHour - 3) / 10 !== 1 => $base . 'а',
+        ($inputHour - 4) % 10 === 0 && ($inputHour - 4) / 10 !== 1 => $base . 'а',
+        default => $base . 'ов'
+    };
 }
+
+echo hours_rus('21') . PHP_EOL;
