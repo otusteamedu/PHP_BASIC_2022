@@ -12,22 +12,26 @@
     </header>
 
     <main>
-        <div id="tiles">
-            <!-- плитка -->
-            <div class="tile">
-                <img class="feature_icon" src="/images/icon1.png" alt="значок Mobile Application">
-                <h3 class="tile_header">Mobile Application</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                </p>
-                <a href="#" class="expand" id="expand_1">Expand <img src="images/arrow_r_purple.svg" alt="Развёрнутое описание"></a>
-            </div>
+        <?php
+            $imagesUploadFiles = scandir('images/upload');
+            $imageFiles = array_filter($imagesUploadFiles, fn ($file) => boolval(preg_match('/\.(jpg|png|gif)$/', $file)));
+        ?>
 
-        </div>
-         <!-- блок навигации -->
-        <div class="explore">
-            <button type="button">Explore all <img src="images/arrow_r_beige.svg" alt="Стрелка вправо"></button>
+        <!-- <div id="tiles"> -->
+        <div class="row">
+            <?php
+                foreach ($imageFiles as $image) {
+            ?>
+                <figure class="col-sm-12 col-md-6 col-lg-4">
+                    <a href="<?="images/upload/$image"?>" target="_blank">
+                        <img class="thumb" src="<?="images/upload/$image"?>" alt="<?=$image;?>">
+                    </a>
+                    <figcaption><?=$image;?></figcaption>
+                    <!-- <a href="#" class="expand" id="expand_1">Expand <img src="images/arrow_r_purple.svg" alt="Развёрнутое описание"></a> -->
+                </figure>
+            <?php
+                }
+            ?>
         </div>
     </main>
 
