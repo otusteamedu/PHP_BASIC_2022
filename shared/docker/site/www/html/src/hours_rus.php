@@ -22,5 +22,3 @@ function hours_rus(int|string $inputHour): string
         default => $base . 'ов'
     };
 }
-
-echo hours_rus('21') . PHP_EOL;
