@@ -1,7 +1,4 @@
 <?php
-    require 'src/hours_rus.php';
-    require 'src/minutes_rus.php';
-
     $title = 'Фотогалерея';
     require 'head.php';
 ?>
