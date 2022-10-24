@@ -4,5 +4,5 @@
     $hoursNow = $dtiNow->format('H');
     $minutesNow = $dtiNow->format('i');
 ?>
-<p><em> Сформировано: <?=$dateNow;?>, <?=hours_rus($hoursNow);?> <?=minutes_rus($minutesNow);?>. </em></p>
-<p><em> PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?> </em></p>
+<p><em><small> Сформировано: <?=$dateNow;?>, <?=$hoursNow;?>:<?=$minutesNow;?> </small></em></p>
+<p><em><small> PHP_VERSION: <?=$_SERVER['PHP_VERSION'];?> </small></em></p>
