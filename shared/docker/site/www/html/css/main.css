@@ -6,29 +6,17 @@ body {
 
 header {
 	text-align: center;
-	padding: 2rem 0 0.5rem 0;
-	width: 100%;
-}
-/*
-#tiles {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	padding: 0.5rem 0 0.5rem 0;
-}*/
-
-aside {
-	padding-left: 1rem;
+	padding: 1rem 0 1rem 0;*/
 }
 
 main {
 	border-top: 1px solid lime;
 	border-bottom: 1px solid lime;
+	padding: 1.5rem;
 }
 
 footer {
     padding: 1rem 1rem 3rem 1rem;
-    width: 100%;
 }
 
 figure {
@@ -37,26 +25,6 @@ figure {
 
 .thumb {
 	height: 280px;
+	width: 300px;
 	object-fit: cover;
-}
-
-
-/* media */
-@media screen and (max-width: 1920px) {
-	main {
-		/*padding: 0.5rem 3rem 0.5rem 3rem;*/
-		padding: 1rem 3rem 1rem 3rem;
-	}
-}
-
-@media screen and (max-width: 1440px) {
-	main {
-		padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-	}
-}
-
-@media screen and (max-width: 320px) {
-	h1 {
-		font-size: 1.1em;
-	}
 }

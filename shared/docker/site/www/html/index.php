@@ -12,26 +12,24 @@
     </header>
 
     <main>
-        <?php
-            $imagesUploadFiles = scandir('images/upload');
-            $imageFiles = array_filter($imagesUploadFiles, fn ($file) => boolval(preg_match('/\.(jpg|png|gif)$/', $file)));
-        ?>
+        <div class="container-fluid">
+            <div class="row">
+                <?php
+                    $imagesUploadFiles = scandir('images/upload');
+                    $imageFiles = array_filter($imagesUploadFiles, fn ($file) => boolval(preg_match('/\.(jpg|png|gif)$/', $file)));
 
-        <!-- <div id="tiles"> -->
-        <div class="row">
-            <?php
-                foreach ($imageFiles as $image) {
-            ?>
-                <figure class="col-sm-12 col-md-6 col-lg-4">
-                    <a href="<?="images/upload/$image"?>" target="_blank">
-                        <img class="thumb" src="<?="images/upload/$image"?>" alt="<?=$image;?>">
-                    </a>
-                    <figcaption><?=$image;?></figcaption>
-                    <!-- <a href="#" class="expand" id="expand_1">Expand <img src="images/arrow_r_purple.svg" alt="Развёрнутое описание"></a> -->
-                </figure>
-            <?php
-                }
-            ?>
+                    foreach ($imageFiles as $image) {
+                ?>
+                    <figure class="col-sm-12 col-md-6 col-lg-4">
+                        <a href="<?="images/upload/$image"?>" target="_blank">
+                            <img class="thumb" src="<?="images/upload/$image"?>" alt="<?=$image;?>">
+                        </a>
+                        <figcaption><?=$image;?></figcaption>
+                    </figure>
+                <?php
+                    }
+                ?>
+            </div>
         </div>
     </main>
 
