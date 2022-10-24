@@ -13,22 +13,34 @@
 
     <main>
         <div class="container-fluid">
+            
+            <!-- Галерея -->
             <div class="row">
                 <?php
                     $imagesUploadFiles = scandir('images/upload');
                     $imageFiles = array_filter($imagesUploadFiles, fn ($file) => boolval(preg_match('/\.(jpg|png|gif)$/', $file)));
 
                     foreach ($imageFiles as $image) {
+                        $safeImageFileName = htmlspecialchars($image);
                 ?>
                     <figure class="col-sm-12 col-md-6 col-lg-4">
-                        <a href="<?="images/upload/$image"?>" target="_blank">
-                            <img class="thumb" src="<?="images/upload/$image"?>" alt="<?=$image;?>">
+                        <a href="<?="images/upload/$safeImageFileName"?>" target="_blank">
+                            <img class="thumb" src="<?="images/upload/$safeImageFileName"?>" alt="<?=$safeImageFileName;?>">
                         </a>
-                        <figcaption><?=$image;?></figcaption>
+                        <figcaption><?=$safeImageFileName;?></figcaption>
                     </figure>
                 <?php
                     }
                 ?>
+            </div>
+
+            <!-- Форма загрузки картинки -->
+            <div class="d-flex justify-content-center">
+                <form>
+                    <div class="form-group pt-4">
+                        <input type="file" name="upload" id="uploadImageFormControl" disabled>
+                    </div>
+                </form>
             </div>
         </div>
     </main>
