@@ -6,8 +6,13 @@ function gallery()
     $files = array_diff(scandir($dir), array('..', '.'));
 
     foreach ($files as $value) {
+        $file = "./img/$value";
+        $image = resizeImage($file, 100, 100);
 
-        $image = "./img/$value";
-        echo '<a href="' . $image . '" target = "_blank"><img src="' . $image . '"></a>';
+        imagejpeg($image, "./mini/$value");
+
+        echo '<a href="' . $file . '" target = "_blank"><img src="' . './mini/' . $value . '"></a>';
+
     }
+
 }
