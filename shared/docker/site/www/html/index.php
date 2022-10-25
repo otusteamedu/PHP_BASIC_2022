@@ -10,11 +10,15 @@
 
     <main>
         <div class="container-fluid">
-            
-            <!-- Галерея -->
             <div class="row">
+                <!-- Обработать форму и сохранить файлы изображения -->
                 <?php
-                    $imagesUploadFiles = scandir('images/upload');
+                    var_dump($_FILES);
+                ?>
+
+                <!-- Отобразить галерею -->
+                <?php
+                    $imagesUploadFiles = scandir('images/upload/thumbs');
                     $imageFiles = array_filter($imagesUploadFiles, fn ($file) => boolval(preg_match('/\.(jpg|png|gif)$/', $file)));
 
                     foreach ($imageFiles as $image) {
@@ -33,9 +37,13 @@
 
             <!-- Форма загрузки картинки -->
             <div class="d-flex justify-content-center">
-                <form>
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-group pt-4">
-                        <input type="file" name="upload" id="uploadImageFormControl" disabled>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="6000000">
+                        <input class="form-control-file" type="file" name="upload" id="uploadImageFormControl">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="submit" name="submit_upload" id="submitUpload">
                     </div>
                 </form>
             </div>
