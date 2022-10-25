@@ -2,7 +2,7 @@
 
 // from https://stackoverflow.com/questions/14649645/resize-image-in-php
 
-function resize_image(resource $file, int $w, int $h, bool $crop = false)
+function resize_image(resource $file, int $w, int $h, bool $crop = false): GdImage
 {
     list($width, $height) = getimagesize($file);
     $r = $width / $height;
