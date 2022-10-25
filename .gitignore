@@ -1,4 +1,5 @@
 .idea/
 .vagrant/
 sublime.*
-images/upload/
+images/upload/*.*
+images/upload/thumbs/*.*
