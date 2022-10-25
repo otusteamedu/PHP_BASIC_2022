@@ -15,21 +15,16 @@
     <main>
         <div class="container-fluid">
             <div class="row">
-                <!-- Обработать форму и сохранить файлы изображения -->
                 <?php
-                    try {
-                        $uploadResult = treat_form_data();
-                    } catch (Exception $e) {
-                        $uploadResult = $e->getMessage();
-                    }
-                ?>
+                    // Обработать форму и сохранить файлы изображения
+                    $uploadResult = treat_form_data();
 
-                <!-- Отобразить галерею -->
-                <?php
+                    // Отобразить галерею
                     $thumbFiles = scandir('images/upload/thumbs');
                     $thumbFiles = array_filter($thumbFiles, fn ($file) => boolval(preg_match('/^thumb_.*\.png$/', $file)));
 
                     foreach ($thumbFiles as $thumb) {
+                        // исходное название файла изображения
                         $imageFileName = mb_substr($thumb, 6, -4);
                 ?>
                     <figure class="col-sm-12 col-md-6 col-lg-4">
