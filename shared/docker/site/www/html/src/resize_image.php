@@ -2,7 +2,7 @@
 
 // from https://stackoverflow.com/questions/14649645/resize-image-in-php
 
-function resize_image(resource $file, int $w, int $h, bool $crop = false): GdImage
+function resize_image(string $file, int $w, int $h, bool $crop = false): GdImage
 {
     list($width, $height) = getimagesize($file);
     $r = $width / $height;
@@ -24,8 +24,8 @@ function resize_image(resource $file, int $w, int $h, bool $crop = false): GdIma
         }
     }
     $src = imagecreatefromjpeg($file);
-    $dst = imagecreatetruecolor($newwidth, $newheight);
-    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+    $dst = imagecreatetruecolor((int)$newwidth, (int)$newheight);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, (int)$newwidth, (int)$newheight, $width, $height);
 
     return $dst;
 }
