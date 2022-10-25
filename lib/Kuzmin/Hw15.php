@@ -1,6 +1,6 @@
 <?php
 
-namespace Kuzmin;
+namespace Otus\Kuzmin;
 
 class Hw15
 {
@@ -11,7 +11,7 @@ class Hw15
      * @param int $to
      * @return array
      */
-    public static function delThree(int $from, int $to): array
+    public function delThree(int $from, int $to): array
     {
         $res = [];
 
@@ -30,29 +30,34 @@ class Hw15
      * Функция выводит на экран все эелеметы массива
      *
      * @param array $array
-     * @return void
+     * @param string|null $firstSymbol
+     * @return string
      */
-    public static function printArray(array $array, ?string $firstSymbol = null): void
+    public function prepareArrayToPrint(array $array, ?string $firstSymbol = null): string
     {
+        $result = '';
+
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                echo "$key:" . PHP_EOL;
+                $result .= "$key:" . PHP_EOL;
 
                 $print = '';
                 foreach ($value as $item) {
                     if ($firstSymbol) {
-                        if (lcfirst($firstSymbol) === lcfirst(mb_substr($item, 0, 1))){
+                        if (lcfirst($firstSymbol) === lcfirst(mb_substr($item, 0, 1))) {
                             $print .= $item . ', ';
                         }
                     } else {
                         $print .= $item . ', ';
                     }
                 }
-                echo mb_substr($print, 0, -2) . PHP_EOL;
+                $result .= mb_substr($print, 0, -2) . PHP_EOL;
             } else {
-                echo $value . PHP_EOL;
+                $result .= $value . PHP_EOL;
             }
         }
+
+        return $result;
     }
 
     /**
@@ -63,14 +68,14 @@ class Hw15
      * @param int $to
      * @return array
      */
-    public static function evenOrUneven(int $from, int $to): array
+    public function evenOrUneven(int $from, int $to): array
     {
         $res = [];
 
         do {
             if ($from === 0) {
                 $res[] = "$from - это ноль";
-            }elseif ($from % 2 === 0) {
+            } elseif ($from % 2 === 0) {
                 $res[] = "$from - это четное число";
             } else {
                 $res[] = "$from - это нечетное число";
@@ -88,17 +93,17 @@ class Hw15
      * @param string $value
      * @return string
      */
-    public static function translitString(string $value): string
+    public function translitString(string $value): string
     {
 
         $alphabet = [
-            'а' => 'a',    'б' => 'b',    'в' => 'v',    'г' => 'g',    'д' => 'd',
-            'е' => 'e',    'ё' => 'e',    'ж' => 'zh',   'з' => 'z',    'и' => 'i',
-            'й' => 'y',    'к' => 'k',    'л' => 'l',    'м' => 'm',    'н' => 'n',
-            'о' => 'o',    'п' => 'p',    'р' => 'r',    'с' => 's',    'т' => 't',
-            'у' => 'u',    'ф' => 'f',    'х' => 'h',    'ц' => 'c',    'ч' => 'ch',
-            'ш' => 'sh',   'щ' => 'sch',  'ь' => '\'',     'ы' => 'y',    'ъ' => '"',
-            'э' => 'e',    'ю' => 'yu',   'я' => 'ya'
+            'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'д' => 'd',
+            'е' => 'e', 'ё' => 'e', 'ж' => 'zh', 'з' => 'z', 'и' => 'i',
+            'й' => 'y', 'к' => 'k', 'л' => 'l', 'м' => 'm', 'н' => 'n',
+            'о' => 'o', 'п' => 'p', 'р' => 'r', 'с' => 's', 'т' => 't',
+            'у' => 'u', 'ф' => 'f', 'х' => 'h', 'ц' => 'c', 'ч' => 'ch',
+            'ш' => 'sh', 'щ' => 'sch', 'ь' => '\'', 'ы' => 'y', 'ъ' => '"',
+            'э' => 'e', 'ю' => 'yu', 'я' => 'ya'
         ];
 
         return strtr($value, $alphabet);
@@ -110,13 +115,33 @@ class Hw15
      * @param string $value
      * @return string
      */
-    public static function replaceSpaces (string $value): string
+    public function replaceSpaces(string $value): string
     {
         return str_replace(' ', '_', $value);
     }
 
-    public static function translitAndReplace (string $value): string
+    /**
+     * @param string $value
+     * @return string
+     */
+    public function translitAndReplace(string $value): string
     {
         return self::replaceSpaces(self::translitString($value));
+    }
+
+    /**
+     * Функция выводит строку
+     *
+     * @param string $data
+     * @param string $type | 'console' для вывода данных в консоль | 'file' для вывода данных в файл
+     * @return void
+     */
+    public function outputData(string $data, string $type): void
+    {
+        if ($type === 'file') {
+            file_put_contents('data.txt', $data);
+        } elseif ($type === 'console'){
+            echo $data . PHP_EOL;
+        }
     }
 }

@@ -1,0 +1,19 @@
+{
+  "name": "otus/kuzmin",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "dmitry_kuzmin",
+      "email": "d.kuzmin@maticson.ru"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Otus\\": "lib"
+    }
+  },
+  "require": {
+  }
+}

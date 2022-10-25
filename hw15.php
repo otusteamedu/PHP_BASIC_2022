@@ -1,45 +1,48 @@
 <?php
-require_once 'autoload.php';
+require_once 'vendor/autoload.php';
 
-use Kuzmin\Hw15;
+use Otus\Kuzmin\Hw15;
 
-//Задание #1
-$numbers = Hw15::delThree(0, 100);
-Hw15::printArray($numbers);
-echo PHP_EOL;
+$class = new Hw15();
 
-//Задание #2
-$array = Hw15::evenOrUneven(0, 10);
-Hw15::printArray($array);
-echo PHP_EOL;
+$class->outputData('Задание #1', 'console');
+$numbers = $class->delThree(0, 100);
+$result = $class->prepareArrayToPrint($numbers);
+$class->outputData($result, 'console');
 
-//Задание #3
+$class->outputData('Задание #2', 'console');
+$array = $class->evenOrUneven(0, 10);
+$result = $class->prepareArrayToPrint($array);
+$class->outputData($result, 'console');
+
+$class->outputData('Задание #3', 'console');
 $regionsArray = [
     'Московская область' => ['Москва', 'Зеленоград', 'Клин'],
     'Ленинградская область' => ['Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'],
     'Рязанская область' => ['Рязань', 'Касимов', 'Скопин', 'Сасово', 'Рыбное'],
 ];
 
-Hw15::printArray($regionsArray);
-echo PHP_EOL;
+$result = $class->prepareArrayToPrint($regionsArray);
+$class->outputData($result, 'console');
 
-//Задание #4
+$class->outputData('Задание #4', 'console');
 $text = 'съешь ещё этих мягких французских булок, да выпей чаю';
-echo Hw15::translitString($text) . PHP_EOL . PHP_EOL;
+echo $class->translitString($text) . PHP_EOL . PHP_EOL;
 
-//Задание #5
-echo Hw15::replaceSpaces($text) . PHP_EOL. PHP_EOL;
+$class->outputData('Задание #5', 'console');
+echo $class->replaceSpaces($text) . PHP_EOL. PHP_EOL;
 
 //Задание #6
 #Сделано в отдельном файле hm15_6.php
 
-//Задание #7
+$class->outputData('Задание #7', 'console');
 for($i = 0; print $i . PHP_EOL, $i++ < 9;);
 echo PHP_EOL;
 
-//Задание #8
-Hw15::printArray($regionsArray, 'К');
-echo PHP_EOL;
+$class->outputData('Задание #8', 'console');
+$result = $class->prepareArrayToPrint($regionsArray, 'К');
+$class->outputData($result, 'console');
 
-//Задание #9
-echo Hw15::translitAndReplace($text) . PHP_EOL;
+$class->outputData ('Задание #9', 'console');
+$result = $class->translitAndReplace($text) . PHP_EOL;
+$class->outputData($result, 'console');
