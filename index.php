@@ -22,6 +22,20 @@ require_once 'gallery.php';
 gallery();
 ?>
   </div>
+
+  <form action = "" method="post" enctype="multipart/form-data">
+  <fieldset>
+  <legend>Upload your photo:</legend>
+  <label for="file">Photo:</label>
+  <input type="file" name="file">
+  <br>
+  <br>
+  <input type="submit" value="Upload">
+  </fieldset>
+</form>
+    <?php
+uploadPhotos();
+?>
 </main>
   <footer>Footer</footer>
 </body>
