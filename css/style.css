@@ -13,5 +13,14 @@ body {
 
 img {
   padding-right: 10px;
-  max-width: 100px;
+}
+
+form {
+  margin: 50px auto 20px;
+  max-width: 350px;
+}
+
+.warning {
+  color: #f00;
+  text-align: center;
 }
