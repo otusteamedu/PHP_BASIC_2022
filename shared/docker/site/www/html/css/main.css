@@ -20,11 +20,14 @@ footer {
 }
 
 figure {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
 	text-align: center;
 }
 
-.thumb {
+/*.thumb {
 	height: 280px;
 	width: 300px;
 	object-fit: cover;
-}
+}*/
