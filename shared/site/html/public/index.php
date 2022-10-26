@@ -1,7 +1,7 @@
 <?php
     $title = 'Фотогалерея';
     require 'head.php';
-    require 'src/treat_form_data.php';
+    require '../src/treat_form_data.php';
 ?>
 
 <body>
@@ -29,8 +29,8 @@
                 ?>
                     <figure class="col-sm-12 col-md-6 col-lg-4">
                         <div>
-                            <a href="<?="images/upload/$imageFileName"?>" target="_blank">
-                                <img class="thumb" src="<?="images/upload/thumbs/$thumb"?>" alt="<?=$thumb;?>">
+                            <a href="<?="/images/upload/$imageFileName"?>" target="_blank">
+                                <img class="thumb" src="<?="/images/upload/thumbs/$thumb"?>" alt="<?=$thumb;?>">
                             </a>
                             <figcaption><?=$imageFileName;?></figcaption>
                         </div>
