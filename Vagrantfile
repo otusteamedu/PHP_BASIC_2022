@@ -13,7 +13,9 @@ Vagrant.configure("2") do |config|
     cp -pf /shared/config/.bash_aliases ~vagrant/.bash_aliases
     cp -pf /shared/config/.selected_editor ~vagrant/.selected_editor
     cp -pf /shared/config/.vimrc ~vagrant/.vimrc
-    cp -pfr /shared/docker ~vagrant/
+    cp -pfr /shared/site ~vagrant/
+    # права на запись в директорию загрузки изображений
+    chmod -R 0777 ~vagrant/site/html/images/upload
     echo "User vagrant config ok..."
     
     apt-get update
