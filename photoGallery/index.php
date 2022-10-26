@@ -14,10 +14,15 @@
     $dir_big = "img_big";
     $files = scandir($dir);
     $files = excess($files);
-    for ($i = 0; $i < count($files); $i++) {
+    $arr = explode(".", $files['name']);
+    $ext = mb_strtolower($arr[count($arr) - 1]);
+    $allowed = array('jpg', 'jpeg', 'png');
+    if (in_array($ext, $allowed)) {
+        for ($i = 0; $i < count($files); $i++) {
     ?>
-        <a href="<?= $dir_big . "/" . $files[$i] ?>" target="_blank"><img style="width: 300px; height: 200px" src="<?= $dir . "/" . $files[$i] ?>" alt="Фото галереи" /></a>
+            <a href="<?= $dir_big . "/" . $files[$i] ?>" target="_blank"><img style="width: 300px; height: 200px" src="<?= $dir . "/" . $files[$i] ?>" alt="Фото галереи" /></a>
     <?php
+        }
     }
     ?>
 </body>
