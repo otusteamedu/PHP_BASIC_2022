@@ -34,7 +34,7 @@ function treat_form_data(): string
         }
 
         $uploadedFileName = basename($_FILES['upload']['name']);
-        $uploadDir = '/var/www/html/images/upload';
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/upload';
         $pathToSavedFile = "$uploadDir/$uploadedFileName";
         if (!@move_uploaded_file($_FILES['upload']['tmp_name'], $pathToSavedFile)) {
             throw new ErrorException('Ошибка перемещения файла', 11);
