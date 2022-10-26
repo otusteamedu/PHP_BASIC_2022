@@ -1,0 +1,6 @@
+.idea/
+.vagrant/
+sublime.*
+site/html/public/info.php
+site/html/public/images/upload/*.jpg
+site/html/public/images/upload/thumbs/*.png
