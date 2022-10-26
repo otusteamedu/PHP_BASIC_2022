@@ -1,5 +1,5 @@
 <?php
-require_once 'gallery.php';
+require_once '../gallery.php';
 ?>
 
 <!DOCTYPE html>
