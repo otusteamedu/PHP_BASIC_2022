@@ -1,5 +1,5 @@
 .idea/
 .vagrant/
 sublime.*
-images/upload/*.jpg
-images/upload/thumbs/*.png
+site/html/public/images/upload/*.jpg
+site/html/public/images/upload/thumbs/*.png
