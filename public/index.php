@@ -10,20 +10,20 @@ require_once '../gallery.php';
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="css/normalize.css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="public/css/normalize.css" />
+  <link rel="stylesheet" href="public/css/style.css" />
 </head>
 
 <body>
   <header>Header</header>
   <main>
     <div class='images'>
-<?php
+  <?php
 gallery();
 ?>
   </div>
 
-  <form action = "" method="post" enctype="multipart/form-data">
+  <form action = "upload.php" method="post" enctype="multipart/form-data">
   <fieldset>
   <legend>Upload your photo:</legend>
   <label for="file">Photo:</label>
@@ -33,13 +33,9 @@ gallery();
   <input type="submit" value="Upload">
   </fieldset>
 </form>
-    <?php
-uploadPhotos();
-?>
+
 </main>
   <footer>Footer</footer>
 </body>
 
 </html>
-
-
