@@ -2,12 +2,15 @@
     $title = 'Фотогалерея';
     require 'head.php';
     require '../src/treat_form_data.php';
+    require '../src/display_gallery.php';
 ?>
 
 <body>
     <header>
         <h1>
-            <a href="/" class="ml-2 float-left"><img src="images/home.png"></a>
+            <a href="/" class="ml-2 float-left">
+                <img src="images/home.png">
+            </a>
             Фотогалерея
         </h1>
     </header>
@@ -20,23 +23,7 @@
                     $uploadResult = treat_form_data();
 
                     // Отобразить галерею
-                    $thumbFiles = scandir('images/upload/thumbs');
-                    $thumbFiles = array_filter($thumbFiles, fn ($file) => boolval(preg_match('/^thumb_.*\.png$/', $file)));
-
-                    foreach ($thumbFiles as $thumb) {
-                        // исходное название файла изображения
-                        $imageFileName = mb_substr($thumb, 6, -4);
-                ?>
-                    <figure class="col-sm-12 col-md-6 col-lg-4">
-                        <div>
-                            <a href="<?="/images/upload/$imageFileName"?>" target="_blank">
-                                <img class="thumb" src="<?="/images/upload/thumbs/$thumb"?>" alt="<?=$thumb;?>">
-                            </a>
-                            <figcaption><?=$imageFileName;?></figcaption>
-                        </div>
-                    </figure>
-                <?php
-                    }
+                    display_gallery();
                 ?>
             </div>
 
