@@ -3,19 +3,19 @@ Vagrant.configure("2") do |config|
   
   config.vm.network "forwarded_port", host: 8033, guest: 8033, id: "www"
 
-  config.vm.synced_folder "shared/", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
+  config.vm.synced_folder "./", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
 
   config.vm.provision "shell", inline: <<-SHELL
     TZ=Europe/Moscow
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     
-    cp -pf /shared/config/vagrant_bashrc ~vagrant/.bashrc
-    cp -pf /shared/config/.bash_aliases ~vagrant/.bash_aliases
-    cp -pf /shared/config/.selected_editor ~vagrant/.selected_editor
-    cp -pf /shared/config/.vimrc ~vagrant/.vimrc
+    cp -pf /shared/user_config/vagrant_bashrc ~vagrant/.bashrc
+    cp -pf /shared/user_config/.bash_aliases ~vagrant/.bash_aliases
+    cp -pf /shared/user_config/.selected_editor ~vagrant/.selected_editor
+    cp -pf /shared/user_config/.vimrc ~vagrant/.vimrc
     cp -pfr /shared/site ~vagrant/
     # права на запись в директорию загрузки изображений
-    chmod -R 0777 ~vagrant/site/html/images/upload
+    chmod -R 0777 ~vagrant/site/html/public/images/upload
     echo "User vagrant config ok..."
     
     apt-get update
@@ -39,6 +39,6 @@ Vagrant.configure("2") do |config|
     
     docker run hello-world
 
-    cd /home/vagrant/docker && docker compose up
+    cd /shared/docker && docker compose up
   SHELL
 end
