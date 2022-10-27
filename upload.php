@@ -3,6 +3,7 @@
 function uploadPhotos()
 {
     $photos = [];
+    $result = '';
 
     if (file_exists('photos.json')) {
         $photos = json_decode(file_get_contents('photos.json'), true);
@@ -24,13 +25,25 @@ function uploadPhotos()
 
             file_put_contents('photos.json', json_encode($photos));
 
-            header("Location: public");
-
-            die();
+            $result = '<div style="margin-top:50px;font-size:22px;
+  text-align:center;">' . 'Your image have been uploaded!' . '</div>';
 
         } else {
-            echo '<div class="warning">' . 'Upload an image in jpg/jpeg format, please' . '</div>';
+
+            $result = '<div style="margin-top:50px;font-size:22px;color:#f00;
+  text-align:center;">' . 'Upload an image in jpg/jpeg format, please' . '</div>';
+
         }
+
+    } else {
+        $result = '<div style="margin-top:50px;font-size:22px;color:#f00;
+  text-align:center;">' . 'Upload an image, please' . '</div>';
     }
+    return $result;
 }
-uploadPhotos();
+
+$result = uploadPhotos();
+
+header("Refresh:2; url=public");
+
+echo ($result);
