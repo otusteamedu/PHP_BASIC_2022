@@ -1,12 +1,13 @@
 <?php
-
-function excess($files)
+function extension($files)
 {
-    $result = [];
-    for ($i = 0; $i < count($files); $i++) {
-        if ($files[$i] != "." && $files[$i] != ".." && $files[$i] != ".DS_Store") {
-            $result[] = $files[$i];
+    $valid_extensions = ['jpg', 'jpeg', 'png'];
+    $result_arr = [];
+    foreach ($files as $file) {
+        $file_extension = pathinfo($file, PATHINFO_EXTENSION);
+        if (in_array(strtolower($file_extension), $valid_extensions)) {
+            $result_arr[] = $file;
         }
     }
-    return $result;
+    return $result_arr;
 }
