@@ -1,0 +1,14 @@
+body {
+  margin: 20px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form {
+  margin: 50px auto 20px;
+  max-width: 400px;
+}
+
+#nothing {
+  background-color: #fff;
+  color: red;
+}
