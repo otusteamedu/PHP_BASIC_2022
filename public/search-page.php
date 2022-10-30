@@ -28,7 +28,17 @@ require_once '../search.php';?>
         </tr>
       </thead>
       <tbody>
-        <?php searchInLibrary();?>
+        <?php
+$books = searchInLibrary();
+
+if (empty($books)) {
+    echo '<tr id="nothing"><th scope="row">' . "Nothing found" . '</th></tr>';
+} else {
+    foreach ($books as $book) {
+        echo '<tr><th scope="row">' . $book['id'] . '</th><td>' . $book['title'] . '</td><td>' . $book['authors'] . '</td><td>' . $book['pages'] . '</td><td>' . $book['year'] . '</td></tr>';
+    }
+}
+?>
       </tbody>
     </table>
   </main>
