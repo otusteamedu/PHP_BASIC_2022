@@ -1,7 +1,6 @@
 <?php
-require_once '../table.php';
+require_once '../db.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +28,9 @@ require_once '../table.php';
       </thead>
       <tbody>
         <?php
-createTable();
+foreach (getBooks() as $book) {
+    echo '<tr><th scope="row">' . $book['id'] . '</th><td>' . $book['title'] . '</td><td>' . $book['authors'] . '</td><td>' . $book['pages'] . '</td><td>' . $book['year'] . '</td></tr>';
+}
 ?>
       </tbody>
     </table>
@@ -37,13 +38,12 @@ createTable();
     <form action="search-page.php" method="post">
       <fieldset>
         <div class="mb-3">
-          <label for="text" class="form-label">Find authors or books in library:</label>
+          <label for="text" class="form-label">Find authors or books in library (case-sensitive):</label>
           <input type="text" name="text" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
       </fieldset>
     </form>
-
   </main>
 </body>
 
