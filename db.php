@@ -2,7 +2,12 @@
 
 function connect()
 {
-    $pdo = new PDO('mysql:host=localhost;dbname=otus-books', 'root', '',
+    $config = parse_ini_file("config.ini", true, INI_SCANNER_TYPED);
+    $db = $config['mysql'];
+
+    $pdo = new PDO("mysql:host={$db['host']};dbname={$db['dbname']};}",
+        $db['username'],
+        $db['password'],
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::FETCH_ASSOC => true,
