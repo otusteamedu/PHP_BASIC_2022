@@ -19,9 +19,11 @@ function upload_file()
 }
 
 if (!empty($_POST['load'])) {
-    $file_name = $_FILES['file']['type'];
-    print("MIME-тип файла: " . $file_name . "<br>");
+    $upload_dir = 'img_big';
+    $file_name = time() . $_FILES['file']['name'];
+    $destination = $upload_dir . '/' . $file_name;
     upload_file();
+    echo ("MIME-тип файла: " . mime_content_type($destination) . "<br>");
     echo '<br /><br />';
     echo '<a href="index.php">Вернуться на страницу галереи</a>';
 }
