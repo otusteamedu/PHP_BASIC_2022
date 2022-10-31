@@ -16,9 +16,12 @@ RUN apt-get update &&       \
     && docker-php-ext-install -j$(nproc) gd                         \
     && docker-php-ext-configure zip                                 \
     && docker-php-ext-install -j$(nproc) zip                        \
+    && docker-php-ext-configure pdo_mysql  --with-pdo-mysql=mysqlnd \
+    && docker-php-ext-install -j$(nproc) pdo_mysql                  \
     && pecl install xdebug-3.1.5                                    \
-    && docker-php-ext-enable xdebug                                 \
-    && /bin/sh /tmp/composer_install.sh                             \
+    && docker-php-ext-enable xdebug
+
+RUN /bin/sh /tmp/composer_install.sh                                \
     && composer global require --dev "squizlabs/php_codesniffer=*"
 
 EXPOSE 9033
