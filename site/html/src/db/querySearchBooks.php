@@ -1,7 +1,5 @@
 <?php
 
-require_once 'db/dbСonnect.php';
-
 /**
  * Искать в БД список книг, удовлетворяющих поисковому запросу.
  *
@@ -13,10 +11,11 @@ function querySearchBooks(string $searchString): array
     $sql = '
         SELECT * 
         FROM `book`
-        WHERE MATCH (`name`, `authors`) AGAINST (?)
+        WHERE MATCH (`name`, `authors`) AGAINST (:search)
     ';
     $pstmt = $conn->prepare($sql);
-    $pstmt->execute([$searchString]);
+    $pstmt->bindValue(':search', $searchString);
+    $pstmt->execute();
     $books = $pstmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $books;

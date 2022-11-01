@@ -1,7 +1,5 @@
 <?php
 
-require_once 'util/getConfig.php';
-
 /**
  * Установить соединение с БД.
  *

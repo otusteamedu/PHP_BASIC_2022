@@ -8,7 +8,7 @@
  */
 function getConfig(): void
 {
-    $dotEnv = file_get_contents(realpath($_SERVER['DOCUMENT_ROOT'] . '/../.env'));
+    $dotEnv = file_get_contents('.env', true);
     if ($dotEnv === false) {
         throw new ErrorException("Невозможно прочитать конфигурацию", 1);
     }

@@ -1,8 +1,5 @@
 <?php
 
-require_once 'util/getConfig.php';
-require_once 'util/renderTemplate.php';
-
 /**
  * Сформировать HTML-код строк таблицы книг на основании шаблона.
  *
