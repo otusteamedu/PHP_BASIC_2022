@@ -9,14 +9,15 @@ class Hw15
      *
      * @param int $from
      * @param int $to
+     * @param int $multiple
      * @return array
      */
-    public function delThree(int $from, int $to): array
+    public function getNumbersOfMultiples(int $from, int $to, int $multiple): array
     {
         $res = [];
 
         while ($from <= $to) {
-            if ($from % 3 === 0) {
+            if ($from % $multiple === 0) {
                 $res[] = $from;
             }
 

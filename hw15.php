@@ -6,7 +6,7 @@ use Otus\Kuzmin\Hw15;
 $class = new Hw15();
 
 $class->outputData('Задание #1', 'console');
-$numbers = $class->delThree(0, 100);
+$numbers = $class->getNumbersOfMultiples(0, 100, 3);
 $result = $class->prepareArrayToPrint($numbers);
 $class->outputData($result, 'console');
 
