@@ -6,7 +6,7 @@ require_once 'util/getConfig.php';
  * Установить соединение с БД.
  *
  * @throws PDOException Если попытка подключения к базе данных завершается с ошибкой.
- * 
+ *
  * @return PDO Экземпляр PDO, предоставляющий подключение к необходимой базе данных.
  */
 function dbСonnect(): PDO

@@ -9,7 +9,7 @@
     
     $books = getBooks();
     $booksTableRows = buildBookRows($books);
-    $searchString = getFormData()['search'] ?? '';
+    $searchString = getFormData()['search'] ?: '';
 ?>
 
 <body>

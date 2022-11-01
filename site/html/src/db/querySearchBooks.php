@@ -4,7 +4,7 @@ require_once 'db/dbСonnect.php';
 
 /**
  * Искать в БД список книг, удовлетворяющих поисковому запросу.
- * 
+ *
  * @return array Список найденных книг.
  */
 function querySearchBooks(string $searchString): array

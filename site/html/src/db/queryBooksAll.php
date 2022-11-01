@@ -4,7 +4,7 @@ require_once 'db/dbСonnect.php';
 
 /**
  * Получить из БД список всех книг в библиотеке.
- * 
+ *
  * @return array Список книг.
  */
 function queryBooksAll(): array

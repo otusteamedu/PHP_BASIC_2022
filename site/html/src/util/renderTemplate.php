@@ -5,7 +5,7 @@
  *
  * @param $pathToTemplate путь к файлу шаблона.
  * @param $vars ассоциативный массив соответствий имён переменных шаблона их реальным значениям.
- * 
+ *
  * @return HTML-код шаблона с подставленными значениями.
  */
 function renderTemplate(string $pathToTemplate, array $vars = []): string

@@ -2,7 +2,7 @@
 
 /**
  * Получить значение элемента <input> формы поиска.
- * 
+ *
  * @return array Значение поля поиска в виде ассоциативного массива [field_name => value].
  */
 function getFormData(): array
