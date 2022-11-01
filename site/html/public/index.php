@@ -2,14 +2,12 @@
     $title = 'Библиотека';
     require 'head.php';
     
-    // на этапе сборки compose-проекта в php.ini прописывается include_path = ".:/var/www/html/src"
-    require 'model/getBooks.php';
-    require 'model/buildBookRows.php';
-    require 'model/getFormData.php';
+    // на этапе сборки compose-проекта в php.ini прописывается include_path = ".:/var/www/html"
+    require 'vendor/autoload.php';
     
     $books = getBooks();
     $booksTableRows = buildBookRows($books);
-    $searchString = getFormData()['search'] ?: '';
+    $searchString = getFormData()['search'] ?? '';
 ?>
 
 <body>
