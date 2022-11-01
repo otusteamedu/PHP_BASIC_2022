@@ -1,7 +1,10 @@
 FROM php:8.1-fpm-bullseye
+
 COPY php.ini /usr/local/etc/php/php.ini
 COPY zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY composer_install.sh /tmp/
+COPY composer.json /var/www/html/
+
 RUN apt-get update &&       \
     apt-get upgrade -y &&   \
     apt-get install -y      \
@@ -22,6 +25,7 @@ RUN apt-get update &&       \
     && docker-php-ext-enable xdebug
 
 RUN /bin/sh /tmp/composer_install.sh                                \
-    && composer global require --dev "squizlabs/php_codesniffer=*"
+    && cd /var/www/html                                             \
+    && composer install
 
 EXPOSE 9033
