@@ -13,5 +13,8 @@ function getConfig(): void
         throw new ErrorException("Невозможно прочитать конфигурацию", 1);
     }
     $dotEnvAssignments = explode("\n", $dotEnv);
-    array_walk($dotEnvAssignments, fn ($assignment, $index) => $assignment && putenv($assignment));
+    array_walk(
+        $dotEnvAssignments,
+        fn ($assignment, $index) => preg_match('/^[a-zA-Z0-9_]+=/', $assignment) && putenv($assignment)
+    );
 }
