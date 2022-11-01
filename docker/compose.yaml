@@ -12,7 +12,7 @@ services:
             - 3306:3306
         volumes:
             - v_mysql_data:/var/lib/mysql
-            - /library.db:/docker-entrypoint-initdb.d
+            - /shared/library.db:/docker-entrypoint-initdb.d
         networks:
             - n_my_net
 
