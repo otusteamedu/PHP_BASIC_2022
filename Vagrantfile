@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/debian11"
   
+  config.vm.network "forwarded_port", host: 3306, guest: 3306, id: "mariadb"
   config.vm.network "forwarded_port", host: 8033, guest: 8033, id: "www"
 
   config.vm.synced_folder "./", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
@@ -14,7 +15,6 @@ Vagrant.configure("2") do |config|
     cp -pf /shared/user_config/.selected_editor ~vagrant/.selected_editor
     cp -pf /shared/user_config/.vimrc ~vagrant/.vimrc
     cp -pfr /shared/site ~vagrant/
-    # права на запись в директорию загрузки изображений
     chmod -R 0777 ~vagrant/site/html/public/images/upload
     echo "User vagrant config ok..."
     

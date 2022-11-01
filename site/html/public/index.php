@@ -1,8 +1,14 @@
 <?php
     $title = 'Фотогалерея';
     require 'head.php';
-    require '../src/treat_form_data.php';
-    require '../src/display_gallery.php';
+
+    require 'vendor/autoload.php';
+
+    // Обработать форму и сохранить файлы изображения
+    $uploadResult = treatFormData();
+
+    // Сформировать галерею
+    $images = buildGallery();
 ?>
 
 <body>
@@ -17,15 +23,7 @@
 
     <main>
         <div class="container-fluid">
-            <div class="row">
-                <?php
-                    // Обработать форму и сохранить файлы изображения
-                    $uploadResult = treat_form_data();
-
-                    // Отобразить галерею
-                    display_gallery();
-                ?>
-            </div>
+            <div class="row"> <?=$images;?> </div>
 
             <!-- Форма загрузки картинки -->
             <div class="d-flex justify-content-center">

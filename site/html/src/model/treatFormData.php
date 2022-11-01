@@ -1,8 +1,6 @@
 <?php
 
-require_once 'resize_image.php';
-
-function treat_form_data(): string
+function treatFormData(): string
 {
     $ret = '';
     $phpFileUploadErrors = [
@@ -33,14 +31,15 @@ function treat_form_data(): string
             throw new ErrorException('Пустой файл', 10);
         }
 
+        getConfig();
         $uploadedFileName = basename($_FILES['upload']['name']);
-        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/upload';
+        $uploadDir = getenv('UPLOAD_DIR');
         $pathToSavedFile = "$uploadDir/$uploadedFileName";
         if (!@move_uploaded_file($_FILES['upload']['tmp_name'], $pathToSavedFile)) {
             throw new ErrorException('Ошибка перемещения файла', 11);
         }
 
-        $resizedGDImage = resize_image($pathToSavedFile, 300, 280);
+        $resizedGDImage = resizeImage($pathToSavedFile, 300, 280);
         $thumbDir = "$uploadDir/thumbs";
         $thumbFileName = "thumb_$uploadedFileName.png";
         $pathToThumbFile = "$thumbDir/$thumbFileName";
