@@ -1,0 +1,22 @@
+body {
+	font-family: "Nunito", "Tahoma", sans-serif;
+}
+
+header, footer {
+	background-color: #f8f9fa;
+}
+
+h1 {
+	font-family: "Nunito-Bold"
+}
+
+main {
+	border-top: 1px solid lime;
+	border-bottom: 1px solid lime;
+	padding: 1.5rem;
+	background-color: beige;
+}
+
+footer {
+    padding: 1rem 1rem 0rem 1rem;
+}

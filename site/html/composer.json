@@ -1,0 +1,17 @@
+{
+    "name": "dimitryos/library",
+    "description": "ДЗ ДЗ: Улучшаем библиотеку",
+    "type": "project",
+    "license": "private",
+    "authors": [
+        {
+            "name": "Д.С. Понятов"
+        }
+    ],
+    "require": {
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "autoload": {
+        "files": ["src/helpers.php"]
+    }
+}
