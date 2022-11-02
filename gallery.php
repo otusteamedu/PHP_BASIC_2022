@@ -15,7 +15,7 @@ function gallery()
 
         imagejpeg($image, "$dir2" . "$value");
 
-        echo '<a href="' . './public/img/' . $value . '" target = "_blank"><img src="' . './public/mini/' . $value . '"></a>';
+        echo '<a href="' . './img/' . $value . '" target = "_blank"><img src="' . './mini/' . $value . '"></a>';
 
     }
 }
