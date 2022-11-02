@@ -3,6 +3,10 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.login {
+  text-align: center;
+}
+
 .images {
   margin: 50px 0;
   display: flex;
@@ -23,4 +27,8 @@ form {
 .warning {
   color: #f00;
   text-align: center;
+}
+
+fieldset {
+  padding-top: 10px;
 }
