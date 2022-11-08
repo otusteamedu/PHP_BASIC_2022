@@ -1,25 +1,26 @@
 <?php
 
-// from https://stackoverflow.com/questions/14649645/resize-image-in-php
-
+/**
+ *  @see https://stackoverflow.com/questions/14649645/resize-image-in-php
+ */
 function resizeImage(string $file, int $w, int $h, bool $crop = false): GdImage
 {
     list($width, $height) = getimagesize($file);
     $r = $width / $height;
     if ($crop) {
         if ($width > $height) {
-            $width = ceil($width-($width*abs($r-$w/$h)));
+            $width = ceil($width - ($width * abs($r - $w / $h)));
         } else {
-            $height = ceil($height-($height*abs($r-$w/$h)));
+            $height = ceil($height - ($height * abs($r - $w / $h)));
         }
         $newwidth = $w;
         $newheight = $h;
     } else {
-        if ($w/$h > $r) {
-            $newwidth = $h*$r;
+        if ($w / $h > $r) {
+            $newwidth = $h * $r;
             $newheight = $h;
         } else {
-            $newheight = $w/$r;
+            $newheight = $w / $r;
             $newwidth = $w;
         }
     }
