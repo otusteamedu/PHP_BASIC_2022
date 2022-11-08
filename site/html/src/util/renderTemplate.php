@@ -10,7 +10,7 @@
  */
 function renderTemplate(string $pathToTemplate, array $vars = []): string
 {
-    $template = file_get_contents($pathToTemplate);
+    $template = file_get_contents($pathToTemplate, true);
 
     foreach ($vars as $name => $value) {
         $template = str_replace("{{{$name}}}", $value, $template);
