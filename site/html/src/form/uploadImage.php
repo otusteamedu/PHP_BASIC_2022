@@ -1,6 +1,14 @@
 <?php
 
-function treatFormData(): string
+/**
+ * Обработчик формы загрузки изображения.
+ * Валидирует отправленные данные,
+ * создаёт миниатюру загруженной картинки,
+ * перемещает файлы загруженной картинки и её миниатюры в соответствующие директории.
+ * 
+ * @return string Сообщение об ошибке, если была.
+ */
+function uploadImage(): string
 {
     $ret = '';
     $phpFileUploadErrors = [
@@ -32,6 +40,7 @@ function treatFormData(): string
         }
 
         getConfig();
+
         $uploadedFileName = basename($_FILES['upload']['name']);
         $uploadDir = getenv('UPLOAD_DIR');
         $pathToSavedFile = "$uploadDir/$uploadedFileName";
@@ -40,7 +49,7 @@ function treatFormData(): string
         }
 
         $resizedGDImage = resizeImage($pathToSavedFile, 300, 280);
-        $thumbDir = "$uploadDir/thumbs";
+        $thumbDir = getenv('THUMBS_DIR');
         $thumbFileName = "thumb_$uploadedFileName.png";
         $pathToThumbFile = "$thumbDir/$thumbFileName";
         if(!@imagepng($resizedGDImage, $pathToThumbFile, 5)) {
