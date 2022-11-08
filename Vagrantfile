@@ -15,7 +15,8 @@ Vagrant.configure("2") do |config|
     cp -pf /shared/user_config/.selected_editor ~vagrant/.selected_editor
     cp -pf /shared/user_config/.vimrc ~vagrant/.vimrc
     cp -pfr /shared/site ~vagrant/
-    chmod -R 0777 ~vagrant/site/html/public/images/upload
+    chmod -R 0777 ~vagrant/site/html/public/images/thumbs
+    chmod -R 0777 ~vagrant/site/html/upload
     echo "User vagrant config ok..."
     
     apt-get update
