@@ -24,7 +24,6 @@ RUN apt-get update &&       \
     && pecl install xdebug-3.1.5                                    \
     && docker-php-ext-enable xdebug
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN /bin/sh /tmp/composer_install.sh                                \
     && cd /var/www/html                                             \
     && composer install
