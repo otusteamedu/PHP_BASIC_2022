@@ -1,15 +1,14 @@
 body {
 	font-family: "Nunito", "Tahoma", sans-serif;
-	background-color: black;
-	color: beige;
+	background-color: #f8f9fa;
 }
 
-header {
-	text-align: center;
-	padding: 1rem 0 1rem 0;*/
+.dropdown-menu {
+    min-width: 15rem;
 }
 
 main {
+	background-color: beige;
 	border-top: 1px solid lime;
 	border-bottom: 1px solid lime;
 	padding: 1.5rem;
@@ -21,7 +20,7 @@ footer {
 
 figure {
 	display: flex;
-	justify-content: center;
 	align-items: flex-end;
+	justify-content: center;
 	text-align: center;
 }
