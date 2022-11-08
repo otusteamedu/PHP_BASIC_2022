@@ -1,0 +1,8 @@
+
+<form action="/parser.php" name="logout" method="post" class="form-inline">
+    <div>
+        <span class="pr-1"><small>{{display_name}}</small></span>
+        <button class="btn btn-outline-info" type="submit" name="submit_logout">Выйти</button>
+        <input type="hidden" name="_csrf_token" value="{{csrf_token}}">
+    </div>
+</form>
