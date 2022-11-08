@@ -1,0 +1,30 @@
+
+<div class="navbar-nav flex-column align-items-end">
+    <div class="navbar-nav dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Войти </a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <form action="/parser.php" name="login" method="post" class="px-4 py-3">
+                <div class="form-group">
+                    <!-- Сохраняем для удобства отображение логина после неудачной попытки входа -->
+                    <input type="text" class="form-control" name="login" placeholder="Логин"
+                           value="{{login}}">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Пароль">
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="remember" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe"> Запомнить меня </label>
+                    </div>
+                </div>
+                <div class="form-group text-center pt-1">
+                    <input type="hidden" name="_csrf_token" value="{{csrf_token}}">
+                    <button type="submit" class="btn btn-primary" name="submit_login">Войти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Отображаем сообщения об ошибках входа, если они есть -->
+    <div class="nav-text text-danger">{{form_error}}</div>
+</div>
