@@ -19,17 +19,10 @@
             </tr>
         </thead>
         <tbody style="text-align: center;">
-            <?php $conn = new PDO("mysql:host=127.0.0.1;dbname=otus", "root", "qweasdzxc0");
-            $sql = "SELECT * FROM Books";
-            $result = $conn->query($sql);
-            while ($row = $result->fetch()) {
-                echo "<tr>";
-                echo "<td>" . $row["id_book"] . "</td>";
-                echo "<td>" . $row["name"] . "</td>";
-                echo "<td>" . $row["pages"] . "</td>";
-                echo "<td>" . $row["author"] . "</td>";
-                echo "</tr>";
-            } ?>
+            <?php
+            include 'dbconn.php';
+            include 'output.php';
+            ?>
         </tbody>
     </table>
     <form name="search" method="post" action="searchBook.php">
