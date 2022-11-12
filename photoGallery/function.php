@@ -1,15 +1,11 @@
 <?php
-function extension($files)
+function isImage($file)
 {
-    $valid_extentions = ['jpg', 'jpeg', 'png'];
-    $result_arr = [];
-    foreach ($files as $file) {
-        $file_extension = pathinfo($file, PATHINFO_EXTENSION);
-        if (in_array(strtolower($file_extension), $valid_extentions)) {
-            $result_arr[] = $file;
-        }
+    $valid_type = ['image/png', 'image/jpeg'];
+    if (in_array(mime_content_type($file), $valid_type)) {
+
+        return $file;
     }
-    return $result_arr;
 }
 
 
