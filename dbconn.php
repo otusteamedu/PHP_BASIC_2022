@@ -1,6 +1,12 @@
 <?php
-$conn = new PDO("mysql:host=127.0.0.1;dbname=otus", "root", "qweasdzxc0");
-$sql = "SELECT * FROM Books";
-$result = $conn->query($sql);
+function dbconn()
+{
+    $settings = parse_ini_file("connection.ini");
+    $host = $settings['host'];
+    $dbname = $settings['dbname'];
+    $username = $settings['username'];
+    $password = $settings['password'];
+    $conn = new PDO('mysql:dbname=' . $dbname . ';host=' . $host, $username, $password);
 
-return $result;
+    return $conn;
+}
