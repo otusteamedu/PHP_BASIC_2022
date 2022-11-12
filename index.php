@@ -20,8 +20,7 @@
         </thead>
         <tbody style="text-align: center;">
             <?php
-            include 'dbconn.php';
-            include 'output.php';
+            include 'queryBook.php';
             ?>
         </tbody>
     </table>

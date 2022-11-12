@@ -1,4 +1,9 @@
 <?php
+include 'dbconn.php';
+$conn = dbconn();
+$sql = "SELECT * FROM Books";
+$result = $conn->query($sql);
+
 while ($row = $result->fetch()) {
     echo "<tr>";
     echo "<td>" . $row["id_book"] . "</td>";

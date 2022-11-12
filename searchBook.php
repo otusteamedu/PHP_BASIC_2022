@@ -1,7 +1,8 @@
 <?php
+include 'dbconn.php';
 function searchBook($query)
 {
-    $conn = new PDO("mysql:host=127.0.0.1;dbname=otus", "root", "qweasdzxc0");
+    $conn = dbconn();
     $sql = "
             SELECT * 
             FROM `books`
