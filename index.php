@@ -1,3 +1,8 @@
+<?php include 'dbQuery/queryBook.php';
+include 'functions/buildBookRows.php';
+$books = queryBook();
+$booksTableRows = buildBookRows($books); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +24,7 @@
             </tr>
         </thead>
         <tbody style="text-align: center;">
-            <?php
-            include 'queryBook.php';
-            ?>
+            <?= $booksTableRows; ?>
         </tbody>
     </table>
     <form name="search" method="post" action="searchBook.php">
