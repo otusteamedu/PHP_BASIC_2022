@@ -1,5 +1,6 @@
 <?php
-include 'conn/dbconn.php';
+include "../conn/dbconn.php";
+include "../functions/buildRowsOutput.php";
 function searchBook($query)
 {
     $conn = dbconn();
@@ -15,10 +16,6 @@ function searchBook($query)
 }
 if (!empty($_POST['query'])) {
     $search_result = searchBook($_POST['query']);
-    foreach ($search_result as $row) {
-        echo $row["id_book"] . "</br>";
-        echo $row["name"] . "</br>";
-        echo $row["pages"] . "</br>";
-        echo $row["author"] . "</br>";
-    }
+    $books = buildRowsOutput($search_result);
+    echo $books;
 }

@@ -1,4 +1,5 @@
-<?php include 'dbQuery/queryBook.php';
+<?php
+include 'dbQuery/queryBook.php';
 include 'functions/buildBookRows.php';
 $books = queryBook();
 $booksTableRows = buildBookRows($books); ?>
@@ -27,7 +28,7 @@ $booksTableRows = buildBookRows($books); ?>
             <?= $booksTableRows; ?>
         </tbody>
     </table>
-    <form name="search" method="post" action="searchBook.php">
+    <form name="search" method="post" action="dbQuery/searchBook.php">
         <input type="search" name="query" placeholder="Поиск">
         <button type="submit">Найти</button>
     </form>
