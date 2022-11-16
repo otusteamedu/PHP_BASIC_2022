@@ -2,10 +2,10 @@
 include 'renderTemplate.php';
 function buildRowsOutput($books)
 {
-    $pathTempOutput = "../templates/templateOutput.html";
+    $pathTemp = "../templates/templateOutput.html";
     $booksTableRowsHtml = '';
     foreach ($books as $book) {
-        $booksTableRowsHtml .= renderTemplate($pathTempOutput, [
+        $booksTableRowsHtml .= renderTemplate($pathTemp, [
             'Id_1'     => $book['id_book'],
             'name_2'   => htmlspecialchars($book['name']),
             'pages_3'  => htmlspecialchars($book['pages']),

@@ -2,7 +2,7 @@
 include 'renderTemplate.php';
 function buildBookRows($books)
 {
-    $pathTemp = 'templates/template.html';
+    $pathTemp = '../templates/template.html';
     $booksTableRowsHtml = '';
     foreach ($books as $book) {
         $booksTableRowsHtml .= renderTemplate($pathTemp, [
