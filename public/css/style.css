@@ -1,0 +1,46 @@
+body {
+  margin: 20px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h5 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+form {
+  margin: 50px auto 20px;
+  max-width: 400px;
+}
+
+#add-books {
+  margin: 30px 0;
+
+  text-align: center;
+}
+
+#nothing {
+  background-color: #fff;
+  color: red;
+}
+
+.images {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+img {
+  padding-right: 10px;
+  max-width: 200px;
+}
+
+.login {
+  text-align: center;
+}
+
+.greeting {
+  text-align: center;
+}
