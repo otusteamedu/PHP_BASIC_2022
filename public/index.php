@@ -1,6 +1,5 @@
 <?php
-require_once '../db.php';
-require_once 'add-book-button.php';
+require_once '../lib.php';
 
 session_start();
 
