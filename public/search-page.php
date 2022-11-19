@@ -39,7 +39,6 @@ if (empty($books)) {
         echo '<tr><th scope="row">' . $book['id'] . '</th><td>' . $book['title'] . '</td><td>' . $book['name'] . '</td><td>' . $book['pages'] . '</td><td>' . $book['year'] . '</td><td><a href ="' . $book['url'] . '" target = "_blank">Page</a></td></tr>';
     }
 }
-; // foreach ($books as $book) {; //     print_r($book);; // }
 ?>
       </tbody>
     </table>
