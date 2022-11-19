@@ -216,17 +216,3 @@ function gallery($id)
     }
     echo "</div>";
 }
-
-/* function searchBooks($query): array
-{
-$pdo = connect();
-
-$sqlQuery = "select * from books where (authors regexp ? or title regexp ?)";
-
-$result = $pdo->prepare($sqlQuery);
-$result->execute([
-"(^|[[:space:]])$query([[:space:]]|$)", "(^|[[:space:]])$query([[:space:]]|$)",
-]);
-$data = $result->fetchAll();
-return $data;
-} */
