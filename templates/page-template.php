@@ -21,7 +21,7 @@ $id = basename(__FILE__, '.php');
 $files = gallery($id);
 $name = array_pop($files);
 
-echo '<h1 class="book-title">' . $name[0]['title'] . '</h1>';
+echo '<h1 class="book-title">' . $name . '</h1>';
 echo "<div class='images'>";
 foreach ($files as $value) {
 
