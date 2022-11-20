@@ -16,13 +16,19 @@ require_once '../../lib.php';
 
 <body>
   <main>
-    <div class='images'>
       <?php
-
 $id = basename(__FILE__, '.php');
-gallery($id);
+$files = gallery($id);
+$name = array_pop($files);
+
+echo '<h1 class="book-title">' . $name[0]['title'] . '</h1>';
+echo "<div class='images'>";
+foreach ($files as $value) {
+
+    echo '<a href="' . '../images/' . $value . '" target = "_blank"><img src="' . '../mini/' . $value . '"></a>';
+}
+echo "</div>";
 ?>
-    </div>
   </main>
 </body>
 
