@@ -3,7 +3,7 @@
 require_once 'db.php';
 require_once 'resize.php';
 
-function authenticate($username, $password)
+function authenticate($username, $password): bool
 {
     $pdo = connect();
     $result = $pdo->prepare('SELECT 1 FROM users where username = ? and password = ?');
@@ -43,30 +43,29 @@ WHERE (author.name like ? or book.title like ?)";
     return $data;
 }
 
-function addBooksButton($user)
+function addBooksButton($user): string
 {
     $pdo = connect();
     $result = $pdo->prepare('SELECT is_admin FROM users WHERE username = ?');
     $result->execute([$user]);
     $data = $result->fetchAll();
+    $result = '';
     if ($data[0]['is_admin']) {
-        echo '<div id="add-books">
-      <a class="btn btn-warning" href="add-book-page.php" role="button">Add the books to the library</a>
-    </div>';
+        $result = 'admin';
     }
+    return $result;
 }
 
-function createPage($id)
+function createPage($id): string
 {
     $path = 'public/pages/' . $id . '.php';
     $file = fopen($path, "w");
     $content = file_get_contents("templates/page-template.php");
     fwrite($file, $content);
     fclose($file);
-    $result = '<div style="margin-top:50px;font-size:22px;
-text-align:center;">' . 'Your book have been added!' . '</div>';
+    $result = 'Your book have been added!';
 
-    echo ($result);
+    return ($result);
 }
 
 function uploadPhotos($size): array
@@ -76,10 +75,7 @@ function uploadPhotos($size): array
     foreach ($_FILES['image']['tmp_name'] as $value) {
         $mimetype = mime_content_type($value);
         if (!in_array($mimetype, array('image/jpeg', 'image/jpg'))) {
-            $result = '<div style="margin-top:50px;font-size:22px;color:#f00;
-text-align:center;">' . 'Upload an image in jpg/jpeg format, please' . '</div>';
-            echo ($result);
-
+            array_push($images, 'type is depricated');
             return $images;
         }
     }
@@ -100,7 +96,7 @@ text-align:center;">' . 'Upload an image in jpg/jpeg format, please' . '</div>';
     return $images;
 }
 
-function addBook($title, $author, $pages, $year, $images)
+function addBook($title, $author, $pages, $year, $images): string
 {
     $pdo = connect();
 
@@ -181,10 +177,11 @@ function addBook($title, $author, $pages, $year, $images)
         }
     }
     // create the page for the added book
-    createPage($id);
+    $result = createPage($id);
+    return $result;
 }
 
-function gallery($id)
+function gallery($id): array
 {
     $pdo = connect();
 
@@ -209,10 +206,5 @@ function gallery($id)
             array_push($files, $value);
         }
     }
-    echo "<div class='images'>";
-    foreach ($files as $value) {
-
-        echo '<a href="' . '../images/' . $value . '" target = "_blank"><img src="' . '../mini/' . $value . '"></a>';
-    }
-    echo "</div>";
+    return $files;
 }
