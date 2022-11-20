@@ -191,8 +191,6 @@ function gallery($id): array
     $result->execute();
     $name = $result->fetchAll();
 
-    echo '<h1 class="book-title">' . $name[0]['title'] . '</h1>';
-
     $result = $pdo->query(
         "SELECT image FROM images WHERE book_id = $id"
     );
@@ -206,5 +204,7 @@ function gallery($id): array
             array_push($files, $value);
         }
     }
+    array_push($files, $name[0]['title']);
+
     return $files;
 }
