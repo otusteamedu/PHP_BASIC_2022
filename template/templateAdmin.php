@@ -10,10 +10,9 @@
     <h1 style="color: antiquewhite;">Галерея фотографий</h1>
 
     <?php
-    include 'extension.php';
-    include 'function.php';
-    $dir = "img_small";
-    $dir_big = "img_big";
+    include '../function.php';
+    $dir = "../img_small";
+    $dir_big = "../img_big";
     $files = scandir($dir);
     for ($i = 0; $i < count($files); $i++) {
         if (isImage($dir_big . "/" . $files[$i])) {
@@ -23,7 +22,6 @@
     <?php
         }
     }
-
     ?>
 
     <h2 style="color:brown;">Загрузить фотографию</h2>
@@ -31,5 +29,3 @@
         <input type="file" name="file">
         <input type="submit" name="load" value="Загрузить файл">
 </body>
-
-</html>
