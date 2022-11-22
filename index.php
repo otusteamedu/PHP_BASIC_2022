@@ -1,8 +1,7 @@
 <?php
 require_once 'db.php';
 
-$query = array_key_exists('query', $_POST) ? $_POST['query'] : null;
-$books = getBooks($query);
+$books = getBooks($_POST);
 ?>
 
 <head>
