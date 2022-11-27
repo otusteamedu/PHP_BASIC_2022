@@ -10,7 +10,7 @@
     <h1 style="color: antiquewhite;">Галерея фотографий</h1>
 
     <?php
-    include '../function.php';
+    include '../functions.php';
     $dir = "../img_small";
     $dir_big = "../img_big";
     $files = scandir($dir);

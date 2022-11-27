@@ -1,5 +1,5 @@
 <?php
-include 'function.php';
+include 'functions.php';
 function upload_file()
 {
     $upload_dir = 'img_big';
@@ -23,5 +23,5 @@ if (!empty($_POST['load'])) {
     upload_file();
     echo ("MIME-тип файла: " . $file_type . "<br>");
     echo '<br /><br />';
-    echo '<a href="index.php">Вернуться на страницу галереи</a>';
+    echo '<a href="template/templateGuest.php">Вернуться на страницу галереи</a>';
 }
