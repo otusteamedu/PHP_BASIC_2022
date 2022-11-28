@@ -6,12 +6,12 @@
 final class FirstClassParcel extends Parcel
 {
     /**
-     * @var int объявленная стоимость
+     * @var int объявленная стоимость (в копейках)
      */
     private int $declaredValue = 0;
 
     /**
-     * @var int наложенный платёж
+     * @var int наложенный платёж (в копейках)
      */
     private int $cashOnDelivery = 0;
 
@@ -34,7 +34,7 @@ final class FirstClassParcel extends Parcel
             throw new InvalidArgumentException("Превышен максимальный вес", 1);
         }
         if ($height + $width + $length > 70 || $height > 36 || $width > 36 || $length > 36) {
-            throw new InvalidArgumentException("Превышены максимальные габариты", 1);
+            throw new InvalidArgumentException("Превышены максимальные габариты", 2);
         }
 
         parent::__construct($weight, $height, $width, $length, $toAddress, $fromAddress, $trackNumber);
@@ -77,7 +77,7 @@ final class FirstClassParcel extends Parcel
     }
 
     /**
-     * Расчёт итоговой цены посылки в копейках
+     * Расчёт итоговой цены посылки (в копейках)
      * 
      * @return int
      */
