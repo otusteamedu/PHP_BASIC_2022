@@ -58,7 +58,7 @@ class Parcel
             throw new InvalidArgumentException("Превышен максимальный вес", 1);
         }
         if ($height + $width + $length > 300) {
-            throw new InvalidArgumentException("Превышены максимальные габариты", 1);
+            throw new InvalidArgumentException("Превышены максимальные габариты", 2);
         }
 
         $this->weight = $weight;
