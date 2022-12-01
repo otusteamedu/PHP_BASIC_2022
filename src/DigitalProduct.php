@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Цифровой товар
  */
-final class DigitalProduct extends SingleProduct
+final class DigitalProduct extends DiscreteProduct
 {
     /** Цена цифрового варианта дешевле в 2 раза */
     protected function getProductPrice(): float
