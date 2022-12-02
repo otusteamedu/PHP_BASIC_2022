@@ -1,21 +1,20 @@
 Vagrant.configure("2") do |config|
-  #config.vm.box = "debian11-4.1.4"
   config.vm.box = "generic/debian11"
   
-  config.vm.network "forwarded_port", host: 5432, guest: 5432, id: "pgsql"
+  config.vm.network "forwarded_port", host: 3306, guest: 3306, id: "mariadb"
   config.vm.network "forwarded_port", host: 8033, guest: 8033, id: "www"
 
-  config.vm.synced_folder "shared/", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
+  config.vm.synced_folder "./", "/shared", owner: "vagrant",  group: "vagrant", mount_options: ["dmode=775", "fmode=664"]
 
   config.vm.provision "shell", inline: <<-SHELL
     TZ=Europe/Moscow
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     
-    cp -pf /shared/config/vagrant_bashrc ~vagrant/.bashrc
-    cp -pf /shared/config/.bash_aliases ~vagrant/.bash_aliases
-    cp -pf /shared/config/.selected_editor ~vagrant/.selected_editor
-    cp -pf /shared/config/.vimrc ~vagrant/.vimrc
-    cp -pfr /shared/docker ~vagrant/
+    cp -pf /shared/provision/vagrant_bashrc ~vagrant/.bashrc
+    cp -pf /shared/provision/.bash_aliases ~vagrant/.bash_aliases
+    cp -pf /shared/provision/.selected_editor ~vagrant/.selected_editor
+    cp -pf /shared/provision/.vimrc ~vagrant/.vimrc
+    cp -pfr /shared/app ~vagrant/app/
     echo "User vagrant config ok..."
     
     apt-get update
