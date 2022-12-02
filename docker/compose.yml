@@ -1,25 +1,28 @@
 
 services:
     db:
-        build: ./pgsql
+        build: ./db
         environment:
-            POSTGRES_PASSWORD: qwerty
+            MARIADB_ROOT_PASSWORD: root
+            MARIADB_USER: vagrant
+            MARIADB_PASSWORD: vagrant
+            MARIADB_DATABASE: tasktracker
+        hostname: c_sql
         ports:
-            - "5432:5432"
+            - "3306:3306"
         volumes:
-            - v_pgsql_data:/var/lib/postgresql/data
-            - /shared/tmp:/tmp
+            - v_mysql_data:/var/lib/mysql
+            - /shared/initdb:/docker-entrypoint-initdb.d
         networks:
             - n_my_net
-        command: "-c timezone='Europe/Moscow' -c log_timezone='Europe/Moscow'"
 
     php:
-       build: ./php81
+       build: ./php
        hostname: c_php
        ports:
-           - 9000:9000
+           - "9000:9000"
        volumes:
-           - /home/vagrant/docker/web/www:/var/www
+           - /home/vagrant/app:/var/www/html
        networks:
            - n_my_net
             
@@ -27,15 +30,15 @@ services:
         build: ./web
         hostname: c_web
         ports:
-            - 8033:8033
+            - "8033:80"
         volumes:
-            - /home/vagrant/docker/web/www:/var/www
-            - /home/vagrant/docker/web/conf:/etc/nginx/conf.d
+            - /home/vagrant/app:/var/www/html
+            - /shared/config/nginx:/etc/nginx/conf.d
         networks:
             - n_my_net
             
 volumes:
-   v_pgsql_data:
+   v_mysql_data:
 
 networks:
     n_my_net:

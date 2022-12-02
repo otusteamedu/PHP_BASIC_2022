@@ -1,2 +1,0 @@
-FROM nginx
-EXPOSE 8033

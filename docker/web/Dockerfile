@@ -1,2 +1,3 @@
 FROM nginx
-EXPOSE 8033
+
+# EXPOSE 8033
