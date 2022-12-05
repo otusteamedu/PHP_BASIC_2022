@@ -12,34 +12,42 @@ abstract class Product
     {
         $this->price = $price;
     }
+    abstract public function totalCost($coast): float;
 }
 
 class SingleProduct extends Product
 {
-    public function totalCost(int $count): float
+    public function totalCost($count): float
     {
-        return $count * $this->price;
+        if (!is_int($count)) {
+            echo "The quantity must be an integer" . PHP_EOL;
+            return 0;
+        } else {
+            return $count * $this->price;
+        }
     }
 }
 
-class DigitalProduct
+class DigitalProduct extends Product
 {
-    public float $price;
-
     public function __construct(SingleProduct $parentProduct)
     {
         $parentPrice = $parentProduct->price;
         $this->price = $parentProduct->getPrice($parentPrice) / 2;
     }
-    public function totalCost(): float
+    public function totalCost($count = 1): float
     {
         return $this->price;
+    }
+    function setPrice(float $price): void
+    {
+        echo "the price of the digital item is fixed" . PHP_EOL;
     }
 }
 
 class WeightProduct extends Product
 {
-    public function totalCost(float $weight): float
+    public function totalCost($weight): float
     {
         return $weight * $this->price;
     }
