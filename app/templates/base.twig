@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Планировщик задач">
+    <meta name="keywords" content="планировщик, расписание">
+    
+    <link href="/css/fonts.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <title>{{title ?? 'ZZZ'}}</title>
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg justify-content-between">
+                <a href="/" class="navbar-brand">
+                    <img src="/images/terem.png" alt="На главную" height="60" width="60">
+                </a>
+                
+                <div class="navbar-text">
+                    <h1 class="izc pb-1"> Календарь </h1>
+                    <h2> {{pageName ?? 'V Планировщик задач V'}} </h2>
+                </div>
+
+                <div class="navbar-text">&nbsp;</div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {# основное содержимое #}
+        {% block main_content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container-fluid">
+            <p id="grants_tema">Создано Дмитриями</p>
+
+            {% block twig_debug_dump %}{% endblock %}
+        </div>
+    </footer>
+</body>
+
+</html>
