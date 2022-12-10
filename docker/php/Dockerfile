@@ -1,4 +1,4 @@
-FROM php:8-fpm-bullseye
+FROM php:8.1-fpm-bullseye
 
 RUN apt-get update &&       \
     apt-get upgrade -y &&   \
@@ -11,7 +11,7 @@ RUN apt-get update &&       \
     && docker-php-ext-install -j$(nproc) zip                        \
     && docker-php-ext-configure pdo_mysql  --with-pdo-mysql=mysqlnd \
     && docker-php-ext-install -j$(nproc) pdo_mysql                  \
-    && pecl install xdebug-3.1.5                                    \
+    && pecl install xdebug-3.1.6                                    \
     && docker-php-ext-enable xdebug
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer

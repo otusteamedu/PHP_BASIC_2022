@@ -10,10 +10,10 @@ Vagrant.configure("2") do |config|
     TZ=Europe/Moscow
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
     
-    cp -pf /shared/provision/vagrant_bashrc ~vagrant/.bashrc
-    cp -pf /shared/provision/.bash_aliases ~vagrant/.bash_aliases
-    cp -pf /shared/provision/.selected_editor ~vagrant/.selected_editor
-    cp -pf /shared/provision/.vimrc ~vagrant/.vimrc
+    cp -pf /shared/config/provision/vagrant_bashrc ~vagrant/.bashrc
+    cp -pf /shared/config/provision/.bash_aliases ~vagrant/.bash_aliases
+    cp -pf /shared/config/provision/.selected_editor ~vagrant/.selected_editor
+    cp -pf /shared/config/provision/.vimrc ~vagrant/.vimrc
     cp -pfr /shared/app ~vagrant/app/
     echo "User vagrant config ok..."
     
