@@ -5,13 +5,12 @@ namespace Otus\Mvc\Core;
 class App
 {
     protected static $routes = [
-        'lessons/spec' => ['lessons', 'linux'],
-        'info' => ['home', 'info']
+        'info' => ['index', 'info']
     ];
 
     public static function run()
     {
-        // конроллер и действие по умолчанию
+        // контроллер и действие по умолчанию
         $controller_name = "Otus\\Mvc\\Controllers\\IndexController";
         $action_name = "index";
 
@@ -37,13 +36,13 @@ class App
         if (!class_exists($controller_name, true))
         {
             //redirect to 404
-            View::render('404');
+            View::render('alert/404.twig');
         }
 
         if(!method_exists($controller_name, $action_name))
         {
             //redirect to 404
-            View::render('404');
+            View::render('alert/404.twig');
         }
 
         $controller = new $controller_name();

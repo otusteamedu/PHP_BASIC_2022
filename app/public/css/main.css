@@ -2,3 +2,26 @@ body {
 	font-family: "Times New Roman", serif;
 	background-color: beige;
 }
+
+header {
+	text-align: center;
+	padding: 1rem 0 1rem 0;
+}
+
+main {
+	border-top: 1px solid lime;
+	border-bottom: 1px solid lime;
+	background-color: #f8f9fa;
+	padding-top: 0;
+	padding-right: 1.5rem;
+	padding-bottom: 1.5rem;
+	padding-left: 1.5rem;
+}
+
+footer {
+    padding: 1rem 1rem 3rem 1rem;
+}
+
+.copyleft {
+	font-family: "Tahoma", sans-serif;
+}

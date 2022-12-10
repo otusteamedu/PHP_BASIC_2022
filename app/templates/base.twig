@@ -15,7 +15,7 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
 
-    <title>{{title ?? 'ZZZ'}}</title>
+    <title>{{title ?? 'Планировщик'}}</title>
 </head>
 
 <body>
@@ -27,11 +27,19 @@
                 </a>
                 
                 <div class="navbar-text">
-                    <h1 class="izc pb-1"> Календарь </h1>
-                    <h2> {{pageName ?? 'V Планировщик задач V'}} </h2>
+                    <h1 class="pb-1"> Календарь </h1>
+                    {% if pageName is not empty %}
+                        <h3> {{pageName}} </h3>
+                    {% endif %}
                 </div>
 
-                <div class="navbar-text">&nbsp;</div>
+                <div class="navbar-text">
+                    {% if userName is not empty %}
+                        <a href="/home"> {{userName}} </a>
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                </div>
             </nav>
         </div>
     </header>
@@ -43,8 +51,10 @@
 
     <footer>
         <div class="container-fluid">
-            <p id="grants_tema">Создано Дмитриями</p>
+            <p class="copyleft">Создано Дмитриями</p>
+            <p><a href="/info"><em> phpinfo </em></a></p>
 
+            {# область для отладочного вывода #}
             {% block twig_debug_dump %}{% endblock %}
         </div>
     </footer>

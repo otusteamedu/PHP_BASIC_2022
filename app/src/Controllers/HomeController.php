@@ -6,16 +6,13 @@ use Otus\Mvc\Core\View;
 
 class HomeController
 {
-    public function index() {
-        View::render('info', [
-            'title' => 'InfoPage',
-            'name' => 'Dmitry'
+    public function index()
+    {
+        View::render('home/index.twig', [
+            'title' => 'Личный кабинет',
+            'pageName' => 'Личный кабинет',
+            'userName' => $userName ?? 'Anonymous',
+            'name' => $name ?? 'Anonymous'
         ]);
-    }
-
-    public function info() {
-        echo $_ENV['PROJECT_DIR'];
-
-        phpinfo();
     }
 }
