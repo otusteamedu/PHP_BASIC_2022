@@ -1,21 +1,5 @@
 
 services:
-    db:
-        build: ./db
-        environment:
-            MARIADB_ROOT_PASSWORD: root
-            MARIADB_USER: vagrant
-            MARIADB_PASSWORD: vagrant
-            MARIADB_DATABASE: tasktracker
-        hostname: c_sql
-        ports:
-            - "3306:3306"
-        volumes:
-            - v_mysql_data:/var/lib/mysql
-            - /shared/config/initdb:/docker-entrypoint-initdb.d
-        networks:
-            - n_my_net
-
     php:
        build: ./php
        hostname: c_php
@@ -36,9 +20,6 @@ services:
             - /shared/config/nginx:/etc/nginx/conf.d
         networks:
             - n_my_net
-            
-volumes:
-   v_mysql_data:
 
 networks:
     n_my_net:
