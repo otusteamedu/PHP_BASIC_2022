@@ -1,16 +1,19 @@
+
+{# Шаблон отображения сообщения об ошибке #}
+
 {% extends 'base.twig' %}
 
 {% block main_content %}
     <div class="container">
-        <div class="d-flex justify-content-center pt-4">
-            <div class="alert-danger text-center w-50 py-5">
+        <div class="d-flex justify-content-center py-4">
+            <div class="alert-danger text-center w-50 py-4">
                 {% if errorType is defined %}
                     <h4>{{errorType}}</h4>
                 {% endif %}
 
                 <p>{{message}}</p>
                 
-                <p><a href="/">На главную</a></p>
+                {# <p><a href="/">На главную</a></p> #}
             </div>
         </div>
     </div>
