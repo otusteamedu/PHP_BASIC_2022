@@ -1,4 +1,5 @@
 <?php
+
 function isImage($file)
 {
     $valid_type = ['image/png', 'image/jpeg'];
@@ -20,7 +21,6 @@ function extension($files)
     }
     return $result_arr;
 }
-
 
 function resize_image($files, $w, $h, $crop = FALSE)
 {

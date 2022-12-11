@@ -1,5 +1,4 @@
 <?php
-require '../conn/dbconn.php';
 
 function selectImage($id)
 {
