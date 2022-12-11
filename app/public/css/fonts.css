@@ -1,1 +1,14 @@
 
+@font-face {
+    font-family: 'Andika';
+    src: local('Andika'), url('../fonts/andika.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto Light';
+    src: local('Roboto Light'), local('Roboto-Light'), url('../fonts/Robotolight.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
