@@ -1,0 +1,11 @@
+{
+    "autoload": {
+    "files": 
+    [
+    "conn/dbconn.php",
+    "src/functions.php",
+    "src/selectImage.php",
+    "src/queryBook.php",
+    "src/dir.php"]
+    }
+    }
