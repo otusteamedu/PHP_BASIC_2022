@@ -11,14 +11,9 @@
 
 
     <?php
-    include '../functions.php';
-    include '../db/selectImage.php';
-    include '../db/queryBook.php';
-    $dir = "../img_small";
-    $dir_big = "../img_big";
-    $files = extension(scandir($dir_big));
-    $files_sml = extension(scandir($dir));
-    for ($i = 1; $i < count($files) + 1; $i++) {
+    require("../vendor/autoload.php");
+
+    for ($i = 1; $i < count(files()) + 1; $i++) {
         if (isImage("../" . selectImage($i))) {
 
 

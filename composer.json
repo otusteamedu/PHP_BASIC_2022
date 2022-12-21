@@ -4,8 +4,8 @@
     [
     "conn/dbconn.php",
     "src/functions.php",
-    "db/selectImage.php",
-    "db/queryBook.php",
+    "src/selectImage.php",
+    "src/queryBook.php",
     "src/dir.php"]
     }
     }

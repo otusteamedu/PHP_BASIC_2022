@@ -9,8 +9,8 @@ class ComposerStaticInit0171f1ecd9a457b1d2ff1d89d198b7fa
     public static $files = array (
         'e11e8057879e365ee8081c57ea842813' => __DIR__ . '/../..' . '/conn/dbconn.php',
         '5d80ba682afba25d348d62676196765b' => __DIR__ . '/../..' . '/src/functions.php',
-        'da5403ba197c7638df37953b504c7bab' => __DIR__ . '/../..' . '/db/selectImage.php',
-        '42367e5a9918566b4e083c9beeaf7aac' => __DIR__ . '/../..' . '/db/queryBook.php',
+        '3e49b72ce628580cedd08d094bfde1e6' => __DIR__ . '/../..' . '/src/selectImage.php',
+        'cadb4840abde37f13b9720179183ce49' => __DIR__ . '/../..' . '/src/queryBook.php',
         'ab7dda99eae1c1945d1c6cc5b04002df' => __DIR__ . '/../..' . '/src/dir.php',
     );
 
