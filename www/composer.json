@@ -1,0 +1,9 @@
+{
+  "name": "hw/env",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Hw\\Env\\": "src/"
+    }
+  }
+}
