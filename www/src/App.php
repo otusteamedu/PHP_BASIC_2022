@@ -2,7 +2,7 @@
 
 namespace Hw\Env;
 
-class Name {
+class App {
   const DEFAULT_ACTION = "index";
   const DEFAULT_CONTROLLER = "Index";
 
