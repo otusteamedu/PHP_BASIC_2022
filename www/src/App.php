@@ -34,6 +34,7 @@ class App {
     $controller = "Hw\\Env\\Controllers\\" . $controller;
     if (!class_exists($controller)) {
       View::render('404');
+      $this->controller = "404";
     } else {
       $this->controller = $controller;
       return $this;
@@ -41,18 +42,20 @@ class App {
   }
 
   public function setAction($action) {
-    $reflector = new \ReflectionClass($this->controller);
-    if (!$reflector->hasMethod($action)) {
-      View::render('404');
-      $this->action = "404";
-    } else {
-      $this->action = $action;
-      return $this;
+    if ($this->controller !== "404") {
+      $reflector = new \ReflectionClass($this->controller);
+      if (!$reflector->hasMethod($action)) {
+        View::render('404');
+        $this->action = "404";
+      } else {
+        $this->action = $action;
+        return $this;
+      }
     }
   }
 
   public function action() {
-    if ($this->action === "404") {
+    if ($this->action === "404" || $this->controller === "404") {
       return;
     } else {
       call_user_func_array(array(new $this->controller, $this->action), []);
