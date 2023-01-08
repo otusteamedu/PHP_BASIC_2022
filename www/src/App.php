@@ -33,28 +33,29 @@ class App {
     $controller = ucfirst(strtolower($controller)) . "Controller";
     $controller = "Hw\\Env\\Controllers\\" . $controller;
     if (!class_exists($controller)) {
-      header("HTTP/1.0 404 Not Found");
-      echo "<h1>404 Not Found</h1>";
-      echo "Controller not found";
-      exit();
+      View::render('404');
+    } else {
+      $this->controller = $controller;
+      return $this;
     }
-    $this->controller = $controller;
-    return $this;
   }
 
   public function setAction($action) {
     $reflector = new \ReflectionClass($this->controller);
     if (!$reflector->hasMethod($action)) {
-      header("HTTP/1.0 404 Not Found");
-      echo "<h1>404 Not Found</h1>";
-      echo "Method not found";
-      exit();
+      View::render('404');
+      $this->action = "404";
+    } else {
+      $this->action = $action;
+      return $this;
     }
-    $this->action = $action;
-    return $this;
   }
 
   public function action() {
-    call_user_func_array(array(new $this->controller, $this->action), []);
+    if ($this->action === "404") {
+      return;
+    } else {
+      call_user_func_array(array(new $this->controller, $this->action), []);
+    }
   }
 }
