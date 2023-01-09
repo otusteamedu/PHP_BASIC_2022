@@ -37,8 +37,8 @@ class App {
       $this->controller = "404";
     } else {
       $this->controller = $controller;
-      return $this;
     }
+    return $this;
   }
 
   public function setAction($action) {
@@ -49,8 +49,8 @@ class App {
         $this->action = "404";
       } else {
         $this->action = $action;
-        return $this;
       }
+      return $this;
     }
   }
 
