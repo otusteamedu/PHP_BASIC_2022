@@ -2,19 +2,27 @@
 
 namespace Hw\Env\Controllers;
 
-class IndexController
-{
-    public function index()
-    {
-        echo "This is a home page!";
-    }
+use Hw\Env\View;
 
-    public function test()
-    {
-        echo "This is a test page!";
-    }
+class IndexController {
+  public function index() {
+    View::render('nav', [
+      'title' => 'Index',
+      'page' => 'home',
+    ]);
+  }
 
-    public function new() {
-        echo "This is a new page!";
-    }
+  public function test() {
+    View::render('nav', [
+      'title' => 'Test',
+      'page' => 'test',
+    ]);
+  }
+
+  public function new () {
+    View::render('nav', [
+      'title' => 'New',
+      'page' => 'new',
+    ]);
+  }
 }
