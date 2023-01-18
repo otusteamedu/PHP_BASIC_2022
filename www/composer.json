@@ -1,0 +1,12 @@
+{
+  "name": "hw/hw18",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "HW\\HW18\\Controllers\\": "Controllers/",
+      "HW\\HW18\\Core\\": "Core/",
+      "HW\\HW18\\Models\\": "Models/",
+      "HW\\HW18\\Views\\": "Views/"
+    }
+  }
+}
