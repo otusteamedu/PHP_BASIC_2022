@@ -5,7 +5,8 @@ namespace HW\HW18\Core;
 class Database {
 
   public static function connect() {
-    $config = parse_ini_file("../config/config.ini", true, INI_SCANNER_TYPED);
+    $data = parse_ini_file("../config/config.ini", true, INI_SCANNER_TYPED);
+    $config = $data['mysql'];
 
     $pdo = new \PDO("mysql:host={$config['host']};port={$config['port']};dbname={$config['db']};}",
       $config['username'],
