@@ -20,11 +20,14 @@ class App {
       $this->setController($this->controller);
       $this->setAction($this->action);
     } else {
-      @list($controller, $action) = explode("/", $path, 2);
+      $path_arr = explode("/", $path, 2);
 
-      if (isset($controller)) {
-        $this->setController($controller);
-        $this->setAction($action);
+      if (count($path_arr) < 2) {
+        $this->setController($path_arr[0]);
+        $this->setAction($this->action);
+      } else {
+        $this->setController($path_arr[0]);
+        $this->setAction($path_arr[1]);
       }
     }
   }
