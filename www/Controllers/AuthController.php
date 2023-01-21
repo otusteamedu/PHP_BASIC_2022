@@ -12,23 +12,18 @@ class AuthController {
 
   public function auth() {
 
-    if (!empty($_POST['user']) && !empty($_POST['password'])) {
+    $result = Auth::authenticate($_POST['user'], $_POST['password']);
 
-      $result = Auth::authenticate($_POST['user'], $_POST['password']);
-
-      if ($result === null) {
-        View::render('auth', [
-          'error' => 'Wrong username or password!',
-          'title' => 'Log In',
-        ]);
-      } else {
-        View::render('personal', [
-          'title' => 'personal page of ' . $_POST['user'],
-          'name' => $_POST['user'],
-        ]);
-      }
+    if ($result) {
+      View::render('personal', [
+        'title' => 'personal page of ' . $_POST['user'],
+        'name' => $_POST['user'],
+      ]);
     } else {
-      Redirect::redirect('/');
+      View::render('auth', [
+        'error' => 'Wrong username or password!',
+        'title' => 'Log In',
+      ]);
     }
   }
   public function logout() {
