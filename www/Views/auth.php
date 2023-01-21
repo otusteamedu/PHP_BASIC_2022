@@ -18,13 +18,13 @@
         <label for="user">User:</label>
       </div>
       <div>
-        <input type="text" id="user" name="user">
+        <input type="text" id="user" name="user" required>
       </div>
       <div>
         <label for="password">Password:</label>
       </div>
       <div>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" required>
       </div>
       <div>
         <input type="submit" value="Log in!">
