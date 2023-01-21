@@ -1,7 +1,12 @@
 <?php require_once 'header.php';?>
 
 <div>
-  <h4>Вход в систему</h4>
+  <div>
+    <h4>Вход в систему</h4>
+  </div>
+  <div>
+    <h4><a href="/registration/index">Регистрация</a></h4>
+  </div>
 </div>
 <div>
   <?php if (isset($error)): ?>
