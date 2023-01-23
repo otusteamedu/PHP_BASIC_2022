@@ -1,5 +1,5 @@
 <?php
-require 'conn/dbconn.php';
+require 'src/dbconn.php';
 function addPhoto($path)
 {
     $pdo = dbconn();

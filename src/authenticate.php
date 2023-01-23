@@ -1,5 +1,5 @@
 <?php
-require '../conn/dbconn.php';
+require 'dbconn.php';
 function authenticate($username)
 {
     $pdo = dbconn();

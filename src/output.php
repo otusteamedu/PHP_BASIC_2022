@@ -1,6 +1,6 @@
 <?php
 include 'functions.php';
-include 'db/addPhoto.php';
+include 'addPhoto.php';
 function upload_file()
 {
     $upload_dir = 'img_big';

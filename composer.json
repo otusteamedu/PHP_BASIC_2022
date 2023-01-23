@@ -2,7 +2,7 @@
     "autoload": {
     "files": 
     [
-    "conn/dbconn.php",
+    "src/dbconn.php",
     "src/functions.php",
     "src/selectImage.php",
     "src/queryBook.php",
