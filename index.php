@@ -1,28 +1,53 @@
 <?php
-require 'src/dbconn.php';
-function authenticate($username)
+
+abstract class Product
 {
-    $pdo = dbconn();
-    $result = $pdo->prepare('SELECT password FROM users where username =:username');
-    $result->execute(array(':username' => $username));
-    $output = $result->fetchAll(PDO::FETCH_ASSOC);
-    $hash_pass = $output[0]['password'];
-    return $hash_pass;
+
+    protected static $cost = 1;
+
+    abstract public function getFinalCost();
 }
 
-session_start();
-if (empty($_SESSION['token'])) {
-    header('Location: template/authForm.php');
-} else {
-    header('Location: template/templateAdmin.php');
-}
+class DigitalProduct extends Product
+{
 
-if (!empty($_POST['user']) && !empty($_POST['password'])) {
-    if (password_verify($_POST['password'], authenticate($_POST['user']))) {
-        header('Location: ../template/templateAdmin.php');
-        $_SESSION['username'] = $_POST['user'];
-        $_SESSION['token'] = uniqid();
-    } else {
-        header('Location: template/templateGuest.php');
+    public function getFinalCost()
+    {
+        return self::$cost / 2;
     }
 }
+
+class PeiceProduct extends Product
+{
+
+    public function getFinalCost()
+    {
+        return self::$cost;
+    }
+}
+
+class WeightProduct extends Product
+{
+
+    private $weight;
+
+    public function setWeight($weight)
+    {
+        $this->weight = $weight;
+    }
+
+    public function getFinalCost()
+    {
+        return $this->weight * self::$cost;
+    }
+}
+
+$product_1 = new DigitalProduct;
+$product_2 = new PeiceProduct;
+$product_3 = new WeightProduct;
+
+$product_3->setWeight(2.5);
+
+echo "Стоимость цифрового товара - {$product_1->getFinalCost()}, ";
+echo "Стоимость штучного товара - {$product_2->getFinalCost()}, ";
+echo "Стоимость весового товара - {$product_3->getFinalCost()}, ";
