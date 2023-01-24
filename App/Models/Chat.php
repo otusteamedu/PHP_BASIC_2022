@@ -16,10 +16,10 @@ class Chat {
   public static function addMessage($username) {
 
     $pdo = Database::connect();
-    $result = $pdo->prepare('INSERT INTO `messages` (`message_text`, `username`) VALUES (?, (SELECT username FROM users WHERE username=?))');
+    $result = $pdo->prepare('INSERT INTO `messages` (`message_text`, `username`) VALUES (?,?)');
 
     try {
-      $result->execute([$_POST['message'], $username]);
+      $result->execute([$_POST['message'], ucfirst($username)]);
 
     } catch (\Exception $ex) {
 
