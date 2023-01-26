@@ -10,7 +10,7 @@ class IndexController {
     $user = Session::get('username');
     if (!empty($user)) {
       View::render('personal', [
-        'title' => 'personal page of ' . $user,
+        'title' => 'Personal page of ' . $user,
         'name' => $user,
       ]);
     } else {

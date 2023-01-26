@@ -12,7 +12,6 @@ class RegistrationController {
   }
 
   public function registration() {
-
     $result = Register::register($_POST['user'], $_POST['password']);
     if ($result) {
       View::render('registration', [

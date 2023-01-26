@@ -4,16 +4,18 @@ namespace App\Controllers;
 
 use App\Core\Redirect;
 use App\Core\View;
-use App\Core\Session;
+use App\Models\Auth;
 use App\Models\Chat;
 
 class ChatController {
-  public function index() {
 
-    if (!empty(Session::get('username'))) {
+  public function index() {
+    if (!empty(Auth::get('username'))) {
+      $result = Chat::listMessages();
       View::render('chat', [
-        'title' => '',
-        'messages' => Chat::listMessages(),
+       'title' => 'Chat',
+        'messages' => $result[0],
+        'pagination' => $result[1],
       ]);
     } else {
       Redirect::redirect('/');
@@ -21,14 +23,14 @@ class ChatController {
   }
 
   public function addMessage() {
-    $user = Session::get('username');
+    $user = Auth::get('username');
     if (!empty($user)) {
-      $result = Chat::addMessage(Session::get('username'));
+      $result = Chat::addMessage($user);
       if ($result) {
         Redirect::redirect('/chat/index');
       } else {
         View::render('chat', [
-          'title' => '',
+          'title' => 'Chat',
           'messages' => Chat::listMessages(),
           'error' => 'Message not sent, please try again',
         ]);
