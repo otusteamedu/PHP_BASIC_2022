@@ -4,16 +4,8 @@
 
 <head>
   <title><?php echo $title; ?></title>
-  <style>
-  body {
-    text-align: center;
-  }
-
-  form,
-  input[type=submit] {
-    margin-top: 20px;
-  }
-  </style>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
