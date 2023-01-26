@@ -2,10 +2,10 @@
 
 <div>
   <div>
-    <h4><a href="/">Вход в систему</a></h4>
+    <h4 class="upper"><a href="/">Login</a></h4>
   </div>
   <div>
-    <h4>Регистрация</h4>
+    <h4>Registration</h4>
   </div>
 </div>
 <div>
