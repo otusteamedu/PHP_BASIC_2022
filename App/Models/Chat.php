@@ -5,12 +5,20 @@ use App\Core\Database;
 use App\Core\Logger;
 
 class Chat {
+
   public static function listMessages() {
     $pdo = Database::connect();
-    $query = $pdo->prepare('SELECT * FROM messages ORDER BY message_date DESC');
-    $query->execute();
-    $result = $query->fetchAll();
-    return $result;
+    $query = 'SELECT * FROM messages ORDER BY message_date DESC';
+    $countQuery = 'SELECT COUNT(*) FROM messages';
+
+    $limit = (isset($_GET['limit'])) ? $_GET['limit'] : '5';
+    $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+
+    $Paginator = new Paginator($pdo, $query, $countQuery);
+    $results = $Paginator->getData($limit, $page);
+    $pagination = $Paginator->createLinks();
+
+    return [$results, $pagination];
   }
 
   public static function addMessage($username) {
@@ -21,7 +29,7 @@ class Chat {
     try {
       $result->execute([$_POST['message'], ucfirst($username)]);
 
-    } catch (\Exception $ex) {
+    } catch (\Exception$ex) {
 
       Logger::getLogger()->info("Message not send");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
