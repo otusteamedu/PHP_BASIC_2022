@@ -3,9 +3,21 @@
 abstract class Product
 {
 
-    protected static $cost = 1;
+    protected $cost;
+    protected $name;
+
+    public function __construct($name, $cost)
+    {
+        $this->name = $name;
+        $this->cost = $cost;
+    }
 
     abstract public function getFinalCost();
+
+    public function __toString()
+    {
+        return $this->name . ' : price is - ' . $this->cost . ' ';
+    }
 }
 
 class DigitalProduct extends Product
@@ -13,7 +25,7 @@ class DigitalProduct extends Product
 
     public function getFinalCost()
     {
-        return self::$cost / 2;
+        return $this->cost / 2;
     }
 }
 
@@ -22,14 +34,19 @@ class PeiceProduct extends Product
 
     public function getFinalCost()
     {
-        return self::$cost;
+        return $this->cost;
     }
 }
 
 class WeightProduct extends Product
 {
+    protected $weight;
 
-    private $weight;
+    public function __construct($name, $cost, $weight)
+    {
+        parent::__construct($name, $cost);
+        $this->weight = $weight;
+    }
 
     public function setWeight($weight)
     {
@@ -38,16 +55,20 @@ class WeightProduct extends Product
 
     public function getFinalCost()
     {
-        return $this->weight * self::$cost;
+        return $this->weight * $this->cost;
+    }
+
+    public function __toString()
+    {
+        return parent::__toString() . ', weight - ' . $this->weight;
     }
 }
 
-$product_1 = new DigitalProduct;
-$product_2 = new PeiceProduct;
-$product_3 = new WeightProduct;
+$product_1 = new DigitalProduct('Digital Product', 10);
+$product_2 = new PeiceProduct('Peice Product', 10);
+$product_3 = new WeightProduct('Weight Product', 10, 1.5);
 
-$product_3->setWeight(2.5);
 
-echo "Стоимость цифрового товара - {$product_1->getFinalCost()}, ";
-echo "Стоимость штучного товара - {$product_2->getFinalCost()}, ";
-echo "Стоимость весового товара - {$product_3->getFinalCost()}, ";
+echo $product_1;
+echo $product_2;
+echo $product_3;
