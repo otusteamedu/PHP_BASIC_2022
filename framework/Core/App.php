@@ -9,25 +9,26 @@ class App
         'home-info' => ['Home', 'info']
     ];
 
-
     public static function run()
     {
+
         $controller_name = "Otus\\Mvc\\Controllers\\IndexController";
         $action_name = "index";
 
         $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
         if (array_key_exists($path, self::$routes)) {
             $controller = self::$routes[$path][0];
-            $controller_name = self::makeControllerName($controller);
+            $controller_name = "Otus\\Mvc\\Controllers\\{$controller}Controller";
             $action_name = self::$routes[$path][1];
-        } elseif ($path !== "") {
-            @list($controller, $action) = explode("/", $path, 2);
-            if (isset($controller)) {
-                $controller_name = self::makeControllerName($controller);
-            }
-
-            if (isset($action)) {
-                $action_name = $action;
+        } else {
+            if ($path !== "") {
+                @list($controller, $action) = explode("/", $path, 2);
+                if (isset($controller)) {
+                    $controller_name = "Otus\\Mvc\\Controllers\\{$controller}Controller";
+                }
+                if (isset($action)) {
+                    $action_name = $action;
+                }
             }
         }
 
