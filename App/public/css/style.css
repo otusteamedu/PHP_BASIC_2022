@@ -1,0 +1,16 @@
+ body {
+   text-align: center;
+ }
+
+ form,
+ input[type=submit] {
+   margin-top: 20px;
+ }
+
+ .upper {
+   margin-top: 20px;
+ }
+
+ #logout {
+   margin-top: 0;
+ }
