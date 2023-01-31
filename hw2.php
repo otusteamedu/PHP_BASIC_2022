@@ -79,21 +79,48 @@ function getMinuteName(int $minute): string
     if ($minute<1 || $minute>60)
         return 'Превышен интервал "минут"';
     
-    return 'минут' . match ($minute) {
-        1, 21, 31, 41, 51 => 'а',
-        2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54 => 'ы',
+    return 'минут' . match (1) {
+        preg_match('/^(1|([2-5]1))$/', $minute) => 'а',
+        preg_match('/^([2-4]|([2-5][2-4]))$/', $minute) => 'ы',
+        default => '',
+    };
+
+}
+
+function getMinuteNameVer2(string $minute): string
+{
+    if ($minute<1 || $minute>60)
+        return 'Превышен интервал "минут"';
+
+    $end = 0;
+    if ($minute > 20){
+    	$end = $minute[1];
+    } else if ($minute < 5) {
+    	$end = $minute;
+    }
+    
+    return 'минут' . match ($end) {
+        '1' => 'а',
+        '2', '3', '4' => 'ы',
         default => '',
     };
 }
 
-function getTimeWithRussianName(){
+function getTimeWithRussianName(int $ver = 1): string
+{
     $h = date('G');
     $m = date('i');
+    $return = $h.' '.getHourName($h).' '.$m.' ';
+    $return .= match ($ver) {
+        2 => getMinuteNameVer2((string)$m),
+        default => getMinuteName($m)
+    };
 
-    return $h.' '.getHourName($h).' '.$m.' '.getMinuteName($m);
+    return $return;
 }
 
 echo getTimeWithRussianName();
+echo getTimeWithRussianName(2);
 
 
 ?>
