@@ -8,12 +8,12 @@ class Event {
 
   public static function listAllEvents() {
     $pdo = Database::connect();
-    $query = 'SELECT events.type, events.topic, events.date, events.time FROM events ORDER BY date';
 
-   /*  $query = 'SELECT events.type, events.topic, events.date, events.time, users.username FROM events
+    $query = 'SELECT  events.id, events.type, events.topic, events.date, events.time, group_concat(users.username) AS usernames FROM events
     LEFT JOIN events_users ON events.id = events_users.event_id
     LEFT JOIN users ON users.id = events_users.user_id
-    ORDER BY date'; */
+    GROUP BY events.id
+    ORDER BY events.date';
 
     $username = NULL;
     $queryCount = 'SELECT events.id FROM events';

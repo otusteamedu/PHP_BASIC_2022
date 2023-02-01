@@ -36,7 +36,7 @@ if (isset($events)) {
     echo "<td>{$time}</td>";
     echo "<td>{$event['type']}</td>";
     echo "<td>{$event['topic']}</td>";
-    // echo "<td>{$event['username']}</td>";
+    echo "<td>{$event['usernames']}</td>";
     echo '</tr>';
   }
 }?>
