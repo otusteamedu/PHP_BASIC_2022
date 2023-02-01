@@ -5,3 +5,7 @@ port     =
 db       =
 username =
 password =
+
+[pepper]
+
+secret =
