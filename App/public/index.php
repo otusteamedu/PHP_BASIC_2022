@@ -1,8 +1,6 @@
 <?php
 include_once '../vendor/autoload.php';
 
-// require __DIR__ . '/autoload.php';
+use App\Core\App;
 
-$app = new App\Core\App();
-
-$app->action();
+App::action();
