@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  font-family: "Tahoma", "Open-Sans", "Verdana", sans-serif;
+  
+  /*background-color: black;*/
+}
+
+/* normalized styles */
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.main { 
+  max-width:1110px;
+  margin:auto;
+}
+
+.flex_container{
+  display:inline-flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+
+.services {
+  width:110;
+  height:210px;
+  box-sizing:border-box;
+  background-color:white;
+  margin-bottom: 30px;
+}
+
+
+.services img {
+  width:100px;
+  max-height:200px;
+}
+
+
