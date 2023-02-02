@@ -64,7 +64,7 @@ echo "<br>";
 
 function getHourName(int $hour): string
 {
-    if ($hour<1 || $hour>24)
+    if ($hour<0 || $hour>24)
         return 'Превышен интервал "часа"';
     
     return 'час' . match ($hour) {
@@ -76,7 +76,7 @@ function getHourName(int $hour): string
 
 function getMinuteName(int $minute): string
 {
-    if ($minute<1 || $minute>60)
+    if ($minute<0 || $minute>60)
         return 'Превышен интервал "минут"';
     
     return 'минут' . match (1) {
@@ -89,19 +89,20 @@ function getMinuteName(int $minute): string
 
 function getMinuteNameVer2(string $minute): string
 {
-    if ($minute<1 || $minute>60)
+    if ($minute<0 || $minute>60)
         return 'Превышен интервал "минут"';
 
     $end = 0;
     if ($minute > 20){
-    	$end = $minute[1];
+        $end = $minute%10;
+        echo $end;
     } else if ($minute < 5) {
-    	$end = $minute;
+        $end = $minute;
     }
     
     return 'минут' . match ($end) {
-        '1' => 'а',
-        '2', '3', '4' => 'ы',
+        1 => 'а',
+        2, 3, 4 => 'ы',
         default => '',
     };
 }
