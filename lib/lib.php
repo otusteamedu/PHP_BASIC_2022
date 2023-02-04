@@ -4,9 +4,9 @@ function getBooks(string $searchString = '', int $limit = 10): array
 	global $db;
 	$where = '1';
 	if ($searchString){
-		$where .= " AND (`books`.`name` LIKE '%".$searchString."%' 
-					OR CONCAT( `authors`.`last_name`, ' ', `authors`.`first_name` ) LIKE '%".$searchString."%'
-					OR CONCAT( `authors`.`first_name`, ' ', `authors`.`last_name` ) LIKE '%".$searchString."%'
+		$where .= " AND (`books`.`name` LIKE '%".$db->escape_string($searchString)."%' 
+					OR CONCAT( `authors`.`last_name`, ' ', `authors`.`first_name` ) LIKE '%".$db->escape_string($searchString)."%'
+					OR CONCAT( `authors`.`first_name`, ' ', `authors`.`last_name` ) LIKE '%".$db->escape_string($searchString)."%'
 					)";
 	}
 	$sql = "SELECT `books`.`id`, `books`.`name`, `books`.`count_pages`, 

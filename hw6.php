@@ -41,9 +41,17 @@ $listBooks = getBooks($searchString);
 	</tbody>
 </table>
 <form method="POST" action="">
-	ПОИСК: <input type="text" name="search" value="<?=$searchString?>" style="width:500px">
-	<input type="submit" name="start" value="Искать">
-	<input type="submit" name="reset" value="Сбросить">
+	<div class="form-group">
+		ПОИСК: <input  class="form-control" type="text" name="search" value="<?=$searchString?>" placeholder="Введите название или автора">
+		<input class="btn btn-primary mb-2" type="submit" name="start" value="Искать">
+		<?php 
+		if ($searchString){
+			?>
+			<input class="btn btn-secondary mb-2" type="submit" name="reset" value="Сбросить">
+			<?
+		}
+		?>
+	</div>
 
 </form>
 

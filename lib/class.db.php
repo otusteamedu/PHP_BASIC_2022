@@ -29,4 +29,15 @@ class servise_db
 		return $tmp;
 	}
 
+	public function escape_string($string) { 
+		if($this->_conn) {
+            if(is_string($string) || is_numeric($string) || is_null($string)) {
+			    return mysqli_real_escape_string( $this->_conn, $string );
+            } 
+		} else { 
+			die('Cannot connect MySQL (escape_string)');
+		}
+	
+	}
+
 }
