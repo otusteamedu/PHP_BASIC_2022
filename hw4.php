@@ -1,3 +1,7 @@
+<?php
+include ('lib/functions.php');
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -13,19 +17,9 @@
 
 		<div class="flex_container" >
 			<?php
-				$listFiles = scandir('img');
-
-				$count = count($listFiles);
-				for($i=0; $i<$count; $i++){
-					if (is_file("img/".$listFiles[$i])){
-						?>
-						<div class="services" >
-							<a href="/img/<?=$listFiles[$i]?>" target="_blank" >
-								<img src="/img/<?=$listFiles[$i]?>">
-							</a>
-						</div>
-						<?
-					}
+				$listFoto = getImagesList('img');
+				foreach ($listFoto as $fileName) {
+				    echo parseTpl('file_name', $fileName);
 				}
 			?>
 			
