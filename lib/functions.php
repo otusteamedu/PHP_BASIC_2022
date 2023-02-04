@@ -14,11 +14,12 @@ function getImagesList(string $dir = 'img'): array
 
 function getImageTpl(string $filName, string $folder = 'img'): string
 {
-	$tpl = '<div class="services" >
-			<a href="'.$folder.'/'.$filName.'" target="_blank" >
-				<img src="'.$folder.'/thumbs/'.$filName.'">
-			</a>
-			</div>';
+	global $USER;
+	$tpl = '<div class="services" >';
+	if ($USER) $tpl .= '<a href="'.$folder.'/'.$filName.'" target="_blank" >';
+	$tpl .= '<img src="'.$folder.'/thumbs/'.$filName.'">';
+	if ($USER) $tpl .= '</a>';			
+	$tpl .= '</div>';
 	return $tpl;
 }
 
@@ -50,6 +51,48 @@ function uploadFile(): array
 		$return['text'] = 'Ошибка загрузки';
 	}
 	return $return;
+}
+
+function login(string $user_name, string $password): array
+{
+	global $db;
+	$user_name = strtolower($user_name); 
+	$sql = "SELECT *
+			FROM `users`
+			WHERE `login` = '".$db->escape_string($user_name)."' 
+					AND `password` = MD5('".$db->escape_string($password)."')
+			LIMIT 1";
+	$result = $db->fetchAll($sql);
+	if (isset($result[0]))
+		return $result[0];
+	return [];
+}
+
+function loginByToken(string $token): array
+{
+	global $db;
+	$user_name = strtolower($user_name); 
+	$sql = "SELECT *
+			FROM `users`
+			WHERE `token` = '".$db->escape_string($token)."' 
+			LIMIT 1";
+	$result = $db->fetchAll($sql);
+	if (isset($result[0]))
+		return $result[0];
+	return [];
+}
+
+function setToken(string $user_id): string
+{
+	global $db;
+	$token = uniqid(); 
+	$sql = "UPDATE `users`
+        SET `token` = '".$db->escape_string($token)."'
+        WHERE `id` = '".(int)$user_id."'
+        LIMIT 1
+        ";
+    $db->query($sql);
+    return $token;
 }
 
 

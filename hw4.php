@@ -1,5 +1,5 @@
 <?php
-include ('lib/functions.php');
+include ('lib/ini.php');
 ?>
 
 <!DOCTYPE html>
@@ -31,13 +31,20 @@ include ('lib/functions.php');
 			?>
 			
 		</div>
-
-		<div class="button">
-			<form enctype="multipart/form-data" action="" method="POST">
-				Загрузить изображение: <input name="userfile" type="file" />
-				<input class="button" type="submit" value="Загрузить" />
-			</form>
-		</div>
+		<?php
+		if ($USER){
+			?>
+				<div class="button">
+					<form enctype="multipart/form-data" action="" method="POST">
+						Загрузить изображение: <input name="userfile" type="file" />
+						<input class="button" type="submit" value="Загрузить" />
+					</form>
+				</div>
+			<?php
+		} else {
+			include ('loginForm.php');
+		}
+		?>
 	<footer>
 		
 	</footer>
