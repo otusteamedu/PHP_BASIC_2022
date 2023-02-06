@@ -17,10 +17,7 @@ include ('lib/functions.php');
 
 		<div class="flex_container" >
 			<?php
-				$listFoto = getImagesList('img');
-				foreach ($listFoto as $fileName) {
-				    echo parseTpl('file_name', $fileName);
-				}
+				echo showImagesList('img');
 			?>
 			
 		</div>

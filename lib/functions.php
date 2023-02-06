@@ -1,12 +1,12 @@
 <?php
-function getImagesList(string $dir = 'img'): array
+function showImagesList(string $dir = 'img'): string
 {
 	$listFiles = scandir($dir);
 	$count = count($listFiles);
-	$return = [];
+	$return = '';
 	for($i=0; $i<$count; $i++){
 		if (is_file($dir."/".$listFiles[$i])){
-			$return[] = "/img/".$listFiles[$i];
+			$return .= parseTpl('file_name', "/img/".$listFiles[$i]);
 		}
 	}
 	return $return;
@@ -21,6 +21,7 @@ function parseTpl(string $key, string $value): string
 			</div>';
 	return str_replace('__'.$key.'__', $value, $tpl);
 }
+
 
 
 
