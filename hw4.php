@@ -1,5 +1,5 @@
 <?php
-include ('lib/functions.php');
+include ('lib/ini.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,29 +15,32 @@ include ('lib/functions.php');
 <body>
 	<section class="main">
 		<?php
-		if (isset($_FILES) && $_FILES){
-			$resultUpload = uploadFile();
-			if ($resultUpload['error'])
-	    		echo $resultUpload['text']."<br>";
-	    }
+		$resultUpload = uploadFile();
+		if ($resultUpload['error'])
+    		echo $resultUpload['text']."<br>";
 
 		?>
 		<div class="flex_container" >
 			<?php
-				$listFoto = getImagesList('img');
-				foreach ($listFoto as $fileName) {
-				    echo getImageTpl($fileName, 'img');
-				}
+				echo getImagesList('img', $isLogined);
 			?>
 			
 		</div>
+		<?php
+		if ($isLogined){
+			?>
+				<div class="button">
+					<form enctype="multipart/form-data" action="" method="POST">
+						Загрузить изображение: <input name="userfile" type="file" />
+						<input class="button" type="submit" value="Загрузить" />
+					</form>
+				</div>
+			<?php
+		} else {
+			include ('loginForm.php');
+		}
 
-		<div class="button">
-			<form enctype="multipart/form-data" action="" method="POST">
-				Загрузить изображение: <input name="userfile" type="file" />
-				<input class="button" type="submit" value="Загрузить" />
-			</form>
-		</div>
+		?>
 	<footer>
 		
 	</footer>
