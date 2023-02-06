@@ -15,24 +15,19 @@ include ('lib/ini.php');
 <body>
 	<section class="main">
 		<?php
-		if (isset($_FILES) && $_FILES){
-			$resultUpload = uploadFile();
-			if ($resultUpload['error'])
-	    		echo $resultUpload['text']."<br>";
-	    }
+		$resultUpload = uploadFile();
+		if ($resultUpload['error'])
+    		echo $resultUpload['text']."<br>";
 
 		?>
 		<div class="flex_container" >
 			<?php
-				$listFoto = getImagesList('img');
-				foreach ($listFoto as $fileName) {
-				    echo getImageTpl($fileName, 'img');
-				}
+				echo getImagesList('img', $isLogined);
 			?>
 			
 		</div>
 		<?php
-		if ($USER){
+		if ($isLogined){
 			?>
 				<div class="button">
 					<form enctype="multipart/form-data" action="" method="POST">
@@ -44,6 +39,7 @@ include ('lib/ini.php');
 		} else {
 			include ('loginForm.php');
 		}
+
 		?>
 	<footer>
 		

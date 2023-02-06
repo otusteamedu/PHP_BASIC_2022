@@ -1,61 +1,75 @@
 <?php
-function getImagesList(string $dir = 'img'): array
+function getImagesList(string $dir = 'img', bool $isLogined = false): string
 {
 	$listFiles = scandir($dir);
 	$count = count($listFiles);
-	$return = [];
+	$return = '';
+	$tpl = getImageTpl($isLogined);
+	$tpl = parseTpl($tpl, 'folder', $dir);
 	for($i=0; $i<$count; $i++){
 		if (is_file($dir."/".$listFiles[$i]) && is_file($dir."/thumbs/".$listFiles[$i])){
-			$return[] = $listFiles[$i];
+			$return .= parseTpl($tpl, 'file_name', $listFiles[$i]);
+
 		}
 	}
 	return $return;
 }
 
-function getImageTpl(string $filName, string $folder = 'img'): string
+function getImageTpl(bool $isLogined = false): string
 {
-	global $USER;
-	$tpl = '<div class="services" >';
-	if ($USER) $tpl .= '<a href="'.$folder.'/'.$filName.'" target="_blank" >';
-	$tpl .= '<img src="'.$folder.'/thumbs/'.$filName.'">';
-	if ($USER) $tpl .= '</a>';			
-	$tpl .= '</div>';
+	if ($isLogined){
+		$tpl = '<div class="services" >
+					<a href="__folder__/__file_name__" target="_blank" >
+						<img src="__folder__/thumbs/__file_name__">
+					</a>
+				</div>';
+	} else {
+		$tpl = '<div class="services" >
+					<img src="__folder__/thumbs/__file_name__">
+				</div>';
+	}
 	return $tpl;
+}
+
+function parseTpl(string $tpl, string $key, string $value): string
+{
+	return str_replace('__'.$key.'__', $value, $tpl);
 }
 
 function uploadFile(): array
 {
 	$return = [];
 	$return['error'] = 0;
-	if (isset($_FILES["userfile"]["type"])){
-	    if(strstr($_FILES["userfile"]["type"], 'image')){
-			include('lib/resize.php');
-			$tmp_name = $_FILES["userfile"]["tmp_name"];
-			$salt = uniqid();
-			$name = "img/".$salt."_".$_FILES["userfile"]["name"];
-			if (move_uploaded_file($tmp_name, $name)) {
-				if (!imagepng(resize_image($name, 100, 100), "img/thumbs/".$salt."_".$_FILES["userfile"]["name"])){
+	if (isset($_FILES) && $_FILES){
+		if (isset($_FILES["userfile"]["type"])){
+		    if(strstr($_FILES["userfile"]["type"], 'image')){
+				include('lib/resize.php');
+				$tmp_name = $_FILES["userfile"]["tmp_name"];
+				$salt = uniqid();
+				$name = "img/".$salt."_".$_FILES["userfile"]["name"];
+				if (move_uploaded_file($tmp_name, $name)) {
+					if (!imagepng(resize_image($name, 100, 100), "img/thumbs/".$salt."_".$_FILES["userfile"]["name"])){
+						$return['error'] = 1;
+						$return['text'] = 'Ошибка создания миниатюры';
+					}
+				} else {
 					$return['error'] = 1;
-					$return['text'] = 'Ошибка создания миниатюры';
+					$return['text'] = 'Ошибка загрузки';
 				}
 			} else {
 				$return['error'] = 1;
-				$return['text'] = 'Ошибка загрузки';
+				$return['text'] = 'Не допустимый формат файла';
 			}
 		} else {
 			$return['error'] = 1;
-			$return['text'] = 'Не допустимый формат файла';
+			$return['text'] = 'Ошибка загрузки';
 		}
-	} else {
-		$return['error'] = 1;
-		$return['text'] = 'Ошибка загрузки';
 	}
 	return $return;
 }
 
-function login(string $user_name, string $password): array
+function login(object $db, string $user_name, string $password): array
 {
-	global $db;
 	$user_name = strtolower($user_name); 
 	$sql = "SELECT *
 			FROM `users`
@@ -68,9 +82,8 @@ function login(string $user_name, string $password): array
 	return [];
 }
 
-function loginByToken(string $token): array
+function loginByToken(object $db, string $token): array
 {
-	global $db;
 	$user_name = strtolower($user_name); 
 	$sql = "SELECT *
 			FROM `users`
@@ -82,9 +95,33 @@ function loginByToken(string $token): array
 	return [];
 }
 
-function setToken(string $user_id): string
+function loginByToken_Bind(object $db, string $token): array
 {
-	global $db;
+	$sql = "SELECT id, login, admin, token
+			FROM users
+			WHERE token = ?
+			LIMIT 1";
+	$result = $db->fetchBind($sql, 's', ['id', 'login', 'admin', 'token'], [$token]);
+	if (isset($result[0]))
+		return $result[0];
+	return [];
+}
+
+function login_Bind(object $db, string $user_name, string $password): array
+{
+	$user_name = strtolower($user_name); 
+	$sql = "SELECT id, login, admin, token
+			FROM users
+			WHERE login = ? AND `password` = MD5(?)
+			LIMIT 1";
+	$result = $db->fetchBind($sql, 'ss', ['id', 'login', 'admin', 'token'], [$user_name, $password]);
+	if (isset($result[0]))
+		return $result[0];
+	return [];
+}
+
+function setToken(object $db, int $user_id): string
+{
 	$token = uniqid(); 
 	$sql = "UPDATE `users`
         SET `token` = '".$db->escape_string($token)."'
@@ -92,6 +129,18 @@ function setToken(string $user_id): string
         LIMIT 1
         ";
     $db->query($sql);
+    return $token;
+}
+
+function setToken_Bind(object $db, int $user_id): string
+{
+	$token = uniqid(); 
+	$sql = "UPDATE users
+        SET token = ?
+        WHERE id = ?
+        LIMIT 1
+        ";
+    $db->updateBind($sql, 'is', [$token, $user_id]);
     return $token;
 }
 
