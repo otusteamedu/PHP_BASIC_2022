@@ -63,5 +63,12 @@ class servise_db
 		return mysqli_stmt_execute($stmt);
 	}
 
+	public function insertBind($sql, $types, $params){
+		$stmt = mysqli_prepare($this->_conn, $sql);
+		mysqli_stmt_bind_param($stmt, $types, ...$params);
+		mysqli_stmt_execute($stmt);
+		return mysqli_stmt_insert_id($stmt);
+	}
+
 
 }
