@@ -6,10 +6,10 @@ class servise_db
 	private $_count = 0;
 
 	function __construct(){
-		$this->_conn = new mysqli('localhost',
-		                             'root',
-		                             '',
-		                             'otus');
+		$this->_conn = new mysqli(getConfigBD('host'),
+		                            getConfigBD('user'),
+		                            getConfigBD('password'),
+		                            getConfigBD('bd_name'));
 	}
 
 	public function query($sql){
@@ -34,10 +34,28 @@ class servise_db
             if(is_string($string) || is_numeric($string) || is_null($string)) {
 			    return mysqli_real_escape_string( $this->_conn, $string );
             } 
-		} else { 
-			die('Cannot connect MySQL (escape_string)');
-		}
+		} 
 	
 	}
+
+	public function fetchBind($sql, $types, $keys, $params){
+
+		$result = $keys;
+		$return = [];
+		$stmt = mysqli_prepare($this->_conn, $sql);
+		mysqli_stmt_bind_param($stmt, $types, ...$params);
+		mysqli_stmt_execute($stmt);
+		mysqli_stmt_bind_result($stmt, ...$result);
+
+		while (mysqli_stmt_fetch($stmt)) {
+			$tmp = [];
+			for($i=0;$i<count($result);$i++){
+				$tmp[$keys[$i]] = $result[$i];
+			}
+			$return[] = $tmp;
+		}
+		return $return;
+	}
+
 
 }

@@ -19,7 +19,11 @@ if (isset($_POST['start']) && isset($_POST['search']) && $_POST['search'] != '')
 	$searchString = $_POST['search'];
 }
 
-$listBooks = getBooks($searchString);
+//$listBooks = getBooks($db, $searchString);
+
+$listBooks = getBooks_bind($db, $searchString);
+
+
 
 ?>
 <table class="table table-striped" >
