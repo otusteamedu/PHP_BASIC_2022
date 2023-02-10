@@ -34,8 +34,6 @@ if (isset($_GET['action-msg'])) {
 if (isset($events)) {
   foreach ($events as $event) {
     $id = $event['id'];
-   // Modal button (delete event)
-    // $delete = "<a href=" . "/Event/deleteEvent?action=delete&event_id={$id}" . "><input type='submit' value='delete' class='btn' id='delete'></a>";
 
     // Modal button (delete event)
     $delete = "<button type='button' id='delete-event' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteEventModal{$id}'>Delete</button>";
