@@ -5,7 +5,7 @@
     <h4 class="upper">Login</h4>
   </div>
   <div>
-    <h4><a href="/Registration/index">Registration</a></h4>
+    <h4><a href="/Auth/registration">Registration</a></h4>
   </div>
 </div>
 <div>
@@ -27,7 +27,7 @@
         <input type="password" id="password" name="password" required>
       </div>
       <div>
-        <input type="submit" value="Log in!">
+        <input class="btn btn-primary" type="submit" value="Log in!" id="login">
       </div>
     </div>
   </form>

@@ -1,21 +1,12 @@
-<?php ;?>
+<?php require_once 'header.php';?>
 
-<!DOCTYPE html>
-<html>
+<h1>404</h1>
+<h2>Page not found</h2>
 
-<head>
-  <title>404 - Not Found</title>
-  <style>
-  h1,
-  h2 {
-    text-align: center;
-  }
-  </style>
-</head>
-
-<body>
-  <h1>404</h1>
-  <h2>Page not found</h2>
+<?php
+if (isset($debug_info)) {
+  echo '<pre>', print_r($debug_info), '</pre>';
+}?>
 </body>
 
 </html>

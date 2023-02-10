@@ -1,0 +1,70 @@
+ body {
+   text-align: center;
+ }
+
+ h1,
+ h2 {
+   text-align: center;
+ }
+
+ form,
+ input[type=submit] {
+   margin-top: 10px;
+ }
+
+ input#join,
+ input#cancel,
+ input#new-event {
+   margin-top: 0;
+   border: 0;
+   padding: 4px 15px;
+ }
+
+ .alert {
+   width: 40%;
+   margin: 10px auto;
+ }
+
+ #join {
+   background-color: var(--bs-cyan);
+   color: #fff;
+   border-radius: var(--bs-btn-border-radius);
+ }
+
+ #cancel {
+   background-color: var(--bs-red);
+   color: #fff;
+   border-radius: var(--bs-btn-border-radius);
+ }
+
+ #edit-event,
+ #delete-event {
+   padding: 4px 15px;
+   border: 0;
+ }
+
+ .upper {
+   margin-top: 10px;
+ }
+
+ #login,
+ #registration {
+   margin-top: 15px;
+ }
+
+ #logout {
+   margin: 0 0 10px;
+   background-color: var(--bs-blue);
+   border: 0;
+   padding: 4px 15px;
+   border-radius: var(--bs-btn-border-radius);
+   color: #fff;
+ }
+
+ .custom-modal-header {
+   padding: 10px;
+ }
+
+ .custom-modal-body {
+   padding-top: 0;
+ }

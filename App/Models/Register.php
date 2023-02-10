@@ -15,8 +15,10 @@ class Register {
     $pdo = Database::connect();
     $result = $pdo->prepare('INSERT INTO users(username, password_hash) VALUES (?,?)');
     try {
-      $result->execute([$username, $password_hashed]);
-    } catch (\Exception $ex) {
+      $result->execute([ucfirst($username), $password_hashed]);
+      return true;
+
+    } catch (\Exception$ex) {
 
       Logger::getLogger()->info("Registration failed");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
@@ -24,6 +26,5 @@ class Register {
 
       return false;
     }
-    return true;
   }
 }

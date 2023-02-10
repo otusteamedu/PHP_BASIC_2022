@@ -17,7 +17,7 @@
   if (isset($message)): ?>
   <h2 style="color: green"><?php echo $message; ?></h2>
   <?php endif;?>
-  <form action="/Registration/registration" method="post">
+  <form action="/Auth/register" method="post">
     <div>
       <div>
         <label for="user">Your name:</label>
@@ -32,7 +32,7 @@
         <input type="password" id="password" name="password" required>
       </div>
       <div>
-        <input type="submit" value="Register me!">
+        <input class="btn btn-primary" type="submit" value="Register me!" id="registration">
       </div>
     </div>
   </form>

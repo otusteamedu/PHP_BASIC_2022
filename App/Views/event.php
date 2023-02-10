@@ -1,44 +1,54 @@
 <?php require_once 'header.php';?>
-<div>
-  <h4 class="upper"><a href="/Personal/index">Return to personal page</a></h4>
-</div>
+<div class="container">
+  <div>
+    <h5 class="upper"><a href="/Personal/index">Return to personal page</a></h5>
+  </div>
+  <br>
+  <!-- Pagination -->
+  <nav><?php require_once 'pagination.php';?></nav>
 
-<br>
-<nav><?php echo $pagination; ?></nav>
-<?php
-if (isset($error)): ?>
-<h2 style="color: red"><?php echo $error; ?></h2>
-<?php endif;
-if (isset($message)): ?>
-<h2><?php echo $message; ?></h2>
-<?php endif;?>
-<table class="table table-striped table-condensed table-bordered table-rounded">
-  <thead>
-    <tr class="text-center">
-      <th width="20%">Date</th>
-      <th width="20%">Time</th>
-      <th width="20%">Type</th>
-      <th width="25%">Topic</th>
-      <th width="15%">Subscription</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
+  <!-- Table -->
+  <table class="table table-striped table-condensed table-bordered table-rounded">
+    <thead>
+      <tr class="text-center">
+        <th width="10%">ID</th>
+        <th width="20%">Date</th>
+        <th width="20%">Time</th>
+        <th width="30%">Event</th>
+        <th width="20%">Subscription</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
 
 if (isset($events)) {
+
   foreach ($events as $event) {
+    $join = "<a href=" . "/Event/join?action=join&event_id={$event['id']}&user={$user}" . "><input type='submit' value='join' class='btn' id='join'></a>";
+    $cancel = "<a href=" . "/Event/cancel?action=cancel&event_id={$event['id']}&user={$user}" . "><input type='submit' value='cancel' class='btn' id='cancel'></a>";
     $date = date('d M Y', strtotime($event['date']));
     $time = date('G.i', strtotime($event['time']));
-    echo "<tr><td>{$date}</td>";
+    if (date('d M Y') <= $date) {
+      if ($event['usernames']) {
+        $users = explode(",", $event['usernames']);
+        in_array($user, $users) ? $link = $cancel : $link = $join;
+      } else {
+        $link = $join;
+      }
+    } else {
+      $link = "Subscription closed";
+    }
+    echo "<tr><td>{$event['id']}</td>";
+    echo "<td>{$date}</td>";
     echo "<td>{$time}</td>";
-    echo "<td>{$event['type']}</td>";
-    echo "<td>{$event['topic']}</td>";
+    echo "<td>{$event['name']}</td>";
+    echo "<td>{$link}</td>";
     echo '</tr>';
   }
 }?>
-  </tbody>
-</table>
-
+    </tbody>
+  </table>
+</div>
 </body>
 
 </html>

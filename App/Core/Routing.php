@@ -3,7 +3,6 @@
 namespace App\Core;
 
 class Routing {
-
   const DEFAULT_ACTION = "index";
   const DEFAULT_CONTROLLER = "Index";
 
@@ -37,7 +36,6 @@ class Routing {
 
     $controller = "App\\Controllers\\" . ucfirst(strtolower($controller)) . "Controller";
     if (!class_exists($controller)) {
-      View::render('404');
       $this->controller = "404";
     } else {
       $this->controller = $controller;
@@ -48,7 +46,6 @@ class Routing {
   protected function setAction($action) {
     if ($this->controller !== "404") {
       if (!method_exists($this->controller, $action)) {
-        View::render('404');
         $this->action = "404";
       } else {
         $this->action = $action;
@@ -56,6 +53,7 @@ class Routing {
       return $this;
     }
   }
+
   public function getPath() {
     return [
       "Controller" => $this->controller,

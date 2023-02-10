@@ -22,6 +22,9 @@ class Auth {
       if (!$verify) {
         Logger::getLogger()->info("Authentication failed - wrong password");
         Logger::getLogger()->debug("Request params", $_REQUEST);
+      } else {
+        session_start();
+        $_SESSION['username'] = $username;
       }
       return $verify;
     } else {
@@ -36,15 +39,9 @@ class Auth {
     $query = $pdo->prepare('SELECT is_admin FROM users where username = ?');
     $query->execute([$username]);
     $result = $query->fetch();
-    return $result ["is_admin"];
+    return $result["is_admin"];
   }
 
-  public static function set($param, $value) {
-    session_start();
-    if (!array_key_exists($param, $_SESSION)) {
-      $_SESSION[$param] = $value;
-    }
-  }
   public static function get($param, $default = '') {
     session_start();
     if (array_key_exists($param, $_SESSION)) {

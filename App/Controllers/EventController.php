@@ -10,13 +10,14 @@ use App\Models\Event;
 class EventController {
 
   public function index() {
-
-    if (!empty(Auth::get('username'))) {
+    $user = ucfirst(Auth::get('username'));
+    if (!empty($user)) {
       $result = Event::listAllEvents();
       View::render('event', [
         'title' => 'Events',
         'events' => $result[0],
         'pagination' => $result[1],
+        'user' => $user,
       ]);
     } else {
       Redirect::redirect('/');
@@ -25,18 +26,28 @@ class EventController {
 
   public function addEvent() {
     $result = Event::addEvent();
-    if ($result) {
-      Redirect::redirect('/Event/index');
-    } else {
-      $user = Auth::get('username');
-      $result = Event::listAllEvents();
-      View::render('admin', [
-        'title' => 'Admin page',
-        'name' => $user,
-        'error' => 'Event not created, please try again',
-        'events' => $result[0],
-        'pagination' => $result[1],
-      ]);
+    Redirect::redirect("/Personal/index/?action-msg=$result");
+  }
+  public function editEvent() {
+    $result = Event::editEvent();
+    Redirect::redirect("/Personal/index/?action-msg=$result");
+  }
+  public function deleteEvent() {
+    $result = Event::deleteEvent();
+    Redirect::redirect("/Personal/index/?action-msg=$result");
+  }
+
+  public function join() {
+    if (!empty($_GET['action']) && $_GET['action'] === 'join') {
+      $result = Event::joinEvent($_GET['event_id'], $_GET['user']);
+      Redirect::redirect("/Personal/index/?action-msg=$result");
+    }
+  }
+
+  public function cancel() {
+    if (!empty($_GET['action']) && $_GET['action'] === 'cancel') {
+      $result = Event::cancelEvent($_GET['event_id'], $_GET['user']);
+      Redirect::redirect("/Personal/index/?action-msg=$result");
     }
   }
 }

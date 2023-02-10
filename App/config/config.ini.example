@@ -1,11 +1,15 @@
 [mysql]
 
-host     =
-port     =
-db       =
-username =
-password =
+host     = localhost
+port     = 3306
+db       = my-project
+username = my-username
+password = my-password
 
 [pepper]
 
-secret =
+secret = my-secret-word;
+
+[debug]
+
+enabled = true;

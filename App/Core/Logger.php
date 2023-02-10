@@ -13,7 +13,7 @@ class Logger {
 
     if (self::$logger == null) {
 
-      self::$logger = new MonologLogger('monolog_test');
+      self::$logger = new MonologLogger('monolog_otus_project');
       self::$logger->pushHandler(new StreamHandler('../log/app.log', LogLevel::DEBUG));
     }
     return self::$logger;

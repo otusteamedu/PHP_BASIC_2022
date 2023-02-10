@@ -5,23 +5,51 @@ namespace App\Controllers;
 use App\Core\Redirect;
 use App\Core\View;
 use App\Models\Auth;
+use App\Models\Register;
 
 class AuthController {
 
-  public function auth() {
+  public function registration() {
+    View::render('registration', [
+      'title' => 'Registration',
+    ]);
+  }
 
-    $result = Auth::authenticate($_POST['user'], $_POST['password']);
+  public function register() {
+
+    $result = Register::register($_POST['user'], $_POST['password']);
 
     if ($result) {
-      Auth::set('username', $_POST['user']);
-      Redirect::redirect('/personal/index');
+      View::render('registration', [
+        'message' => 'Registration completed successfully! You can login now.',
+        'title' => 'Registration',
+      ]);
     } else {
-      View::render('auth', [
-        'error' => 'Wrong username or password!',
-        'title' => 'Log In',
+      View::render('registration', [
+        'error' => 'Sorry, that username is already in use',
+        'title' => 'Registration',
       ]);
     }
   }
+
+  public function auth() {
+    if (!empty($_POST['user']) && $_POST['password']) {
+
+      $result = Auth::authenticate($_POST['user'], $_POST['password']);
+
+      if ($result) {
+        Redirect::redirect('/personal/index');
+      } else {
+        View::render('auth', [
+          'error' => 'Wrong username or password!',
+          'title' => 'Log In',
+        ]);
+      }
+    } else {
+      Redirect::redirect('/');
+    }
+  }
+
   public function logout() {
     if (!empty($_GET['action']) && $_GET['action'] === 'exit') {
       Auth::logout();

@@ -38,46 +38,25 @@ class Paginator {
     while ($row = $rs->fetch()) {
       $results[] = $row;
     }
-
     return $results;
   }
 
   public function createLinks() {
 
     $limit = $this->_limit;
-    $username = $this->_username;
+    $start = 1;
+    $end = ceil($this->_total / $limit);
 
     if ($limit == 'all') {
       return '';
     }
 
-    $start = 1;
-    $end = ceil($this->_total / $limit);
-    $class = ($this->_page == $start) ? "page-item disabled" : "page-item";
-
-    $html = '<ul class="pagination justify-content-center">';
-
-    if ($username) {
-      $html .= '<li class="' . $class . '"><a class="page-link" href="?username=' . $username . '&limit=' . $limit . '&page=' . ($this->_page - 1) . '">Previous</a></li>';
-      for ($i = $start; $i <= $end; $i++) {
-        $class = ($this->_page == $i) ? "active" : "";
-        $html .= '<li class="' . $class . '"><a class="page-link" href="?username=' . $username . '&limit=' . $limit . '&page=' . $i . '">' . $i . '</a></li>';
-      }
-      $class = ($this->_page == $end) ? "disabled" : "";
-      $html .= '<li class="' . $class . '"><a class="page-link" href="??username=' . $username . '&limit=' . $limit . '&page=' . ($this->_page + 1) . '">Next</a></li>';
-
-    } else {
-      $html .= '<li class="' . $class . '"><a class="page-link" href="?limit=' . $limit . '&page=' . ($this->_page - 1) . '">Previous</a></li>';
-      for ($i = $start; $i <= $end; $i++) {
-        $class = ($this->_page == $i) ? "active" : "";
-        $html .= '<li class="' . $class . '"><a class="page-link" href="?limit=' . $limit . '&page=' . $i . '">' . $i . '</a></li>';
-      }
-      $class = ($this->_page == $end) ? "disabled" : "";
-      $html .= '<li class="' . $class . '"><a class="page-link" href="?limit=' . $limit . '&page=' . ($this->_page + 1) . '">Next</a></li>';
-    }
-
-    $html .= '</ul>';
-
-    return $html;
+    return array(
+      'limit' => $limit,
+      'username' => $this->_username,
+      'start' => $start,
+      'end' => $end,
+      'page' => $this->_page,
+    );
   }
 }
