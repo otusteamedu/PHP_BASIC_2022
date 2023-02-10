@@ -5,9 +5,13 @@ namespace Otus\Mvc\Models\Eloquent;
 use Psr\Log\LogLevel;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Processor\IntrospectionProcessor;
 
 class MyLogger
 {
+    public $ex;
+
+
     public static function log_user_auth() {
         $log = new Logger('users_log');
         $log->pushHandler(new StreamHandler('log/user_event.log', LogLevel::ERROR));
@@ -28,9 +32,17 @@ class MyLogger
     }
 
     public static function log_db_error() {
+        $ex=0; 
         $log = new Logger('db_log');
         $log->pushHandler(new StreamHandler('log/db_error.log', LogLevel::ERROR));
-        $log->error('ошибка в базе данных');
+        $log->error('ошибка'.''.$ex);
+    }
+
+    public static function new_log_db() {
+        $log = new Logger('db_log');
+        $log->pushHandler(new StreamHandler('log/db_error.log', LogLevel::ERROR));
+        //$log->error('ошибка в базе данных');
+        $log->info('Newlog', ['username' => 'Seldaek']);
     }
 
 }

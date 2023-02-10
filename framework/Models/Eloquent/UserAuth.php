@@ -19,8 +19,7 @@ class UserAuth extends Model
                     }
                 } catch (\Exception $e) {
                     MyLogger::log_db_error(); 
-                    View::render('503',[
-                    ]); 
+                    View::render('503',[]); 
                 }
 
             if((User::where('name', '=', $_POST['username'])->first()) !== null) {
@@ -44,7 +43,6 @@ class UserAuth extends Model
 
     public static function logout() {
         if (isset($_POST['logout'])) {
-            //session_destroy();
             try {
                 if(!session_destroy()) {
                     throw new Exception("Ошибка окончания сессии"); 

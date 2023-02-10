@@ -1,3 +1,5 @@
-
-framework/.DS_Store
-.DS_Store
+/framework/vendor
+/.idea/
+.env
+/framework/log/*.log
+.vscode
