@@ -1,6 +1,6 @@
 {
   "name": "otus/mvc",
-  "description": "A simple MVC project* (*not the original! simplification of the MVC code under homework 24 )",
+  "description": "A simple MVC project",
   "type": "project",
   "license": "Freeware",
   "authors": [

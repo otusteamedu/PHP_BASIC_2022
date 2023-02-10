@@ -2,25 +2,20 @@
 
 namespace Otus\Mvc\Controllers;
 
+use Otus\Mvc\Core\Database;
 use Otus\Mvc\Core\View;
-
+use Otus\Mvc\Models\Eloquent\User as EloquentUser;
+use Otus\Mvc\Models\OtusORM\Users as OtusORMUsers;
+use Otus\Mvc\Models\Doctrine\User as DoctrineUser;
+use PDO;
 class IndexController
 {
-    public function index() 
-    {
-        View::render('info',[
-            'title' => 'Index page',
-            'text' => 'главной странице',
-            'annotation' => 'сейчас есть 2 контроллера index и home'
-        ]);
-    }
+    public function index() {
 
-    public function test() 
-    {
+
         View::render('info',[
-            'title' => 'Index page',
-            'text' => 'тестовой странице',
-            'annotation' => 'ты на методе test'
+            'title' => 'Главная страница',
+            'name' => 'Anonymous user',
         ]);
     }
 }

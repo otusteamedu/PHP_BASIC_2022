@@ -14,16 +14,20 @@
 </head>
 <body>
 
-<h1>Привет, <?php echo $name; ?></h1>
 
-<form action=/auth/login method="post">
+<h1><?php echo $resault; ?></h1>
+<h2>Зарегистрируйся</h2>
+
+
+<form action=/auth/register method="post">
         <label for="user">Имя пользователя:</label>
         <input type="text" name="username" /><br>
         <label for="password">Пароль:</label>
         <input type="text" name="password" /><br>
-        <input type="submit" name="login" value="Войти">
+        <button type="submit" name="register" value="register">Регистрация</button>
 </form>
 
+<a href='/index/index'>Вернуться на главную</a>
 
 </body>
 </html>
