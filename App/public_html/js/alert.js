@@ -1,6 +1,5 @@
 const msgAlert = document.getElementById('msg-alert')
-
-let url = window.location.href
+const url = window.location.href
 const re = /\?.*/
 
 if (msgAlert) {

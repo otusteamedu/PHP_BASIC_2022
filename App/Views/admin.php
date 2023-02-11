@@ -43,7 +43,7 @@ if (isset($events)) {
     $date = date('d F Y', strtotime($event['date']));
     $time = date('G.i', strtotime($event['time']));
 
-    date('d M Y') <= $date ? $value = $edit : $value = $delete;
+    date('Y-m-d') <= $event['date'] ? $value = $edit : $value = $delete;
     // table content
     echo "<tr><td>{$event['id']}</td>";
     echo "<td>{$date}</td>";

@@ -28,7 +28,7 @@ if (isset($events)) {
     $cancel = "<a href=" . "/Event/cancel?action=cancel&event_id={$event['id']}&user={$user}" . "><input type='submit' value='cancel' class='btn' id='cancel'></a>";
     $date = date('d M Y', strtotime($event['date']));
     $time = date('G.i', strtotime($event['time']));
-    if (date('d M Y') <= $date) {
+    if (date('Y-m-d') <= $event['date']) {
       if ($event['usernames']) {
         $users = explode(",", $event['usernames']);
         in_array($user, $users) ? $link = $cancel : $link = $join;
