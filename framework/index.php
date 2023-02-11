@@ -1,3 +1,5 @@
 <?php
-    require_once 'vendor/autoload.php';
-    \Otus\Mvc\Core\App::run();
+require_once 'vendor/autoload.php';
+
+$run = new \Otus\Mvc\Core\App();
+$run->run();
