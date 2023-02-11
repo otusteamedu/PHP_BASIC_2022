@@ -1,10 +1,15 @@
 const msgAlert = document.getElementById('msg-alert')
-const url = window.location.href
-const re = /\?.*/
 
-if (msgAlert) {
-  msgAlert.addEventListener('closed.bs.alert', (event) => {
-    let start_url = url.replace(re, '')
-    window.location.replace(start_url)
-  })
+function storeUrl() {
+  let url = window.location.href
+  localStorage.setItem('url', url)
+}
+
+if (msgAlert && localStorage.hasOwnProperty('url')) {
+  setTimeout(() => {
+    let url = localStorage.getItem('url')
+    msgAlert.remove()
+    window.location.replace(url)
+    localStorage.removeItem('url')
+  }, 3000)
 }

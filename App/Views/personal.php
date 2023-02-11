@@ -6,10 +6,9 @@
   <!-- Message alert -->
   <?php
 if (isset($_GET['action-msg'])) {
-  echo '<div class="alert alert-primary alert-dismissible fade show" id="msg-alert" role="alert">';
+  echo '<div class="alert alert-primary" id="msg-alert" role="alert">';
   echo $_GET['action-msg'];
-  echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
+  echo '</div>';
 }?>
   <h5><a href="/Event/index">Go to events</a></h5>
   <br>
@@ -22,10 +21,10 @@ if (isset($_GET['action-msg'])) {
   <table class="table table-striped table-condensed table-bordered table-rounded">
     <thead>
       <tr class="text-center">
-        <th width="25%">ID</th>
         <th width="25%">Date</th>
         <th width="25%">Time</th>
         <th width="25%">Event</th>
+        <th width="25%">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -33,12 +32,15 @@ if (isset($_GET['action-msg'])) {
 
 if (isset($events)) {
   foreach ($events as $event) {
-    $date = date('d M Y', strtotime($event['date']));
+    $date = date('d F Y', strtotime($event['date']));
     $time = date('G.i', strtotime($event['time']));
-    echo "<tr><td>{$event['id']}</td>";
-    echo "<td>{$date}</td>";
+
+    date('Y-m-d') <= $event['date'] ? $status = "Upcoming" : $status = "Expired";
+
+    echo "<tr><td>{$date}</td>";
     echo "<td>{$time}</td>";
     echo "<td>{$event['name']}</td>";
+    echo "<td>{$status}</td>";
     echo '</tr>';
   }
 }?>

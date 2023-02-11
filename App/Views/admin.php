@@ -6,10 +6,9 @@
   <!-- Message alert -->
   <?php
 if (isset($_GET['action-msg'])) {
-  echo '<div class="alert alert-primary alert-dismissible fade show" id="msg-alert" role="alert">';
+  echo '<div class="alert alert-primary" id="msg-alert" role="alert">';
   echo $_GET['action-msg'];
-  echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>';
+  echo '</div>';
 }?>
   <h5><a href="/Event/index">Go to events</a></h5>
   <br>
@@ -36,21 +35,21 @@ if (isset($events)) {
     $id = $event['id'];
 
     // Modal button (delete event)
-    $delete = "<button type='button' id='delete-event' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteEventModal{$id}'>Delete</button>";
+    $delete = "<button type='button' id='delete-event' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#deleteEventModal{$id}' onclick='storeUrl()'>Delete</button>";
     // Modal button (edit event)
-    $edit = "<button type='button' id='edit-event' class='btn btn-secondary' data-bs-toggle='modal' data-bs-target='#editEventModal{$id}'>Edit</button>";
+    $edit = "<button type='button' id='edit-event' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#editEventModal{$id}' onclick='storeUrl()'>Edit</button>";
 
     $date = date('d F Y', strtotime($event['date']));
     $time = date('G.i', strtotime($event['time']));
 
-    date('Y-m-d') <= $event['date'] ? $value = $edit : $value = $delete;
+    date('Y-m-d') <= $event['date'] ? $button = $edit : $button = $delete;
     // table content
-    echo "<tr><td>{$event['id']}</td>";
+    echo "<tr><td>{$id}</td>";
     echo "<td>{$date}</td>";
     echo "<td>{$time}</td>";
     echo "<td>{$event['name']}</td>";
     echo "<td>{$event['usernames']}</td>";
-    echo "<td>{$value}</td></tr>";
+    echo "<td>{$button}</td></tr>";
     ?>
         <!-- Modal (edit event) -->
         <div class="modal fade" id="editEventModal<?php echo $id; ?>" tabindex="-1"
@@ -76,7 +75,7 @@ if (isset($events)) {
                     <input required type="time" id="event-time-new" class="form-control" name="event-time-new"
                       value="<?php echo $event['time']; ?>"><br>
                   </div>
-                  <input type="submit" id="submit-edit-event" class="btn btn-primary" value="Edit event">
+                  <button type="submit" id="submit-edit-event" class="btn btn-primary">Edit event</button>
                 </form>
               </div>
               <div class="modal-footer">
@@ -117,7 +116,8 @@ if (isset($events)) {
     </table>
   </div>
   <!-- Modal button (add event)-->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">
+  <button type="button" id='add-event' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal"
+    onclick='storeUrl()'>
     Add event
   </button>
   <!-- Modal (add event) -->

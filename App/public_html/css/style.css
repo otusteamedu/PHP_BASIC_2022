@@ -12,8 +12,6 @@
    margin-top: 10px;
  }
 
- input#join,
- input#cancel,
  input#new-event {
    margin-top: 0;
    border: 0;
@@ -25,21 +23,16 @@
    margin: 10px auto;
  }
 
- #join {
-   background-color: var(--bs-cyan);
-   color: #fff;
-   border-radius: var(--bs-btn-border-radius);
- }
-
- #cancel {
-   background-color: var(--bs-red);
-   color: #fff;
-   border-radius: var(--bs-btn-border-radius);
- }
-
  #edit-event,
- #delete-event {
+ #delete-event,
+ #join-event,
+ #cancel-event {
    padding: 4px 15px;
+   border: 0;
+ }
+
+ #add-event {
+   padding: 5px 15px;
    border: 0;
  }
 
