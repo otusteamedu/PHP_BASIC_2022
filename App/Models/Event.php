@@ -75,17 +75,15 @@ class Event {
     $pdo = Database::connect();
     $query = 'INSERT INTO events(name, date, time) VALUES (?,?,?)';
     $result = $pdo->prepare($query);
-    $message = '';
+    $message = "The event created!";
     try {
       $result->execute([$_POST['event-name'], $_POST['event-date'], $_POST['event-time']]);
-      $message = "The event created!";
-    } catch (\Exception$ex) {
+    } catch (\Exception $ex) {
       Logger::getLogger()->info("Event not created");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
       Logger::getLogger()->debug("Request params", $_REQUEST);
       $message = "Event not created, please try again";
     }
-    unset($_POST);
     return $message;
   }
   public static function editEvent() {
@@ -109,13 +107,12 @@ class Event {
     try {
       $result->execute([$_POST['event-name-new'], $_POST['event-date-new'], $_POST['event-time-new']]);
       $message = "The event updated!";
-    } catch (\Exception$ex) {
+    } catch (\Exception $ex) {
       Logger::getLogger()->info("Event not edited");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
       Logger::getLogger()->debug("Request params", $_REQUEST);
       $message = "Event not updated, please try again";
     }
-    unset($_POST);
     return $message;
   }
   public static function deleteEvent() {
@@ -124,17 +121,15 @@ class Event {
     $pdo = Database::connect();
     $query = "DELETE FROM events WHERE events.id=?";
     $result = $pdo->prepare($query);
-    $message = '';
+    $message = "The event deleted!";
     try {
       $result->execute([$id]);
-      $message = "The event deleted!";
-    } catch (\Exception$ex) {
+    } catch (\Exception $ex) {
       Logger::getLogger()->info("Event not deleted");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
       Logger::getLogger()->debug("Request params", $_REQUEST);
       $message = "Event not deleted, please try again";
     }
-    unset($_POST);
     return $message;
   }
 
@@ -144,13 +139,12 @@ class Event {
     $event_id = $_POST['event-id'];
     $query = "INSERT INTO events_users (`event_id`, `user_id`) VALUES (?, ?)";
     $res = $pdo->prepare($query);
-    $message = '';
+    $message = "You joined the event!";
     try {
       $res->execute([
         $event_id, $user_id,
       ]);
-      $message = "You joined the event!";
-    } catch (\Throwable$ex) {
+    } catch (\Throwable $ex) {
       Logger::getLogger()->info("Error message:", [$ex->getMessage()]);
       Logger::getLogger()->error("Error trace:", $ex->getTrace());
       Logger::getLogger()->debug("Request params:", $_REQUEST);
@@ -165,13 +159,12 @@ class Event {
     $event_id = $_POST['event-id'];
     $query = "DELETE FROM events_users WHERE event_id=? AND user_id=?";
     $res = $pdo->prepare($query);
-    $message = '';
+    $message = "You cancelled the event!";
     try {
       $res->execute([
         $event_id, $user_id,
       ]);
-      $message = "You cancelled the event!";
-    } catch (\Throwable$ex) {
+    } catch (\Throwable $ex) {
       Logger::getLogger()->info("Error message:", [$ex->getMessage()]);
       Logger::getLogger()->error("Error trace:", $ex->getTrace());
       Logger::getLogger()->debug("Request params:", $_REQUEST);

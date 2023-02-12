@@ -67,7 +67,7 @@ if (isset($events)) {
                       value="<?php echo $event['name'], ",", $event['date'], ",", $event['time']; ?>">
                     <label for="event-name-new" class="form-label">Event name:</label><br>
                     <input required type="text" id="event-name-new" class="form-control" name="event-name-new"
-                      value="<?php echo $event['name'];?>"><br>
+                      value="<?php echo $event['name']; ?>"><br>
                     <label for="event-date-new" class="form-label">Event date:</label><br>
                     <input required type="date" id="event-date-new" class="form-control" name="event-date-new"
                       value="<?php echo $event['date']; ?>"><br>
@@ -110,16 +110,14 @@ if (isset($events)) {
         </div>
         <!-- end of Modal -->
         <?php
-  }
+}
 }?>
       </tbody>
     </table>
   </div>
   <!-- Modal button (add event)-->
   <button type="button" id='add-event' class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal"
-    onclick='storeUrl()'>
-    Add event
-  </button>
+    onclick="storeUrl()">Add event</button>
   <!-- Modal (add event) -->
   <div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
