@@ -1,34 +1,35 @@
 <?php
+
 namespace Otus\Mvc\Models\OtusORM;
+
 use PDO;
+use Otus\Mvc\Core\Database;
+
 
 abstract class Model
 {
-    private static array $config = [
-        'type' => 'mysql',
-        'host' => 'db',
-        'db' => 'mvc',
-        'user' => 'root',
-        'password' => 'root'
-    ];
 
     private static $connectonInstance;
 
-    private static function getInstance() {
-        if(self::$connectonInstance === null)
-        {
-            self::$connectonInstance = new PDO(sprintf("%s:host=%s;dbname=%s",
-                                                        self::$config['type'],
-                                                        self::$config['host'],
-                                                        self::$config['db']),
-                self::$config['user'],
-                self::$config['password'],
+    private static function getInstance()
+    {
+        if (self::$connectonInstance === null) {
+            self::$connectonInstance = new PDO(
+                sprintf(
+                    "%s:host=%s;dbname=%s",
+                    Database::$config['type'],
+                    Database::$config['host'],
+                    Database::$config['db']
+                ),
+                Database::$config['user'],
+                Database::$config['password'],
                 [
                     // При возврате результатов запроса - возвращать в виде ассоциативного массива
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES   => false,
                     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION
-                ]);
+                ]
+            );
         }
         return self::$connectonInstance;
     }
@@ -40,7 +41,8 @@ abstract class Model
 
     protected static $table;
 
-    private static function getTableName() {
+    private static function getTableName()
+    {
         return static::$table;
     }
 
@@ -53,10 +55,9 @@ abstract class Model
         $statement = self::getInstance()->prepare($sql);
         $statement->execute([$value]);
         $result = $statement->fetchAll();
-        if($statement->rowCount() === 0)
+        if ($statement->rowCount() === 0)
             return;
-        foreach ($result[0] as $i => $v)
-        {
+        foreach ($result[0] as $i => $v) {
             $model->{$i} = $v;
         }
         $model->isInserted = true;
@@ -71,25 +72,23 @@ abstract class Model
         unset($parameters['isInserted']);
         $tableName = self::getTableName();
 
-        if($this->isInserted)
-        {
+        if ($this->isInserted) {
             $params = array_keys($parameters);
             $values = array_values($parameters);
             $values[] = array_shift($values);
             $update = "";
             unset($params[0]);
-            foreach ($params as $key)
-            {
+            foreach ($params as $key) {
                 $update .= "$key = ?,";
             }
-            $update = substr($update,0,-1);
+            $update = substr($update, 0, -1);
             $query = "update $tableName set $update where id = ?";
             $statement = self::getInstance()->prepare($query);
             $statement->execute($values);
         } else {
             $params = array_keys($parameters);
-            $templ = substr(str_repeat('?,',sizeof($params)),0,-1);
-            $columns = implode(',',$params);
+            $templ = substr(str_repeat('?,', sizeof($params)), 0, -1);
+            $columns = implode(',', $params);
             $values = array_values($parameters);
             $query = "insert into $tableName ($columns) values ($templ)";
             $statement = self::getInstance()->prepare($query);
