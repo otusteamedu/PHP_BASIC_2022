@@ -70,6 +70,29 @@ class Event {
     return [$results, $pagination];
   }
 
+  public static function calendarView() {
+    $calendar = new Calendar();
+    $data = $calendar->getData();
+    return $data;
+  }
+
+  public static function eventByDate() {
+    $date = (isset($_GET['date'])) ? $_GET['date'] : date('Y-m-d');
+    $pdo = Database::connect();
+    // $query = 'SELECT * FROM events WHERE date = ?';
+
+    $query = 'SELECT  events.id, events.name, events.date, events.time, group_concat(users.username) AS usernames FROM events
+    LEFT JOIN events_users ON events.id = events_users.event_id
+    LEFT JOIN users ON users.id = events_users.user_id
+    WHERE events.date = ?
+    GROUP BY events.id
+    ORDER BY events.date, events.time';
+    $res = $pdo->prepare($query);
+    $res->execute([$date]);
+    $data = $res->fetchAll();
+    return $data;
+  }
+
   public static function addEvent() {
 
     $pdo = Database::connect();
@@ -78,7 +101,7 @@ class Event {
     $message = "The event created!";
     try {
       $result->execute([$_POST['event-name'], $_POST['event-date'], $_POST['event-time']]);
-    } catch (\Exception $ex) {
+    } catch (\Exception$ex) {
       Logger::getLogger()->info("Event not created");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
       Logger::getLogger()->debug("Request params", $_REQUEST);
@@ -107,7 +130,7 @@ class Event {
     try {
       $result->execute([$_POST['event-name-new'], $_POST['event-date-new'], $_POST['event-time-new']]);
       $message = "The event updated!";
-    } catch (\Exception $ex) {
+    } catch (\Exception$ex) {
       Logger::getLogger()->info("Event not edited");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
       Logger::getLogger()->debug("Request params", $_REQUEST);
@@ -124,7 +147,7 @@ class Event {
     $message = "The event deleted!";
     try {
       $result->execute([$id]);
-    } catch (\Exception $ex) {
+    } catch (\Exception$ex) {
       Logger::getLogger()->info("Event not deleted");
       Logger::getLogger()->error("Exception", [$ex->getMessage()]);
       Logger::getLogger()->debug("Request params", $_REQUEST);
@@ -144,7 +167,7 @@ class Event {
       $res->execute([
         $event_id, $user_id,
       ]);
-    } catch (\Throwable $ex) {
+    } catch (\Throwable$ex) {
       Logger::getLogger()->info("Error message:", [$ex->getMessage()]);
       Logger::getLogger()->error("Error trace:", $ex->getTrace());
       Logger::getLogger()->debug("Request params:", $_REQUEST);
@@ -164,7 +187,7 @@ class Event {
       $res->execute([
         $event_id, $user_id,
       ]);
-    } catch (\Throwable $ex) {
+    } catch (\Throwable$ex) {
       Logger::getLogger()->info("Error message:", [$ex->getMessage()]);
       Logger::getLogger()->error("Error trace:", $ex->getTrace());
       Logger::getLogger()->debug("Request params:", $_REQUEST);

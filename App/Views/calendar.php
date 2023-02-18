@@ -1,4 +1,5 @@
 <?php require_once 'header.php';?>
+
 <div class="container">
 
   <!-- Message alert -->
@@ -9,9 +10,62 @@ if (isset($_GET['action-msg'])) {
   echo '</div>';
 }?>
   <h5 class="upper btn"><a href="/Personal/index" id="personal">Personal page</a></h5>
-  <h5 class="upper btn"><a href="/Event/calendar" id="calendar-view">Calendar view</a></h5>
-  <!-- Pagination -->
-  <nav id='paginator'><?php require_once 'pagination.php';?></nav>
+  <h5 class="upper btn"><a href="/Event/index" id="list-view">List view</a></h5>
+  <!-- Calendar -->
+  <table class="table table-dark align-middle calendar-nav">
+    <thead>
+      <tr>
+        <th width='15%'><a href="<?php echo $data['prev']; ?>" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a></th>
+        <th width='70%'><a href="#"><?php echo $data['navData']; ?></a></th>
+        <th width='15%'><a href="<?php echo $data['next']; ?>" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a></th>
+      </tr>
+    </thead>
+  </table>
+
+  <table class="table table-dark align-middle table-bordered calendar-body">
+    <thead>
+      <tr>
+        <th width='14%'>Mon</th>
+        <th width='14%'>Tue</th>
+        <th width='14%'>Wed</th>
+        <th width='14%'>Thu</th>
+        <th width='14%'>Fri</th>
+        <th width='14%'>Sat</th>
+        <th width='14%'>Sun</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+for ($i = 0; $i < $data['weeks']; $i++) {
+  echo '<tr>';
+  for ($j = 0; $j < 7; $j++) {
+
+    $cell = $data['cells'][$i * 7 + $j];
+    $cellDate = $data['links'][$i * 7 + $j];
+
+    if (isset($_GET['month']) && isset($_GET['year'])) {
+      $link = "/Event/calendar/?month={$_GET['month']}&year={$_GET['year']}&date={$cellDate}";
+    } else {
+      $link = "/Event/calendar/?date={$cellDate}";
+    }
+
+    $class = 'empty-day';
+    if (date('Y-m-d') == date('Y-m-d', strtotime($cellDate))) {
+      $class = 'this-day';
+    }?>
+      <td class="<?php echo $class; ?>" id="<?php echo $cellDate; ?>"><a class='single-day'
+          href="<?php echo $link; ?>"><?php echo $cell; ?></a>
+      </td>
+      <?php }
+  echo '</tr>';
+}
+?>
+    </tbody>
+  </table>
 
   <!-- Table -->
   <table class="table table-striped table-condensed table-bordered table-rounded">
@@ -25,7 +79,8 @@ if (isset($_GET['action-msg'])) {
     </thead>
     <tbody>
       <?php
-if (isset($events)) {
+
+if (!empty($events)) {
   foreach ($events as $event) {
     $id = $event['id'];
 
@@ -109,7 +164,15 @@ if (isset($events)) {
       <!-- end of Modal -->
       <?php
 }
-}?>
+} else if (isset($_GET['date'])) {
+  echo "<tr><td>" . date('d F Y', strtotime($_GET['date'])) . "</td>";
+  echo "<td colspan='3'>No events on this day</td></tr>";
+} else {
+  echo "<tr><td>" . date('d-F-Y') . "</td>";
+  echo "<td colspan='3'>No events on this day</td></tr>";
+}
+
+?>
     </tbody>
   </table>
 </div>

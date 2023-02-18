@@ -15,7 +15,9 @@ class NotFound {
         'debug_info' => $debug,
       ]);
     } else {
-      View::render('404');
+      View::render('404', [
+        'title' => 'Not found',
+      ]);
     }
   }
 }

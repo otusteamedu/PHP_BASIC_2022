@@ -1,6 +1,6 @@
 <?php require_once 'header.php';?>
 <div class="container">
-  <div class="upper btn"><a href="/Auth/logout?action=exit"><input type="submit" value="Log out" id="logout"></a></div>
+  <div class="btn"><a href="/Auth/logout?action=exit"><input type="submit" value="Log out" id="logout"></a></div>
 
   <h3>Hello, <?php echo $name; ?>!</h3>
   <!-- Message alert -->
@@ -10,10 +10,10 @@ if (isset($_GET['action-msg'])) {
   echo $_GET['action-msg'];
   echo '</div>';
 }?>
-  <h5><a href="/Event/index">Go to events</a></h5>
+  <div class="btn" id="go-to-events"><a href="/Event/index" class='white-link'>Go to events</a></div>
   <br>
   <!-- Pagination -->
-  <nav><?php require_once 'pagination.php';?></nav>
+  <nav id='paginator'><?php require_once 'pagination.php';?></nav>
 
   <!-- Table -->
   <div id='events-table'>

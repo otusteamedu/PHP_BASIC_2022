@@ -13,3 +13,7 @@ secret = my-secret-word;
 [debug]
 
 enabled = true;
+
+[registration]
+
+enabled = true;

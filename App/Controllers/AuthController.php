@@ -10,9 +10,20 @@ use App\Models\Register;
 class AuthController {
 
   public function registration() {
-    View::render('registration', [
-      'title' => 'Registration',
-    ]);
+
+    $data = parse_ini_file("../config/config.ini", true, INI_SCANNER_TYPED);
+    $registration_enabled = $data['registration']['enabled'];
+
+    if ($registration_enabled) {
+      View::render('registration', [
+        'title' => 'Registration',
+      ]);
+    } else {
+      View::render('registration-closed', [
+         'title' => 'Registration'
+      ]
+    );
+    }
   }
 
   public function register() {

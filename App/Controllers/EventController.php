@@ -24,6 +24,22 @@ class EventController {
     }
   }
 
+  public function calendar() {
+    $user = ucfirst(Auth::get('username'));
+    if (!empty($user)) {
+      $calendar = Event::calendarView();
+      $events = Event::eventByDate();
+      View::render('calendar', [
+        'title' => 'Calendar',
+        'user' => $user,
+        'data' => $calendar,
+        'events' => $events,
+      ]);
+    } else {
+      Redirect::redirect('/');
+    }
+  }
+
   public function addEvent() {
 
     $result = Event::addEvent();
