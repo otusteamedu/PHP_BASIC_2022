@@ -22,11 +22,10 @@ class Event {
     $dataCount = $resCount->fetchAll();
     $count = count($dataCount);
 
-    $limit = (isset($_GET['limit'])) ? $_GET['limit'] : '8';
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
 
     $Paginator = new Paginator($pdo, $query, $count, $username);
-    $results = $Paginator->getData($limit, $page);
+    $results = $Paginator->getData($page);
     $pagination = $Paginator->createLinks();
 
     return [$results, $pagination];
@@ -59,12 +58,11 @@ class Event {
     WHERE users.id=$id
     ORDER BY events.date, events.time";
 
-    $limit = (isset($_GET['limit'])) ? $_GET['limit'] : '8';
     $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
     $user = (isset($_GET['username'])) ? $_GET['username'] : $username;
 
     $Paginator = new Paginator($pdo, $query, $count, $user);
-    $results = $Paginator->getData($limit, $page);
+    $results = $Paginator->getData($page);
     $pagination = $Paginator->createLinks();
 
     return [$results, $pagination];
@@ -79,7 +77,6 @@ class Event {
   public static function eventByDate() {
     $date = (isset($_GET['date'])) ? $_GET['date'] : date('Y-m-d');
     $pdo = Database::connect();
-    // $query = 'SELECT * FROM events WHERE date = ?';
 
     $query = 'SELECT  events.id, events.name, events.date, events.time, group_concat(users.username) AS usernames FROM events
     LEFT JOIN events_users ON events.id = events_users.event_id

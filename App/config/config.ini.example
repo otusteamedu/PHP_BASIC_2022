@@ -8,12 +8,16 @@ password = my-password
 
 [pepper]
 
-secret = my-secret-word;
+secret = my-secret-word
 
 [debug]
 
-enabled = true;
+enabled = true
 
 [registration]
 
-enabled = true;
+enabled = true
+
+[limit]
+
+limit = 8

@@ -121,6 +121,7 @@ if (!empty($events)) {
                 <div>
                   <input type="hidden" id="event-id" name="event-id" value="<?php echo $id; ?>">
                   <input type="hidden" name="username" value="<?php echo $user; ?>">
+                  <input type="hidden" name="view" value="calendar">
                   <p><b>Event:</b> <?php echo $event['name']; ?> </p>
                   <p><b>Date:</b> <?php echo $date; ?></p>
                   <p><b>Time:</b> <?php echo $time; ?></p>
@@ -148,6 +149,7 @@ if (!empty($events)) {
                 <div>
                   <input type="hidden" id="event-id" name="event-id" value="<?php echo $id; ?>">
                   <input type="hidden" name="username" value="<?php echo $user; ?>">
+                  <input type="hidden" name="view" value="calendar">
                   <p><b>Event:</b> <?php echo $event['name']; ?> </p>
                   <p><b>Date:</b> <?php echo $date; ?></p>
                   <p><b>Time:</b> <?php echo $time; ?></p>

@@ -12,16 +12,16 @@ class Paginator {
   private $_username;
 
   public function __construct($pdo, $query, $count, $username) {
-
+    $data = parse_ini_file("../config/config.ini", true, INI_SCANNER_TYPED);
+    $this->_limit = $data['limit']['limit'];
     $this->_query = $query;
     $this->_username = $username;
     $this->_pdo = $pdo;
     $this->_total = $count;
   }
 
-  public function getData($limit, $page) {
+  public function getData($page) {
 
-    $this->_limit = $limit;
     $this->_page = $page;
 
     if ($this->_limit == 'all') {
@@ -52,7 +52,6 @@ class Paginator {
     }
 
     return array(
-      'limit' => $limit,
       'username' => $this->_username,
       'start' => $start,
       'end' => $end,
