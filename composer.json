@@ -1,0 +1,18 @@
+{
+  "name": "otus/mvc",
+  "description": "A simple MVC project",
+  "type": "project",
+  "license": "Freeware",
+  "require": {
+    "doctrine/orm": "^2.10",
+    "symfony/yaml": "^5.3",
+    "symfony/cache": "^5.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Otus\\Mvc\\Controllers\\": "Controllers/",
+      "Otus\\Mvc\\Core\\": "Core/",
+      "Otus\\Mvc\\Views\\": "Views/"
+    }
+  }
+}
