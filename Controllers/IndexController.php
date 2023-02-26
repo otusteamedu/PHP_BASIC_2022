@@ -2,20 +2,20 @@
 
 namespace Otus\Mvc\Controllers;
 
-use Otus\Mvc\Core\Controller;
+use Otus\Mvc\Core\View;
 
 class IndexController
 {
     public function index() {
 
-        Controller::render('info',[
+        View::render('info',[
             'title' => 'Заработало'
         ]);
     }
 
     public function main() {
 
-        Controller::render('main',[
+        View::render('main',[
             'title' => 'Главная',
             'text' => 'Как то так'
         ]);

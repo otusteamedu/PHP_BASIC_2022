@@ -2,15 +2,15 @@
 
 namespace Otus\Mvc\Controllers;
 
-use Otus\Mvc\Core\Controller;
+use Otus\Mvc\Core\View;
 
 class StaticController
 {
     public function index() {
-        Controller::render('static',[]);
+        View::render('static',[]);
     }
 
     public function page1() {
-        Controller::render('page1',[]);
+        View::render('page1',[]);
     }
 }

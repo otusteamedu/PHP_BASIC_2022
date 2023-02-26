@@ -1,11 +1,9 @@
 <?php
 namespace Otus\Mvc\Core;
+use Otus\Mvc\Core\View;
+use Otus\Mvc\Core\Routes;
 
 class Controller {
-	protected static $routes = [
-        'lessons/linux-specialization' => ['Lessons','linux'],
-        'linux-spec' => ['Lessons','linux']
-    ];
 
     public static function run()
     {
@@ -15,46 +13,25 @@ class Controller {
         $action_name = "index";
 
         $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
-        if(array_key_exists($path,self::$routes))
-        {
-            $controller = self::$routes[$path][0];
-            $controller_name = "Otus\\Mvc\\Controllers\\{$controller}Controller";
-            $action_name = self::$routes[$path][1];
-        } else {
-            if($path !== "")
-            {
-                @list($controller, $action) = explode("/", $path, 2);
-                if (isset($controller)){
-                    $controller_name = "Otus\\Mvc\\Controllers\\{$controller}Controller";
-                }
-                if (isset($action)){
-                    $action_name = $action;
-                }
-            }
-        }
-
+        $route = new Routes($path);
+        //$route->setRoute($path);
 
         // Check controller exists.
-        if(!class_exists($controller_name,true)) {
+        if(!class_exists($route->controller_name,true)) {
             //redirect to 404
-            $this->render('404');
+            View::render('404');
+            return;
         }
 
-        if(!method_exists($controller_name, $action_name)) {
+        if(!method_exists($route->controller_name, $route->action_name)) {
             //redirect to 404
-            $this->render('404');
+            View::render('404');
+            return;
         }
 
-        $controller = new $controller_name();
-        $controller->$action_name();
+        $controller = new $route->controller_name();
+        $controller->{$route->action_name}();
     }
-
-    static function render(string $view, array $data = []) {
-        extract($data, EXTR_OVERWRITE);
-        require_once implode(DIRECTORY_SEPARATOR, [$_SERVER['DOCUMENT_ROOT'], 'Views', "$view.php"]);
-        exit();
-    }
-
 } 
 
 ?>
