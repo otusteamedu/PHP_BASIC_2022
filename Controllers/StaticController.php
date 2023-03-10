@@ -4,9 +4,13 @@ namespace Otus\Mvc\Controllers;
 
 use Otus\Mvc\Core\View;
 
-class StaticController
+class StaticController extends BaseController
 {
     public function index() {
+         echo "<pre>"; 
+        print_r($this->user); 
+        echo "</pre>";
+
         View::render('static',[]);
     }
 

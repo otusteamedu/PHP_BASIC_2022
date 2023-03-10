@@ -1,36 +1,45 @@
 <?php
 namespace Otus\Mvc\Core;
-use Otus\Mvc\Core\View;
-use Otus\Mvc\Core\Routes;
+use Otus\Mvc\Core\{View,Routes};
+use Otus\Mvc\Models\Users;
 
 class Controller {
 
+    protected static $exceptionsForNoLogined = ['Index'];
+
     public static function run()
-    {
-        //Database::bootEloquent();
+    {   
 
-        $controller_name = "Otus\\Mvc\\Controllers\\IndexController";
-        $action_name = "index";
 
-        $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
-        $route = new Routes($path);
-        //$route->setRoute($path);
+        /*$controller_name = "Otus\\Mvc\\Controllers\\IndexController";
+        $action_name = "index";*/
 
-        // Check controller exists.
-        if(!class_exists($route->controller_name,true)) {
-            //redirect to 404
-            View::render('404');
-            return;
+        session_start();
+        $user = Users::loginByToken();
+        if (!$user) {
+            $controller = new $route->index();
+            $controller->loginPage();
+        } else {
+            $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
+            $route = new Routes($path);
+
+            // Check controller exists.
+            if(!class_exists($route->controller_name,true)) {
+                //redirect to 404
+                View::render('404');
+                return;
+            }
+
+            if(!method_exists($route->controller_name, $route->action_name)) {
+                //redirect to 404
+                View::render('404');
+                return;
+            }
+            $controller = new $route->controller_name();
+            $controller->setUser($user);
+            $controller->{$route->action_name}();
         }
 
-        if(!method_exists($route->controller_name, $route->action_name)) {
-            //redirect to 404
-            View::render('404');
-            return;
-        }
-
-        $controller = new $route->controller_name();
-        $controller->{$route->action_name}();
     }
 } 
 
