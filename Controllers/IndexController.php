@@ -3,7 +3,7 @@
 namespace Otus\Mvc\Controllers;
 
 use Otus\Mvc\Core\View;
-use Otus\Mvc\Models\Users;
+use Otus\Mvc\Models\Users\Service\UsersService;
 
 class IndexController extends BaseController
 {
@@ -20,7 +20,7 @@ class IndexController extends BaseController
 
     public function login() {
         if(!empty($_POST['user']) && !empty($_POST['password'])) {
-            $user = Users::login($_POST['user'], $_POST['password']);
+            $user = UsersService::loginUser($_POST['user'], $_POST['password']);
             if ($user){
                 View::render('info',[
                     'title' => 'Заработало'
@@ -32,7 +32,7 @@ class IndexController extends BaseController
     public function main() {
 
 
-        $user = Users::getAll([]);
+        $user = UsersService::getListUsers([]);
 echo "<pre>"; 
 print_r($user); 
 echo "</pre>";

@@ -1,7 +1,7 @@
 <?php
 namespace Otus\Mvc\Core;
 use Otus\Mvc\Core\{View,Routes};
-use Otus\Mvc\Models\Users;
+use Otus\Mvc\Models\Users\Service\UsersService;
 
 class Controller {
 
@@ -15,7 +15,7 @@ class Controller {
         $action_name = "index";*/
 
         session_start();
-        $user = Users::loginByToken();
+        $user = UsersService::loginUserByToken();
         if (!$user) {
             $controller = new $route->index();
             $controller->loginPage();

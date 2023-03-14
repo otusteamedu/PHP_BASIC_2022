@@ -6,12 +6,13 @@ abstract class Model
 {
     private static $connectonInstance;
 
-    public static function config()
+    public static function config(): array
     {
         return require implode(DIRECTORY_SEPARATOR,[$_SERVER['DOCUMENT_ROOT'],'config','database.php']);
     }
 
-    private static function getInstance() {
+    private static function getInstance(): object
+    {
         if(self::$connectonInstance === null)
         {
             $config = self::config();
@@ -28,18 +29,19 @@ abstract class Model
         return self::$connectonInstance;
     }
 
-    public function Model()
+    public function Model(): object
     {
         self::getInstance();
     }
 
     protected static $table;
 
-    private static function getTableName() {
+    private static function getTableName(): string
+    {
         return static::$table;
     }
 
-    public static function getById($value)
+    public static function getById(int $value): ?object
     {
         $modelName = static::class;
         $model = new $modelName();
@@ -49,7 +51,7 @@ abstract class Model
         $statement->execute([$value]);
         $result = $statement->fetch();
         if($statement->rowCount() === 0)
-            return;
+            return null;
         $model->isInserted = true;
         return $model;
     }
@@ -99,7 +101,7 @@ abstract class Model
         $statement->execute([$this->id]);
     }
 
-    public static function getSQL($sql, $parameters)
+    public static function getSQL(string $sql, array $parameters): array
     {
         $modelName = static::class;
         $model = new $modelName();
@@ -108,7 +110,7 @@ abstract class Model
         $statement->execute($parameters);
         $result = $statement->fetchAll();
         if($statement->rowCount() === 0)
-            return;
+            return [];
         return $result;
     }
 }

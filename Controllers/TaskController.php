@@ -3,7 +3,7 @@
 namespace Otus\Mvc\Controllers;
 
 use Otus\Mvc\Core\View;
-use Otus\Mvc\Models\Tasks;
+use Otus\Mvc\Models\Tasks\Service\TasksService;
 
 class TaskController extends BaseController
 {
@@ -17,13 +17,13 @@ class TaskController extends BaseController
     public function list() {
 
 
-        $list = Tasks::getAll([]);
+        $list = TasksService::getListTasks([]);
 echo "<pre>"; 
 print_r($list); 
 echo "</pre>";
         View::render('taskslist',[
             'list' => $list,
-            'states' => Tasks::getStates()
+            'states' => TasksService::getStates()
         ]);
     }
 }

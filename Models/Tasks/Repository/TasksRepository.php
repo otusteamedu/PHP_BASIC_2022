@@ -1,20 +1,11 @@
 <?php
 
-namespace Otus\Mvc\Models;
+namespace Otus\Mvc\Models\Tasks\Repository;
+use Otus\Mvc\Models\Model;
 
-class Tasks extends Model
+class TasksRepository extends Model
 {
     protected static $table = 'tasks';
-    protected static $states = [
-        0 => 'новая',
-        1 => 'в работе',
-        2 => 'выполнена',
-    ];
-
-    public static function getStates($params = []): array
-    {
-        return self::$states;
-    }
     
     public static function getAll($params = []): array
     {

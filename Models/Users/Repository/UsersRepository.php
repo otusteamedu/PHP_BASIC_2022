@@ -1,8 +1,9 @@
 <?php
 
-namespace Otus\Mvc\Models;
+namespace Otus\Mvc\Models\Users\Repository;
+use Otus\Mvc\Models\Model;
 
-class Users extends Model
+class UsersRepository extends Model
 {
     protected static $table = 'users';
 
@@ -61,7 +62,7 @@ class Users extends Model
         return [];
     }
 
-    public static function setToken(int $user_id): string
+    private static function setToken(int $user_id): string
     {
         $token = uniqid(); 
         $parameters = [$token, $user_id];
